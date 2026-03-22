@@ -1,0 +1,205 @@
+@import url('./../../App.css');
+
+* {
+  margin: 0;
+    padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+main {
+  margin: 0;
+  background: var(--bg-main);
+  min-height: 100vh;
+  overflow: hidden; 
+}
+
+.painel-login {
+    margin: auto;
+    margin-top: 80px;
+    width: 70%;
+    max-width: 500px;
+    height: 500px;
+    border-radius: 1rem; /*rounded-2xl*/
+    background: #77777733; /*leve transparência*/
+    border: 1px solid #43434333;
+    backdrop-filter: blur(18px); /*efeito de vidro*/
+    -webkit-backdrop-filter: blur(12px); /*compatibilidade Safari*/
+    box-shadow: 0 4px 30px #00000033;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: start;
+    align-items: center;
+}
+
+.logo {
+  width: 60px;
+  margin: 25px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+}
+
+img {
+    width: 50px;
+}
+
+.descricao {
+  color: var(--text-secondary);
+  font-size: 14px;
+  text-align: center;
+  width: 80%;
+  margin: 15px 0 15px;
+}
+
+/* ------------------------INPUT EMAIL----------------------------*/
+
+.i-email {
+  position: relative;
+  margin: 15px 0 10px;
+  width: 85%;
+  max-width: 400px;
+}
+
+.i-email input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px var(--text-main) solid;
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  font-size: 18px;
+  color: var(--text-main);
+}
+
+.i-email input:focus,
+.i-email input:valid {
+  outline: 0;
+  border-bottom-color: var(--accent-red);
+}
+
+.i-email label {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  pointer-events: none;
+}
+
+.i-email label span {
+  display: inline-block;
+  font-size: 18px;
+  min-width: 5px;
+  color: var(--text-main);
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.i-email input:focus+label span,
+.i-email input:valid+label span {
+  color: var(--accent-red-hover);
+  transform: translateY(-30px);
+}
+
+/* ------------------------INPUT SENHA----------------------------*/
+
+.i-senha {
+  position: relative;
+  margin: 15px 0 10px;
+  width: 85%;
+  max-width: 400px;
+}
+
+.i-senha input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px var(--text-main) solid;
+  display: block;
+  width: 100%;
+  padding: 15px 0;
+  font-size: 18px;
+  color: var(--text-main);
+}
+
+.i-senha input:focus,
+.i-senha input:valid {
+  outline: 0;
+  border-bottom-color: var(--accent-red);
+}
+
+.i-senha label {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  pointer-events: none;
+}
+
+.i-senha label span {
+  display: inline-block;
+  font-size: 18px;
+  min-width: 5px;
+  color: var(--text-main);
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.i-senha input:focus+label span,
+.i-senha input:valid+label span {
+  color: var(--accent-red-hover);
+  transform: translateY(-30px);
+}
+
+/*------------------------BOTÃO---------------------------------*/
+
+.btn-login {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.btn-primary {
+  background: var(--accent-red);
+  border: var(--border-default);
+  font-size: 20px;
+  width: 85%;
+  max-width: 410px;
+  color: var(--text-main);
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  background: var(--accent-red-hover);
+  transform: translateY(-2px);
+}
+
+/*-----------------------REGISTRO---------------------------*/
+
+.btn-registro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.btn-secundary {
+  background: var(--bg-card);
+  border: var(--border-default);
+  font-size: 20px;
+  width: 85%;
+  max-width: 410px;
+  color: var(--text-main);
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-secundary:hover {
+  background: var(--text-secondary);
+  transform: translateY(-2px);
+}
