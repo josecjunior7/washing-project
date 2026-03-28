@@ -85,7 +85,7 @@ const Login = () => {
       {modalSenha && (
         <div className="modal-overlay" onClick={() => setModalSenha(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h3>Recuperar senha</h3>
+            <h3>RECUPERAR SENHA</h3>
             <input 
               type="email" 
               placeholder="Digite seu e-mail"
@@ -93,10 +93,10 @@ const Login = () => {
               onChange={(e) => setEmailRecuperar(e.target.value)}
             />
             <button className="modal-btn" onClick={handleRecuperarSenha}>
-              Enviar
+              ENVIAR
             </button>
             <button className="modal-btn-fechar" onClick={() => setModalSenha(false)}>
-              Cancelar
+              CANCELAR
             </button>
           </div>
         </div>
@@ -104,13 +104,13 @@ const Login = () => {
 
       {/* FORMULÁRIO DE LOGIN */}
       <section className="painel-login">
-        {/* LOGO COM TEXTO LADO A LADO */}
+        {/* LOGO COM TEXTO LADO A LADO - MAIOR */}
         <div className="logo-container">
           <span className="logo-text-left">LAVA</span>
           <div className="logo">
             <img src={logo} alt="Logo" />
           </div>
-          <span className="logo-text-right">mais</span>
+          <span className="logo-text-right">MAIS</span>
         </div>
 
         {/* Input Email */}
@@ -123,10 +123,10 @@ const Login = () => {
           />
           <label>
             <span style={{ transitionDelay: '0ms' }}>E</span>
-            <span style={{ transitionDelay: '50ms' }}>m</span>
-            <span style={{ transitionDelay: '100ms' }}>a</span>
-            <span style={{ transitionDelay: '150ms' }}>i</span>
-            <span style={{ transitionDelay: '200ms' }}>l</span>
+            <span style={{ transitionDelay: '50ms' }}>M</span>
+            <span style={{ transitionDelay: '100ms' }}>A</span>
+            <span style={{ transitionDelay: '150ms' }}>I</span>
+            <span style={{ transitionDelay: '200ms' }}>L</span>
           </label>
         </div>
 
@@ -140,32 +140,32 @@ const Login = () => {
           />
           <label>
             <span style={{ transitionDelay: '0ms' }}>S</span>
-            <span style={{ transitionDelay: '50ms' }}>e</span>
-            <span style={{ transitionDelay: '100ms' }}>n</span>
-            <span style={{ transitionDelay: '150ms' }}>h</span>
-            <span style={{ transitionDelay: '200ms' }}>a</span>
+            <span style={{ transitionDelay: '50ms' }}>E</span>
+            <span style={{ transitionDelay: '100ms' }}>N</span>
+            <span style={{ transitionDelay: '150ms' }}>H</span>
+            <span style={{ transitionDelay: '200ms' }}>A</span>
           </label>
         </div>
 
         <div className="btn-login">
           <button className="btn-primary" onClick={handleLogin}>
-            Login
+            LOGIN
           </button>
         </div>
 
         {/* ESQUECEU A SENHA */}
         <div className="esqueceu-senha">
           <a onClick={() => setModalSenha(true)} className="link-esqueceu">
-            Esqueceu a senha?
+            ESQUECEU A SENHA?
           </a>
         </div>
 
         <div>
-          <h2 className="descricao">Ou</h2>
+          <h2 className="descricao">OU</h2>
         </div>
 
         <div className="btn-registro">
-          <button className="btn-secundary">Registre-se</button>
+          <button className="btn-secundary">REGISTRE-SE</button>
         </div>
       </section>
     </main>

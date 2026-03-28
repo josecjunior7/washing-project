@@ -1,18 +1,18 @@
 :root {
 
   /* Telas de Fundo */
-  --bg-main: #12110C;
-  --bg-card: #44403E;
-  --bg-card-alt: #43413E;
+  --bg-main: #6a11cb;
+  --bg-card: #4b0082;
+  --bg-card-alt: #5a1a8a;
 
   /* Textos */
-  --text-main: #E6E6E5;
+  --text-main: #00FFFF;
   --text-title: #FFFFFF;
-  --text-secondary: #888784;
+  --text-secondary: #CCCCCC;
 
   /* Botões */
-  --accent-red: #BC0D0C;
-  --accent-red-hover: #fa1717;
+  --accent-red: #00FFFF;
+  --accent-red-hover: #00CCCC;
 
   /* Bordas */
   --border-default: #433D3C;
