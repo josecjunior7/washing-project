@@ -9,7 +9,7 @@
 
 main {
   margin: 0;
-  background: var(--bg-main);
+  background: #6a11cb;
   min-height: 100vh;
   overflow: hidden; 
 }
@@ -70,13 +70,13 @@ img {
   width: 100%;
   padding: 15px 0;
   font-size: 18px;
-  color: var(--text-main);
+  color:  #00FFFF;
 }
 
 .i-email input:focus,
 .i-email input:valid {
   outline: 0;
-  border-bottom-color: var(--accent-red);
+  border-bottom-color: #00FFFF;
 }
 
 .i-email label {
@@ -90,13 +90,13 @@ img {
   display: inline-block;
   font-size: 18px;
   min-width: 5px;
-  color: var(--text-main);
+  color: #00FFFF;
   transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .i-email input:focus+label span,
 .i-email input:valid+label span {
-  color: var(--accent-red-hover);
+  color: #00CCCC;
   transform: translateY(-30px);
 }
 
@@ -117,13 +117,13 @@ img {
   width: 100%;
   padding: 15px 0;
   font-size: 18px;
-  color: var(--text-main);
+  color: #00FFFF;/*deixar ciano*/
 }
 
 .i-senha input:focus,
 .i-senha input:valid {
   outline: 0;
-  border-bottom-color: var(--accent-red);
+  border-bottom-color: #00FFFF;
 }
 
 .i-senha label {
@@ -137,13 +137,13 @@ img {
   display: inline-block;
   font-size: 18px;
   min-width: 5px;
-  color: var(--text-main);
+  color: #00FFFF;
   transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .i-senha input:focus+label span,
 .i-senha input:valid+label span {
-  color: var(--accent-red-hover);
+  color: #00CCCC;
   transform: translateY(-30px);
 }
 
@@ -158,12 +158,12 @@ img {
 }
 
 .btn-primary {
-  background: var(--accent-red);
-  border: var(--border-default);
+  background: #00FFFF;
+  border: none;
   font-size: 20px;
   width: 85%;
   max-width: 410px;
-  color: var(--text-main);
+  color: #000000;
   border: none;
   padding: 12px 20px;
   border-radius: 8px;
@@ -172,7 +172,7 @@ img {
 }
 
 .btn-primary:hover {
-  background: var(--accent-red-hover);
+  background: #00CCCC;;
   transform: translateY(-2px);
 }
 
@@ -186,13 +186,13 @@ img {
 }
 
 .btn-secundary {
-  background: var(--bg-card);
+  background: transparent;
   border: var(--border-default);
   font-size: 20px;
   width: 85%;
   max-width: 410px;
-  color: var(--text-main);
-  border: none;
+  color: #00FFFF;
+  border: 2px solid #00FFFF;
   padding: 12px 20px;
   border-radius: 8px;
   cursor: pointer;
@@ -200,6 +200,6 @@ img {
 }
 
 .btn-secundary:hover {
-  background: var(--text-secondary);
+  background: rgba(0, 255, 255, 0.2);
   transform: translateY(-2px);
 }
