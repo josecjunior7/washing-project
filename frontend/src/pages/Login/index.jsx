@@ -104,13 +104,18 @@ const Login = () => {
 
       {/* FORMULÁRIO DE LOGIN */}
       <section className="painel-login">
-        {/* LOGO COM TEXTO LADO A LADO - MAIOR */}
-        <div className="logo-container">
-          <span className="logo-text-left">LAVA</span>
-          <div className="logo">
-            <img src={logo} alt="Logo" />
+        {/* LOGO COM TEXTO MAIOR E SUBTÍTULO */}
+        <div className="logo-section">
+          <div className="logo-container">
+            <span className="logo-text-left">LAVAR</span>
+            <div className="logo">
+              <img src={logo} alt="Logo" />
+            </div>
+            <span className="logo-text-right">MAIS</span>
           </div>
-          <span className="logo-text-right">MAIS</span>
+          <div className="logo-subtitle">
+            LAVANDERIA AUTO SERVIÇO
+          </div>
         </div>
 
         {/* Input Email */}
@@ -161,7 +166,7 @@ const Login = () => {
         </div>
 
         <div>
-          <h2 className="descricao">OU</h2>
+          <h2 className="descricao"></h2>
         </div>
 
         <div className="btn-registro">
