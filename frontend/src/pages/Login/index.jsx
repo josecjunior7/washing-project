@@ -7,6 +7,8 @@ import "./Login.css";
 const Login = () => {
   const navigate = useNavigate();
   const [menuAberto, setMenuAberto] = useState(false);
+  const [modalSenha, setModalSenha] = useState(false);
+  const [emailRecuperar, setEmailRecuperar] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
@@ -29,6 +31,27 @@ const Login = () => {
 
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
+  };
+
+  const handleRecuperarSenha = async () => {
+    if (!emailRecuperar) {
+      alert("Digite seu e-mail!");
+      return;
+    }
+    
+    try {
+      // Aqui você vai conectar com o backend
+      // await axios.post('http://localhost:8080/api/recuperar-senha', {
+      //   email: emailRecuperar
+      // });
+      
+      alert(`E-mail de recuperação enviado para ${emailRecuperar}`);
+      setModalSenha(false);
+      setEmailRecuperar("");
+    } catch (error) {
+      alert("Erro ao enviar e-mail de recuperação!");
+      console.error(error);
+    }
   };
 
   return (
@@ -54,6 +77,27 @@ const Login = () => {
           </div>
           <div className="menu-item" onClick={() => navigate('/')}>
             🚪 Sair
+          </div>
+        </div>
+      )}
+
+      {/* MODAL RECUPERAR SENHA */}
+      {modalSenha && (
+        <div className="modal-overlay" onClick={() => setModalSenha(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h3>Recuperar senha</h3>
+            <input 
+              type="email" 
+              placeholder="Digite seu e-mail"
+              value={emailRecuperar}
+              onChange={(e) => setEmailRecuperar(e.target.value)}
+            />
+            <button className="modal-btn" onClick={handleRecuperarSenha}>
+              Enviar
+            </button>
+            <button className="modal-btn-fechar" onClick={() => setModalSenha(false)}>
+              Cancelar
+            </button>
           </div>
         </div>
       )}
@@ -102,6 +146,13 @@ const Login = () => {
           <button className="btn-primary" onClick={handleLogin}>
             Login
           </button>
+        </div>
+
+        {/* ESQUECEU A SENHA */}
+        <div className="esqueceu-senha">
+          <a onClick={() => setModalSenha(true)} className="link-esqueceu">
+            Esqueceu a senha?
+          </a>
         </div>
 
         <div>
