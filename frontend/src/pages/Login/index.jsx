@@ -104,8 +104,13 @@ const Login = () => {
 
       {/* FORMULÁRIO DE LOGIN */}
       <section className="painel-login">
-        <div className="logo">
-          <img src={logo} alt="Logo" />
+        {/* LOGO COM TEXTO LADO A LADO */}
+        <div className="logo-container">
+          <span className="logo-text-left">LAVA</span>
+          <div className="logo">
+            <img src={logo} alt="Logo" />
+          </div>
+          <span className="logo-text-right">mais</span>
         </div>
 
         {/* Input Email */}
