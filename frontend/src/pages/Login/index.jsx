@@ -6,14 +6,12 @@ import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
-
-  // 1. Criar estados para armazenar o que o usuário digita
+  const [menuAberto, setMenuAberto] = useState(false);
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
 
-  // 2. Função de Login dentro do componente
   const handleLogin = async (e) => {
-    e.preventDefault(); // Impede a página de recarregar
+    e.preventDefault();
     try {
       const response = await axios.post('http://localhost:8080/api/login', {
         email: email,
@@ -29,15 +27,45 @@ const Login = () => {
     }
   };
 
+  const toggleMenu = () => {
+    setMenuAberto(!menuAberto);
+  };
+
   return (
     <main>
+      {/* FAIXA AZUL NO TOPO */}
+      <div className="top-bar">
+        <div className="menu-icon" onClick={toggleMenu}>
+          ☰
+        </div>
+      </div>
+
+      {/* MENU QUE ABRE AO CLICAR */}
+      {menuAberto && (
+        <div className="menu-lateral">
+          <div className="menu-item" onClick={() => navigate('/perfil')}>
+            👤 Meu Perfil
+          </div>
+          <div className="menu-item" onClick={() => navigate('/configuracoes')}>
+            ⚙️ Configurações
+          </div>
+          <div className="menu-item" onClick={() => navigate('/ajuda')}>
+            ❓ Ajuda
+          </div>
+          <div className="menu-item" onClick={() => navigate('/')}>
+            🚪 Sair
+          </div>
+        </div>
+      )}
+
+      {/* FORMULÁRIO DE LOGIN */}
       <section className="painel-login">
-        <section className="logo">
+        <div className="logo">
           <img src={logo} alt="Logo" />
-        </section>
+        </div>
 
         {/* Input Email */}
-        <section className="i-email">
+        <div className="i-email">
           <input 
             type="text" 
             required 
@@ -51,10 +79,10 @@ const Login = () => {
             <span style={{ transitionDelay: '150ms' }}>i</span>
             <span style={{ transitionDelay: '200ms' }}>l</span>
           </label>
-        </section>
+        </div>
 
         {/* Input Senha */}
-        <section className="i-senha">
+        <div className="i-senha">
           <input 
             type="password" 
             required 
@@ -68,21 +96,21 @@ const Login = () => {
             <span style={{ transitionDelay: '150ms' }}>h</span>
             <span style={{ transitionDelay: '200ms' }}>a</span>
           </label>
-        </section>
+        </div>
 
-        <section className="btn-login">
+        <div className="btn-login">
           <button className="btn-primary" onClick={handleLogin}>
             Login
           </button>
-        </section>
+        </div>
 
-        <section>
+        <div>
           <h2 className="descricao">Ou</h2>
-        </section>
+        </div>
 
-        <section className="btn-registro">
+        <div className="btn-registro">
           <button className="btn-secundary">Registre-se</button>
-        </section>
+        </div>
       </section>
     </main>
   );

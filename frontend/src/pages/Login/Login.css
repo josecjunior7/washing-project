@@ -2,47 +2,129 @@
 
 * {
   margin: 0;
-    padding: 0;
+  padding: 0;
   box-sizing: border-box;
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
+/* MAIN COM FUNDO ROXO */
 main {
   margin: 0;
   background: #6a11cb;
   min-height: 100vh;
-  overflow: hidden; 
+  padding-top: 70px;
+  overflow: hidden;
 }
 
+/* ========== FAIXA AZUL NO TOPO ========== */
+.top-bar {
+  background: #4cc9f0;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.menu-icon {
+  font-size: 28px;
+  cursor: pointer;
+  color: white;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.menu-icon:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+/* ========== MENU LATERAL ========== */
+.menu-lateral {
+  position: fixed;
+  top: 70px;
+  left: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  min-width: 200px;
+  overflow: hidden;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-item {
+  padding: 12px 20px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: 0.2s;
+  border-bottom: 1px solid #eee;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item:hover {
+  background: #f0f0f0;
+  color: #4cc9f0;
+}
+
+/* ========== PAINEL DE LOGIN ========== */
 .painel-login {
-    margin: auto;
-    margin-top: 80px;
-    width: 70%;
-    max-width: 500px;
-    height: 500px;
-    border-radius: 1rem; /*rounded-2xl*/
-    background: #77777733; /*leve transparência*/
-    border: 1px solid #43434333;
-    backdrop-filter: blur(18px); /*efeito de vidro*/
-    -webkit-backdrop-filter: blur(12px); /*compatibilidade Safari*/
-    box-shadow: 0 4px 30px #00000033;
-
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: start;
-    align-items: center;
+  margin: auto;
+  margin-top: 80px;
+  width: 70%;
+  max-width: 500px;
+  height: 500px;
+  border-radius: 1rem;
+  background: #77777733;
+  border: 1px solid #43434333;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px #00000033;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: start;
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
+/* ========== LOGO ========== */
 .logo {
-  width: 60px;
-  margin: 25px;
+  width: 80px;
+  margin: 20px;
   margin-top: 30px;
-  margin-bottom: 30px;
-
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-img {
-    width: 50px;
+.logo img {
+  width: 100%;
+  max-width: 80px;
+  height: auto;
+  border-radius: 50%;
+  background: white;
+  padding: 8px;
 }
 
 .descricao {
@@ -54,7 +136,6 @@ img {
 }
 
 /* ------------------------INPUT EMAIL----------------------------*/
-
 .i-email {
   position: relative;
   margin: 15px 0 10px;
@@ -70,7 +151,7 @@ img {
   width: 100%;
   padding: 15px 0;
   font-size: 18px;
-  color:  #00FFFF;
+  color: #00FFFF;
 }
 
 .i-email input:focus,
@@ -101,7 +182,6 @@ img {
 }
 
 /* ------------------------INPUT SENHA----------------------------*/
-
 .i-senha {
   position: relative;
   margin: 15px 0 10px;
@@ -117,7 +197,7 @@ img {
   width: 100%;
   padding: 15px 0;
   font-size: 18px;
-  color: #00FFFF;/*deixar ciano*/
+  color: #00FFFF;
 }
 
 .i-senha input:focus,
@@ -147,8 +227,7 @@ img {
   transform: translateY(-30px);
 }
 
-/*------------------------BOTÃO---------------------------------*/
-
+/*------------------------BOTÃO LOGIN---------------------------------*/
 .btn-login {
   padding-top: 10px;
   display: flex;
@@ -164,7 +243,6 @@ img {
   width: 85%;
   max-width: 410px;
   color: #000000;
-  border: none;
   padding: 12px 20px;
   border-radius: 8px;
   cursor: pointer;
@@ -172,12 +250,11 @@ img {
 }
 
 .btn-primary:hover {
-  background: #00CCCC;;
+  background: #00CCCC;
   transform: translateY(-2px);
 }
 
-/*-----------------------REGISTRO---------------------------*/
-
+/*-----------------------BOTÃO REGISTRO---------------------------*/
 .btn-registro {
   display: flex;
   flex-direction: column;
@@ -187,7 +264,6 @@ img {
 
 .btn-secundary {
   background: transparent;
-  border: var(--border-default);
   font-size: 20px;
   width: 85%;
   max-width: 410px;
