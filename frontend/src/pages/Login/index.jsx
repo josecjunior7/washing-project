@@ -163,7 +163,7 @@ const Login = () => {
         </div>
 
         <div className="btn-registro">
-          <button className="btn-secundary">CADASTRAR-SE</button>{/**butão de cadastrar nome */}
+          <button className="btn-secundary">CADASTRA-SE</button>{/**butão de cadastrar nome */}
         </div>
 
         {/* ESQUECEU A SENHA */}
