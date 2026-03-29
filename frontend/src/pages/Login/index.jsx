@@ -114,7 +114,7 @@ const Login = () => {
             <span className="logo-text-right">MAIS</span>
           </div>
           <div className="logo-subtitle">
-            LAVANDERIA AUTO SERVIÇO
+            LAVANDERIA AUTOSSERVIÇO
           </div>
         </div>
 
@@ -163,7 +163,7 @@ const Login = () => {
         </div>
 
         <div className="btn-registro">
-          <button className="btn-secundary">CADASTRA-SE</button>{/**butão de cadastrar nome */}
+          <button className="btn-secundary">CADASTRE-SE</button>{/**butão de cadastrar nome */}
         </div>
 
         {/* ESQUECEU A SENHA */}
