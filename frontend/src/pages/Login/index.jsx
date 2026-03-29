@@ -158,19 +158,19 @@ const Login = () => {
           </button>
         </div>
 
-        {/* ESQUECEU A SENHA */}
-        <div className="esqueceu-senha">
-          <a onClick={() => setModalSenha(true)} className="link-esqueceu">
-            ESQUECEU A SENHA?
-          </a>
-        </div>
-
         <div>
           <h2 className="descricao"></h2>
         </div>
 
         <div className="btn-registro">
-          <button className="btn-secundary">REGISTRE-SE</button>
+          <button className="btn-secundary">CADASTRAR-SE</button>
+        </div>
+
+        {/* ESQUECEU A SENHA */}
+        <div className="esqueceu-senha">
+          <a onClick={() => setModalSenha(true)} className="link-esqueceu">
+            ESQUECEU A SENHA?
+          </a>
         </div>
       </section>
     </main>
