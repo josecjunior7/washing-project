@@ -63,7 +63,7 @@ const Login = () => {
         </div>
       </div>
 
-      {/* MENU QUE ABRE AO CLICAR */}
+      {/* 3 TRACINHOS */}
       {menuAberto && (
         <div className="menu-lateral">
           <div className="menu-item" onClick={() => navigate('/perfil')}>
@@ -163,7 +163,7 @@ const Login = () => {
         </div>
 
         <div className="btn-registro">
-          <button className="btn-secundary">CADASTRAR-SE</button>
+          <button className="btn-secundary">CADASTRAR-SE</button>{/**butão de cadastrar nome */}
         </div>
 
         {/* ESQUECEU A SENHA */}
