@@ -126,6 +126,7 @@ main {
 
 .logo-text-left {
   font-size: 56px;
+  margin: 15px 0 20px 0;
   font-weight: bold;
   color: #FFFFFF;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);

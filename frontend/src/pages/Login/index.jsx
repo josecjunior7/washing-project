@@ -107,7 +107,7 @@ const Login = () => {
         {/* LOGO COM TEXTO MAIOR E SUBTÍTULO */}
         <div className="logo-section">
           <div className="logo-container">
-            <span className="logo-text-left">LAVAR</span>
+            <span className="logo-text-left">LAVA</span>
             <div className="logo">
               <img src={logo} alt="Logo" />
             </div>
