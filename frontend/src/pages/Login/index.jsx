@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/heading-has-content */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -6,7 +8,6 @@ import "./Login.css";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [menuAberto, setMenuAberto] = useState(false);
   const [modalSenha, setModalSenha] = useState(false);
   const [emailRecuperar, setEmailRecuperar] = useState("");
   const [email, setEmail] = useState("");
@@ -27,10 +28,6 @@ const Login = () => {
       alert("Erro ao logar. Verifique se o backend está rodando!");
       console.error(error);
     }
-  };
-
-  const toggleMenu = () => {
-    setMenuAberto(!menuAberto);
   };
 
   const handleRecuperarSenha = async () => {
@@ -55,36 +52,12 @@ const Login = () => {
   };
 
   return (
-    <main>
-      {/* FAIXA AZUL NO TOPO */}
-      <div className="top-bar">
-        <div className="menu-icon" onClick={toggleMenu}>
-          ☰
-        </div>
-      </div>
-
-      {/* 3 TRACINHOS */}
-      {menuAberto && (
-        <div className="menu-lateral">
-          <div className="menu-item" onClick={() => navigate('/perfil')}>
-            👤 Meu Perfil
-          </div>
-          <div className="menu-item" onClick={() => navigate('/configuracoes')}>
-            ⚙️ Configurações
-          </div>
-          <div className="menu-item" onClick={() => navigate('/ajuda')}>
-            ❓ Ajuda
-          </div>
-          <div className="menu-item" onClick={() => navigate('/')}>
-            🚪 Sair
-          </div>
-        </div>
-      )}
+    <main className="main-login">
 
       {/* MODAL RECUPERAR SENHA */}
       {modalSenha && (
-        <div className="modal-overlay" onClick={() => setModalSenha(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <section className="modal-overlay" onClick={() => setModalSenha(false)}>
+          <section className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h3>RECUPERAR SENHA</h3>
             <input 
               type="email" 
@@ -98,28 +71,40 @@ const Login = () => {
             <button className="modal-btn-fechar" onClick={() => setModalSenha(false)}>
               CANCELAR
             </button>
-          </div>
-        </div>
+          </section>
+        </section>
       )}
 
-      {/* FORMULÁRIO DE LOGIN */}
+      {/* PAINEL DE LOGIN */}
       <section className="painel-login">
-        {/* LOGO COM TEXTO MAIOR E SUBTÍTULO */}
-        <div className="logo-section">
-          <div className="logo-container">
-            <span className="logo-text-left">LAVA</span>
-            <div className="logo">
-              <img src={logo} alt="Logo" />
-            </div>
-            <span className="logo-text-right">MAIS</span>
-          </div>
-          <div className="logo-subtitle">
-            LAVANDERIA AUTOSSERVIÇO
-          </div>
-        </div>
 
-        {/* Input Email */}
-        <div className="i-email">
+      
+        {/* LOGO COM TEXTO MAIOR E SUBTÍTULO */}
+        <section className="logo-section">
+
+          {/* CONTAINER */}
+          <section className="logo-container">
+            
+            {/* TEXTO DIREITA */}
+            <span className="logo-text-left">LAVA</span>
+            {/* LOGO */}
+            <section className="logo">
+              <img src={logo} alt="Logo" />
+            </section>
+            {/* TEXTO ESQUERDA */}
+            <span className="logo-text-right">MAIS</span>
+
+          </section>
+
+          {/* DESCRIÇÃO */}
+          <section className="logo-subtitle">
+            LAVANDERIA AUTOSSERVIÇO
+          </section>
+
+        </section>
+
+        {/* INPUT EMAIL */}
+        <section className="i-email">
           <input 
             type="text" 
             required 
@@ -133,10 +118,10 @@ const Login = () => {
             <span style={{ transitionDelay: '150ms' }}>I</span>
             <span style={{ transitionDelay: '200ms' }}>L</span>
           </label>
-        </div>
+        </section>
 
-        {/* Input Senha */}
-        <div className="i-senha">
+        {/* INPUT SENHA */}
+        <section className="i-senha">
           <input 
             type="password" 
             required 
@@ -150,28 +135,30 @@ const Login = () => {
             <span style={{ transitionDelay: '150ms' }}>H</span>
             <span style={{ transitionDelay: '200ms' }}>A</span>
           </label>
-        </div>
+        </section>
 
-        <div className="btn-login">
+        {/* BOTÃO DE LOGIN */}
+        <section className="btn-login">
           <button className="btn-primary" onClick={handleLogin}>
             LOGIN
           </button>
-        </div>
+        </section>
 
-        <div>
-          <h2 className="descricao"></h2>
-        </div>
+        <section>
+          <h2 className="descricao">OU</h2>
+        </section>
 
-        <div className="btn-registro">
-          <button className="btn-secundary">CADASTRE-SE</button>{/**butão de cadastrar nome */}
-        </div>
+        {/* BOTÃO DE REGISTRO */}
+        <section className="btn-registro">
+          <button className="btn-secundary">CADASTRE-SE</button>
+        </section>
 
         {/* ESQUECEU A SENHA */}
-        <div className="esqueceu-senha">
+        <section className="esqueceu-senha">
           <a onClick={() => setModalSenha(true)} className="link-esqueceu">
             ESQUECEU A SENHA?
           </a>
-        </div>
+        </section>
       </section>
     </main>
   );

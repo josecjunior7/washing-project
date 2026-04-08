@@ -9,7 +9,7 @@ function App() {
         {/* Rota inicial é o Login */}
         <Route path="/" element={<Login />} />
         
-        {/* Rota da Home (protegida ou não) */}
+        {/* Rota da Home */}
         <Route path="/home" element={<Home />} />
 
         {/* Redireciona qualquer rota errada para o login */}

@@ -11,8 +11,8 @@
   --text-secondary: #CCCCCC;
 
   /* Botões */
-  --accent-red: #00FFFF;
-  --accent-red-hover: #00CCCC;
+  --bt-main: #00FFFF;
+  --bt-hover: #00a6d8;
 
   /* Bordas */
   --border-default: #433D3C;
