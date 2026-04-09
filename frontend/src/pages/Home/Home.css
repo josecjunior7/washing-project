@@ -1,4 +1,3 @@
-/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -6,14 +5,13 @@
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* FUNDO GRADIENTE ROXO */
 .home-empresa-container {
   min-height: 100vh;
   background: linear-gradient(135deg, #c084fc 0%, #6a11cb 100%);
   padding-top: 70px;
 }
 
-/* ========== FAIXA AZUL NO TOPO ========== */
+/* TOPO */
 .top-bar {
   background: #4cc9f0;
   padding: 15px 25px;
@@ -33,53 +31,41 @@
   cursor: pointer;
   color: white;
   font-weight: bold;
-  transition: 0.2s;
-}
-
-.menu-icon:hover {
-  opacity: 0.8;
-  transform: scale(1.05);
 }
 
 .nav-menu {
   display: flex;
   gap: 30px;
-  align-items: center;
 }
 
 .nav-menu a {
   color: white;
   text-decoration: none;
   font-size: 16px;
-  font-weight: 500;
-  transition: 0.2s;
   text-transform: uppercase;
 }
 
 .nav-menu a:hover {
   color: #ffe6b3;
-  transform: translateY(-2px);
 }
 
 .btn-login-top {
   background: #00FFFF;
   color: #000000;
   border: none;
-  padding: 12px 30px;
-  border-radius: 30px;
-  font-size: 16px;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.2s;
   text-transform: uppercase;
 }
 
 .btn-login-top:hover {
   background: #00CCCC;
-  transform: translateY(-2px);
 }
 
-/* ========== MENU LATERAL ========== */
+/* MENU LATERAL */
 .menu-lateral {
   position: fixed;
   top: 70px;
@@ -90,18 +76,6 @@
   z-index: 1000;
   min-width: 200px;
   overflow: hidden;
-  animation: slideDown 0.2s ease;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .menu-item {
@@ -109,12 +83,7 @@
   font-size: 16px;
   color: #333;
   cursor: pointer;
-  transition: 0.2s;
   border-bottom: 1px solid #eee;
-}
-
-.menu-item:last-child {
-  border-bottom: none;
 }
 
 .menu-item:hover {
@@ -122,26 +91,17 @@
   color: #4cc9f0;
 }
 
-/* ========== CONTEÚDO CENTRALIZADO ========== */
+/* CONTEÚDO */
 .content {
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
-/* ========== LOGO CENTRALIZADO ========== */
+/* LOGO */
 .logo-section {
-  width: 100%;
   text-align: center;
-  margin: 20px 0 40px 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  margin-bottom: 40px;
 }
 
 .logo-container {
@@ -149,14 +109,12 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  width: 100%;
 }
 
 .logo-text-left {
   font-size: 56px;
   font-weight: bold;
   color: #FFFFFF;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
 }
 
@@ -164,16 +122,7 @@
   font-size: 56px;
   font-weight: bold;
   color: #00FFFF;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
-}
-
-.logo-img {
-  width: 100px;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .logo-emoji {
@@ -182,17 +131,13 @@
 
 .logo-subtitle {
   font-size: 16px;
-  font-weight: 500;
   color: #00FFFF;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-top: 10px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  width: 100%;
 }
 
-/* ========== CARD PRINCIPAL CENTRALIZADO ========== */
+/* CARD PRINCIPAL */
 .card-unidade {
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(10px);
@@ -200,13 +145,10 @@
   padding: 30px;
   margin-bottom: 40px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  text-align: center;
 }
 
 .card-unidade h1 {
-  font-size: 32px;
+  font-size: 28px;
   color: #FFFFFF;
   margin-bottom: 20px;
   text-transform: uppercase;
@@ -217,7 +159,6 @@
   flex-direction: column;
   gap: 15px;
   margin-bottom: 25px;
-  align-items: center;
 }
 
 .info-item {
@@ -225,13 +166,10 @@
   align-items: center;
   gap: 12px;
   color: #FFFFFF;
-  font-size: 16px;
-  justify-content: center;
 }
 
 .info-item .emoji {
   font-size: 24px;
-  min-width: 40px;
 }
 
 .info-item strong {
@@ -243,55 +181,40 @@
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
-  margin-top: 20px;
-  justify-content: center;
 }
 
 .btn-acao {
   background: #00FFFF;
   color: #000000;
   border: none;
-  padding: 10px 25px;
+  padding: 10px 20px;
   border-radius: 25px;
   font-size: 14px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.2s;
   text-transform: uppercase;
 }
 
 .btn-acao:hover {
   background: #00CCCC;
-  transform: translateY(-2px);
 }
 
-/* ========== GRID DE UNIDADES CENTRALIZADO ========== */
+/* UNIDADE SECUNDÁRIA */
 .grid-unidades {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   gap: 25px;
-  margin-top: 20px;
   flex-wrap: wrap;
-  width: 100%;
 }
 
 .card-unidade-secundaria {
-  flex: 1;
-  min-width: 250px;
-  max-width: 300px;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(10px);
   border-radius: 16px;
   padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: 0.3s;
+  width: 300px;
   text-align: center;
-}
-
-.card-unidade-secundaria:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .card-unidade-secundaria h3 {
@@ -303,7 +226,6 @@
 
 .card-unidade-secundaria p {
   color: #FFFFFF;
-  font-size: 14px;
   margin-bottom: 8px;
 }
 
@@ -322,109 +244,17 @@
   font-size: 12px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.2s;
-  margin-top: 10px;
   width: 100%;
   text-transform: uppercase;
 }
 
 .btn-mapa:hover {
   background: rgba(0, 255, 255, 0.2);
-  transform: translateY(-2px);
 }
 
-/* ========== RESPONSIVO ========== */
 @media (max-width: 768px) {
-  .nav-menu {
-    display: none;
-  }
-  
-  .card-unidade h1 {
-    font-size: 24px;
-  }
-  
-  .info-item {
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-  }
-  
-  .botoes-acao {
-    justify-content: center;
-  }
-  
-  .logo-text-left,
-  .logo-text-right {
-    font-size: 36px;
-  }
-  
-  .logo-emoji {
-    font-size: 50px;
-  }
-  
-  .logo-img {
-    width: 70px;
-  }
-  
-  .grid-unidades {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .card-unidade-secundaria {
-    width: 100%;
-    max-width: 100%;
-  }
-}
-/* ========== ANIMAÇÕES DE ENTRADA ========== */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-/* Animação do container principal */
-.home-empresa-container {
-  animation: fadeIn 0.5s ease-out;
-}
-
-/* Animação do logo */
-.logo-section {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-/* Animação do card principal */
-.card-unidade {
-  animation: fadeInUp 0.7s ease-out 0.1s both;
-}
-
-/* Animação dos cards secundários */
-.card-unidade-secundaria {
-  animation: fadeInUp 0.7s ease-out both;
-}
-
-.card-unidade-secundaria:nth-child(1) {
-  animation-delay: 0.2s;
-}
-
-.card-unidade-secundaria:nth-child(2) {
-  animation-delay: 0.35s;
-}
-
-.card-unidade-secundaria:nth-child(3) {
-  animation-delay: 0.5s;
+  .nav-menu { display: none; }
+  .logo-text-left, .logo-text-right { font-size: 36px; }
+  .logo-emoji { font-size: 50px; }
+  .info-item { flex-direction: column; align-items: flex-start; }
 }

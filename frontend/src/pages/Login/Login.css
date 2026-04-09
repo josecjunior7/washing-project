@@ -1,5 +1,3 @@
-@import url('./../../App.css');
-
 * {
   margin: 0;
   padding: 0;
@@ -7,381 +5,173 @@
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* MAIN COM GRADIENTE ROXO CLARO → ROXO ESCURO */
 .main-login {
   background: linear-gradient(135deg, #c084fc 0%, #6a11cb 100%);
   min-height: 100vh;
-  overflow: hidden;
-}
-
-/* ========== PAINEL DE LOGIN ========== */
-.painel-login {
-  margin: auto;
-  margin-top: 40px;
-  width: 85%;
-  max-width: 520px;
-  border-radius: 1rem;
-  background: rgba(0, 0, 0, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
   display: flex;
-  flex-flow: column nowrap;
-  justify-content: start;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-  padding: 40px 20px 60px 20px;
-}
-
-/* ========== LOGO COM TEXTO MAIOR E SUBTÍTULO CENTRALIZADO ========== */
-.logo-section {
-  width: 100%;
-  text-align: center;
-  margin: 20px 0 20px 0;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.painel-login {
+  width: 450px;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  text-align: center;
+}
+
+.logo-section {
+  margin-bottom: 30px;
 }
 
 .logo-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  width: 100%;
+  gap: 15px;
+  margin-bottom: 10px;
 }
 
-.logo-text-left {
-  font-size: 56px;
+.logo-text-left, .logo-text-right {
+  font-size: 32px;
   font-weight: bold;
-  color: #FFFFFF;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
 }
 
-.logo-text-right {
-  font-size: 56px;
-  font-weight: bold;
-  color: #00FFFF;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  text-transform: uppercase;
-}
+.logo-text-left { color: #FFFFFF; }
+.logo-text-right { color: #00FFFF; }
 
-.logo {
-  width: 100px;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.logo img {
-  width: 100%;
-  max-width: 100px;
-  height: auto;
-  border-radius: 50%;
-  background: white;
-  padding: 12px;
-}
+.logo img { width: 60px; border-radius: 50%; background: white; padding: 8px; }
 
 .logo-subtitle {
-  font-size: 16px;
-  font-weight: 500;
   color: #00FFFF;
-  text-transform: uppercase;
+  font-size: 12px;
   letter-spacing: 2px;
-  margin-top: 10px;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  width: 100%;
 }
 
-.descricao {
-  color: #FFFFFF;
-  font-size: 14px;
-  text-align: center;
-  width: 80%;
-  margin: 15px 0 15px;
-  text-transform: uppercase;
-}
-
-/* ------------------------INPUT EMAIL----------------------------*/
-.i-email {
+.i-email, .i-senha {
   position: relative;
-  margin: 15px 0 10px;
-  width: 85%;
-  max-width: 400px;
+  margin: 25px 0;
 }
 
-.i-email input {
-  background-color: transparent;
-  border: 0;
-  border-bottom: 2px solid #00FFFF;
-  display: block;
+.i-email input, .i-senha input {
   width: 100%;
-  padding: 15px 0;
-  font-size: 18px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #00FFFF;
+  padding: 12px 0;
   color: #00FFFF;
+  font-size: 16px;
+  outline: none;
 }
 
-.i-email input:focus,
-.i-email input:valid {
-  outline: 0;
-  border-bottom-color: #00FFFF;
-}
-
-.i-email label {
+.i-email label, .i-senha label {
   position: absolute;
-  top: 15px;
   left: 0;
+  bottom: 12px;
   pointer-events: none;
 }
 
-.i-email label span {
+.i-email label span, .i-senha label span {
   display: inline-block;
-  font-size: 18px;
-  min-width: 5px;
   color: #00FFFF;
-  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  text-transform: uppercase;
+  font-size: 16px;
+  transition: 0.3s;
 }
 
-.i-email input:focus+label span,
-.i-email input:valid+label span {
-  color: #00CCCC;
+.i-email input:focus ~ label span,
+.i-email input:valid ~ label span,
+.i-senha input:focus ~ label span,
+.i-senha input:valid ~ label span {
   transform: translateY(-30px);
-}
-
-/* ------------------------INPUT SENHA----------------------------*/
-.i-senha {
-  position: relative;
-  margin: 15px 0 10px;
-  width: 85%;
-  max-width: 400px;
-}
-
-.i-senha input {
-  background-color: transparent;
-  border: 0;
-  border-bottom: 2px solid #00FFFF;
-  display: block;
-  width: 100%;
-  padding: 15px 0;
-  font-size: 18px;
-  color: #00FFFF;
-}
-
-.i-senha input:focus,
-.i-senha input:valid {
-  outline: 0;
-  border-bottom-color: #00FFFF;
-}
-
-.i-senha label {
-  position: absolute;
-  top: 15px;
-  left: 0;
-  pointer-events: none;
-}
-
-.i-senha label span {
-  display: inline-block;
-  font-size: 18px;
-  min-width: 5px;
-  color: #00FFFF;
-  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  text-transform: uppercase;
-}
-
-.i-senha input:focus+label span,
-.i-senha input:valid+label span {
   color: #00CCCC;
-  transform: translateY(-30px);
 }
 
-/*------------------------BOTÃO LOGIN---------------------------------*/
-.btn-login {
-  padding-top: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.btn-primary, .btn-secundary {
   width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin: 10px 0;
 }
 
 .btn-primary {
   background: #00FFFF;
-  border: none;
-  font-size: 20px;
-  width: 85%;
-  max-width: 410px;
+  color: #000000;
+}
+
+.btn-primary:hover { background: #00CCCC; }
+
+.btn-secundary {
+  background: transparent;
+  border: 2px solid #00FFFF;
+  color: #00FFFF;
+}
+
+.btn-secundary:hover { background: rgba(0, 255, 255, 0.1); }
+
+.descricao {
   color: #FFFFFF;
-  padding: 12px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.btn-primary:hover {
-  background: #00CCCC;
-  transform: translateY(-2px);
-}
-
-/* ========== ESQUECEU A SENHA ========== */
-.esqueceu-senha {
-  text-align: center;
-  margin: 10px 0 5px 0;
-  width: 85%;
-  max-width: 410px;
+  font-size: 14px;
+  margin: 15px 0;
 }
 
 .link-esqueceu {
   color: #FFFFFF;
-  font-size: 14px;
+  font-size: 12px;
+  cursor: pointer;
   text-decoration: none;
-  transition: 0.2s;
-  cursor: pointer;
-  text-transform: uppercase;
 }
 
-.link-esqueceu:hover {
-  color: #00CCCC;
-  text-decoration: underline;
-}
+.link-esqueceu:hover { color: #00CCCC; }
 
-/*-----------------------BOTÃO REGISTRO---------------------------*/
-.btn-registro {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.btn-secundary {
-  background: #00FFFF;
-  font-size: 20px;
-  width: 85%;
-  max-width: 410px;
-  color: #FFFFFF;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-.btn-secundary:hover {
-  background: #00CCCC;
-  transform: translateY(-2px);
-}
-
-/* ========== MODAL RECUPERAR SENHA ========== */
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-index: 1000;
 }
 
 .modal-content {
-  background: linear-gradient(135deg, #c084fc 0%, #8a2be2 100%);
+  background: linear-gradient(135deg, #c084fc 0%, #6a11cb 100%);
   padding: 30px;
   border-radius: 16px;
-  width: 90%;
-  max-width: 400px;
+  width: 350px;
   text-align: center;
-  animation: slideUp 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.modal-content h3 {
-  color: #FFFFFF;
-  margin-bottom: 20px;
-  font-size: 24px;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
+.modal-content h3 { color: #FFFFFF; margin-bottom: 20px; }
 .modal-content input {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 20px;
+  padding: 10px;
+  margin-bottom: 15px;
   border: 1px solid #00FFFF;
   border-radius: 8px;
-  font-size: 16px;
-  outline: none;
-  background: rgba(255, 255, 255, 0.1);
-  color: #FFFFFF;
-}
-
-.modal-content input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-  text-transform: uppercase;
-}
-
-.modal-content input:focus {
-  border-color: #00FFFF;
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.modal-btn {
-  background: #00FFFF;
-  color: #FFFFFF;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom: 10px;
-  transition: 0.2s;
-  text-transform: uppercase;
-}
-
-.modal-btn:hover {
-  background: #00CCCC;
-  transform: translateY(-2px);
-}
-
-.modal-btn-fechar {
   background: transparent;
-  color: #00FFFF;
-  border: 2px solid #00FFFF;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  width: 100%;
-  transition: 0.2s;
-  text-transform: uppercase;
+  color: #FFFFFF;
 }
 
-.modal-btn-fechar:hover {
-  background: rgba(0, 255, 255, 0.2);
-  transform: translateY(-2px);
+.modal-btn, .modal-btn-fechar {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 5px 0;
 }
+
+.modal-btn { background: #00FFFF; color: #000000; border: none; }
+.modal-btn-fechar { background: transparent; border: 1px solid #00FFFF; color: #00FFFF; }

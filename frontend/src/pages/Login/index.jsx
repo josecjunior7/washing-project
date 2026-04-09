@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/heading-has-content */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +13,14 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    
+    // LOGIN MOCKADO PARA TESTE
+    if (email === "admin@email.com" && senha === "123456") {
+      localStorage.setItem('token', 'usuario-logado');
+      navigate('/dashboard');
+      return;
+    }
+    
     try {
       const response = await axios.post('http://localhost:8080/api/login', {
         email: email,
@@ -22,11 +28,11 @@ const Login = () => {
       });
 
       if (response.status === 200) {
+        localStorage.setItem('token', 'usuario-logado');
         navigate('/dashboard');
       }
     } catch (error) {
       alert("Erro ao logar. Verifique se o backend está rodando!");
-      console.error(error);
     }
   };
 
@@ -35,131 +41,60 @@ const Login = () => {
       alert("Digite seu e-mail!");
       return;
     }
-    
-    try {
-      // Aqui você vai conectar com o backend
-      // await axios.post('http://localhost:8080/api/recuperar-senha', {
-      //   email: emailRecuperar
-      // });
-      
-      alert(`E-mail de recuperação enviado para ${emailRecuperar}`);
-      setModalSenha(false);
-      setEmailRecuperar("");
-    } catch (error) {
-      alert("Erro ao enviar e-mail de recuperação!");
-      console.error(error);
-    }
+    alert(`E-mail de recuperação enviado para ${emailRecuperar}`);
+    setModalSenha(false);
+    setEmailRecuperar("");
   };
 
   return (
     <main className="main-login">
-
-      {/* MODAL RECUPERAR SENHA */}
+      {/* MODAL */}
       {modalSenha && (
-        <section className="modal-overlay" onClick={() => setModalSenha(false)}>
-          <section className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-overlay" onClick={() => setModalSenha(false)}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h3>RECUPERAR SENHA</h3>
-            <input 
-              type="email" 
-              placeholder="Digite seu e-mail"
-              value={emailRecuperar}
-              onChange={(e) => setEmailRecuperar(e.target.value)}
-            />
-            <button className="modal-btn" onClick={handleRecuperarSenha}>
-              ENVIAR
-            </button>
-            <button className="modal-btn-fechar" onClick={() => setModalSenha(false)}>
-              CANCELAR
-            </button>
-          </section>
-        </section>
+            <input type="email" placeholder="Digite seu e-mail" value={emailRecuperar} onChange={(e) => setEmailRecuperar(e.target.value)} />
+            <button className="modal-btn" onClick={handleRecuperarSenha}>ENVIAR</button>
+            <button className="modal-btn-fechar" onClick={() => setModalSenha(false)}>CANCELAR</button>
+          </div>
+        </div>
       )}
 
       {/* PAINEL DE LOGIN */}
-      <section className="painel-login">
-
-      
-        {/* LOGO COM TEXTO MAIOR E SUBTÍTULO */}
-        <section className="logo-section">
-
-          {/* CONTAINER */}
-          <section className="logo-container">
-            
-            {/* TEXTO DIREITA */}
+      <div className="painel-login">
+        <div className="logo-section">
+          <div className="logo-container">
             <span className="logo-text-left">LAVA</span>
-            {/* LOGO */}
-            <section className="logo">
-              <img src={logo} alt="Logo" />
-            </section>
-            {/* TEXTO ESQUERDA */}
+            <div className="logo"><img src={logo} alt="Logo" /></div>
             <span className="logo-text-right">MAIS</span>
+          </div>
+          <div className="logo-subtitle">LAVANDERIA AUTOSSERVIÇO</div>
+        </div>
 
-          </section>
+        <div className="i-email">
+          <input type="text" required value={email} onChange={(e) => setEmail(e.target.value)} />
+          <label><span>E</span><span>M</span><span>A</span><span>I</span><span>L</span></label>
+        </div>
 
-          {/* DESCRIÇÃO */}
-          <section className="logo-subtitle">
-            LAVANDERIA AUTOSSERVIÇO
-          </section>
+        <div className="i-senha">
+          <input type="password" required value={senha} onChange={(e) => setSenha(e.target.value)} />
+          <label><span>S</span><span>E</span><span>N</span><span>H</span><span>A</span></label>
+        </div>
 
-        </section>
+        <div className="btn-login">
+          <button className="btn-primary" onClick={handleLogin}>LOGIN</button>
+        </div>
 
-        {/* INPUT EMAIL */}
-        <section className="i-email">
-          <input 
-            type="text" 
-            required 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)} 
-          />
-          <label>
-            <span style={{ transitionDelay: '0ms' }}>E</span>
-            <span style={{ transitionDelay: '50ms' }}>M</span>
-            <span style={{ transitionDelay: '100ms' }}>A</span>
-            <span style={{ transitionDelay: '150ms' }}>I</span>
-            <span style={{ transitionDelay: '200ms' }}>L</span>
-          </label>
-        </section>
+        <h2 className="descricao">OU</h2>
 
-        {/* INPUT SENHA */}
-        <section className="i-senha">
-          <input 
-            type="password" 
-            required 
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
-          />
-          <label>
-            <span style={{ transitionDelay: '0ms' }}>S</span>
-            <span style={{ transitionDelay: '50ms' }}>E</span>
-            <span style={{ transitionDelay: '100ms' }}>N</span>
-            <span style={{ transitionDelay: '150ms' }}>H</span>
-            <span style={{ transitionDelay: '200ms' }}>A</span>
-          </label>
-        </section>
-
-        {/* BOTÃO DE LOGIN */}
-        <section className="btn-login">
-          <button className="btn-primary" onClick={handleLogin}>
-            LOGIN
-          </button>
-        </section>
-
-        <section>
-          <h2 className="descricao">OU</h2>
-        </section>
-
-        {/* BOTÃO DE REGISTRO */}
-        <section className="btn-registro">
+        <div className="btn-registro">
           <button className="btn-secundary">CADASTRE-SE</button>
-        </section>
+        </div>
 
-        {/* ESQUECEU A SENHA */}
-        <section className="esqueceu-senha">
-          <a onClick={() => setModalSenha(true)} className="link-esqueceu">
-            ESQUECEU A SENHA?
-          </a>
-        </section>
-      </section>
+        <div className="esqueceu-senha">
+          <a onClick={() => setModalSenha(true)} className="link-esqueceu">ESQUECEU A SENHA?</a>
+        </div>
+      </div>
     </main>
   );
 };
