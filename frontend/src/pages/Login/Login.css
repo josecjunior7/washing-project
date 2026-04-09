@@ -7,7 +7,7 @@
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* MAIN COM GRADIENTE: ROXO CLARO → ROXO ESCURO */
+/* MAIN COM GRADIENTE ROXO CLARO → ROXO ESCURO */
 .main-login {
   margin: 0;
   background: linear-gradient(135deg, #c084fc 0%, #6a11cb 100%);
@@ -16,13 +16,12 @@
   overflow: hidden;
 }
 
-
 /* ========== PAINEL DE LOGIN ========== */
 .painel-login {
   margin: auto;
-  margin-top: 10px;
+  margin-top: 80px;
   width: 85%;
-  max-width: 520px;
+  max-width: 600px;
   border-radius: 1rem;
   background: rgba(0, 0, 0, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -36,11 +35,11 @@
   padding: 40px 20px 60px 20px;
 }
 
-/* ========== LOGO E SUBTÍTULO ========== */
+/* ========== LOGO COM TEXTO MAIOR E SUBTÍTULO CENTRALIZADO ========== */
 .logo-section {
   width: 100%;
   text-align: center;
-  margin: 15px 0 20px 0;
+  margin: 20px 0 20px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,8 +55,7 @@
 }
 
 .logo-text-left {
-  font-size: 42px;
-  margin: 15px 0 20px 0;
+  font-size: 56px;
   font-weight: bold;
   color: #FFFFFF;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -65,9 +63,9 @@
 }
 
 .logo-text-right {
-  font-size: 42px;
+  font-size: 56px;
   font-weight: bold;
-  color: var(--bt-main);
+  color: #00FFFF;
   text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
 }
@@ -85,19 +83,29 @@
   max-width: 100px;
   height: auto;
   border-radius: 50%;
-  border: 6px white solid;
+  background: white;
+  padding: 12px;
 }
 
 .logo-subtitle {
   font-size: 16px;
   font-weight: 500;
-  color: var(--bt-main);
+  color: #00FFFF;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin-top: 10px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   text-align: center;
   width: 100%;
+}
+
+.descricao {
+  color: #FFFFFF;
+  font-size: 14px;
+  text-align: center;
+  width: 80%;
+  margin: 15px 0 15px;
+  text-transform: uppercase;
 }
 
 /* ------------------------INPUT EMAIL----------------------------*/
@@ -111,18 +119,18 @@
 .i-email input {
   background-color: transparent;
   border: 0;
-  border-bottom: 2px solid var(--bt-main);
+  border-bottom: 2px solid #00FFFF;
   display: block;
   width: 100%;
   padding: 15px 0;
   font-size: 18px;
-  color: var(--text-title);
+  color: #00FFFF;
 }
 
 .i-email input:focus,
 .i-email input:valid {
   outline: 0;
-  border-bottom-color: var(--bt-main);
+  border-bottom-color: #00FFFF;
 }
 
 .i-email label {
@@ -136,14 +144,14 @@
   display: inline-block;
   font-size: 18px;
   min-width: 5px;
-  color: var(--bt-main);
+  color: #00FFFF;
   transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   text-transform: uppercase;
 }
 
 .i-email input:focus+label span,
 .i-email input:valid+label span {
-  color: var(--bt-hover);
+  color: #00CCCC;
   transform: translateY(-30px);
 }
 
@@ -158,18 +166,18 @@
 .i-senha input {
   background-color: transparent;
   border: 0;
-  border-bottom: 2px solid var(--bt-main);
+  border-bottom: 2px solid #00FFFF;
   display: block;
   width: 100%;
   padding: 15px 0;
   font-size: 18px;
-  color: var(--text-title);
+  color: #00FFFF;
 }
 
 .i-senha input:focus,
 .i-senha input:valid {
   outline: 0;
-  border-bottom-color: var(--bt-main);
+  border-bottom-color: #00FFFF;
 }
 
 .i-senha label {
@@ -183,14 +191,14 @@
   display: inline-block;
   font-size: 18px;
   min-width: 5px;
-  color: var(--bt-main);
+  color: #00FFFF;
   transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   text-transform: uppercase;
 }
 
 .i-senha input:focus+label span,
 .i-senha input:valid+label span {
-  color: var(--bt-hover);
+  color: #00CCCC;
   transform: translateY(-30px);
 }
 
@@ -204,12 +212,12 @@
 }
 
 .btn-primary {
-  background: var(--bt-main);
+  background: #00FFFF;
   border: none;
   font-size: 20px;
   width: 85%;
   max-width: 410px;
-  color: var(--text-title);
+  color: #FFFFFF;
   padding: 12px 20px;
   border-radius: 8px;
   cursor: pointer;
@@ -219,15 +227,8 @@
 }
 
 .btn-primary:hover {
-  background: var(--bt-hover);
+  background: #00CCCC;
   transform: translateY(-2px);
-}
-
-.descricao {
-  margin: 5px 0 0 0;
-  font-size: 18px;
-  font-weight: 200;
-  color: var(--text-title);
 }
 
 /* ========== ESQUECEU A SENHA ========== */
@@ -239,7 +240,7 @@
 }
 
 .link-esqueceu {
-  color: var(--text-title);
+  color: #FFFFFF;
   font-size: 14px;
   text-decoration: none;
   transition: 0.2s;
@@ -248,7 +249,7 @@
 }
 
 .link-esqueceu:hover {
-  color: var(--bt-hover);
+  color: #00CCCC;
   text-decoration: underline;
 }
 
@@ -262,11 +263,11 @@
 }
 
 .btn-secundary {
-  background: var(--bt-main);
+  background: #00FFFF;
   font-size: 20px;
   width: 85%;
   max-width: 410px;
-  color: var(--text-title);
+  color: #FFFFFF;
   border: none;
   padding: 12px 20px;
   border-radius: 8px;
@@ -277,7 +278,7 @@
 }
 
 .btn-secundary:hover {
-  background: var(--bt-hover);
+  background: #00CCCC;
   transform: translateY(-2px);
 }
 
@@ -319,7 +320,7 @@
 }
 
 .modal-content h3 {
-  color: var(--text-title);
+  color: #FFFFFF;
   margin-bottom: 20px;
   font-size: 24px;
   font-weight: 600;
@@ -330,12 +331,12 @@
   width: 100%;
   padding: 12px;
   margin-bottom: 20px;
-  border: 1px solid var(--bt-main);
+  border: 1px solid #00FFFF;
   border-radius: 8px;
   font-size: 16px;
   outline: none;
   background: rgba(255, 255, 255, 0.1);
-  color: var(--text-title);
+  color: #FFFFFF;
 }
 
 .modal-content input::placeholder {
@@ -344,12 +345,12 @@
 }
 
 .modal-content input:focus {
-  border-color: var(--bt-main);
+  border-color: #00FFFF;
   background: rgba(255, 255, 255, 0.2);
 }
 
 .modal-btn {
-  background: var(--bt-main);
+  background: #00FFFF;
   color: #FFFFFF;
   border: none;
   padding: 12px 20px;
@@ -364,14 +365,14 @@
 }
 
 .modal-btn:hover {
-  background: var(--bt-hover);
+  background: #00CCCC;
   transform: translateY(-2px);
 }
 
 .modal-btn-fechar {
   background: transparent;
-  color: var(--bt-main);
-  border: 2px solid var(--bt-main);
+  color: #00FFFF;
+  border: 2px solid #00FFFF;
   padding: 12px 20px;
   border-radius: 8px;
   font-size: 16px;

@@ -22,7 +22,7 @@ const Login = () => {
       });
 
       if (response.status === 200) {
-        navigate('/home');
+        navigate('/dashboard');
       }
     } catch (error) {
       alert("Erro ao logar. Verifique se o backend está rodando!");

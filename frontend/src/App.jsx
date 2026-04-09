@@ -1,18 +1,22 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
-import Home from './pages/Home';
+import Home from './pages/Home';        // ← MUDE PARA Home
+import Dashboard from './pages/Dashboard/Dashboard';
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Rota inicial é o Login */}
-        <Route path="/" element={<Login />} />
+        {/* PÁGINA PÚBLICA - informações da empresa */}
+        <Route path="/" element={<Home />} />     {/* ← MUDE PARA Home */}
         
-        {/* Rota da Home */}
-        <Route path="/home" element={<Home />} />
+        {/* TELA DE LOGIN */}
+        <Route path="/login" element={<Login />} />
 
-        {/* Redireciona qualquer rota errada para o login */}
+        {/* DASHBOARD - área administrativa (pós-login) */}
+        <Route path="/dashboard" element={<Dashboard />} />
+
+        {/* Redireciona qualquer rota errada para HOME */}
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
