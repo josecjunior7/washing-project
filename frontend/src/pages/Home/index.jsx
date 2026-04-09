@@ -46,7 +46,7 @@ const Home = () => {
         </button>
       </div>
 
-      {/* MENU LATERAL - OPÇÕES EXTRAS */}
+      {/* 3 PONTINHOS */}
       {menuAberto && (
   <div className="menu-lateral" onMouseLeave={fecharMenu}>
     <div className="menu-item" onClick={() => navigate('/faq')}>
@@ -61,7 +61,7 @@ const Home = () => {
   </div>
 )}
 
-      {/* CONTEÚDO PRINCIPAL (restante do código igual) */}
+      {/* CONTEÚDO PRINCIPAL (restante do código igual) */} {/*parte do titulo */}
       <div className="content">
         {/* LOGO CENTRALIZADO */}
         <div className="logo-section">
@@ -77,7 +77,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* CARD DA UNIDADE PRINCIPAL */}
+        {/* CARD DA UNIDADE PRINCIPAL */} {/* informações que vão aparecer no site sobre empresa*/}
         <div className="card-unidade">
           <h1>LAVA MAIS LAVANDERIA AUTO SERVIÇOS, Recife Av. Norte</h1>
           
