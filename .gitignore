@@ -1,0 +1,7 @@
+#Variaveis de ambiente
+.env
+
+#variaveis de springboot
+src/main/resources/*.properties
+
+
