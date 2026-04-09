@@ -1,7 +1,3 @@
 #Variaveis de ambiente
 .env
 
-#variaveis de springboot
-backend/src/main/resources/*.properties
-**/application.properties
-**/application-prod.properties

@@ -9,19 +9,17 @@
 
 /* MAIN COM GRADIENTE ROXO CLARO → ROXO ESCURO */
 .main-login {
-  margin: 0;
   background: linear-gradient(135deg, #c084fc 0%, #6a11cb 100%);
   min-height: 100vh;
-  padding-top: 70px;
   overflow: hidden;
 }
 
 /* ========== PAINEL DE LOGIN ========== */
 .painel-login {
   margin: auto;
-  margin-top: 80px;
+  margin-top: 40px;
   width: 85%;
-  max-width: 600px;
+  max-width: 520px;
   border-radius: 1rem;
   background: rgba(0, 0, 0, 0.55);
   border: 1px solid rgba(255, 255, 255, 0.2);
