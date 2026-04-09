@@ -121,7 +121,7 @@ const Home = () => {
         </div>
 
 
-        {/* GRID DE UNIDADES */}
+           {/* GRADE DA UNIDADE */}
         <div className="grid-unidades">
           <div className="card-unidade-secundaria">
             <h3>Mercado Público</h3>
@@ -130,28 +130,6 @@ const Home = () => {
               Rua Padre Lemos, 500 - Casa Amarela, Recife - PE
             </div>
             <button className="btn-mapa" onClick={() => abrirMaps("Mercado Público de Casa Amarela, Recife")}>
-              Ver no Mapa
-            </button>
-          </div>
-
-          <div className="card-unidade-secundaria">
-            <h3>Casa Amarela</h3>
-            <p>📍 Centro Comercial de Casa Amarela</p>
-            <div className="endereco">
-              Av. Norte, 3000 - Casa Amarela, Recife - PE
-            </div>
-            <button className="btn-mapa" onClick={() => abrirMaps("Casa Amarela, Recife")}>
-              Ver no Mapa
-            </button>
-          </div>
-
-          <div className="card-unidade-secundaria">
-            <h3>Espinheiro</h3>
-            <p>📍 Espinheiro</p>
-            <div className="endereco">
-              Rua do Espinheiro, 150 - Espinheiro, Recife - PE
-            </div>
-            <button className="btn-mapa" onClick={() => abrirMaps("Espinheiro, Recife")}>
               Ver no Mapa
             </button>
           </div>

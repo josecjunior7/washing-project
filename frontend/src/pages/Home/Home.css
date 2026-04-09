@@ -376,3 +376,55 @@
     max-width: 100%;
   }
 }
+/* ========== ANIMAÇÕES DE ENTRADA ========== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Animação do container principal */
+.home-empresa-container {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Animação do logo */
+.logo-section {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Animação do card principal */
+.card-unidade {
+  animation: fadeInUp 0.7s ease-out 0.1s both;
+}
+
+/* Animação dos cards secundários */
+.card-unidade-secundaria {
+  animation: fadeInUp 0.7s ease-out both;
+}
+
+.card-unidade-secundaria:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.card-unidade-secundaria:nth-child(2) {
+  animation-delay: 0.35s;
+}
+
+.card-unidade-secundaria:nth-child(3) {
+  animation-delay: 0.5s;
+}
