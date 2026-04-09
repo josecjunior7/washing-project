@@ -1,4 +1,3 @@
-/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -6,14 +5,12 @@
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* FUNDO GRADIENTE ROXO */
 .dashboard-container {
-  padding: 20px;
+  padding: 25px;
   background: linear-gradient(135deg, #c084fc 0%, #6a11cb 100%);
   min-height: 100vh;
 }
 
-/* HEADER */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -26,162 +23,80 @@
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.dashboard-header h2 {
-  color: #FFFFFF;
-  font-size: 24px;
-  text-transform: uppercase;
-  font-weight: bold;
+.dashboard-header h2 { color: #FFFFFF; font-size: 22px; }
+.dashboard-header span { color: #00FFFF; }
+
+/* AJUSTE PARA NÃO ACHATAR: Usando Grid em vez de Flex direto */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
-.dashboard-header span {
-  color: #00FFFF;
-  font-size: 14px;
-  font-weight: 500;
-}
-
-/* CARDS */
-.cards {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 30px;
-  flex-wrap: wrap;
-}
-
-/* CARD */
 .card {
-  flex: 1;
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(10px);
   border-radius: 16px;
-  padding: 25px 20px;
+  padding: 20px 10px;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: 0.3s;
+  min-height: 120px;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-}
+.icon { font-size: 28px; margin-bottom: 8px; }
 
-/* ÍCONES */
-.icon {
-  font-size: 40px;
-  margin-bottom: 15px;
-}
-
-/* CORES DOS ÍCONES (mantidas originais) */
+/* Cores dos ícones mantidas */
 .clientes { color: #4da6ff; }
 .motos { color: #5cd6c0; }
 .servicos { color: #a29bfe; }
 .ordens { color: #74b9ff; }
 .pecas { color: #ff9ff3; }
 
-/* TEXTO DOS CARDS */
-.card p {
-  font-size: 14px;
-  color: #CCCCCC;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 8px;
-}
+.card p { font-size: 10px; color: #CCCCCC; text-transform: uppercase; margin-bottom: 5px; }
+.card h3 { font-size: 22px; color: #00FFFF; font-weight: bold; }
 
-.card h3 {
-  font-size: 28px;
-  color: #00FFFF;
-  font-weight: bold;
-}
-
-/* PARTE INFERIOR */
-.content {
+.stats-small { margin-top: 10px; }
+.stat-item-small {
   display: flex;
-  gap: 20px;
-  margin-top: 20px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
+.stat-item-small span { color: #CCC; font-size: 10px; }
+.stat-item-small strong { color: #00FFFF; font-size: 11px; }
 
-.box {
-  flex: 1;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 25px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: 0.3s;
-}
-
-.box:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
-.box h3 {
-  font-size: 20px;
-  color: #00FFFF;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 10px;
-}
-
-.empty {
-  color: #CCCCCC;
-  text-align: center;
-  padding: 30px;
-  font-style: italic;
-}
-
-/* ESTATÍSTICAS */
-.stats {
-  display: flex;
-  flex-direction: column;
+/* BOXES INFERIORES */
+.quatro-boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 15px;
 }
 
-.stat-item {
+.box {
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.box h3 {
+  font-size: 12px;
+  color: #00FFFF;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 6px;
+}
+
+.linha-info {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 12px;
-  margin-bottom: 5px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.stat-item span {
-  color: #FFFFFF;
-  font-size: 15px;
-}
+.linha-info span { color: #FFFFFF; font-size: 11px; }
+.linha-info strong { color: #00FFFF; font-size: 11px; }
 
-.stat-item strong {
-  color: #00FFFF;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-/* RESPONSIVO */
-@media (max-width: 900px) {
-  .cards {
-    flex-wrap: wrap;
-  }
-
-  .card {
-    flex: 1 1 calc(50% - 20px);
-    min-width: 180px;
-  }
-
-  .content {
-    flex-direction: column;
-  }
-  
-  .dashboard-header {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
-  }
-}
-
-@media (max-width: 500px) {
-  .card {
-    flex: 1 1 100%;
-  }
-}
+.vazio { color: #CCC; text-align: center; padding: 20px; font-size: 11px; }

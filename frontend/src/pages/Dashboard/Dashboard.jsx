@@ -1,5 +1,15 @@
 import React from "react";
-import { FaUsers, FaSoap, FaTools, FaClipboardList, FaCogs } from "react-icons/fa";
+// Importação correta dos ícones (Resolvendo o erro 'not defined')
+import { 
+  FaUsers, 
+  FaSoap, 
+  FaTools, 
+  FaClipboardList, 
+  FaCogs, 
+  FaMoneyBill, 
+  FaTrash, 
+  FaUserCog 
+} from "react-icons/fa";
 import "./Dashboard.css";
 
 function Dashboard() {
@@ -7,72 +17,111 @@ function Dashboard() {
 
   return (
     <section className="dashboard-container">
-      {/* HEADER */}
+      
+      {/* CABEÇALHO */}
       <section className="dashboard-header">
-        <h2>Dashboard</h2>
+        <h2>Gestão da Lavanderia</h2>
         <span>{dataAtual}</span>
       </section>
 
-      {/* CARDS */}
-      <section className="cards">
-        <section className="card">
+      {/* LINHA 1 - CARDS PRINCIPAIS (Grid para não achatar) */}
+      <section className="cards-grid">
+        <div className="card">
           <FaUsers className="icon clientes" />
           <p>CLIENTES</p>
           <h3>0</h3>
-        </section>
-
-        <section className="card">
+        </div>
+        <div className="card">
           <FaSoap className="icon motos" />
           <p>MÁQUINAS</p>
           <h3>0</h3>
-        </section>
-
-        <section className="card">
+        </div>
+        <div className="card">
           <FaTools className="icon servicos" />
           <p>SERVIÇOS</p>
           <h3>0</h3>
-        </section>
-
-        <section className="card">
+        </div>
+        <div className="card">
           <FaClipboardList className="icon ordens" />
           <p>ORDENS ABERTAS</p>
           <h3>0</h3>
-        </section>
-
-        <section className="card">
+        </div>
+        <div className="card">
           <FaCogs className="icon pecas" />
           <p>PEÇAS</p>
           <h3>0</h3>
-        </section>
+        </div>
       </section>
 
-      {/* PARTE INFERIOR */}
-      <section className="content">
-        <section className="box">
-          <h3>Ordens Recentes</h3>
-          <p className="empty">Nenhuma ordem de serviço encontrada</p>
-        </section>
+      {/* LINHA 2 - RECEITA, CANCELAMENTOS, USUÁRIOS */}
+      <section className="cards-grid">
+        <div className="card">
+          <FaMoneyBill className="icon" style={{ color: '#4da6ff' }} />
+          <p>RECEITA</p>
+          <div className="stats-small">
+            <div className="stat-item-small"><span>Hoje</span><strong>R$ 0,00</strong></div>
+            <div className="stat-item-small"><span>Semana</span><strong>R$ 0,00</strong></div>
+            <div className="stat-item-small"><span>Mês</span><strong>R$ 0,00</strong></div>
+          </div>
+        </div>
 
-        <section className="box">
-          <h3>Estatísticas do Mês</h3>
-          <section className="stats">
-            <section className="stat-item">
-              <span>Serviços Concluídos</span>
-              <strong>0</strong>
-            </section>
-            <section className="stat-item">
-              <span>Receita Total</span>
-              <strong>R$ 0,00</strong>
-            </section>
-            <section className="stat-item">
-              <span>Peças Utilizadas</span>
-              <strong>0</strong>
-            </section>
-          </section>
-        </section>
+        <div className="card">
+          <FaTrash className="icon" style={{ color: '#ff9ff3' }} />
+          <p>CANCELAMENTOS</p>
+          <div className="stats-small">
+            <div className="stat-item-small"><span>Hoje</span><strong>0</strong></div>
+            <div className="stat-item-small"><span>Semana</span><strong>0</strong></div>
+            <div className="stat-item-small"><span>Mês</span><strong>0</strong></div>
+          </div>
+        </div>
+
+        <div className="card">
+          <FaUserCog className="icon" style={{ color: '#74b9ff' }} />
+          <p>USUÁRIOS</p>
+          <div className="stats-small">
+            <div className="stat-item-small"><span>Clientes</span><strong>0</strong></div>
+            <div className="stat-item-small"><span>Funcionários</span><strong>0</strong></div>
+            <div className="stat-item-small"><span>Novos hoje</span><strong>0</strong></div>
+          </div>
+        </div>
       </section>
+
+      {/* LINHA 3 - BOXES LADO A LADO */}
+      <div className="quatro-boxes">
+        <div className="box">
+          <h3>⏰ Horários Mais Utilizados</h3>
+          <div className="linha-info"><span>08:00 - 10:00</span><strong>0</strong></div>
+          <div className="linha-info"><span>10:00 - 12:00</span><strong>0</strong></div>
+          <div className="linha-info"><span>14:00 - 16:00</span><strong>0</strong></div>
+          <div className="linha-info"><span>16:00 - 18:00</span><strong>0</strong></div>
+          <div className="linha-info"><span>18:00 - 20:00</span><strong>0</strong></div>
+        </div>
+
+        <div className="box">
+          <h3>🔄 Status das Máquinas</h3>
+          <div className="linha-info"><span>🟢 Máquina 1 (Lavar)</span><strong>Disponível</strong></div>
+          <div className="linha-info"><span>🔴 Máquina 2 (Lavar)</span><strong>Ocupada</strong></div>
+          <div className="linha-info"><span>🟢 Máquina 3 (Secar)</span><strong>Disponível</strong></div>
+          <div className="linha-info"><span>🔴 Máquina 4 (Secar)</span><strong>Ocupada</strong></div>
+          <div className="linha-info"><span>🟢 Máquina 5 (Lavar)</span><strong>Disponível</strong></div>
+        </div>
+
+        <div className="box">
+          <h3>📋 Ordens Recentes</h3>
+          <div className="vazio">Nenhuma ordem encontrada</div>
+        </div>
+
+        <div className="box">
+          <h3>📊 Estatísticas do Mês</h3>
+          <div className="linha-info"><span>Serviços Concluídos</span><strong>0</strong></div>
+          <div className="linha-info"><span>Receita Total</span><strong>R$ 0,00</strong></div>
+          <div className="linha-info"><span>Peças Utilizadas</span><strong>0</strong></div>
+        </div>
+      </div>
+
     </section>
   );
 }
 
+// ESSA LINHA É FUNDAMENTAL PARA RESOLVER O ERRO DE EXPORTAÇÃO:
 export default Dashboard;
