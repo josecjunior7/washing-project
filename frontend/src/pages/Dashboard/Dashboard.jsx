@@ -1,82 +1,95 @@
 import React from "react";
-import { 
-  FaCalendarAlt, 
-  FaHistory, 
-  FaCreditCard, 
-  FaBullhorn, 
-  FaHeadset, 
-  FaClock, 
-  FaPlus, 
-  FaDollarSign 
-} from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
+import { 
+  FaCalendarAlt, FaHistory, FaCreditCard, 
+  FaHeadset, FaCogs, FaNewspaper, FaArrowLeft
+} from 'react-icons/fa';
+import dashboardLogo from "./../../assets/images/dashboard-logo.png";
 import "./Dashboard.css";
 
 function Dashboard() {
   const navigate = useNavigate();
 
-  // Definição dos cards da grade direita
-  const menuItems = [
-    { id: "agendamento", nome: "AGENDAMENTO", icone: <FaCalendarAlt size={50} />, classe: "card-agendamento" },
-    { id: "historico_agendamento", nome: "HISTORICO DE AGENDAMENTO", icone: <FaHistory size={50} />, classe: "card-hist-agendamento" },
-    { id: "historico_pagamento", nome: "HISTORICO DE PAGAMENTO", icone: <FaClock size={50} />, classe: "card-hist-pagamento" },
-    { id: "pagamento", nome: "PAGAMENTO", icone: <FaDollarSign size={50} />, classe: "card-pagamento" },
-    { id: "suporte", nome: "SUPORTE", icone: <FaCreditCard size={50} />, classe: "card-suporte" },
-    { id: "funcionamento", nome: "FUNCIONAMENTO", icone: <FaHeadset size={50} />, classe: "card-funcionamento" },
-  ];
+  const irParaAgendamento = () => navigate('/agendamento');
+  const irParaHistoricoAgendamento = () => navigate('/historico-agendamento');
+  const irParaHistoricoPagamento = () => navigate('/historico-pagamento');
+  const irParaPagamento = () => navigate('/pagamento');
+  const irParaSuporte = () => navigate('/suporte');
+  const irParaFuncionamento = () => navigate('/funcionamento');
+  const irParaNovidades = () => navigate('/novidades');
 
   return (
     <div className="dashboard-container">
       
-      {/* CABEÇALHO ROXO SUPERIOR */}
-      <header className="header-topo">
+      {/* CABEÇALHO SUPERIOR */}
+      <div className="header-topo">
         <div className="breadcrumb">
-          <span>▶ /page</span>
+          Página Inicial / Dashboard
         </div>
-        <div className="voltar-inicio-btn" onClick={() => navigate('/')}>
-          voltar ao início
-        </div>
-      </header>
+        <button className="voltar-inicio-btn" onClick={() => navigate('/')}>
+          <FaArrowLeft /> voltar ao início
+        </button>
+      </div>
 
-      <main className="layout-grid">
+      {/* LAYOUT PRINCIPAL */}
+      <div className="layout-grid">
         
-        {/* COLUNA DA ESQUERDA: LOGO E NOVIDADES */}
+        {/* COLUNA ESQUERDA */}
         <div className="coluna-esquerda">
-          <div className="logo-area-nova">
-            <div className="logo-texto">
-              <h2 className="logo-primario">Lava mais</h2>
-              <p className="logo-subtitulo">Lavanderia Autosserviço</p>
-            </div>
-          </div>
-
-          {/* CARD NOVIDADES (ESTILO VERTICAL) */}
-          <div className="card-novidades" onClick={() => navigate('/novidades')}>
-            <div className="icone-plus-circle"><FaPlus size={10} /></div>
-            <div className="icone-principal">
-              <FaBullhorn size={70} />
-            </div>
-            <h2 className="nome-card">NOVIDADES</h2>
+          
+          {/* LOGO */}
+          <div className="logo-area">
+  <img src={dashboardLogo} alt="Logo Dashboard" className="logo-imagem" />
+</div>
+          
+          {/* CARD NOVIDADES */}
+          <div className="card-novidades" onClick={irParaNovidades}>
+            <FaNewspaper className="icone-card" />
+            <div className="nome-card">NOVIDADES</div>
+            <div className="icone-plus-circle">+</div>
           </div>
         </div>
 
-        {/* COLUNA DA DIREITA: GRADE DE BOTÕES */}
+        {/* COLUNA DIREITA - GRADE DE BOTÕES */}
         <div className="grade-botoes">
-          {menuItems.map((item) => (
-            <div 
-              key={item.id} 
-              className={`menu-card ${item.classe}`}
-              onClick={() => navigate(`/${item.id}`)}
-            >
-              <div className="icone-plus-circle"><FaPlus size={10} /></div>
-              <div className="icone-principal">
-                {item.icone}
-              </div>
-              <p className="nome-card">{item.nome}</p>
-            </div>
-          ))}
-        </div>
+          
+          <div className="menu-card card-agendamento" onClick={irParaAgendamento}>
+            <FaCalendarAlt className="icone-card" />
+            <div className="nome-card">AGENDAMENTO</div>
+            <div className="icone-plus-circle">+</div>
+          </div>
 
-      </main>
+          <div className="menu-card card-hist-agendamento" onClick={irParaHistoricoAgendamento}>
+            <FaHistory className="icone-card" />
+            <div className="nome-card">HISTORICO DE<br />AGENDAMENTO</div>
+            <div className="icone-plus-circle">+</div>
+          </div>
+
+          <div className="menu-card card-hist-pagamento" onClick={irParaHistoricoPagamento}>
+            <FaCreditCard className="icone-card" />
+            <div className="nome-card">HISTORICO DE<br />PAGAMENTO</div>
+            <div className="icone-plus-circle">+</div>
+          </div>
+
+          <div className="menu-card card-pagamento" onClick={irParaPagamento}>
+            <FaCreditCard className="icone-card" />
+            <div className="nome-card">PAGAMENTO</div>
+            <div className="icone-plus-circle">+</div>
+          </div>
+
+          <div className="menu-card card-suporte" onClick={irParaSuporte}>
+            <FaHeadset className="icone-card" />
+            <div className="nome-card">SUPORTE</div>
+            <div className="icone-plus-circle">+</div>
+          </div>
+
+          <div className="menu-card card-funcionamento" onClick={irParaFuncionamento}>
+            <FaCogs className="icone-card" />
+            <div className="nome-card">FUNCIONAMENTO</div>
+            <div className="icone-plus-circle">+</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

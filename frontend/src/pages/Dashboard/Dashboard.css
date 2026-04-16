@@ -8,7 +8,7 @@
 .dashboard-container {
   min-height: 100vh;
   background: #FFFFFF;
-  padding: 15px;
+  padding: 20px;
 }
 
 /* CABEÇALHO SUPERIOR */
@@ -17,108 +17,138 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 20px;
-  border-radius: 8px;
+  padding: 15px 30px;
+  border-radius: 16px;
   color: white;
-  margin-bottom: 25px;
+  margin-bottom: 35px;
 }
 
 .breadcrumb {
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .voltar-inicio-btn {
   background: #A9D9D0;
   color: #444;
-  padding: 5px 15px;
-  border-radius: 15px;
-  font-size: 12px;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   border: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 /* LAYOUT PRINCIPAL */
 .layout-grid {
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 25px;
-  max-width: 1300px;
+  grid-template-columns: 400px 1fr;
+  gap: 35px;
+  max-width: 1600px;
   margin: 0 auto;
 }
 
-/* LOGO */
-.logo-primario {
-  font-size: 40px;
-  color: #9356B7;
-  font-weight: 700;
-  line-height: 1;
+/* COLUNA ESQUERDA */
+.coluna-esquerda {
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+}
+
+/* LOGO - MAIOR */
+.logo-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.logo-imagem {
+  width: 220px;      /* ANTES: 200px */
+  height: 220px;     /* ANTES: 200px */
+  border-radius: 50%;
+  object-fit: contain;
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
 .logo-subtitulo {
   color: #7129A3;
-  font-size: 13px;
+  font-size: 18px;   /* ANTES: 16px */
   font-weight: 600;
 }
 
-/* CARD NOVIDADES */
+/* CARD NOVIDADES - MAIOR */
 .card-novidades {
   background: linear-gradient(to bottom, #8CE1C3 50%, #B686D7 50%);
-  border-radius: 35px;
-  height: 480px;
+  border-radius: 50px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  padding: 40px 10px;
+  justify-content: center;
+  gap: 25px;
   color: white;
   position: relative;
   cursor: pointer;
 }
 
-/* GRADE DA DIREITA */
+/* GRADE DA DIREITA - CARDS MAIORES */
 .grade-botoes {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 230px);
-  gap: 20px;
+  grid-auto-rows: 350px;
+  gap: 30px;
 }
 
 .menu-card {
-  border-radius: 35px;
+  border-radius: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 20px;
   color: white;
   text-align: center;
-  padding: 20px;
+  padding: 30px;
   cursor: pointer;
   position: relative;
   transition: transform 0.2s ease;
 }
 
 .menu-card:hover, .card-novidades:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+}
+
+/* ÍCONES - MAIORES */
+.icone-card {
+  font-size: 80px;
+  color: white;
+}
+
+.nome-card {
+  font-size: 22px;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.4;
 }
 
 .icone-plus-circle {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 25px;
+  right: 25px;
   background: rgba(255, 255, 255, 0.4);
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.nome-card {
-  font-size: 16px;
+  font-size: 24px;
   font-weight: bold;
-  text-transform: uppercase;
 }
 
 /* CORES DOS CARDS */
@@ -129,8 +159,21 @@
 .card-suporte { background-color: #7129A3; }
 .card-funcionamento { background-color: #2AB38A; }
 
-@media (max-width: 1024px) {
-  .layout-grid { grid-template-columns: 1fr; }
-  .grade-botoes { grid-template-columns: repeat(2, 1fr); }
-  .card-novidades { height: 350px; }
+/* RESPONSIVO */
+@media (max-width: 1200px) {
+  .layout-grid { 
+    grid-template-columns: 1fr; 
+  }
+  .grade-botoes { 
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .card-novidades { 
+    height: 300px; 
+  }
+}
+
+@media (max-width: 768px) {
+  .grade-botoes { 
+    grid-template-columns: 1fr;
+  }
 }
