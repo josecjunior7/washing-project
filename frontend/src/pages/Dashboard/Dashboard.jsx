@@ -1,85 +1,82 @@
 import React from "react";
-import { FaUsers, FaSoap, FaTools, FaClipboardList, FaCogs, FaMoneyBill, FaTrash, FaUserCog, FaSignOutAlt } from "react-icons/fa";
+import { 
+  FaCalendarAlt, 
+  FaHistory, 
+  FaCreditCard, 
+  FaBullhorn, 
+  FaHeadset, 
+  FaClock, 
+  FaPlus, 
+  FaDollarSign 
+} from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 import "./Dashboard.css";
 
 function Dashboard() {
   const navigate = useNavigate();
-  const dataAtual = new Date().toLocaleDateString('pt-BR');
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/');
-  };
+  // Definição dos cards da grade direita
+  const menuItems = [
+    { id: "agendamento", nome: "AGENDAMENTO", icone: <FaCalendarAlt size={50} />, classe: "card-agendamento" },
+    { id: "historico_agendamento", nome: "HISTORICO DE AGENDAMENTO", icone: <FaHistory size={50} />, classe: "card-hist-agendamento" },
+    { id: "historico_pagamento", nome: "HISTORICO DE PAGAMENTO", icone: <FaClock size={50} />, classe: "card-hist-pagamento" },
+    { id: "pagamento", nome: "PAGAMENTO", icone: <FaDollarSign size={50} />, classe: "card-pagamento" },
+    { id: "suporte", nome: "SUPORTE", icone: <FaCreditCard size={50} />, classe: "card-suporte" },
+    { id: "funcionamento", nome: "FUNCIONAMENTO", icone: <FaHeadset size={50} />, classe: "card-funcionamento" },
+  ];
 
   return (
     <div className="dashboard-container">
-      {/* CABEÇALHO */}
-      <div className="dashboard-header">
-        <h2>Gestão da Lavanderia</h2>
-        <div className="header-right">
-          <span>{dataAtual}</span>
-          <button className="btn-logout" onClick={handleLogout}><FaSignOutAlt /> Sair</button>
+      
+      {/* CABEÇALHO ROXO SUPERIOR */}
+      <header className="header-topo">
+        <div className="breadcrumb">
+          <span>▶ /page</span>
         </div>
-      </div>
+        <div className="voltar-inicio-btn" onClick={() => navigate('/')}>
+          voltar ao início
+        </div>
+      </header>
 
-      {/* CARDS PRINCIPAIS */}
-      <div className="cards">
-        <div className="card"><FaUsers className="icon clientes" /><p>CLIENTES</p><h3>0</h3></div>
-        <div className="card"><FaSoap className="icon motos" /><p>MÁQUINAS</p><h3>0</h3></div>
-        <div className="card"><FaTools className="icon servicos" /><p>SERVIÇOS</p><h3>0</h3></div>
-        <div className="card"><FaClipboardList className="icon ordens" /><p>ORDENS ABERTAS</p><h3>0</h3></div>
-        <div className="card"><FaCogs className="icon pecas" /><p>PEÇAS</p><h3>0</h3></div>
-      </div>
+      <main className="layout-grid">
+        
+        {/* COLUNA DA ESQUERDA: LOGO E NOVIDADES */}
+        <div className="coluna-esquerda">
+          <div className="logo-area-nova">
+            <div className="logo-texto">
+              <h2 className="logo-primario">Lava mais</h2>
+              <p className="logo-subtitulo">Lavanderia Autosserviço</p>
+            </div>
+          </div>
 
-      {/* RECEITA, CANCELAMENTOS, USUÁRIOS */}
-      <div className="cards">
-        <div className="card"><FaMoneyBill className="icon" style={{ color: '#4da6ff' }} /><p>RECEITA</p>
-          <div className="stats-small">
-            <div className="stat-item-small"><span>Hoje</span><strong>R$ 0,00</strong></div>
-            <div className="stat-item-small"><span>Semana</span><strong>R$ 0,00</strong></div>
-            <div className="stat-item-small"><span>Mês</span><strong>R$ 0,00</strong></div>
+          {/* CARD NOVIDADES (ESTILO VERTICAL) */}
+          <div className="card-novidades" onClick={() => navigate('/novidades')}>
+            <div className="icone-plus-circle"><FaPlus size={10} /></div>
+            <div className="icone-principal">
+              <FaBullhorn size={70} />
+            </div>
+            <h2 className="nome-card">NOVIDADES</h2>
           </div>
         </div>
-        <div className="card"><FaTrash className="icon" style={{ color: '#ff9ff3' }} /><p>CANCELAMENTOS</p>
-          <div className="stats-small">
-            <div className="stat-item-small"><span>Hoje</span><strong>0</strong></div>
-            <div className="stat-item-small"><span>Semana</span><strong>0</strong></div>
-            <div className="stat-item-small"><span>Mês</span><strong>0</strong></div>
-          </div>
-        </div>
-        <div className="card"><FaUserCog className="icon" style={{ color: '#74b9ff' }} /><p>USUÁRIOS</p>
-          <div className="stats-small">
-            <div className="stat-item-small"><span>Clientes</span><strong>0</strong></div>
-            <div className="stat-item-small"><span>Funcionários</span><strong>0</strong></div>
-            <div className="stat-item-small"><span>Novos hoje</span><strong>0</strong></div>
-          </div>
-        </div>
-      </div>
 
-      {/* BOXES LADO A LADO */}
-      <div className="quatro-boxes">
-        <div className="box"><h3>⏰ Horários Mais Utilizados</h3>
-          <div className="linha-info"><span>08:00 - 10:00</span><strong>0</strong></div>
-          <div className="linha-info"><span>10:00 - 12:00</span><strong>0</strong></div>
-          <div className="linha-info"><span>14:00 - 16:00</span><strong>0</strong></div>
-          <div className="linha-info"><span>16:00 - 18:00</span><strong>0</strong></div>
-          <div className="linha-info"><span>18:00 - 20:00</span><strong>0</strong></div>
+        {/* COLUNA DA DIREITA: GRADE DE BOTÕES */}
+        <div className="grade-botoes">
+          {menuItems.map((item) => (
+            <div 
+              key={item.id} 
+              className={`menu-card ${item.classe}`}
+              onClick={() => navigate(`/${item.id}`)}
+            >
+              <div className="icone-plus-circle"><FaPlus size={10} /></div>
+              <div className="icone-principal">
+                {item.icone}
+              </div>
+              <p className="nome-card">{item.nome}</p>
+            </div>
+          ))}
         </div>
-        <div className="box"><h3>🔄 Status das Máquinas</h3>
-          <div className="linha-info"><span>🟢 Máquina 1 (Lavar)</span><strong>Disponível</strong></div>
-          <div className="linha-info"><span>🔴 Máquina 2 (Lavar)</span><strong>Ocupada</strong></div>
-          <div className="linha-info"><span>🟢 Máquina 3 (Secar)</span><strong>Disponível</strong></div>
-          <div className="linha-info"><span>🔴 Máquina 4 (Secar)</span><strong>Ocupada</strong></div>
-          <div className="linha-info"><span>🟢 Máquina 5 (Lavar)</span><strong>Disponível</strong></div>
-        </div>
-        <div className="box"><h3>📋 Ordens Recentes</h3><div className="vazio">Nenhuma ordem encontrada</div></div>
-        <div className="box"><h3>📊 Estatísticas do Mês</h3>
-          <div className="linha-info"><span>Serviços Concluídos</span><strong>0</strong></div>
-          <div className="linha-info"><span>Receita Total</span><strong>R$ 0,00</strong></div>
-          <div className="linha-info"><span>Peças Utilizadas</span><strong>0</strong></div>
-        </div>
-      </div>
+
+      </main>
     </div>
   );
 }
