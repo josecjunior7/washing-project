@@ -8,7 +8,7 @@ import "./Dashboard.css";
 import NOVIDADES from "./../../assets/images/NOVIDADES.png";
 import STATUS from "./../../assets/images/STATUS.png";
 import AGENDAMENTO from "./../../assets/images/AGENDAMENTO.png";
-import PAGAMENTO from "./../../assets/images/PAGAMENTO.png";
+import FUNCIONAMENTO from "./../../assets/images/FUNCIONAMENTO.png";
 import HISTORICO_DE_AGENDAMENTO from "./../../assets/images/HISTORICO DE AGENDAMENTO.png";
 import HISTORICO_DE_PAGAMENTO from "./../../assets/images/HISTORICO DE PAGAMENTO.png";
 import SUPORTE from "./../../assets/images/SUPORTE.png";
@@ -73,9 +73,9 @@ function Dashboard() {
             <img src={HISTORICO_DE_PAGAMENTO} alt="HISTORICO DE PAGAMENTO" />
           </button>
 
-          {/* PAGAMENTO */}
-          <button className="btn-figma" onClick={irParaPagamento}>
-            <img src={PAGAMENTO} alt="PAGAMENTO" />
+          {/* FUNCIONAMENTO */}
+          <button className="btn-figma" onClick={irParaFuncionamento}>
+            <img src={STATUS} alt="STATUS" />
           </button>
 
           {/* SUPORTE */}
@@ -83,9 +83,9 @@ function Dashboard() {
             <img src={SUPORTE} alt="SUPORTE" />
           </button>
 
-          {/* FUNCIONAMENTO */}
-          <button className="btn-figma" onClick={irParaFuncionamento}>
-            <img src={STATUS} alt="STATUS" />
+          {/* PAGAMENTO */}
+          <button className="btn-figma" onClick={irParaPagamento}>
+            <img src={FUNCIONAMENTO} alt="FUNCIONAMENTO" />
           </button>
         </div>
       </div>
