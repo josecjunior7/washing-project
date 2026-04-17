@@ -6,7 +6,7 @@ import "./Dashboard.css";
 
 // IMPORTANDO AS IMAGENS
 import NOVIDADES from "./../../assets/images/NOVIDADES.png";
-import FUNCIONAMENTO from "./../../assets/images/FUNCIONAMENTO.png";
+import STATUS from "./../../assets/images/STATUS.png";
 import AGENDAMENTO from "./../../assets/images/AGENDAMENTO.png";
 import PAGAMENTO from "./../../assets/images/PAGAMENTO.png";
 import HISTORICO_DE_AGENDAMENTO from "./../../assets/images/HISTORICO DE AGENDAMENTO.png";
@@ -85,7 +85,7 @@ function Dashboard() {
 
           {/* FUNCIONAMENTO */}
           <button className="btn-figma" onClick={irParaFuncionamento}>
-            <img src={FUNCIONAMENTO} alt="FUNCIONAMENTO" />
+            <img src={STATUS} alt="STATUS" />
           </button>
         </div>
       </div>
