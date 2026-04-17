@@ -57,37 +57,48 @@
   gap: 35px;
 }
 
-
-/* LOGO - TAMANHO DINÂMICO */
+/* LOGO - RESPONSIVA */
 .logo-area {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  grid-row: 2;
 }
 
 .logo-imagem {
   width: 100%;
-  max-width: 380px;
+  max-width: 220px;
   height: auto;
   border-radius: 50%;
   object-fit: contain;
   background: white;
+  padding: 20px;
   margin-bottom: 20px;
+}
+
+.logo-texto {
+  font-size: clamp(24px, 5vw, 32px);
+  font-weight: bold;
+  color: #9356B7;
+  line-height: 1.2;
+}
+
+.logo-texto span {
+  color: #00FFFF;
 }
 
 .logo-subtitulo {
   color: #7129A3;
-  font-size: 16px;
+  font-size: clamp(12px, 3vw, 14px);
   font-weight: 600;
+  margin-top: 5px;
 }
 
-/* CARD NOVIDADES - TAMANHO DINÂMICO */
+/* CARD NOVIDADES - DINÂMICO */
 .card-novidades {
   background: linear-gradient(to bottom, #8CE1C3 50%, #B686D7 50%);
   border-radius: 50px;
-  min-height: 400px;
+  min-height: 300px;
   height: auto;
   display: flex;
   flex-direction: column;
@@ -98,13 +109,16 @@
   position: relative;
   cursor: pointer;
   padding: 40px 20px;
-  grid-row: 1;
+}
+
+.card-novidades:hover {
+  transform: translateY(-5px);
 }
 
 /* GRADE DA DIREITA - DINÂMICA E ALINHADA */
 .grade-botoes {
   display: grid;
-  grid-template-columns: repeat(3, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-auto-rows: minmax(280px, auto);
   gap: 25px;
   align-items: stretch;
@@ -116,28 +130,58 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
   color: white;
   text-align: center;
-  padding: 25px 15px;
+  padding: 20px;
   cursor: pointer;
   position: relative;
   transition: transform 0.2s ease;
   height: 100%;
 }
 
-.menu-card:hover, .card-novidades:hover {
+.menu-card:hover {
   transform: translateY(-5px);
 }
 
-/* ÍCONES - DINÂMICOS */
+/* GRADE PARA BOTÕES COM IMAGENS - DINÂMICA */
+.grade-figma {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  align-items: stretch;
+}
+
+.btn-figma {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.btn-figma:hover {
+  transform: translateY(-5px);
+}
+
+.btn-figma img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* ÍCONES - DINÂMICOS (caso use ícones) */
 .icone-card {
-  font-size: clamp(40px, 8vw, 80px);
+  font-size: clamp(40px, 8vw, 60px);
   color: white;
 }
 
 .nome-card {
-  font-size: clamp(14px, 4vw, 20px);
+  font-size: clamp(12px, 4vw, 16px);
   font-weight: bold;
   text-transform: uppercase;
   line-height: 1.3;
@@ -159,7 +203,6 @@
 }
 
 /* CORES DOS CARDS */
-.card-novidades { background: linear-gradient(to bottom, #8CE1C3 50%, #B686D7 50%); }
 .card-agendamento { background-color: #B686D7; }
 .card-hist-agendamento { background-color: #8CE1C3; }
 .card-hist-pagamento { background-color: #9356B7; }
@@ -175,8 +218,11 @@
   .grade-botoes { 
     grid-template-columns: repeat(2, 1fr);
   }
-  .logo-imagem {
-    max-width: 200px;
+  .grade-figma { 
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .card-novidades { 
+    min-height: 250px; 
   }
 }
 
@@ -184,10 +230,10 @@
   .grade-botoes { 
     grid-template-columns: 1fr;
   }
-  .card-novidades {
-    min-height: 300px;
+  .grade-figma { 
+    grid-template-columns: 1fr;
   }
-  .icone-card {
-    font-size: 60px;
+  .logo-imagem {
+    max-width: 160px;
   }
 }

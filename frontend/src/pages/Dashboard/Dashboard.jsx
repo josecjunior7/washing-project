@@ -1,15 +1,22 @@
 import React from "react";
 import { useNavigate } from 'react-router-dom';
-import { 
-  FaCalendarAlt, FaHistory, FaCreditCard, 
-  FaHeadset, FaCogs, FaNewspaper, FaArrowLeft
-} from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
 import dashboardLogo from "./../../assets/images/dashboard-logo.png";
 import "./Dashboard.css";
+
+// IMPORTANDO AS IMAGENS
+import NOVIDADES from "./../../assets/images/NOVIDADES.png";
+import FUNCIONAMENTO from "./../../assets/images/FUNCIONAMENTO.png";
+import AGENDAMENTO from "./../../assets/images/AGENDAMENTO.png";
+import PAGAMENTO from "./../../assets/images/PAGAMENTO.png";
+import HISTORICO_DE_AGENDAMENTO from "./../../assets/images/HISTORICO DE AGENDAMENTO.png";
+import HISTORICO_DE_PAGAMENTO from "./../../assets/images/HISTORICO DE PAGAMENTO.png";
+import SUPORTE from "./../../assets/images/SUPORTE.png";
 
 function Dashboard() {
   const navigate = useNavigate();
 
+  // FUNÇÕES DE NAVEGAÇÃO
   const irParaAgendamento = () => navigate('/agendamento');
   const irParaHistoricoAgendamento = () => navigate('/historico-agendamento');
   const irParaHistoricoPagamento = () => navigate('/historico-pagamento');
@@ -39,55 +46,47 @@ function Dashboard() {
           
           {/* LOGO */}
           <div className="logo-area">
-  <img src={dashboardLogo} alt="Logo Dashboard" className="logo-imagem" />
-</div>
+            <img src={dashboardLogo} alt="Logo Dashboard" className="logo-imagem" />
+          </div>
           
           {/* CARD NOVIDADES */}
-          <div className="card-novidades" onClick={irParaNovidades}>
-            <FaNewspaper className="icone-card" />
-            <div className="nome-card">NOVIDADES</div>
-            <div className="icone-plus-circle">+</div>
-          </div>
+          <button className="btn-figma" onClick={irParaNovidades}>
+            <img src={NOVIDADES} alt="NOVIDADES" />
+          </button>
         </div>
 
-        {/* COLUNA DIREITA - GRADE DE BOTÕES */}
-        <div className="grade-botoes">
+        {/* COLUNA DIREITA - BOTÕES COM IMAGENS */}
+        <div className="grade-figma">
           
-          <div className="menu-card card-agendamento" onClick={irParaAgendamento}>
-            <FaCalendarAlt className="icone-card" />
-            <div className="nome-card">AGENDAMENTO</div>
-            <div className="icone-plus-circle">+</div>
-          </div>
+          {/* AGENDAMENTO */}
+          <button className="btn-figma" onClick={irParaAgendamento}>
+            <img src={AGENDAMENTO} alt="AGENDAMENTO" />
+          </button>
 
-          <div className="menu-card card-hist-agendamento" onClick={irParaHistoricoAgendamento}>
-            <FaHistory className="icone-card" />
-            <div className="nome-card">HISTORICO DE<br />AGENDAMENTO</div>
-            <div className="icone-plus-circle">+</div>
-          </div>
+          {/* HISTORICO DE AGENDAMENTO */}
+          <button className="btn-figma" onClick={irParaHistoricoAgendamento}>
+            <img src={HISTORICO_DE_AGENDAMENTO} alt="HISTORICO DE AGENDAMENTO" />
+          </button>
 
-          <div className="menu-card card-hist-pagamento" onClick={irParaHistoricoPagamento}>
-            <FaCreditCard className="icone-card" />
-            <div className="nome-card">HISTORICO DE<br />PAGAMENTO</div>
-            <div className="icone-plus-circle">+</div>
-          </div>
+          {/* HISTORICO DE PAGAMENTO */}
+          <button className="btn-figma" onClick={irParaHistoricoPagamento}>
+            <img src={HISTORICO_DE_PAGAMENTO} alt="HISTORICO DE PAGAMENTO" />
+          </button>
 
-          <div className="menu-card card-pagamento" onClick={irParaPagamento}>
-            <FaCreditCard className="icone-card" />
-            <div className="nome-card">PAGAMENTO</div>
-            <div className="icone-plus-circle">+</div>
-          </div>
+          {/* PAGAMENTO */}
+          <button className="btn-figma" onClick={irParaPagamento}>
+            <img src={PAGAMENTO} alt="PAGAMENTO" />
+          </button>
 
-          <div className="menu-card card-suporte" onClick={irParaSuporte}>
-            <FaHeadset className="icone-card" />
-            <div className="nome-card">SUPORTE</div>
-            <div className="icone-plus-circle">+</div>
-          </div>
+          {/* SUPORTE */}
+          <button className="btn-figma" onClick={irParaSuporte}>
+            <img src={SUPORTE} alt="SUPORTE" />
+          </button>
 
-          <div className="menu-card card-funcionamento" onClick={irParaFuncionamento}>
-            <FaCogs className="icone-card" />
-            <div className="nome-card">FUNCIONAMENTO</div>
-            <div className="icone-plus-circle">+</div>
-          </div>
+          {/* FUNCIONAMENTO */}
+          <button className="btn-figma" onClick={irParaFuncionamento}>
+            <img src={FUNCIONAMENTO} alt="FUNCIONAMENTO" />
+          </button>
         </div>
       </div>
     </div>
