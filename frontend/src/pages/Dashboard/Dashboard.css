@@ -46,7 +46,7 @@
   display: grid;
   grid-template-columns: 1fr 3fr;
   gap: 25px;
-  max-width: 1600px;
+  max-width: 1200px;
   margin: 0 auto;
   align-items: start; /* ALINHA PELO TOPO */
   max-height: 1000px;
@@ -74,6 +74,11 @@
   border-radius: 50%;
   object-fit: cover;
   background: white;
+}
+
+/* SUBIR APENAS O CARD DE NOVIDADES */
+.coluna-esquerda .btn-figma:first-of-type {
+  margin-top: -38px;  /* Ajuste este valor conforme necessário */
 }
 
 /* ========================================== */
@@ -137,4 +142,20 @@
   .logo-imagem {
     max-width: 160px;
   }
+}
+/*animação de entrada*/
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Aplica no container principal */
+.dashboard-container {
+  animation: slideDown 0.6s ease-out;
 }

@@ -16,11 +16,11 @@ import SUPORTE from "./../../assets/images/SUPORTE.png";
 function Dashboard() {
   const navigate = useNavigate();
 
-  // FUNÇÕES DE NAVEGAÇÃO
+  // FUNÇÕES DE NAVEGAÇÃO - CADA UMA PARA SUA PÁGINA
   const irParaAgendamento = () => navigate('/agendamento');
   const irParaHistoricoAgendamento = () => navigate('/historico-agendamento');
   const irParaHistoricoPagamento = () => navigate('/historico-pagamento');
-  const irParaPagamento = () => navigate('/pagamento');
+  const irParaStatus = () => navigate('/status');           // ← STATUS DE LAVAGEM
   const irParaSuporte = () => navigate('/suporte');
   const irParaFuncionamento = () => navigate('/funcionamento');
   const irParaNovidades = () => navigate('/novidades');
@@ -34,7 +34,7 @@ function Dashboard() {
           Página Inicial / Dashboard
         </div>
         <button className="voltar-inicio-btn" onClick={() => navigate('/')}>
-          <FaArrowLeft /> voltar ao início
+          <FaArrowLeft /> INICIO
         </button>
       </div>
 
@@ -73,8 +73,8 @@ function Dashboard() {
             <img src={HISTORICO_DE_PAGAMENTO} alt="HISTORICO DE PAGAMENTO" />
           </button>
 
-          {/* FUNCIONAMENTO */}
-          <button className="btn-figma" onClick={irParaFuncionamento}>
+          {/* STATUS DE LAVAGEM */}
+          <button className="btn-figma" onClick={irParaStatus}>
             <img src={STATUS} alt="STATUS" />
           </button>
 
@@ -83,8 +83,8 @@ function Dashboard() {
             <img src={SUPORTE} alt="SUPORTE" />
           </button>
 
-          {/* PAGAMENTO */}
-          <button className="btn-figma" onClick={irParaPagamento}>
+          {/* FUNCIONAMENTO */}
+          <button className="btn-figma" onClick={irParaFuncionamento}>
             <img src={FUNCIONAMENTO} alt="FUNCIONAMENTO" />
           </button>
         </div>

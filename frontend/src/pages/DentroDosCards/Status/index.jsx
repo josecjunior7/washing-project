@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 
-function HistoricoPagamento() {
+function Status() {
   const navigate = useNavigate();
 
   return (
@@ -10,10 +10,10 @@ function HistoricoPagamento() {
       <button onClick={() => navigate('/dashboard')}>
         <FaArrowLeft /> Voltar ao Dashboard
       </button>
-      <h1>💰 Histórico de Pagamento</h1>
-      <p>Conteúdo da página de histórico de pagamento...</p>
+      <h1>📊 Status de Lavagem</h1>
+      <p>Conteúdo da página de status de lavagem...</p>
     </div>
   );
 }
 
-export default HistoricoPagamento;
+export default Status;

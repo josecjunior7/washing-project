@@ -3,14 +3,14 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard/Dashboard';
 
-// IMPORTAR AS PÁGINAS DOS CARDS
-import Agendamento from './pages/Agendamento';
-import HistoricoAgendamento from './pages/HistoricoAgendamento';
-import HistoricoPagamento from './pages/HistoricoPagamento';
-import Pagamento from './pages/Pagamento';
-import Suporte from './pages/Suporte';
-import Funcionamento from './pages/Funcionamento';
-import Novidades from './pages/Novidades';
+// IMPORTAR AS PÁGINAS DENTRO DA PASTA DentroDosCards
+import Agendamento from './pages/DentroDosCards/Agendamento';
+import HistoricoAgendamento from './pages/DentroDosCards/HistoricoAgendamento';
+import HistoricoPagamento from './pages/DentroDosCards/HistoricoPagamento';
+import Status from './pages/DentroDosCards/Status';
+import Suporte from './pages/DentroDosCards/Suporte';
+import Funcionamento from './pages/DentroDosCards/Funcionamento';
+import Novidades from './pages/DentroDosCards/Novidades';
 
 function App() {
   // Verifica se o usuário está logado
@@ -35,7 +35,7 @@ function App() {
         <Route path="/agendamento" element={isAuthenticated ? <Agendamento /> : <Navigate to="/login" />} />
         <Route path="/historico-agendamento" element={isAuthenticated ? <HistoricoAgendamento /> : <Navigate to="/login" />} />
         <Route path="/historico-pagamento" element={isAuthenticated ? <HistoricoPagamento /> : <Navigate to="/login" />} />
-        <Route path="/pagamento" element={isAuthenticated ? <Pagamento /> : <Navigate to="/login" />} />
+        <Route path="/status" element={isAuthenticated ? <Status /> : <Navigate to="/login" />} />
         <Route path="/suporte" element={isAuthenticated ? <Suporte /> : <Navigate to="/login" />} />
         <Route path="/funcionamento" element={isAuthenticated ? <Funcionamento /> : <Navigate to="/login" />} />
         <Route path="/novidades" element={isAuthenticated ? <Novidades /> : <Navigate to="/login" />} />
