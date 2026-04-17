@@ -41,51 +41,54 @@
   gap: 10px;
 }
 
-/* LAYOUT PRINCIPAL */
+/* LAYOUT PRINCIPAL - DINÂMICO */
 .layout-grid {
   display: grid;
-  grid-template-columns: 400px 1fr;
+  grid-template-columns: 1fr 2fr;
   gap: 35px;
   max-width: 1600px;
   margin: 0 auto;
 }
 
-/* COLUNA ESQUERDA */
+/* COLUNA ESQUERDA - DINÂMICA */
 .coluna-esquerda {
   display: flex;
   flex-direction: column;
   gap: 35px;
 }
 
-/* LOGO - MAIOR */
+
+/* LOGO - TAMANHO DINÂMICO */
 .logo-area {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  grid-row: 2;
 }
 
 .logo-imagem {
-  width: 220px;      /* ANTES: 200px */
-  height: 220px;     /* ANTES: 200px */
+  width: 100%;
+  max-width: 380px;
+  height: auto;
   border-radius: 50%;
   object-fit: contain;
   background: white;
-  padding: 20px;
   margin-bottom: 20px;
 }
 
 .logo-subtitulo {
   color: #7129A3;
-  font-size: 18px;   /* ANTES: 16px */
+  font-size: 16px;
   font-weight: 600;
 }
 
-/* CARD NOVIDADES - MAIOR */
+/* CARD NOVIDADES - TAMANHO DINÂMICO */
 .card-novidades {
   background: linear-gradient(to bottom, #8CE1C3 50%, #B686D7 50%);
   border-radius: 50px;
-  height: 500px;
+  min-height: 400px;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -94,14 +97,17 @@
   color: white;
   position: relative;
   cursor: pointer;
+  padding: 40px 20px;
+  grid-row: 1;
 }
 
-/* GRADE DA DIREITA - CARDS MAIORES */
+/* GRADE DA DIREITA - DINÂMICA E ALINHADA */
 .grade-botoes {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: 350px;
-  gap: 30px;
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+  grid-auto-rows: minmax(280px, auto);
+  gap: 25px;
+  align-items: stretch;
 }
 
 .menu-card {
@@ -113,45 +119,47 @@
   gap: 20px;
   color: white;
   text-align: center;
-  padding: 30px;
+  padding: 25px 15px;
   cursor: pointer;
   position: relative;
   transition: transform 0.2s ease;
+  height: 100%;
 }
 
 .menu-card:hover, .card-novidades:hover {
-  transform: translateY(-8px);
+  transform: translateY(-5px);
 }
 
-/* ÍCONES - MAIORES */
+/* ÍCONES - DINÂMICOS */
 .icone-card {
-  font-size: 80px;
+  font-size: clamp(40px, 8vw, 80px);
   color: white;
 }
 
 .nome-card {
-  font-size: 22px;
+  font-size: clamp(14px, 4vw, 20px);
   font-weight: bold;
   text-transform: uppercase;
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .icone-plus-circle {
   position: absolute;
-  top: 25px;
-  right: 25px;
+  top: 20px;
+  right: 20px;
   background: rgba(255, 255, 255, 0.4);
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
 }
 
 /* CORES DOS CARDS */
+.card-novidades { background: linear-gradient(to bottom, #8CE1C3 50%, #B686D7 50%); }
 .card-agendamento { background-color: #B686D7; }
 .card-hist-agendamento { background-color: #8CE1C3; }
 .card-hist-pagamento { background-color: #9356B7; }
@@ -167,13 +175,19 @@
   .grade-botoes { 
     grid-template-columns: repeat(2, 1fr);
   }
-  .card-novidades { 
-    height: 300px; 
+  .logo-imagem {
+    max-width: 200px;
   }
 }
 
 @media (max-width: 768px) {
   .grade-botoes { 
     grid-template-columns: 1fr;
+  }
+  .card-novidades {
+    min-height: 300px;
+  }
+  .icone-card {
+    font-size: 60px;
   }
 }
