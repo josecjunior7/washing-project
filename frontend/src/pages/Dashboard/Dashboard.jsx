@@ -1,17 +1,17 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
-import { FaArrowLeft } from 'react-icons/fa';
-import dashboardLogo from "./../../assets/images/dashboard-logo.png";
+import { useNavigate } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
+import dashboardLogo from "../../assets/images/dashboard-logo.png";
 import "./Dashboard.css";
 
-// IMPORTANDO AS IMAGENS
-import NOVIDADES from "./../../assets/images/NOVIDADES.png";
-import STATUS from "./../../assets/images/STATUS_DE_LAVAGEM.png";  
-import AGENDAMENTO from "./../../assets/images/AGENDAMENTO.png";
-import CONTATO from "./../../assets/images/CONTATO.png";
-import INSTAGRAM from "./../../assets/images/INSTAGRAM.png";
-import HISTORICO_DE_AGENDAMENTO from "./../../assets/images/HISTORICO DE AGENDAMENTO.png";
-import HISTORICO_DE_PAGAMENTO from "./../../assets/images/HISTORICO DE PAGAMENTO.png";
+// IMPORTANDO AS IMAGENS - CAMINHO CORRIGIDO
+import NOVIDADES from "../../assets/images/NOVIDADES.png";
+import STATUS from "../../assets/images/STATUS.png";
+import AGENDAMENTO from "../../assets/images/AGENDAMENTO.png";
+import CONTATO from "../../assets/images/CONTATO.png";
+import INSTAGRAM from "../../assets/images/INSTAGRAM.png";
+import HISTORICO_DE_AGENDAMENTO from "../../assets/images/HISTORICO DE AGENDAMENTO.png";
+import HISTORICO_DE_PAGAMENTO from "../../assets/images/HISTORICO DE PAGAMENTO.png";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -47,7 +47,6 @@ function Dashboard() {
           {/* LOGO */}
           <div className="logo-area">
             <img src={dashboardLogo} alt="Logo Dashboard" className="logo-imagem" />
-            <div className="logo-texto">Lava <span>mais</span></div>
             <div className="logo-subtitulo">Lavanderia Autoserviço</div>
           </div>
           
