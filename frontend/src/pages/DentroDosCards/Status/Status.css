@@ -1,0 +1,171 @@
+/* STATUS DE LAVAGEM - ESTILO */
+.status-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #c084fc 0%, #6a11cb 100%);
+  padding: 30px;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Botão voltar */
+.btn-voltar {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 30px;
+  transition: 0.2s;
+}
+
+.btn-voltar:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Imagem do Figma */
+.status-imagem {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto 30px auto;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Título */
+.status-title {
+  text-align: center;
+  font-size: 32px;
+  color: white;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+/* Explicação */
+.status-explicacao {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  margin-bottom: 50px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Linha do tempo */
+.timeline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.timeline-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  min-width: 120px;
+}
+
+.timeline-circle {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  transition: 0.3s;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.timeline-circle.active {
+  background: #00FF88;
+  border-color: #00FF88;
+  color: #000;
+  box-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+.timeline-line {
+  width: 80px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  margin: 15px 0;
+}
+
+.timeline-label {
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  text-transform: uppercase;
+}
+
+/* Informação do pedido */
+.pedido-info {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  padding: 25px;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.pedido-info h3 {
+  color: white;
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
+.pedido-info p {
+  color: rgba(255, 255, 255, 0.8);
+  margin: 8px 0;
+}
+
+.status-verde {
+  color: #00FF88;
+  font-size: 18px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .timeline {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .timeline-line {
+    width: 3px;
+    height: 30px;
+  }
+  
+  .timeline-item {
+    flex-direction: row;
+    gap: 20px;
+    min-width: auto;
+  }
+  
+  .timeline-label {
+    margin-top: 0;
+  }
+  
+  .status-title {
+    font-size: 24px;
+  }
+}

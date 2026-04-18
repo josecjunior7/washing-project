@@ -8,8 +8,8 @@ import Agendamento from './pages/DentroDosCards/Agendamento';
 import HistoricoAgendamento from './pages/DentroDosCards/HistoricoAgendamento';
 import HistoricoPagamento from './pages/DentroDosCards/HistoricoPagamento';
 import Status from './pages/DentroDosCards/Status';
-import Suporte from './pages/DentroDosCards/Suporte';
-import Funcionamento from './pages/DentroDosCards/Funcionamento';
+import Contato from './pages/DentroDosCards/Contato';
+import Instagram from './pages/DentroDosCards/Instagram';
 import Novidades from './pages/DentroDosCards/Novidades';
 
 function App() {
@@ -36,8 +36,8 @@ function App() {
         <Route path="/historico-agendamento" element={isAuthenticated ? <HistoricoAgendamento /> : <Navigate to="/login" />} />
         <Route path="/historico-pagamento" element={isAuthenticated ? <HistoricoPagamento /> : <Navigate to="/login" />} />
         <Route path="/status" element={isAuthenticated ? <Status /> : <Navigate to="/login" />} />
-        <Route path="/suporte" element={isAuthenticated ? <Suporte /> : <Navigate to="/login" />} />
-        <Route path="/funcionamento" element={isAuthenticated ? <Funcionamento /> : <Navigate to="/login" />} />
+        <Route path="/contato" element={isAuthenticated ? <Contato /> : <Navigate to="/login" />} />
+        <Route path="/instagram" element={isAuthenticated ? <Instagram /> : <Navigate to="/login" />} />
         <Route path="/novidades" element={isAuthenticated ? <Novidades /> : <Navigate to="/login" />} />
 
         {/* Redireciona qualquer rota errada para HOME */}

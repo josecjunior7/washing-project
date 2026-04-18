@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 
-function Suporte() {
+function Instagram() {
   const navigate = useNavigate();
 
   return (
@@ -10,10 +10,12 @@ function Suporte() {
       <button onClick={() => navigate('/dashboard')}>
         <FaArrowLeft /> Voltar ao Dashboard
       </button>
-      <h1>🛠️ Suporte</h1>
-      <p>Conteúdo da página de suporte...</p>
+      <h1>📷 Instagram</h1>
+      <p>Siga-nos no Instagram:</p>
+      <p>@lavamais</p>
+      <p>Link: instagram.com/lavamais</p>
     </div>
   );
 }
 
-export default Suporte;
+export default Instagram;

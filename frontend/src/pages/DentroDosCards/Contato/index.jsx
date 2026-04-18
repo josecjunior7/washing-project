@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 
-function Funcionamento() {
+function Contato() {
   const navigate = useNavigate();
 
   return (
@@ -10,10 +10,12 @@ function Funcionamento() {
       <button onClick={() => navigate('/dashboard')}>
         <FaArrowLeft /> Voltar ao Dashboard
       </button>
-      <h1>⚙️ Funcionamento</h1>
-      <p>Conteúdo da página de funcionamento...</p>
+      <h1>📞 Contato</h1>
+      <p>Entre em contato conosco:</p>
+      <p>Email: contato@lavamais.com</p>
+      <p>Telefone: (81) 99999-9999</p>
     </div>
   );
 }
 
-export default Funcionamento;
+export default Contato;

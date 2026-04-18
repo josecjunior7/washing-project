@@ -6,23 +6,23 @@ import "./Dashboard.css";
 
 // IMPORTANDO AS IMAGENS
 import NOVIDADES from "./../../assets/images/NOVIDADES.png";
-import STATUS from "./../../assets/images/STATUS.png";
+import STATUS from "./../../assets/images/STATUS_DE_LAVAGEM.png";  
 import AGENDAMENTO from "./../../assets/images/AGENDAMENTO.png";
-import FUNCIONAMENTO from "./../../assets/images/FUNCIONAMENTO.png";
+import CONTATO from "./../../assets/images/CONTATO.png";
+import INSTAGRAM from "./../../assets/images/INSTAGRAM.png";
 import HISTORICO_DE_AGENDAMENTO from "./../../assets/images/HISTORICO DE AGENDAMENTO.png";
 import HISTORICO_DE_PAGAMENTO from "./../../assets/images/HISTORICO DE PAGAMENTO.png";
-import SUPORTE from "./../../assets/images/SUPORTE.png";
 
 function Dashboard() {
   const navigate = useNavigate();
 
-  // FUNÇÕES DE NAVEGAÇÃO - CADA UMA PARA SUA PÁGINA
+  // FUNÇÕES DE NAVEGAÇÃO
   const irParaAgendamento = () => navigate('/agendamento');
   const irParaHistoricoAgendamento = () => navigate('/historico-agendamento');
   const irParaHistoricoPagamento = () => navigate('/historico-pagamento');
-  const irParaStatus = () => navigate('/status');           // ← STATUS DE LAVAGEM
-  const irParaSuporte = () => navigate('/suporte');
-  const irParaFuncionamento = () => navigate('/funcionamento');
+  const irParaStatus = () => navigate('/status');
+  const irParaContato = () => navigate('/contato');
+  const irParaInstagram = () => navigate('/instagram');
   const irParaNovidades = () => navigate('/novidades');
 
   return (
@@ -34,7 +34,7 @@ function Dashboard() {
           Página Inicial / Dashboard
         </div>
         <button className="voltar-inicio-btn" onClick={() => navigate('/')}>
-          <FaArrowLeft /> INICIO
+          <FaArrowLeft /> voltar ao início
         </button>
       </div>
 
@@ -47,6 +47,8 @@ function Dashboard() {
           {/* LOGO */}
           <div className="logo-area">
             <img src={dashboardLogo} alt="Logo Dashboard" className="logo-imagem" />
+            <div className="logo-texto">Lava <span>mais</span></div>
+            <div className="logo-subtitulo">Lavanderia Autoserviço</div>
           </div>
           
           {/* CARD NOVIDADES */}
@@ -73,19 +75,19 @@ function Dashboard() {
             <img src={HISTORICO_DE_PAGAMENTO} alt="HISTORICO DE PAGAMENTO" />
           </button>
 
-          {/* STATUS DE LAVAGEM */}
+          {/* STATUS */}
           <button className="btn-figma" onClick={irParaStatus}>
             <img src={STATUS} alt="STATUS" />
           </button>
 
-          {/* SUPORTE */}
-          <button className="btn-figma" onClick={irParaSuporte}>
-            <img src={SUPORTE} alt="SUPORTE" />
+          {/* CONTATO */}
+          <button className="btn-figma" onClick={irParaContato}>
+            <img src={CONTATO} alt="CONTATO" />
           </button>
 
-          {/* FUNCIONAMENTO */}
-          <button className="btn-figma" onClick={irParaFuncionamento}>
-            <img src={FUNCIONAMENTO} alt="FUNCIONAMENTO" />
+          {/* INSTAGRAM */}
+          <button className="btn-figma" onClick={irParaInstagram}>
+            <img src={INSTAGRAM} alt="INSTAGRAM" />
           </button>
         </div>
       </div>
