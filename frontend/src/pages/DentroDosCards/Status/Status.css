@@ -49,7 +49,7 @@
   pointer-events: none;
 }
 
-/* Botão com imagem exportada do Figma */
+/* Botões com imagens exportadas do Figma */
 .botao-imagem {
   position: absolute;
   background: transparent;
@@ -60,32 +60,74 @@
   z-index: 15;
 }
 
-/* Posição do botão (ajuste conforme seu Figma) */
-.botao-imagem {
-  bottom: 21%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 .botao-img {
-  width: 530px;
+  width: 520px;
   height: auto;
   display: block;
 }
 
-/* Efeito hover */
-.botao-imagem:hover {
+/* Posição do botão RECEBIDO */
+.botao-recebido {
+  bottom: 59%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Posição do botão PREPARANDO */
+.botao-preparando {
+  bottom: 39.5%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Posição do botão PRONTO PARA RETIRADA */
+.botao-pronto {
+  bottom: 20.6%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Efeitos hover */
+.botao-recebido:hover {
   transform: translateX(-50%) scale(1.05);
 }
 
-/* Efeito ao clicar */
-.botao-imagem:active {
+.botao-preparando:hover {
+  transform: translateX(-50%) scale(1.05);
+}
+
+.botao-pronto:hover {
+  transform: translateX(-50%) scale(1.05);
+}
+
+/* Efeitos ao clicar */
+.botao-recebido:active {
+  transform: translateX(-50%) scale(0.98);
+}
+
+.botao-preparando:active {
+  transform: translateX(-50%) scale(0.98);
+}
+
+.botao-pronto:active {
   transform: translateX(-50%) scale(0.98);
 }
 
 /* Responsivo */
 @media (max-width: 768px) {
   .botao-img {
-    width: 150px;
+    width: 200px;
+  }
+  
+  .botao-recebido {
+    bottom: 50%;
+  }
+  
+  .botao-preparando {
+    bottom: 38%;
+  }
+  
+  .botao-pronto {
+    bottom: 26%;
   }
 }

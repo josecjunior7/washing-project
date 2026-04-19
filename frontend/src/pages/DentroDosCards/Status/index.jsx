@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
 import statusImage from "../../../assets/images/STATUS DE LAVAGEM.png";
+import botaoRecebido from "../../../assets/images/BOTÃO RECEBIDO.png";
+import botaoPreparando from "../../../assets/images/BOTÃO PREPARANDO.png";
 import botaoPronto from "../../../assets/images/BOTÃO PRONTO PARA RETIRADA.png";
 import './Status.css';
 
@@ -9,6 +11,16 @@ function Status() {
   const navigate = useNavigate();
   
   const [statusAtual, setStatusAtual] = useState(2);
+
+  const handleRecebidoClick = () => {
+    setStatusAtual(1);
+    alert("Status alterado para: RECEBIDO");
+  };
+
+  const handlePreparandoClick = () => {
+    setStatusAtual(2);
+    alert("Status alterado para: PREPARANDO");
+  };
 
   const handleProntoClick = () => {
     setStatusAtual(3);
@@ -30,9 +42,33 @@ function Status() {
         className="status-image" 
       />
 
-      {/* Botão usando a imagem exportada do Figma */}
+      {/* Botão RECEBIDO */}
       <button 
-        className="botao-imagem"
+        className="botao-imagem botao-recebido"
+        onClick={handleRecebidoClick}
+      >
+        <img 
+          src={botaoRecebido} 
+          alt="Recebido" 
+          className="botao-img"
+        />
+      </button>
+
+      {/* Botão PREPARANDO */}
+      <button 
+        className="botao-imagem botao-preparando"
+        onClick={handlePreparandoClick}
+      >
+        <img 
+          src={botaoPreparando} 
+          alt="Preparando" 
+          className="botao-img"
+        />
+      </button>
+
+      {/* Botão PRONTO PARA RETIRADA */}
+      <button 
+        className="botao-imagem botao-pronto"
         onClick={handleProntoClick}
       >
         <img 
