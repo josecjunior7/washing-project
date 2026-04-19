@@ -1,10 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaShoppingCart } from "react-icons/fa";
 import dashboardLogo from "../../assets/images/dashboard-logo.png";
 import "./Dashboard.css";
 
-// IMPORTANDO AS IMAGENS - CAMINHO CORRIGIDO
+// IMPORTANDO AS IMAGENS
 import NOVIDADES from "../../assets/images/NOVIDADES.png";
 import STATUS from "../../assets/images/STATUS.png";
 import AGENDAMENTO from "../../assets/images/AGENDAMENTO.png";
@@ -22,7 +22,13 @@ function Dashboard() {
   const irParaHistoricoPagamento = () => navigate('/historico-pagamento');
   const irParaStatus = () => navigate('/status');
   const irParaContato = () => navigate('/contato');
-  const irParaInstagram = () => navigate('/instagram');
+  const irParaCarrinho = () => navigate('/carrinho');
+  
+  // FUNÇÃO PARA ABRIR INSTAGRAM - LINK DIRETO
+  const abrirInstagram = () => {
+    window.open('https://www.instagram.com/lavamais_sertania/', '_blank');
+  };
+  
   const irParaNovidades = () => navigate('/novidades');
 
   return (
@@ -33,9 +39,14 @@ function Dashboard() {
         <div className="breadcrumb">
           Página Inicial / Dashboard
         </div>
-        <button className="voltar-inicio-btn" onClick={() => navigate('/')}>
-          <FaArrowLeft /> voltar ao início
-        </button>
+        <div className="header-botoes">
+          <button className="btn-carrinho" onClick={irParaCarrinho}>
+            <FaShoppingCart /> Carrinho
+          </button>
+          <button className="voltar-inicio-btn" onClick={() => navigate('/')}>
+            <FaArrowLeft /> voltar ao início
+          </button>
+        </div>
       </div>
 
       {/* LAYOUT PRINCIPAL */}
@@ -59,33 +70,28 @@ function Dashboard() {
         {/* COLUNA DIREITA - BOTÕES COM IMAGENS */}
         <div className="grade-figma">
           
-          {/* AGENDAMENTO */}
           <button className="btn-figma" onClick={irParaAgendamento}>
             <img src={AGENDAMENTO} alt="AGENDAMENTO" />
           </button>
 
-          {/* HISTORICO DE AGENDAMENTO */}
           <button className="btn-figma" onClick={irParaHistoricoAgendamento}>
             <img src={HISTORICO_DE_AGENDAMENTO} alt="HISTORICO DE AGENDAMENTO" />
           </button>
 
-          {/* HISTORICO DE PAGAMENTO */}
           <button className="btn-figma" onClick={irParaHistoricoPagamento}>
             <img src={HISTORICO_DE_PAGAMENTO} alt="HISTORICO DE PAGAMENTO" />
           </button>
 
-          {/* STATUS */}
           <button className="btn-figma" onClick={irParaStatus}>
             <img src={STATUS} alt="STATUS" />
           </button>
 
-          {/* CONTATO */}
           <button className="btn-figma" onClick={irParaContato}>
             <img src={CONTATO} alt="CONTATO" />
           </button>
 
-          {/* INSTAGRAM */}
-          <button className="btn-figma" onClick={irParaInstagram}>
+          {/* INSTAGRAM - LINK DIRETO */}
+          <button className="btn-figma" onClick={abrirInstagram}>
             <img src={INSTAGRAM} alt="INSTAGRAM" />
           </button>
         </div>
