@@ -6,39 +6,23 @@ import './Carrinho.css';
 function Carrinho() {
   const navigate = useNavigate();
 
-  // Serviços disponíveis no carrinho
+  // Serviços disponíveis no carrinho (alinhado com o layout da imagem)
   const [itens, setItens] = useState([
     { 
       id: 1, 
       nome: "Lavagem Completa", 
-      descricao: "Lavagem e secagem de roupas",
+      descricao: "Serviço: Lavagem + Secagem + Atendimento",
       quantidade: 1, 
-      preco: 45.90,
+      preco: 89.90,
       imagem: "🧼"
     },
     { 
       id: 2, 
-      nome: "Secagem", 
-      descricao: "Secagem em alta temperatura",
-      quantidade: 2, 
-      preco: 15.00,
+      nome: "Lavagem/Secagem", 
+      descricao: "Serviço: Lavagem ou Secagem + Atendimento",
+      quantidade: 1, 
+      preco: 54.90,
       imagem: "🌀"
-    },
-    { 
-      id: 3, 
-      nome: "Passadoria", 
-      descricao: "Passagem de roupas",
-      quantidade: 1, 
-      preco: 25.00,
-      imagem: "👔"
-    },
-    { 
-      id: 4, 
-      nome: "Lavagem a Seco", 
-      descricao: "Para tecidos delicados",
-      quantidade: 1, 
-      preco: 60.00,
-      imagem: "✨"
     }
   ]);
 
@@ -66,7 +50,7 @@ function Carrinho() {
 
   // Finalizar compra
   const finalizarCompra = () => {
-    alert(`Compra finalizada! Total: R$ ${total.toFixed(2)}\nObrigado pela preferência!`);
+    alert(`✨ Pedido finalizado! Total: R$ ${total.toFixed(2)}\nObrigado pela preferência!`);
   };
 
   return (
@@ -79,7 +63,7 @@ function Carrinho() {
 
       <div className="carrinho-content">
         <h1 className="carrinho-title">
-          <FaShoppingCart /> Meu Carrinho
+          <FaShoppingCart /> SEU CARRINHO
         </h1>
 
         {itens.length === 0 ? (
@@ -130,7 +114,7 @@ function Carrinho() {
                 <strong>R$ {total.toFixed(2)}</strong>
               </div>
               <button className="btn-finalizar" onClick={finalizarCompra}>
-                Finalizar Compra
+                <FaShoppingCart /> Finalizar Pedido
               </button>
             </div>
           </>
