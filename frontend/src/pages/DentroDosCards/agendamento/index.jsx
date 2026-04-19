@@ -1,17 +1,27 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
+import agendamentoImage from "../../../assets/images/LAYOUT DE AGENDAMENTO.png";
+import './Agendamento.css';
 
 function Agendamento() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ padding: '20px' }}>
-      <button onClick={() => navigate('/dashboard')}>
-        <FaArrowLeft /> Voltar ao Dashboard
+    <div className="agendamento-container">
+      
+      {/* Botão Voltar */}
+      <button className="btn-voltar" onClick={() => navigate('/dashboard')}>
+        <FaArrowLeft /> Voltar
       </button>
-      <h1>📅 Agendamento</h1>
-      <p>Conteúdo da página de agendamento...</p>
+
+      {/* Imagem do Figma (layout completo) */}
+      <img 
+        src={agendamentoImage} 
+        alt="Agendamento" 
+        className="agendamento-image" 
+      />
+
     </div>
   );
 }
