@@ -3,10 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaTrash, FaShoppingCart, FaPlus, FaMinus } from 'react-icons/fa';
 import './Carrinho.css';
 
+// IMPORTANDO AS IMAGENS
+import cardLavagem1 from "../../../assets/images/CARD DE LAVAGEM 1.png";
+import cardLavagem2 from "../../../assets/images/CARD DE LAVAGEM 2.png";
+
 function Carrinho() {
   const navigate = useNavigate();
 
-  // Serviços disponíveis no carrinho (alinhado com o layout da imagem)
+  // Serviços disponíveis no carrinho (COM IMAGENS)
   const [itens, setItens] = useState([
     { 
       id: 1, 
@@ -14,7 +18,8 @@ function Carrinho() {
       descricao: "Serviço: Lavagem + Secagem + Atendimento",
       quantidade: 1, 
       preco: 89.90,
-      imagem: "🧼"
+      imagem: cardLavagem1,
+      alt: "Lavagem Completa"
     },
     { 
       id: 2, 
@@ -22,7 +27,8 @@ function Carrinho() {
       descricao: "Serviço: Lavagem ou Secagem + Atendimento",
       quantidade: 1, 
       preco: 54.90,
-      imagem: "🌀"
+      imagem: cardLavagem2,
+      alt: "Lavagem/Secagem"
     }
   ]);
 
@@ -48,9 +54,20 @@ function Carrinho() {
     ));
   };
 
-  // Finalizar compra
-  const finalizarCompra = () => {
-    alert(`✨ Pedido finalizado! Total: R$ ${total.toFixed(2)}\nObrigado pela preferência!`);
+  // Salvar dados do carrinho e ir para pagamento
+  const irParaPagamento = () => {
+    // Salvar os dados do carrinho para usar na página de pagamento
+    const dadosPedido = {
+      itens: itens,
+      total: total,
+      data: new Date().toISOString()
+    };
+    
+    // Salvar no localStorage para acessar na página de pagamento
+    localStorage.setItem('pedidoAtual', JSON.stringify(dadosPedido));
+    
+    // Navegar para a página de pagamento
+    navigate('/pagamento');
   };
 
   return (
@@ -75,12 +92,16 @@ function Carrinho() {
           </div>
         ) : (
           <>
-            {/* LISTA DE ITENS */}
+            {/* LISTA DE ITENS COM IMAGENS */}
             <div className="itens-lista">
               {itens.map(item => (
                 <div key={item.id} className="item-carrinho">
                   <div className="item-imagem">
-                    <span className="item-emoji">{item.imagem}</span>
+                    <img 
+                      src={item.imagem} 
+                      alt={item.alt}
+                      className="item-img"
+                    />
                   </div>
                   <div className="item-info">
                     <h3>{item.nome}</h3>
@@ -113,7 +134,7 @@ function Carrinho() {
                 <span>Total:</span>
                 <strong>R$ {total.toFixed(2)}</strong>
               </div>
-              <button className="btn-finalizar" onClick={finalizarCompra}>
+              <button className="btn-finalizar" onClick={irParaPagamento}>
                 <FaShoppingCart /> Finalizar Pedido
               </button>
             </div>

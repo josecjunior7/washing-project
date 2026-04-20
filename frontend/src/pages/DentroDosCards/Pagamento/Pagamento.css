@@ -1,0 +1,339 @@
+/* PÁGINA DE PAGAMENTO  */
+
+.pagamento-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #ededed 100%);
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pagamento-container {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header - mais compacto */
+.pagamento-header {
+  background: linear-gradient(135deg, #7e45b8 0%, #7e45b8 100%);
+  padding: 15px 20px;
+  text-align: center;
+  position: relative;
+}
+
+.btn-back {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  padding: 4px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  transition: all 0.3s;
+}
+
+.btn-back:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(-2px);
+}
+
+.logo-pagamento {
+  width: 50px;
+  height: auto;
+  margin-bottom: 8px;
+  background: white;
+  border-radius: 50%;
+  padding: 6px;
+}
+
+.pagamento-header h1 {
+  color: white;
+  font-size: 18px;
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 11px;
+}
+
+/* Resumo do pedido - mais compacto */
+.resumo-pedido-card {
+  margin: 12px 15px;
+  padding: 10px 15px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.resumo-pedido-card h3 {
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 8px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #667eea;
+  display: inline-block;
+}
+
+.resumo-itens {
+  margin: 8px 0;
+}
+
+.resumo-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  color: #555;
+  font-size: 12px;
+}
+
+.resumo-total {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 8px;
+  margin-top: 5px;
+  border-top: 1px dashed #ccc;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Opções de pagamento - LADO A LADO e mais compacto */
+.opcoes-pagamento {
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pagamento-card-opcao {
+  flex: 1;
+  min-width: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  padding: 12px 10px;
+  background: white;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.pagamento-card-opcao:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-color: #667eea;
+}
+
+.pagamento-card-opcao.selected {
+  border-color: #4CAF50;
+  background: #f0fff4;
+  box-shadow: 0 2px 8px rgba(76, 175, 80, 0.15);
+}
+
+.card-icon {
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 22px;
+  margin: 0 auto;
+}
+
+.pix-icon {
+  background: #e0f7fa;
+  color: #32BCCD;
+}
+
+.credito-icon {
+  background: #e8f5e9;
+  color: #4CAF50;
+}
+
+.debito-icon {
+  background: #fff3e0;
+  color: #FF9800;
+}
+
+.card-info {
+  flex: 1;
+}
+
+.card-info h3 {
+  font-size: 15px;
+  color: #333;
+  margin-bottom: 3px;
+}
+
+.card-info p {
+  font-size: 10px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.tag {
+  font-size: 9px;
+  color: #4CAF50;
+  font-weight: 600;
+  background: #e8f5e9;
+  padding: 2px 6px;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.check-icon {
+  color: #4CAF50;
+  font-size: 16px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+/* Botão confirmar - mais compacto */
+.btn-confirmar {
+  margin: 5px 15px 15px;
+  width: calc(100% - 30px);
+  padding: 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-confirmar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Footer - mais compacto */
+.pagamento-footer {
+  padding: 12px;
+  text-align: center;
+  background: #f8f9fa;
+  border-top: 1px solid #e0e0e0;
+}
+
+.whatsapp-contato {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: #25D366;
+  font-size: 11px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.whatsapp-contato svg {
+  font-size: 14px;
+}
+
+.marca {
+  font-size: 10px;
+  color: #999;
+}
+
+/* Loading */
+.pagamento-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 12px;
+}
+
+.loading-spinner {
+  width: 35px;
+  height: 35px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #667eea;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsivo para mobile */
+@media (max-width: 768px) {
+  .pagamento-container {
+    max-width: 95%;
+  }
+  
+  .opcoes-pagamento {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .pagamento-card-opcao {
+    flex-direction: row;
+    text-align: left;
+    min-width: auto;
+    padding: 10px 12px;
+  }
+  
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    margin: 0;
+  }
+  
+  .check-icon {
+    position: static;
+  }
+  
+  .card-info h3 {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagamento-header h1 {
+    font-size: 16px;
+  }
+  
+  .btn-back {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+}

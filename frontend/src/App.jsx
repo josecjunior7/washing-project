@@ -11,7 +11,8 @@ import Status from './pages/DentroDosCards/Status';
 import Contato from './pages/DentroDosCards/Contato';
 import Instagram from './pages/DentroDosCards/Instagram';
 import Novidades from './pages/DentroDosCards/Novidades';
-import Carrinho from './pages/DentroDosCards/Carrinho';  // ← ADICIONADO
+import Carrinho from './pages/DentroDosCards/Carrinho';
+import Pagamento from './pages/DentroDosCards/Pagamento';  // ← ADICIONADO (PÁGINA DE PAGAMENTO)
 
 function App() {
   // Verifica se o usuário está logado
@@ -42,7 +43,10 @@ function App() {
         <Route path="/novidades" element={isAuthenticated ? <Novidades /> : <Navigate to="/login" />} />
         
         {/* PÁGINA DO CARRINHO */}
-        <Route path="/carrinho" element={isAuthenticated ? <Carrinho /> : <Navigate to="/login" />} />  {/* ← ADICIONADO */}
+        <Route path="/carrinho" element={isAuthenticated ? <Carrinho /> : <Navigate to="/login" />} />
+
+        {/* PÁGINA DE PAGAMENTO */}
+        <Route path="/pagamento" element={isAuthenticated ? <Pagamento /> : <Navigate to="/login" />} />  {/* ← ADICIONADO */}
 
         {/* Redireciona qualquer rota errada para HOME */}
         <Route path="*" element={<Navigate to="/" />} />
