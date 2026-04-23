@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import "./Home.css";
+import HOME from "../../assets/images/HOME.png";
+import LOGO from "../../assets/images/LOGO_2_3 1.png";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -14,30 +16,44 @@ const Home = () => {
     setMenuAberto(false);
   };
 
+  // Função copiar endereço
   const copiarEndereco = () => {
-    const endereco = "Av. Norte Miguel Arraes de Alencar, 5050 - Recife, PE";
+    const endereco = "Av. Joaquim Nabuco, 209 - Sertânia, PE, 56600-000";
     navigator.clipboard.writeText(endereco);
     alert("Endereço copiado!");
   };
 
-  const abrirMaps = (endereco) => {
-    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(endereco)}`;
-    window.open(url, "_blank");
+  // Função abrir WhatsApp
+  const abrirWhatsApp = () => {
+    window.open("https://wa.me/5587992433763", "_blank");
   };
 
   return (
-    <div className="home-empresa-container">
-      {/* FAIXA AZUL NO TOPO */}
-      <div className="top-bar">
+    <div className="home-container">
+      
+      {/* IMAGEM DE FUNDO (LAYOUT DO FIGMA) */}
+      <img 
+        src={HOME} 
+        alt="Home Layout" 
+        className="home-bg-image" 
+      />
+
+      {/* LOGO NO CANTO SUPERIOR ESQUERDO */}
+      <img 
+        src={LOGO} 
+        alt="Logo" 
+        className="logo-superior-esquerdo" 
+      />
+
+      {/* TOP BAR SOBREPOSTA */}
+      <div className="top-bar-overlay">
         <div className="menu-icon" onClick={toggleMenu}>
           ☰
         </div>
         
         <div className="nav-menu">
-          <a href="#">Quem somos</a>
-          <a href="#">Conheça nossas lavanderias</a>
-          <a href="#">Encontre uma loja</a>
-          <a href="#">Entre em contato</a>
+          <a href="#">Início</a>
+          <a href="#" onClick={() => navigate('/login')}>Login</a>
         </div>
         
         <button className="btn-login-top" onClick={() => navigate('/login')}>
@@ -54,66 +70,41 @@ const Home = () => {
         </div>
       )}
 
-      {/* CONTEÚDO PRINCIPAL */}
-      <div className="content">
-        {/* LOGO */}
-        <div className="logo-section">
-          <div className="logo-container">
-            <span className="logo-text-left">LAVA</span>
-            <div className="logo-img">
-              <span className="logo-emoji">🧼</span>
-            </div>
-            <span className="logo-text-right">MAIS</span>
-          </div>
-          <div className="logo-subtitle">
-            LAVANDERIA AUTO SERVIÇO
-          </div>
+      {/* INFORMAÇÕES À DIREITA */}
+      <div className="info-panel">
+        
+        {/* LOCALIZAÇÃO */}
+        <div className="info-card">
+          <h3>📍 Localização</h3>
+          <p>Av. Joaquim Nabuco, 209 - Sertânia, PE, 56600-000</p>
+          <button className="btn-copiar" onClick={copiarEndereco}>
+            📋 Copiar endereço
+          </button>
         </div>
 
-        {/* CARD PRINCIPAL */}
-        <div className="card-unidade">
-          <h1>OMO Lavanderia Self-Service Recife Av. Norte</h1>
-          
-          <div className="info-unidade">
-            <div className="info-item">
-              <span className="emoji">📍</span>
-              <strong>Endereço:</strong>
-              <span>Av. Norte Miguel Arraes de Alencar, 5050 - Recife, PE</span>
-            </div>
-            <div className="info-item">
-              <span className="emoji">📞</span>
-              <strong>Contato:</strong>
-              <span>(81) 99314-5702</span>
-            </div>
-            <div className="info-item">
-              <span className="emoji">📧</span>
-              <strong>E-mail:</strong>
-              <span>recife.self@loja.omolavanderia.com.br</span>
-            </div>
-            <div className="info-item">
-              <span className="emoji">🕒</span>
-              <strong>Horários:</strong>
-              <span>Segunda a Domingo: 24 horas</span>
-            </div>
-          </div>
-          
-          <div className="botoes-acao">
-            <button className="btn-acao" onClick={copiarEndereco}>📋 Cópia</button>
-            <button className="btn-acao" onClick={() => abrirMaps("Av. Norte Miguel Arraes de Alencar, 5050 Recife")}>🗺️ Como chegar</button>
-            <button className="btn-acao" onClick={() => abrirMaps("Av. Norte Miguel Arraes de Alencar, 5050 Recife")}>🌍 Abrir no Maps</button>
-          </div>
+        {/* MAPA */}
+        <div className="info-card">
+          <h3>🗺️ Mapa do local</h3>
+          <iframe
+            title="Mapa Lavamais"
+            src="https://www.google.com/maps?q=Av.+Joaquim+Nabuco,+209,+Sertânia,+PE&output=embed"
+            className="mapa-iframe"
+            allowFullScreen
+            loading="lazy"
+          ></iframe>
         </div>
 
-        {/* LOCALIZAÇÃO ÚNICA */}
-        <div className="grid-unidades">
-          <div className="card-unidade-secundaria">
-            <h3>Mercado Público</h3>
-            <p>📍 Mercado Público de Casa Amarela</p>
-            <div className="endereco">Rua Padre Lemos, 500 - Casa Amarela, Recife - PE</div>
-            <button className="btn-mapa" onClick={() => abrirMaps("Mercado Público de Casa Amarela, Recife")}>Ver no Mapa</button>
-          </div>
+        {/* HORÁRIO DE FUNCIONAMENTO */}
+        <div className="info-card">
+          <h3>🕒 Horário de funcionamento</h3>
+          <p><strong>6h - 21h</strong> (todos os dias)</p>
+          <p className="atendente">👨‍💼 Atendente:</p>
+          <p>Segunda - Sexta: 08h - 12h</p>
+          <p>Sábado: 08h - 12h</p>
         </div>
+
       </div>
+
     </div>
   );
 };
