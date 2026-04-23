@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import logo from "./../../assets/images/logo-test.png";
+import logo from "./../../assets/images/dashboard-logo.png";
 import "./Login.css";
 
 const Login = () => {
@@ -62,13 +62,14 @@ const Login = () => {
 
       {/* PAINEL DE LOGIN */}
       <div className="painel-login">
+        
+        {/* APENAS A LOGO - SEM TEXTO "LAVA MAIS" */}
         <div className="logo-section">
           <div className="logo-container">
-            <span className="logo-text-left">LAVA</span>
-            <div className="logo"><img src={logo} alt="Logo" /></div>
-            <span className="logo-text-right">MAIS</span>
+            <div className="logo">
+              <img src={logo} alt="Logo" />
+            </div>
           </div>
-          <div className="logo-subtitle">LAVANDERIA AUTOSSERVIÇO</div>
         </div>
 
         <div className="i-email">

@@ -35,21 +35,27 @@
   margin-bottom: 10px;
 }
 
+/* TEXTO "LAVA" E "MAIS" REMOVIDOS - APENAS A LOGO */
 .logo-text-left, .logo-text-right {
-  font-size: 32px;
-  font-weight: bold;
-  text-transform: uppercase;
+  display: none;
 }
 
-.logo-text-left { color: #FFFFFF; }
-.logo-text-right { color: #00FFFF; }
+/* LOGO RETANGULAR - SEM FORMATO DE BOLA */
+.logo {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-.logo img { width: 60px; border-radius: 50%; background: white; padding: 8px; }
-
-.logo-subtitle {
-  color: #00FFFF;
-  font-size: 12px;
-  letter-spacing: 2px;
+/* AUMENTADO APENAS O TAMANHO DA IMAGEM DA LOGO */
+.logo img {
+  width: 200%;
+  max-width: 280px; 
+  height: auto;
+  display: block;
 }
 
 .i-email, .i-senha {

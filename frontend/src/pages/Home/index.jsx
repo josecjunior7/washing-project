@@ -50,12 +50,6 @@ const Home = () => {
         <div className="menu-icon" onClick={toggleMenu}>
           ☰
         </div>
-        
-        <div className="nav-menu">
-          <a href="#">Início</a>
-          <a href="#" onClick={() => navigate('/login')}>Login</a>
-        </div>
-        
         <button className="btn-login-top" onClick={() => navigate('/login')}>
           Login
         </button>

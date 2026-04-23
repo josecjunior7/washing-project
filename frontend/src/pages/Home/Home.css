@@ -5,6 +5,18 @@
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
+/* ANIMAÇÃO DE ENTRADA - CIMA PARA BAIXO */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .home-container {
   position: relative;
   width: 100%;
@@ -13,7 +25,7 @@
   overflow: hidden;
 }
 
-/* IMAGEM DE FUNDO DO FIGMA */
+/* IMAGEM DE FUNDO DO FIGMA - COM ANIMAÇÃO */
 .home-bg-image {
   position: fixed;
   top: 0;
@@ -23,9 +35,10 @@
   object-fit: cover;
   z-index: 0;
   display: block;
+  animation: slideDown 0.6s ease-out;
 }
 
-/* LOGO NO CANTO SUPERIOR ESQUERDO - SEM ANIMAÇÃO */
+/* LOGO NO CANTO SUPERIOR ESQUERDO */
 .logo-superior-esquerdo {
   position: fixed;
   top: 3px;
@@ -34,6 +47,7 @@
   height: auto;
   z-index: 101;
   cursor: pointer;
+  animation: slideDown 0.6s ease-out 0.1s both;
 }
 
 /* TOP BAR SOBREPOSTA */
@@ -50,6 +64,7 @@
   justify-content: space-between;
   z-index: 100;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  animation: slideDown 0.6s ease-out 0.05s both;
 }
 
 .menu-icon {
@@ -105,6 +120,7 @@
   z-index: 1000;
   min-width: 200px;
   overflow: hidden;
+  animation: slideDown 0.6s ease-out 0.15s both;
 }
 
 .menu-item {
@@ -121,27 +137,33 @@
   color: #4cc9f0;
 }
 
-/* PAINEL DE INFORMAÇÕES - CARDS MAIORES */
+/* PAINEL DE INFORMAÇÕES - COM ANIMAÇÃO */
 .info-panel {
   position: absolute;
   top: 100px;
   left: 1200px;
-  width: 480px;  /* AUMENTADO: 400px → 480px */
+  width: 480px;
   z-index: 20;
   display: flex;
   flex-direction: column;
-  gap: 20px;  /* AUMENTADO: 12px → 20px */
+  gap: 20px;
+  animation: slideDown 0.6s ease-out 0.2s both;
 }
 
-/* CARD DE INFORMAÇÃO - MAIOR */
+/* CARD DE INFORMAÇÃO - COM ANIMAÇÃO INDIVIDUAL */
 .info-card {
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(12px);
-  border-radius: 20px;  /* AUMENTADO: 16px → 20px */
-  padding: 20px 24px;  /* AUMENTADO: 12px 18px → 20px 24px */
+  border-radius: 20px;
+  padding: 20px 24px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   transition: 0.2s;
+  animation: slideDown 0.5s ease-out both;
 }
+
+.info-card:nth-child(1) { animation-delay: 0.25s; }
+.info-card:nth-child(2) { animation-delay: 0.35s; }
+.info-card:nth-child(3) { animation-delay: 0.45s; }
 
 .info-card:hover {
   transform: translateX(5px);
@@ -150,35 +172,35 @@
 
 .info-card h3 {
   color: #00FFFF;
-  font-size: 20px;  /* AUMENTADO: 16px → 20px */
-  margin-bottom: 12px;  /* AUMENTADO: 8px → 12px */
+  font-size: 20px;
+  margin-bottom: 12px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   padding-bottom: 8px;
 }
 
 .info-card p {
   color: white;
-  font-size: 15px;  /* AUMENTADO: 13px → 15px */
+  font-size: 15px;
   margin-bottom: 8px;
   line-height: 1.5;
 }
 
-/* MAPA - MAIOR */
+/* MAPA */
 .mapa-iframe {
   width: 100%;
-  height: 200px;  /* AUMENTADO: 150px → 200px */
+  height: 200px;
   border: none;
   border-radius: 12px;
 }
 
-/* BOTÕES - MAIORES */
+/* BOTÕES */
 .btn-copiar {
   background: transparent;
   border: 1.5px solid #00FFFF;
   color: #00FFFF;
-  padding: 10px 16px;  /* AUMENTADO: 6px 12px → 10px 16px */
+  padding: 10px 16px;
   border-radius: 25px;
-  font-size: 14px;  /* AUMENTADO: 12px → 14px */
+  font-size: 14px;
   cursor: pointer;
   width: 100%;
   transition: 0.2s;
@@ -190,8 +212,6 @@
   background: rgba(0, 255, 255, 0.2);
   transform: translateY(-2px);
 }
-
-
 
 .atendente {
   color: #00FFFF !important;
