@@ -1,3 +1,6 @@
+@import url('../../App.css');
+
+/*------------------------ CONFIGURAÇÕES GERAIS -------------------------*/
 * {
   margin: 0;
   padding: 0;
@@ -5,21 +8,25 @@
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
+/*-------------------- FUNDO DA PÁGINA (GRADIENTE VIBRANTE) --------------------*/
 .main-login {
-  background: linear-gradient(135deg, #c084fc 0%, #6a11cb 100%);
+  background: linear-gradient(135deg, #c084fc, #6a11cb 100%);
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/*-------------------- PAINEL (BRANCO GLASSMORPHISM) --------------------*/
 .painel-login {
   width: 450px;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.95); 
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   border-radius: 20px;
   padding: 40px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
   text-align: center;
 }
 
@@ -27,76 +34,69 @@
   margin-bottom: 30px;
 }
 
-.logo-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  margin-bottom: 10px;
-}
-
-/* TEXTO "LAVA" E "MAIS" REMOVIDOS - APENAS A LOGO */
-.logo-text-left, .logo-text-right {
-  display: none;
-}
-
-/* LOGO RETANGULAR - SEM FORMATO DE BOLA */
-.logo {
-  width: 100%;
-  max-width: 200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* AUMENTADO APENAS O TAMANHO DA IMAGEM DA LOGO */
 .logo img {
-  width: 200%;
-  max-width: 280px; 
+  width: 250px;
+  max-width: 100%;
   height: auto;
   display: block;
+  margin: 0 auto;
 }
+
+/*-------------------- INPUTS (ESTRUTURA PARA TRANSITION) --------------------*/
 
 .i-email, .i-senha {
   position: relative;
-  margin: 25px 0;
+  margin: 30px auto;
+  width: 100%;
+  max-width: 380px;
 }
 
 .i-email input, .i-senha input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px #6a11cb solid;
+  display: block;
   width: 100%;
-  background: transparent;
-  border: none;
-  border-bottom: 2px solid #00FFFF;
-  padding: 12px 0;
-  color: #00FFFF;
-  font-size: 16px;
-  outline: none;
+  padding: 15px 0;
+  font-size: 18px;
+  color: var(--bg-main);
+  transition: 0.3s;
+}
+
+.i-email input:focus, .i-email input:valid,
+.i-senha input:focus, .i-senha input:valid {
+  outline: 0;
+  border-bottom-color: var(--bg-main);
 }
 
 .i-email label, .i-senha label {
   position: absolute;
+  top: 15px;
   left: 0;
-  bottom: 12px;
   pointer-events: none;
 }
 
+
 .i-email label span, .i-senha label span {
   display: inline-block;
-  color: #00FFFF;
-  font-size: 16px;
-  transition: 0.3s;
+  font-size: 18px;
+  min-width: 5px;
+  color: var(--bg-main);
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.i-email input:focus ~ label span,
-.i-email input:valid ~ label span,
-.i-senha input:focus ~ label span,
-.i-senha input:valid ~ label span {
+/* Animação: Sobe e muda para Ciano */
+.i-email input:focus + label span,
+.i-email input:valid + label span,
+.i-senha input:focus + label span,
+.i-senha input:valid + label span {
+  color: var(--bg-main);
   transform: translateY(-30px);
-  color: #00CCCC;
 }
 
-.btn-primary, .btn-secundary {
+/*-------------------- BOTÕES (CORES LAVA MAIS) --------------------*/
+
+.btn-primary {
   width: 100%;
   padding: 12px;
   border: none;
@@ -106,37 +106,62 @@
   cursor: pointer;
   text-transform: uppercase;
   margin: 10px 0;
+  background: #00ffff; /* Ciano */
+  color: #6a11cb;      /* Roxo */
+  transition: 0.3s;
 }
 
-.btn-primary {
-  background: #00FFFF;
-  color: #000000;
+.btn-primary:hover { 
+  background: #00e6e6; 
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
 }
-
-.btn-primary:hover { background: #00CCCC; }
 
 .btn-secundary {
+  width: 100%;
+  padding: 12px;
   background: transparent;
-  border: 2px solid #00FFFF;
-  color: #00FFFF;
+  border: 2px solid #6a11cb; /* Roxo */
+  color: #6a11cb;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.btn-secundary:hover { background: rgba(0, 255, 255, 0.1); }
+.btn-secundary:hover { 
+  background: rgba(106, 17, 203, 0.1);
+  border-color: #00ffff;
+  color: #00ffff;
+}
+
+/*-------------------- TEXTOS E LINKS --------------------*/
 
 .descricao {
-  color: #FFFFFF;
+  color: var(--bg-main);
   font-size: 14px;
-  margin: 15px 0;
+  margin: 20px 0;
+  font-weight: bold;
 }
 
 .link-esqueceu {
-  color: #FFFFFF;
-  font-size: 12px;
+  color: #6a11cb;
+  font-size: 13px;
   cursor: pointer;
   text-decoration: none;
+  display: inline-block;
+  margin-top: 15px;
+  transition: 0.2s;
 }
 
-.link-esqueceu:hover { color: #00CCCC; }
+.link-esqueceu:hover { 
+  color: #00ffff;
+  text-decoration: underline;
+}
+
+/*-------------------- MODAL --------------------*/
 
 .modal-overlay {
   position: fixed;
@@ -152,32 +177,50 @@
 }
 
 .modal-content {
-  background: linear-gradient(135deg, #c084fc 0%, #6a11cb 100%);
+  background: #FFFFFF;
   padding: 30px;
   border-radius: 16px;
   width: 350px;
   text-align: center;
 }
 
-.modal-content h3 { color: #FFFFFF; margin-bottom: 20px; }
+.modal-content h3 { 
+  color: #6a11cb; 
+  margin-bottom: 20px; 
+  font-size: 1.2rem;
+}
+
 .modal-content input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin-bottom: 15px;
-  border: 1px solid #00FFFF;
+  border: 1px solid #6a11cb;
   border-radius: 8px;
-  background: transparent;
-  color: #FFFFFF;
+  outline: none;
 }
 
-.modal-btn, .modal-btn-fechar {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  font-weight: bold;
+.modal-content input:focus {
+  border-color: #00ffff;
+}
+
+.modal-btn { 
+  background: #6a11cb; 
+  color: #FFFFFF; 
+  border: none; 
+  width: 100%; 
+  padding: 10px; 
+  border-radius: 8px; 
   cursor: pointer;
-  margin: 5px 0;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.modal-btn { background: #00FFFF; color: #000000; border: none; }
-.modal-btn-fechar { background: transparent; border: 1px solid #00FFFF; color: #00FFFF; }
+.modal-btn-fechar { 
+  background: transparent; 
+  border: 1px solid #666; 
+  color: #666; 
+  width: 100%; 
+  padding: 10px; 
+  border-radius: 8px; 
+  cursor: pointer;
+}

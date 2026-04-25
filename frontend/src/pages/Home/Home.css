@@ -1,3 +1,5 @@
+/*------------------------ CONFIGURAÇÕES GERAIS -------------------------*/
+
 * {
   margin: 0;
   padding: 0;
@@ -5,286 +7,152 @@
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* ANIMAÇÃO DE ENTRADA - CIMA PARA BAIXO */
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/*------------------------ CONTAINER PRINCIPAL -------------------------*/
 
 .home-container {
   position: relative;
   width: 100%;
-  height: 100vh;
-  background: #6a11cb;
-  overflow: hidden;
-}
-
-/* IMAGEM DE FUNDO DO FIGMA - COM ANIMAÇÃO */
-.home-bg-image {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
-  z-index: 0;
-  display: block;
-  animation: slideDown 0.6s ease-out;
-}
-
-/* LOGO NO CANTO SUPERIOR ESQUERDO */
-.logo-superior-esquerdo {
-  position: fixed;
-  top: 3px;
-  left: 120px;
-  width: 280px;
-  height: auto;
-  z-index: 101;
-  cursor: pointer;
-  animation: slideDown 0.6s ease-out 0.1s both;
-}
-
-/* TOP BAR SOBREPOSTA */
-.top-bar-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: rgba(76, 201, 240, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 23px 23px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 100;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  animation: slideDown 0.6s ease-out 0.05s both;
-}
-
-.menu-icon {
-  font-size: 24px;
-  cursor: pointer;
-  color: white;
-  font-weight: bold;
-}
-
-.nav-menu {
-  display: flex;
-  gap: 30px;
-}
-
-.nav-menu a {
-  color: white;
-  text-decoration: none;
-  font-size: 18px;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
-.nav-menu a:hover {
-  color: #ffe6b3;
-}
-
-.btn-login-top {
-  background: #00FFFF;
-  color: #000000;
-  border: none;
-  padding: 6px 18px;
-  border-radius: 25px;
-  font-size: 13px;
-  font-weight: bold;
-  cursor: pointer;
-  text-transform: uppercase;
-  transition: 0.2s;
-}
-
-.btn-login-top:hover {
-  background: #00CCCC;
-  transform: translateY(-2px);
-}
-
-/* MENU LATERAL */
-.menu-lateral {
-  position: fixed;
-  top: 60px;
-  left: 20px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
-  min-width: 200px;
-  overflow: hidden;
-  animation: slideDown 0.6s ease-out 0.15s both;
-}
-
-.menu-item {
-  padding: 10px 18px;
-  font-size: 14px;
-  color: #333;
-  cursor: pointer;
-  border-bottom: 1px solid #eee;
-  transition: 0.2s;
-}
-
-.menu-item:hover {
-  background: #f0f0f0;
-  color: #4cc9f0;
-}
-
-/* PAINEL DE INFORMAÇÕES - COM ANIMAÇÃO */
-.info-panel {
-  position: absolute;
-  top: 100px;
-  left: 1200px;
-  width: 480px;
-  z-index: 20;
+  height: 100vh; /* Altura fixa da tela */
+  overflow: hidden; /* Proíbe o scroll */
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  animation: slideDown 0.6s ease-out 0.2s both;
 }
 
-/* CARD DE INFORMAÇÃO - COM ANIMAÇÃO INDIVIDUAL */
+/*------------------------ FUNDO -------------------------*/
+
+.home-bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/*------------------------ PAINEL PRINCIPAL -------------------------*/
+
+.info-panel {
+  position: relative;
+  z-index: 10;
+  
+
+  width: 600px;
+  max-width: 90%;
+  margin: auto 40px auto auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+
+  max-height: calc(100vh - 120px); 
+}
+
+/*------------------------ POSIÇÃO DOS CARDS -------------------------*/
+
+.info-card:nth-child(1) {
+  grid-column: 1 / 3;
+}
+
+.info-card:nth-child(2) {
+  grid-column: 1 / 2;
+}
+
+.info-card:nth-child(3) {
+  grid-column: 2 / 3;
+}
+
+/*------------------------ CARDS -------------------------*/
+
 .info-card {
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  padding: 20px 24px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: 0.2s;
-  animation: slideDown 0.5s ease-out both;
-}
-
-.info-card:nth-child(1) { animation-delay: 0.25s; }
-.info-card:nth-child(2) { animation-delay: 0.35s; }
-.info-card:nth-child(3) { animation-delay: 0.45s; }
-
-.info-card:hover {
-  transform: translateX(5px);
-  background: rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, .75);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 18px;
+  
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .info-card h3 {
-  color: #00FFFF;
-  font-size: 20px;
+  color: #00ffff;
+  font-size: 18px;
   margin-bottom: 12px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .info-card p {
   color: white;
   font-size: 15px;
-  margin-bottom: 8px;
   line-height: 1.5;
+  margin-bottom: 8px;
 }
 
-/* MAPA */
+.atendente {
+  color: #00ffff !important;
+  font-weight: bold;
+  font-size: 16px !important;
+  margin-top: 12px !important;
+}
+
+/*------------------------ BOTÃO -------------------------*/
+
+.btn-copiar {
+  width: 100%;
+  height: 36px;
+  margin-top: 10px;
+  border: 1px solid #00ffff;
+  border-radius: 20px;
+  background: transparent;
+  color: #00ffff;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-copiar:hover {
+  background: rgba(0, 255, 255, .12);
+}
+
+/*------------------------ MAPA -------------------------*/
+
 .mapa-iframe {
   width: 100%;
-  height: 200px;
+  height: 300px;
   border: none;
   border-radius: 12px;
 }
 
-/* BOTÕES */
-.btn-copiar {
-  background: transparent;
-  border: 1.5px solid #00FFFF;
-  color: #00FFFF;
-  padding: 10px 16px;
-  border-radius: 25px;
-  font-size: 14px;
-  cursor: pointer;
-  width: 100%;
-  transition: 0.2s;
-  margin-top: 10px;
-  font-weight: bold;
-}
+/*------------------------ RESPONSIVIDADE -------------------------*/
 
-.btn-copiar:hover {
-  background: rgba(0, 255, 255, 0.2);
-  transform: translateY(-2px);
-}
-
-.atendente {
-  color: #00FFFF !important;
-  margin-top: 8px;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-/* RESPONSIVO */
-@media (max-width: 1200px) {
+/* Tablets e Telas Médias */
+@media (max-height: 700px) or (max-width: 1100px) {
   .info-panel {
-    left: 120px;
-    width: 400px;
-  }
-}
-
-@media (max-width: 1024px) {
-  .info-panel {
-    left: 80px;
-    width: 350px;
-  }
-  
-  .info-card {
-    padding: 15px 20px;
-  }
-  
-  .info-card h3 {
-    font-size: 18px;
-  }
-  
-  .info-card p {
-    font-size: 13px;
+    width: 500px;
+    margin-right: 20px;
   }
   
   .mapa-iframe {
-    height: 170px;
+    height: 200px;
   }
+  
+  .info-card h3 { font-size: 15px; }
+  .info-card p { font-size: 13px; }
+  .atendente { font-size: 14px !important; }
 }
 
-@media (max-width: 900px) {
+/* Celulares */
+@media (max-width: 568px) {
   .info-panel {
-    left: 60px;
-    width: 300px;
+    margin: auto;
+    grid-template-columns: 1fr;
+    width: 85%;
+    max-height: 80vh;
   }
   
-  .nav-menu {
-    display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .nav-menu {
-    display: none;
-  }
-  
-  .top-bar-overlay {
-    padding: 10px 16px;
-  }
-  
-  .info-panel {
-    position: relative;
-    top: auto;
-    left: auto;
-    width: 90%;
-    max-width: 400px;
-    margin: 80px auto 20px auto;
-  }
-  
-  .home-container {
-    overflow-y: auto;
-  }
-  
-  body {
-    overflow-y: auto;
+  .info-card:nth-child(1), .info-card:nth-child(2), .info-card:nth-child(3) {
+    grid-column: 1 / 2;
   }
 }

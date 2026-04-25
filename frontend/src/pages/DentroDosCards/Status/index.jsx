@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import statusImage from "../../../assets/images/STATUS DE LAVAGEM.png";
-import botaoRecebido from "../../../assets/images/BOTÃO RECEBIDO.png";
-import botaoPreparando from "../../../assets/images/BOTÃO PREPARANDO.png";
-import botaoPronto from "../../../assets/images/BOTÃO PRONTO PARA RETIRADA.png";
+// ATUALIZADO PARA OS NOVOS NOMES
+import statusImage from "../../../assets/images/status_da_lavagem.png";
+import botaoRecebido from "../../../assets/images/btn_rich.png";
+import botaoPreparando from "../../../assets/images/btn_preparando.png";
+import botaoPronto from "../../../assets/images/retire.png";
 import './Status.css';
 
 function Status() {

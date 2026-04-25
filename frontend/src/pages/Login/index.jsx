@@ -14,12 +14,6 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     
-    // LOGIN MOCKADO PARA TESTE
-    if (email === "admin@email.com" && senha === "123456") {
-      localStorage.setItem('token', 'usuario-logado');
-      navigate('/dashboard');
-      return;
-    }
     
     try {
       const response = await axios.post('http://localhost:8080/api/login', {
@@ -50,52 +44,77 @@ const Login = () => {
     <main className="main-login">
       {/* MODAL */}
       {modalSenha && (
-        <div className="modal-overlay" onClick={() => setModalSenha(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <section className="modal-overlay" onClick={() => setModalSenha(false)}>
+          <section className="modal-content" onClick={(e) => e.stopPropagation()}>
             <h3>RECUPERAR SENHA</h3>
             <input type="email" placeholder="Digite seu e-mail" value={emailRecuperar} onChange={(e) => setEmailRecuperar(e.target.value)} />
             <button className="modal-btn" onClick={handleRecuperarSenha}>ENVIAR</button>
             <button className="modal-btn-fechar" onClick={() => setModalSenha(false)}>CANCELAR</button>
-          </div>
-        </div>
+          </section>
+        </section>
       )}
 
       {/* PAINEL DE LOGIN */}
-      <div className="painel-login">
-        
-        {/* APENAS A LOGO - SEM TEXTO "LAVA MAIS" */}
-        <div className="logo-section">
-          <div className="logo-container">
-            <div className="logo">
-              <img src={logo} alt="Logo" />
-            </div>
-          </div>
-        </div>
+      <section className="painel-login">
 
-        <div className="i-email">
-          <input type="text" required value={email} onChange={(e) => setEmail(e.target.value)} />
-          <label><span>E</span><span>M</span><span>A</span><span>I</span><span>L</span></label>
-        </div>
+        {/* LOGO */}
+        <section className="logo-section">
+          <section className="logo-container">
+            <section className="logo"><img src={logo} alt="Logo" /></section>
+          </section>
+        </section>
 
-        <div className="i-senha">
-          <input type="password" required value={senha} onChange={(e) => setSenha(e.target.value)} />
-          <label><span>S</span><span>E</span><span>N</span><span>H</span><span>A</span></label>
-        </div>
+        {/* INPUT EMAIL */}
+        <section className="i-email">
+          <input 
+            type="text" 
+            required 
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} 
+          />
+          <label>
+            <span style={{ transitionDelay: '0ms' }}>E</span>
+            <span style={{ transitionDelay: '50ms' }}>m</span>
+            <span style={{ transitionDelay: '100ms' }}>a</span>
+            <span style={{ transitionDelay: '150ms' }}>i</span>
+            <span style={{ transitionDelay: '200ms' }}>l</span>
+          </label>
+        </section>
 
-        <div className="btn-login">
+        {/* INPUT SENHA */}
+        <section className="i-senha">
+          <input 
+            type="password" 
+            required 
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
+          />
+          <label>
+            <span style={{ transitionDelay: '0ms' }}>S</span>
+            <span style={{ transitionDelay: '50ms' }}>e</span>
+            <span style={{ transitionDelay: '100ms' }}>n</span>
+            <span style={{ transitionDelay: '150ms' }}>h</span>
+            <span style={{ transitionDelay: '200ms' }}>a</span>
+          </label>
+        </section>
+
+        {/* BOTÃO DE LOGIN */}
+        <section className="btn-login">
           <button className="btn-primary" onClick={handleLogin}>LOGIN</button>
-        </div>
+        </section>
 
         <h2 className="descricao">OU</h2>
 
-        <div className="btn-registro">
+        {/* BOTÃO DE REGISTRO */}
+        <section className="btn-registro">
           <button className="btn-secundary">CADASTRE-SE</button>
-        </div>
+        </section>
 
-        <div className="esqueceu-senha">
+        {/* ESQUECEU SUA SENHA */}
+        <section className="esqueceu-senha">
           <a onClick={() => setModalSenha(true)} className="link-esqueceu">ESQUECEU A SENHA?</a>
-        </div>
-      </div>
+        </section>
+      </section>
     </main>
   );
 };

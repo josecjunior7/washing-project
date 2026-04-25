@@ -1,7 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft } from 'react-icons/fa';
-import agendamentoImage from "../../../assets/images/LAYOUT DE AGENDAMENTO.png";
+// ATUALIZADO PARA O NOVO NOME
+import agendamentoImage from "../../../assets/images/layout_agend.png";
 import './Agendamento.css';
 
 function Agendamento() {

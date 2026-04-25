@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaQrcode, FaCreditCard, FaMoneyBill, FaWhatsapp, FaCheckCircle } from 'react-icons/fa';
 import './Pagamento.css';
-import logo from '../../../assets/images/logo-test.png';
+import logo from '../../../assets/images/logo_test.png';
 
 function Pagamento() {
   const navigate = useNavigate();
@@ -51,7 +51,6 @@ function Pagamento() {
     <div className="pagamento-page">
       <div className="pagamento-container">
         
-        {/* Header com logo e título */}
         <div className="pagamento-header">
           <button className="btn-back" onClick={() => navigate('/carrinho')}>
             <FaArrowLeft /> Voltar
@@ -61,7 +60,6 @@ function Pagamento() {
           <p className="subtitle">Selecione a melhor opção para você</p>
         </div>
 
-        {/* Resumo do pedido */}
         <div className="resumo-pedido-card">
           <h3>Resumo do pedido</h3>
           <div className="resumo-itens">
@@ -78,7 +76,6 @@ function Pagamento() {
           </div>
         </div>
 
-        {/* Opções de pagamento estilo cards */}
         <div className="opcoes-pagamento">
           <div 
             className={`pagamento-card-opcao ${metodoSelecionado === 'PIX' ? 'selected' : ''}`}
@@ -126,7 +123,6 @@ function Pagamento() {
           </div>
         </div>
 
-        {/* Botão de confirmação */}
         <button 
           className="btn-confirmar"
           onClick={handleConfirmarPagamento}
@@ -134,7 +130,6 @@ function Pagamento() {
           Confirmar pagamento
         </button>
 
-        {/* Footer */}
         <div className="pagamento-footer">
           <div className="whatsapp-contato">
             <FaWhatsapp />

@@ -2,13 +2,14 @@
 
   /* Telas de Fundo */
   --bg-main: #6a11cb;
-  --bg-card: #4b0082;
-  --bg-card-alt: #5a1a8a;
+  --bg-card: #9d7df2;
+  --bg-card-alt: #6ed9db;
 
   /* Textos */
   --text-main: #00FFFF;
   --text-title: #FFFFFF;
-  --text-secondary: #CCCCCC;
+  --text-secondary: #888888;
+  --subtitle: #000000;
 
   /* Botões */
   --bt-main: #00FFFF;

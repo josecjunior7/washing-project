@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaTrash, FaShoppingCart, FaPlus, FaMinus } from 'react-icons/fa';
 import './Carrinho.css';
-
-// IMPORTANDO AS IMAGENS
-import cardLavagem1 from "../../../assets/images/CARD DE LAVAGEM 1.png";
-import cardLavagem2 from "../../../assets/images/CARD DE LAVAGEM 2.png";
+import cardLavagem1 from "../../../assets/images/card_lav.png";
+import cardLavagem2 from "../../../assets/images/card_machine.png";
 
 function Carrinho() {
   const navigate = useNavigate();
@@ -56,24 +54,19 @@ function Carrinho() {
 
   // Salvar dados do carrinho e ir para pagamento
   const irParaPagamento = () => {
-    // Salvar os dados do carrinho para usar na página de pagamento
     const dadosPedido = {
       itens: itens,
       total: total,
       data: new Date().toISOString()
     };
     
-    // Salvar no localStorage para acessar na página de pagamento
     localStorage.setItem('pedidoAtual', JSON.stringify(dadosPedido));
-    
-    // Navegar para a página de pagamento
     navigate('/pagamento');
   };
 
   return (
     <div className="carrinho-container">
       
-      {/* Botão Voltar */}
       <button className="btn-voltar" onClick={() => navigate('/dashboard')}>
         <FaArrowLeft /> Voltar ao Dashboard
       </button>
@@ -92,7 +85,6 @@ function Carrinho() {
           </div>
         ) : (
           <>
-            {/* LISTA DE ITENS COM IMAGENS */}
             <div className="itens-lista">
               {itens.map(item => (
                 <div key={item.id} className="item-carrinho">
@@ -124,7 +116,6 @@ function Carrinho() {
               ))}
             </div>
 
-            {/* RESUMO DO CARRINHO */}
             <div className="carrinho-resumo">
               <div className="resumo-linha">
                 <span>Subtotal:</span>
