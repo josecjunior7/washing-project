@@ -23,7 +23,7 @@ const Login = () => {
 
       if (response.status === 200) {
         localStorage.setItem('token', 'usuario-logado');
-        navigate('/dashboard');
+        navigate('/home');
       }
     } catch (error) {
       alert("Erro ao logar. Verifique se o backend está rodando!");

@@ -1,71 +1,126 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { FaCalendarAlt, FaHistory, FaCreditCard, FaClock, FaBars, FaBullhorn, FaWhatsapp, FaInstagram } from "react-icons/fa";
+import Sidebar from "../../components/Sidebar";
 import "./Home.css";
-import home from "../../assets/images/home.png";
-import HeaderPublic from "../../components/HeaderPublic";
 
-const Home = () => {
+function Home() {
+  const navigate = useNavigate();
+  const [sidebarAberta, setSidebarAberta] = useState(false);
+  const [nomeUsuario, setNomeUsuario] = useState("Cliente");
 
-  const copiarEndereco = () => {
-    const endereco = "Av. Joaquim Nabuco, 209 - Sertânia, PE, 56600-000";
-    navigator.clipboard.writeText(endereco);
-    alert("Endereço copiado com sucesso!");
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user) setNomeUsuario(user.nome || "Cliente");
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
   };
 
   return (
-    <section className="home-container">
-      
-      {/* IMAGEM DE FUNDO */}
-      <img
-        src={home}
-        alt="Home Layout"
-        className="home-bg-image"
+    <section className="home-layout">
+
+      {/* COMPONENTE SIDEBAR */}
+      <Sidebar 
+        aberta={sidebarAberta} 
+        setAberta={setSidebarAberta} 
+        navigate={navigate} 
+        handleLogout={handleLogout} 
       />
 
-      {/* HEADER COMPONENTE */}
-      <HeaderPublic />
+      <main className="main-content">
+        <header className="header-home">
+          <section className="header-left">
+            <button className="btn-hamburguer" onClick={() => setSidebarAberta(true)}><FaBars /></button>
+            <section className="welcome-text">
+              <span>Bem-vindo de volta,</span>
+              <h2 className="user">{nomeUsuario}</h2>
+            </section>
+          </section>
+          <section className="avatar-circle">{nomeUsuario.charAt(0)}</section>
+        </header>
 
-      {/* PAINEL PRINCIPAL */}
-      <main className="info-panel">
+        <section className="home-body">
+          <section className="section-area">
+            <h4>Nossos Serviços</h4>
+            
+            <section className="unified-grid">
+              {/* AGENDAMENTO */}
+              <section className="card-destaque-vertical" onClick={() => navigate('#')}>
+                <FaCalendarAlt className="icon-main" />
+                <section className="info">
+                  <h5>Agendamento</h5>
+                  <p>Reserve sua máquina agora mesmo</p>
+                </section>
+              </section>
 
-        {/* CARD 1: LOCALIZAÇÃO */}
-        <section className="info-card">
-          <h3>Localização</h3>
-          <p>Av. Joaquim Nabuco, 209 - Sertânia, PE, 56600-000</p>
-          <button
-            className="btn-copiar"
-            onClick={copiarEndereco}
-          >
-          Copiar endereço
-          </button>
-        </section>
+              <section className="sub-grid-services">
+                {/* PRIMEIRA FILEIRA DA GRADE */}
 
-        {/* CARD 2: MAPA */}
-        <section className="info-card">
-          <h3>Mapa do local</h3>
-          <iframe
-            title="Mapa Lavamais"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3944.544665487635!2d-37.2662058!3d-8.0754877!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a8927926955555%3A0x6e9f8e48a1c8b3!2sAv.%20Joaquim%20Nabuco%2C%20209%20-%20Sert%C3%A2nia%2C%20PE!5e0!3m2!1spt-BR!2sbr!4v1700000000000"
-            className="mapa-iframe"
-            allowFullScreen
-            loading="lazy"
-          ></iframe>
-        </section>
+                {/* HISTORICO */}
+                <section className="card-mini purple">
+                  <FaHistory /> 
+                  <section className="info">
+                    <h5>Histórico</h5>
+                    <p>Seus agendamentos</p>
+                  </section>
+                </section>
 
-        {/* CARD 3: HORÁRIO */}
-        <section className="info-card">
-          <section className="card-hours">
-            <h3>Horário de funcionamento</h3>
-            <p><strong>6h - 21h</strong> (todos os dias)</p>
-            <p className="atendente">Atendente:</p>
-            <p>Segunda - Sexta: 08h - 12h</p>
-            <p>Sábado: 08h - 12h</p>
+                {/* PAGAMENTOS */}
+                <section className="card-mini cyan">
+                  <FaCreditCard /> 
+                  <section className="info">
+                    <h5>Pagamentos</h5>
+                    <p>Faturas e recibos</p>
+                  </section>
+                </section>
+
+                {/* STATUS */}
+                <section className="card-mini purple">
+                  <FaClock /> 
+                  <section className="info">
+                    <h5>Status</h5>
+                    <p>Acompanhe sua lavagem</p>
+                  </section>
+                </section>
+
+                {/* SEGUNDA FILEIRA DA GRADE */}
+
+                {/* NOVIDADES */}
+                <section className="card-mini cyan" onClick={() => navigate('#')}>
+                  <FaBullhorn /> 
+                  <section className="info">
+                    <h5>Novidades</h5>
+                    <p>Confira as ofertas</p>
+                  </section>
+                </section>
+
+                {/* WHATSAPP */}
+                <section className="card-mini purple">
+                  <FaWhatsapp /> 
+                  <section className="info">
+                    <h5>Suporte</h5>
+                    <p>Fale conosco</p>
+                  </section>
+                </section>
+
+                {/* INSTAGRAM */}
+                <section className="card-mini cyan">
+                  <FaInstagram /> 
+                  <section className="info">
+                    <h5>Siga-nos</h5>
+                    <p>No Instagram</p>
+                  </section>
+                </section>
+              </section>
+            </section>
           </section>
         </section>
-
       </main>
-
     </section>
   );
-};
+}
 
 export default Home;
