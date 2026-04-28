@@ -1,6 +1,6 @@
 import React from "react";
 import "./LandingPage.css";
-import home from "../../assets/images/home.png";
+import home from "../../assets/images/HOME.png";
 import HeaderPublic from "../../components/HeaderPublic";
 
 const LandingPage = () => {
