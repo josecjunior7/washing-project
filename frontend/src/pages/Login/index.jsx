@@ -40,6 +40,10 @@ const Login = () => {
     setEmailRecuperar("");
   };
 
+  const handleIrParaCadastro = () => {
+    navigate('/cadastro');
+  };
+
   return (
     <main className="main-login">
       {/* MODAL */}
@@ -107,7 +111,7 @@ const Login = () => {
 
         {/* BOTÃO DE REGISTRO */}
         <section className="btn-registro">
-          <button className="btn-secundary">CADASTRE-SE</button>
+          <button className="btn-secundary" onClick={handleIrParaCadastro}>CADASTRE-SE</button>
         </section>
 
         {/* ESQUECEU SUA SENHA */}
