@@ -1,0 +1,292 @@
+@import url('../../App.css');
+
+/*------------------------ CONFIGURACOES GERAIS -------------------------*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/*-------------------- FUNDO DA PAGINA (GRADIENTE VIBRANTE) --------------------*/
+.main-cadastro {
+  background: linear-gradient(135deg, #c084fc, #6a11cb 100%);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*-------------------- PAINEL (BRANCO GLASSMORPHISM) --------------------*/
+.painel-rg {
+  width: 450px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 20px;
+  padding: 20px 36px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*-------------------- LOGO --------------------*/
+.logo-section { margin-bottom: 6px; }
+
+.logo img {
+  width: 140px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/*-------------------- TITULO --------------------*/
+.rg-titulo {
+  text-align: center;
+  color: #6a11cb;
+  margin-bottom: 2px;
+  font-size: 18px;
+}
+
+/*-------------------- INPUTS (ESTRUTURA PARA TRANSITION) --------------------*/
+
+.rg-i-email, .rg-i-senha, .rg-i-tel {
+  position: relative;
+  margin: 14px auto;
+  width: 100%;
+  max-width: 380px;
+}
+
+.rg-i-email input, .rg-i-senha input, .rg-i-tel input {
+  background-color: transparent;
+  border: 0;
+  border-bottom: 2px #6a11cb solid;
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 15px;
+  color: var(--bg-main);
+  transition: 0.3s;
+}
+
+.rg-i-email input:focus, .rg-i-email input:valid,
+.rg-i-senha input:focus, .rg-i-senha input:valid,
+.rg-i-tel input:focus,   .rg-i-tel input:valid {
+  outline: 0;
+  border-bottom-color: var(--bg-main);
+}
+
+.rg-i-email label, .rg-i-senha label, .rg-i-tel label {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  pointer-events: none;
+}
+
+.rg-i-email label span, .rg-i-senha label span, .rg-i-tel label span {
+  display: inline-block;
+  font-size: 15px;
+  min-width: 5px;
+  color: var(--bg-main);
+  transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Animacao: Sobe */
+.rg-i-email input:focus + label span, .rg-i-email input:valid + label span,
+.rg-i-senha input:focus + label span, .rg-i-senha input:valid + label span,
+.rg-i-tel input:focus   + label span, .rg-i-tel input:valid   + label span {
+  color: var(--bg-main);
+  transform: translateY(-26px);
+}
+
+/*-------------------- NOME E SOBRENOME LADO A LADO --------------------*/
+
+.rg-nome-row {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  max-width: 380px;
+  margin: 14px auto;
+}
+
+.rg-nome-row .rg-i-email {
+  flex: 1;
+  margin: 0;
+  max-width: unset;
+}
+
+/*-------------------- SENHA E CONFIRMAR SENHA LADO A LADO --------------------*/
+
+.rg-senhas-row {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  max-width: 380px;
+  margin: 14px auto;
+}
+
+.rg-senhas-row .rg-i-senha {
+  flex: 1;
+  margin: 0;
+  max-width: unset;
+}
+
+/*-------------------- TERMOS --------------------*/
+
+.rg-termos {
+  margin: 8px 0;
+  width: 100%;
+  max-width: 380px;
+}
+
+.rg-termos-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.rg-checkbox { width: 15px; height: 15px; cursor: pointer; }
+
+.rg-termos-texto { font-size: 12px; color: #6a11cb; }
+
+.rg-termos-link { color: #00ffff; text-decoration: none; }
+.rg-termos-link:hover { text-decoration: underline; }
+
+/*-------------------- BOTOES (CORES LAVA MAIS) --------------------*/
+
+.btn-primary {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  margin: 6px 0;
+  background: #00ffff; /* Ciano */
+  color: #6a11cb;      /* Roxo */
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: #00e6e6;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+}
+
+.btn-secundary {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: 2px solid #6a11cb; /* Roxo */
+  color: #6a11cb;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-secundary:hover {
+  background: rgba(106, 17, 203, 0.1);
+  border-color: #00ffff;
+  color: #00ffff;
+}
+
+/*-------------------- SECOES DE BOTAO --------------------*/
+
+.btn-create { margin: 2px auto 0; width: 100%; max-width: 380px; }
+.i-acc      { margin: 2px auto 0; width: 100%; max-width: 380px; }
+
+/*-------------------- TEXTOS E LINKS --------------------*/
+
+.descricao {
+  color: var(--bg-main);
+  font-size: 13px;
+  margin: 6px 0;
+  font-weight: bold;
+}
+
+.return { margin-top: 8px; }
+
+.return-link {
+  color: #6a11cb;
+  font-size: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.2s;
+}
+
+.return-link:hover { color: #00ffff; text-decoration: underline; }
+
+/*-------------------- RESPONSIVO — TELAS PEQUENAS --------------------*/
+
+@media (max-width: 500px) {
+  .main-cadastro { padding: 12px; }
+
+  .painel-rg {
+    width: 100%;
+    max-width: 100%;
+    border-radius: 16px;
+    padding: 16px 20px;
+  }
+
+  .logo img { width: 110px; }
+  .rg-titulo { font-size: 16px; }
+
+  .rg-i-email input, .rg-i-senha input, .rg-i-tel input {
+    font-size: 14px;
+    padding: 8px 0;
+  }
+
+  .rg-i-email label span, .rg-i-senha label span, .rg-i-tel label span {
+    font-size: 14px;
+  }
+
+  .rg-i-email input:focus + label span, .rg-i-email input:valid + label span,
+  .rg-i-senha input:focus + label span, .rg-i-senha input:valid + label span,
+  .rg-i-tel input:focus   + label span, .rg-i-tel input:valid   + label span {
+    transform: translateY(-24px);
+  }
+
+  .rg-nome-row, .rg-senhas-row { gap: 10px; margin: 10px auto; }
+  .rg-i-email, .rg-i-tel       { margin: 10px auto; }
+
+  .btn-primary, .btn-secundary { font-size: 14px; padding: 9px; }
+}
+
+@media (max-width: 360px) {
+  .painel-rg { padding: 12px 14px; border-radius: 12px; }
+
+  .logo img  { width: 90px; }
+  .rg-titulo { font-size: 14px; }
+
+  .rg-i-email input, .rg-i-senha input, .rg-i-tel input {
+    font-size: 13px;
+    padding: 7px 0;
+  }
+
+  .rg-i-email label span, .rg-i-senha label span, .rg-i-tel label span {
+    font-size: 13px;
+  }
+
+  .rg-nome-row, .rg-senhas-row { gap: 8px; margin: 8px auto; }
+  .rg-i-email, .rg-i-tel       { margin: 8px auto; }
+
+  .rg-termos-texto { font-size: 11px; }
+
+  .btn-primary, .btn-secundary { font-size: 13px; padding: 8px; margin: 4px 0; }
+
+  .descricao   { font-size: 12px; margin: 4px 0; }
+  .return-link { font-size: 11px; }
+}

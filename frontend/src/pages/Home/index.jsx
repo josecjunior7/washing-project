@@ -10,8 +10,12 @@ function Home() {
   const [nomeUsuario, setNomeUsuario] = useState("Cliente");
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    if (user) setNomeUsuario(user.nome || "Cliente");
+
+    const user = JSON.parse(localStorage.getItem('usuario'));
+    
+    if (user && user.nome) {
+      setNomeUsuario(user.nome);
+    }
   }, []);
 
   const handleLogout = () => {
@@ -39,7 +43,11 @@ function Home() {
               <h2 className="user">{nomeUsuario}</h2>
             </section>
           </section>
-          <section className="avatar-circle">{nomeUsuario.charAt(0)}</section>
+
+          {/* ✅ MELHORIA: evita erro caso venha vazio */}
+          <section className="avatar-circle">
+            {nomeUsuario ? nomeUsuario.charAt(0) : "C"}
+          </section>
         </header>
 
         <section className="home-body">
@@ -57,7 +65,6 @@ function Home() {
               </section>
 
               <section className="sub-grid-services">
-                {/* PRIMEIRA FILEIRA DA GRADE */}
 
                 {/* HISTORICO */}
                 <section className="card-mini purple">
@@ -86,8 +93,6 @@ function Home() {
                   </section>
                 </section>
 
-                {/* SEGUNDA FILEIRA DA GRADE */}
-
                 {/* NOVIDADES */}
                 <section className="card-mini cyan" onClick={() => navigate('#')}>
                   <FaBullhorn /> 
@@ -114,6 +119,7 @@ function Home() {
                     <p>No Instagram</p>
                   </section>
                 </section>
+
               </section>
             </section>
           </section>
