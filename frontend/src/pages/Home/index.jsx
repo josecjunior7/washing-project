@@ -62,7 +62,6 @@ function Home() {
     const agendamentosSalvos = JSON.parse(localStorage.getItem('agendamentos')) || [];
     setAgendamentos(agendamentosSalvos);
     
-    // Carregar pagamentos do localStorage
     const pagamentosSalvos = JSON.parse(localStorage.getItem('pagamentos')) || [];
     if (pagamentosSalvos.length === 0) {
       const pagamentosExemplo = agendamentosSalvos.map((agendamento, index) => ({
@@ -174,7 +173,7 @@ function Home() {
 
   const handleDownloadRecibo = (pagamento) => {
     if (pagamento.status === "pago") {
-      alert(`📄 Download do recibo:\n\nServiço: ${pagamento.servico}\nValor: R$ ${pagamento.valor.toFixed(2)}\nData: ${pagamento.data}\nForma de Pagamento: ${pagamento.formaPagamento}`);
+      alert(`Download do recibo:\n\nServiço: ${pagamento.servico}\nValor: R$ ${pagamento.valor.toFixed(2)}\nData: ${pagamento.data}\nForma de Pagamento: ${pagamento.formaPagamento}`);
     } else {
       alert("Este pagamento ainda não foi realizado.");
     }
@@ -302,7 +301,6 @@ function Home() {
 
           <section className="home-body">
             <div className="pagamentos-container">
-              {/* Cards de resumo */}
               <div className="resumo-cards">
                 <div className="resumo-card total-pago">
                   <div className="resumo-icon"><FaCheckCircle /></div>
@@ -327,14 +325,12 @@ function Home() {
                 </div>
               </div>
 
-              {/* Filtros */}
               <div className="filtros-pagamentos">
                 <button className={`filtro-btn ${filtro === 'todos' ? 'active' : ''}`} onClick={() => setFiltro('todos')}>Todos</button>
                 <button className={`filtro-btn ${filtro === 'pago' ? 'active' : ''}`} onClick={() => setFiltro('pago')}>Pagos</button>
                 <button className={`filtro-btn ${filtro === 'pendente' ? 'active' : ''}`} onClick={() => setFiltro('pendente')}>Pendentes</button>
               </div>
 
-              {/* Lista de pagamentos */}
               <div className="pagamentos-lista">
                 {pagamentosFiltrados.length === 0 ? (
                   <div className="pagamentos-vazio">
@@ -353,14 +349,14 @@ function Home() {
                         <span className="status-text">{getStatusText(pagamento.status)}</span>
                       </div>
                       <div className="pagamento-detalhes">
-                        <div className="detalhe-item"><span>📅 Data:</span><strong>{pagamento.data}</strong></div>
-                        <div className="detalhe-item"><span>⏰ Horário:</span><strong>{pagamento.horario}</strong></div>
-                        <div className="detalhe-item"><span>🧺 Máquina:</span><strong>{pagamento.maquina}</strong></div>
-                        <div className="detalhe-item valor"><span>💰 Valor:</span><strong>R$ {pagamento.valor.toFixed(2)}</strong></div>
+                        <div className="detalhe-item"><span>Data:</span><strong>{pagamento.data}</strong></div>
+                        <div className="detalhe-item"><span>Horário:</span><strong>{pagamento.horario}</strong></div>
+                        <div className="detalhe-item"><span>Máquina:</span><strong>{pagamento.maquina}</strong></div>
+                        <div className="detalhe-item valor"><span>Valor:</span><strong>R$ {pagamento.valor.toFixed(2)}</strong></div>
                         {pagamento.status === "pago" && (
                           <>
-                            <div className="detalhe-item"><span>📆 Data Pagamento:</span><strong>{pagamento.dataPagamento}</strong></div>
-                            <div className="detalhe-item"><span>💳 Forma:</span><strong>{pagamento.formaPagamento}</strong></div>
+                            <div className="detalhe-item"><span>Data Pagamento:</span><strong>{pagamento.dataPagamento}</strong></div>
+                            <div className="detalhe-item"><span>Forma:</span><strong>{pagamento.formaPagamento}</strong></div>
                           </>
                         )}
                       </div>
@@ -502,9 +498,9 @@ function Home() {
                               <h4>{item.nome}</h4>
                               <p>{item.descricao}</p>
                               <div className="item-pagamento-detalhes">
-                                <span><FaCalendarDay /> {item.data}</span>
-                                <span><FaRegClock /> {item.horario}</span>
-                                <span><FaTshirt /> {item.maquina}</span>
+                                <span>{item.data}</span>
+                                <span>{item.horario}</span>
+                                <span>{item.maquina}</span>
                               </div>
                             </div>
                             <div className="item-pagamento-preco"><strong>R$ {item.preco.toFixed(2)}</strong></div>
@@ -592,11 +588,11 @@ function Home() {
                       </div>
                       <div className="historico-card-body">
                         <div className="historico-info">
-                          <p><FaCalendarDay /> Data: {item.data}</p>
-                          <p><FaRegClock /> Horário: {item.horario}</p>
-                          <p><FaTshirt /> Máquina: {item.maquina}</p>
-                          <p><FaMoneyBill /> Valor: R$ {item.preco.toFixed(2)}</p>
-                          <p><FaCalendarAlt /> Agendado em: {item.dataCriacao}</p>
+                          <p>Data: {item.data}</p>
+                          <p>Horário: {item.horario}</p>
+                          <p>Máquina: {item.maquina}</p>
+                          <p>Valor: R$ {item.preco.toFixed(2)}</p>
+                          <p>Agendado em: {item.dataCriacao}</p>
                         </div>
                         <button className="btn-cancelar-agendamento" onClick={() => {
                           const novosAgendamentos = agendamentos.filter(a => a.id !== item.id);
@@ -684,8 +680,8 @@ function Home() {
               {passo === 3 && (
                 <div className="passo-content">
                   <h2>Escolha data e horário</h2>
-                  <div className="datas-section"><h3><FaCalendarDay /> Data</h3><div className="datas-grid">{datasDisponiveis.map((data, idx) => (<div key={idx} className={`data-card ${dataSelecionada === data ? 'selecionada' : ''}`} onClick={() => setDataSelecionada(data)}>{data}</div>))}</div></div>
-                  <div className="horarios-section"><h3><FaRegClock /> Horário</h3><div className="horarios-grid">{horarios.map((horario) => (<div key={horario} className={`horario-card ${horarioSelecionado === horario ? 'selecionado' : ''}`} onClick={() => setHorarioSelecionado(horario)}>{horario}</div>))}</div></div>
+                  <div className="datas-section"><h3>Data</h3><div className="datas-grid">{datasDisponiveis.map((data, idx) => (<div key={idx} className={`data-card ${dataSelecionada === data ? 'selecionada' : ''}`} onClick={() => setDataSelecionada(data)}>{data}</div>))}</div></div>
+                  <div className="horarios-section"><h3>Horário</h3><div className="horarios-grid">{horarios.map((horario) => (<div key={horario} className={`horario-card ${horarioSelecionado === horario ? 'selecionado' : ''}`} onClick={() => setHorarioSelecionado(horario)}>{horario}</div>))}</div></div>
                 </div>
               )}
               {passo === 4 && (
@@ -757,7 +753,7 @@ function Home() {
                   <div className="info"><h5>Pagamentos</h5><p>Faturas e recibos</p></div>
                 </section>
 
-                <section className="card-mini purple">
+                <section className="card-mini purple" onClick={() => navigate('/status')}>
                   <FaClock />
                   <div className="info"><h5>Status</h5><p>Acompanhe sua lavagem</p></div>
                 </section>
@@ -796,8 +792,8 @@ function Home() {
                     <div key={index} className="carrinho-item">
                       <div className="item-info">
                         <h4>{item.nome}</h4><p>{item.descricao}</p>
-                        {item.data && <p className="item-data"><FaCalendarDay /> {item.data} - <FaRegClock /> {item.horario}</p>}
-                        {item.maquina && <p className="item-maquina"><FaTshirt /> {item.maquina}</p>}
+                        {item.data && <p className="item-data">{item.data} - {item.horario}</p>}
+                        {item.maquina && <p className="item-maquina">{item.maquina}</p>}
                         <span className="item-preco">R$ {item.preco.toFixed(2)}</span>
                       </div>
                       <div className="item-actions">
