@@ -1274,374 +1274,560 @@
   box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
 }
 
-/* ==================== ESTILOS DO PAGAMENTO - NOVO LAYOUT ==================== */
+/* ==================== ESTILOS DA LISTA DE PAGAMENTOS - NOVO LAYOUT ==================== */
 
-.pagamento-container {
-  max-width: 800px;
+.pagamentos-container {
+  max-width: 1000px;
   margin: 0 auto;
+  padding: 20px;
+}
+
+/* Cards de Resumo */
+.resumo-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.resumo-card {
   background: white;
-  border-radius: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(106, 17, 203, 0.1);
+  transition: all 0.3s;
+}
+
+.resumo-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(106, 17, 203, 0.1);
+}
+
+.resumo-icon {
+  width: 55px;
+  height: 55px;
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.total-pago .resumo-icon {
+  background: linear-gradient(135deg, #10dbdb, #0abebe);
+}
+
+.total-pendente .resumo-icon {
+  background: linear-gradient(135deg, #10dbdb, #0abebe);
+}
+
+.total-servicos .resumo-icon {
+  background: linear-gradient(135deg, #10dbdb, #0abebe);
+}
+
+.resumo-info span {
+  font-size: 0.75rem;
+  color: #888;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.resumo-info strong {
+  font-size: 1.6rem;
+  color: #333;
+  font-weight: 700;
+}
+
+/* Filtros */
+.filtros-pagamentos {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.filtro-btn {
+  padding: 10px 28px;
+  background: transparent;
+  border: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+
+.filtro-btn.active {
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  color: white;
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+}
+
+.filtro-btn:hover:not(.active) {
+  background: #f0e6ff;
+  color: #6a11cb;
+}
+
+/* Lista de Pagamentos */
+.pagamentos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 60vh;
+  overflow-y: auto;
 }
 
 .pagamento-card {
-  width: 100%;
+  background: white;
+  border-radius: 16px;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+  transition: 0.3s;
+  border: 1px solid #edf2f7;
 }
 
-/* Header */
-.pagamento-header {
+.pagamento-card:hover {
+  box-shadow: 0 8px 25px rgba(106, 17, 203, 0.1);
+  transform: translateX(5px);
+}
+
+.pagamento-card.pago {
+  border-left: 4px solid #10dbdb;
+}
+
+.pagamento-card.pendente {
+  border-left: 4px solid #10dbdb;
+}
+
+/* Header do Card */
+.pagamento-header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: #faf9fc;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.servico-info h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #6a11cb;
+}
+
+.servico-info p {
+  margin: 4px 0 0;
+  font-size: 0.7rem;
+  color: #888;
+}
+
+.status-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 30px;
+}
+
+.status-badge.pago {
+  background: #e6f7f7;
+  color: #10dbdb;
+}
+
+.status-badge.pendente {
+  background: #e6f7f7;
+  color: #10dbdb;
+}
+
+/* Conteúdo */
+.pagamento-conteudo {
+  padding: 16px 20px;
+}
+
+.pagamento-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.info-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info-item .label {
+  font-size: 0.7rem;
+  color: #999;
+}
+
+.info-item .value {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #444;
+}
+
+.info-item.valor .value {
+  color: #10dbdb;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* Linha de Pagamento (quando pago) */
+.linha-pagamento {
+  background: #f8fafc;
+  padding: 12px 16px;
+  border-radius: 12px;
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pagamento-info-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.pagamento-info-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+}
+
+.pagamento-info-item .label {
+  color: #999;
+}
+
+.pagamento-info-item .value {
+  font-weight: 500;
+  color: #444;
+}
+
+/* Botões */
+.pagamento-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #edf2f7;
+}
+
+.btn-recibo, .btn-detalhes, .btn-pagar {
+  padding: 8px 20px;
+  border-radius: 30px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s;
+  border: none;
+}
+
+.btn-recibo {
+  background: #f0e6ff;
+  color: #6a11cb;
+}
+
+.btn-recibo:hover {
+  background: #e9d8fd;
+  transform: translateY(-1px);
+}
+
+.btn-detalhes {
+  background: #edf2f7;
+  color: #4a5568;
+}
+
+.btn-detalhes:hover {
+  background: #e2e8f0;
+}
+
+.btn-pagar {
+  background: linear-gradient(135deg, #10dbdb, #0abebe);
+  color: white;
+}
+
+.btn-pagar:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(16, 219, 219, 0.3);
+}
+
+/* Vazio */
+.pagamentos-vazio {
+  text-align: center;
+  padding: 60px 20px;
+  background: white;
+  border-radius: 20px;
+  border: 1px solid #edf2f7;
+}
+
+.pagamentos-vazio .icone-vazio {
+  font-size: 3.5rem;
+  color: #cbd5e0;
+  margin-bottom: 15px;
+}
+
+.pagamentos-vazio p {
+  color: #a0aec0;
+  font-size: 0.9rem;
+}
+
+/* Modal Recibo */
+.modal-recibo-container {
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.modal-recibo {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+  animation: modalFadeIn 0.3s ease;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-recibo .modal-header {
   background: linear-gradient(135deg, #6a11cb, #8e2de2);
   color: white;
-  padding: 25px 30px;
+  padding: 20px 24px;
   text-align: center;
 }
 
-.pagamento-header h2 {
+.modal-recibo .modal-header h2 {
   margin: 0;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
 }
 
-/* Resumo do Pedido */
-.resumo-pedido-pagamento {
-  padding: 25px 30px;
-  background: #f8f9fa;
-  border-bottom: 1px solid #eee;
+.modal-body {
+  padding: 24px;
 }
 
-.resumo-pedido-pagamento h3 {
+.recibo-logo {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.recibo-logo h3 {
   color: #6a11cb;
-  font-size: 1rem;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  margin: 0;
+  font-size: 1.3rem;
 }
 
-.itens-pagamento {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.recibo-logo p {
+  font-size: 0.7rem;
+  color: #a0aec0;
+  margin-top: 4px;
 }
 
-.item-pagamento {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: white;
+.recibo-dados {
+  background: #f7fafc;
   padding: 12px 16px;
   border-radius: 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
 }
 
-.item-pagamento-info h4 {
-  margin: 0;
-  font-size: 0.95rem;
-  color: #333;
+.recibo-dados p {
+  margin: 6px 0;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
 }
 
-.item-pagamento-info p {
-  margin: 4px 0 0;
-  font-size: 0.7rem;
-  color: #888;
+.recibo-dados strong {
+  color: #4a5568;
 }
 
-.item-pagamento-preco strong {
-  color: #00c4c4;
-  font-size: 1rem;
+.recibo-servico {
+  margin-bottom: 20px;
 }
 
-.total-pagamento {
+.recibo-servico h4 {
+  color: #6a11cb;
+  margin: 0 0 12px 0;
+  font-size: 0.9rem;
+  border-left: 3px solid #6a11cb;
+  padding-left: 10px;
+}
+
+.recibo-servico p {
+  margin: 8px 0;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px dashed #edf2f7;
+}
+
+.recibo-total {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 15px;
-  padding-top: 15px;
-  border-top: 1px solid #ddd;
-}
-
-.total-pagamento span {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #555;
-}
-
-.total-pagamento strong {
-  font-size: 1.3rem;
-  color: #6a11cb;
-}
-
-/* Formas de Pagamento */
-.formas-pagamento {
-  padding: 25px 30px;
-}
-
-.formas-pagamento h3 {
-  color: #6a11cb;
-  font-size: 1rem;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #faf5ff, #f0e6ff);
+  border-radius: 12px;
   margin-bottom: 20px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
-.opcoes-pagamento {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
+.recibo-total span {
+  font-weight: 600;
+  color: #4a5568;
 }
 
-.opcao-pagamento {
-  flex: 1;
-  min-width: 200px;
-  text-align: center;
-  padding: 20px;
-  border-radius: 16px;
-  border: 2px solid #e0e0e0;
-  cursor: pointer;
-  transition: 0.3s;
-  background: white;
-}
-
-.opcao-pagamento:hover {
-  border-color: #6a11cb;
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(106, 17, 203, 0.1);
-}
-
-.opcao-pagamento.selecionada {
-  border-color: #6a11cb;
-  background: #f0e6ff;
-}
-
-.opcao-icon {
-  font-size: 2.5rem;
-  color: #6a11cb;
-  margin-bottom: 10px;
-}
-
-.opcao-info h4 {
-  margin: 0 0 5px;
-  font-size: 1rem;
-  color: #333;
-}
-
-.opcao-info p {
-  margin: 0;
-  font-size: 0.7rem;
-  color: #888;
-}
-
-.opcao-check {
-  margin-top: 10px;
+.recibo-total strong {
   color: #6a11cb;
   font-size: 1.2rem;
 }
 
-/* Footer */
-.pagamento-footer {
-  padding: 20px 30px;
-  background: #f8f9fa;
-  border-top: 1px solid #eee;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-
-.total-final {
-  flex: 1;
-}
-
-.total-final span {
-  font-size: 0.85rem;
-  color: #888;
-  display: block;
-}
-
-.total-final strong {
-  font-size: 1.6rem;
-  color: #6a11cb;
-}
-
-.btn-finalizar-pagamento {
-  background: linear-gradient(135deg, #25D366, #128C7E);
-  border: none;
-  color: white;
-  padding: 12px 28px;
-  border-radius: 40px;
-  cursor: pointer;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: 0.3s;
-  font-size: 0.9rem;
-}
-
-.btn-finalizar-pagamento:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-}
-
-/* Confirmado */
-.confirmado-card {
+.recibo-footer {
   text-align: center;
-  padding: 60px 40px;
+  padding-top: 12px;
+  border-top: 1px solid #edf2f7;
 }
 
-.icone-confirmado {
-  font-size: 4rem;
-  color: #25D366;
-  margin-bottom: 20px;
+.recibo-footer p {
+  font-size: 0.65rem;
+  color: #a0aec0;
+  margin: 2px 0;
 }
 
-.confirmado-card h2 {
-  color: #6a11cb;
-  margin-bottom: 10px;
+.modal-footer {
+  display: flex;
+  gap: 12px;
+  padding: 16px 20px;
+  border-top: 1px solid #edf2f7;
+  background: #faf9fc;
 }
 
-.confirmado-card p {
-  color: #666;
-  margin-bottom: 25px;
-}
-
-.btn-voltar-home {
-  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+.btn-download-recibo {
+  flex: 1;
+  padding: 10px;
+  background: linear-gradient(135deg, #10dbdb, #0abebe);
   color: white;
   border: none;
-  padding: 12px 28px;
   border-radius: 40px;
   cursor: pointer;
-  font-weight: bold;
-  transition: 0.3s;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: 0.2s;
 }
 
-.btn-voltar-home:hover {
+.btn-download-recibo:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+  box-shadow: 0 4px 12px rgba(16, 219, 219, 0.3);
 }
 
-/* Responsividade do Pagamento */
-@media (max-width: 600px) {
-  .opcoes-pagamento {
-    flex-direction: column;
-  }
-  
-  .opcao-pagamento {
-    min-width: auto;
-  }
-  
-  .pagamento-footer {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .total-final strong {
-    font-size: 1.3rem;
-  }
-  
-  .resumo-pedido-pagamento,
-  .formas-pagamento,
-  .pagamento-footer {
-    padding: 20px;
-  }
+.btn-fechar {
+  flex: 1;
+  padding: 10px;
+  background: #edf2f7;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: 0.2s;
 }
 
-/* Responsividade do Carrinho */
-@media (max-width: 600px) {
-  .carrinho-modal {
-    width: 95%;
-    max-height: 90vh;
-  }
-  
-  .carrinho-item {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  
-  .item-actions {
-    justify-content: space-between;
-    margin-top: 8px;
-  }
-  
-  .carrinho-header h2 {
-    font-size: 1.1rem;
-  }
-  
-  .btn-finalizar, .btn-limpar {
-    font-size: 0.75rem;
-    padding: 10px;
-  }
-  
-  .total strong {
-    font-size: 1.3rem;
-  }
+.btn-fechar:hover {
+  background: #e2e8f0;
 }
 
-/* Responsividade do Agendamento */
-@media (max-width: 600px) {
-  .agendamento-container {
-    padding: 20px;
-  }
-  
-  .tipos-grid, .maquinas-grid {
+/* Responsividade */
+@media (max-width: 768px) {
+  .resumo-cards {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
   
-  .step-line {
-    width: 30px;
-  }
-  
-  .step {
-    width: 32px;
-    height: 32px;
-    font-size: 0.8rem;
-  }
-  
-  .passo-content h2 {
-    font-size: 1.1rem;
-  }
-  
-  .tipo-card {
-    padding: 15px;
-  }
-  
-  .tipo-icon {
-    font-size: 2rem;
-  }
-
-  .botoes-agendamento {
-    flex-wrap: wrap;
-  }
-
-  .btn-proximo, .btn-confirmar, .btn-voltar, .btn-cancelar {
-    flex: 1;
-    justify-content: center;
-    margin-left: 0;
-  }
-}
-
-/* Responsividade do Histórico */
-@media (max-width: 600px) {
-  .historico-container {
-    padding: 20px;
-  }
-  
-  .historico-card-header {
+  .pagamento-header-card {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
   
-  .historico-card-body {
+  .pagamento-info {
     flex-direction: column;
   }
   
-  .btn-cancelar-agendamento {
-    align-self: flex-end;
+  .info-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .pagamento-actions {
+    flex-wrap: wrap;
+  }
+  
+  .btn-recibo, .btn-detalhes, .btn-pagar {
+    flex: 1;
+    justify-content: center;
+  }
+  
+  .linha-pagamento {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .pagamento-info-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .filtros-pagamentos {
+    flex-wrap: wrap;
+  }
+  
+  .filtro-btn {
+    padding: 6px 16px;
+    font-size: 0.75rem;
   }
 }
