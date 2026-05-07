@@ -1129,6 +1129,161 @@
   box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
 }
 
+/* ==================== ESTILOS DO HISTÓRICO ==================== */
+
+.historico-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.historico-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.historico-header h2 {
+  color: #6a11cb;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.historico-header p {
+  color: #888;
+  margin-top: 5px;
+}
+
+.historico-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.historico-card {
+  background: #f8f9fa;
+  border-radius: 16px;
+  padding: 16px;
+  transition: 0.3s;
+  border: 1px solid #eee;
+}
+
+.historico-card:hover {
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.1);
+  border-color: #e0d4f5;
+}
+
+.historico-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.historico-card-header h3 {
+  color: #6a11cb;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.status-agendado {
+  background: #d4edda;
+  color: #155724;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.historico-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.historico-info {
+  flex: 1;
+}
+
+.historico-info p {
+  margin: 6px 0;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.historico-info strong {
+  color: #333;
+}
+
+.btn-cancelar-agendamento {
+  background: transparent;
+  border: 1px solid #ff6b6b;
+  color: #ff6b6b;
+  padding: 8px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  transition: 0.3s;
+}
+
+.btn-cancelar-agendamento:hover {
+  background: #ff6b6b;
+  color: white;
+}
+
+.historico-vazio {
+  text-align: center;
+  padding: 60px 40px;
+}
+
+.historico-vazio .icone-vazio {
+  font-size: 4rem;
+  color: #ccc;
+  margin-bottom: 15px;
+}
+
+.historico-vazio p {
+  color: #999;
+  margin-bottom: 20px;
+}
+
+.btn-agendar {
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 auto;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-agendar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+}
+
 /* Responsividade do Carrinho */
 @media (max-width: 600px) {
   .carrinho-modal {
@@ -1200,5 +1355,26 @@
     flex: 1;
     justify-content: center;
     margin-left: 0;
+  }
+}
+
+/* Responsividade do Histórico */
+@media (max-width: 600px) {
+  .historico-container {
+    padding: 20px;
+  }
+  
+  .historico-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .historico-card-body {
+    flex-direction: column;
+  }
+  
+  .btn-cancelar-agendamento {
+    align-self: flex-end;
   }
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaCalendarAlt, FaHistory, FaCreditCard, FaClock, FaBars, FaBullhorn, FaWhatsapp, FaInstagram, FaArrowLeft, FaCheckCircle, FaRegCircle, FaTshirt, FaWind, FaWater, FaSoap, FaRegClock, FaCalendarDay, FaShoppingCart, FaTrash } from "react-icons/fa";
+import { FaCalendarAlt, FaHistory, FaCreditCard, FaClock, FaBars, FaBullhorn, FaWhatsapp, FaInstagram, FaArrowLeft, FaCheckCircle, FaRegCircle, FaTshirt, FaWind, FaWater, FaRegClock, FaCalendarDay, FaShoppingCart, FaTrash, FaTimes } from "react-icons/fa";
 import Sidebar from "../../components/Sidebar";
 import "./Home.css";
 
@@ -9,15 +9,15 @@ function Home() {
   const [sidebarAberta, setSidebarAberta] = useState(false);
   const [nomeUsuario, setNomeUsuario] = useState("Cliente");
   const [mostrarAgendamento, setMostrarAgendamento] = useState(false);
+  const [mostrarHistorico, setMostrarHistorico] = useState(false);
   const [passo, setPasso] = useState(1);
-  const [tipoLavagem, setTipoLavagem] = useState("");
+  const [tipoServico, setTipoServico] = useState("");
   const [maquinaSelecionada, setMaquinaSelecionada] = useState(null);
-  const [secadoraSelecionada, setSecadoraSelecionada] = useState(null);
   const [dataSelecionada, setDataSelecionada] = useState("");
   const [horarioSelecionado, setHorarioSelecionado] = useState("");
   const [precoTotal, setPrecoTotal] = useState(0);
+  const [agendamentos, setAgendamentos] = useState([]);
   
-  // Estado do carrinho
   const [carrinhoAberto, setCarrinhoAberto] = useState(false);
   const [itensCarrinho, setItensCarrinho] = useState([]);
   const [totalCarrinho, setTotalCarrinho] = useState(0);
@@ -42,10 +42,12 @@ function Home() {
       setNomeUsuario(user.nome);
     }
     
-    // Carregar carrinho do localStorage
     const carrinhoSalvo = JSON.parse(localStorage.getItem('carrinho')) || [];
     setItensCarrinho(carrinhoSalvo);
     calcularTotalCarrinho(carrinhoSalvo);
+    
+    const agendamentosSalvos = JSON.parse(localStorage.getItem('agendamentos')) || [];
+    setAgendamentos(agendamentosSalvos);
   }, []);
 
   const handleLogout = () => {
@@ -105,17 +107,17 @@ function Home() {
 
   const voltarParaHome = () => {
     setMostrarAgendamento(false);
+    setMostrarHistorico(false);
     setPasso(1);
-    setTipoLavagem("");
+    setTipoServico("");
     setMaquinaSelecionada(null);
-    setSecadoraSelecionada(null);
     setDataSelecionada("");
     setHorarioSelecionado("");
   };
 
-  const selecionarTipoLavagem = (tipo) => {
-    setTipoLavagem(tipo);
-    setPrecoTotal(tipo === "completa" ? 30 : 10);
+  const selecionarTipoServico = (tipo) => {
+    setTipoServico(tipo);
+    setPrecoTotal(tipo === "lavagem" ? 30 : 20);
     setPasso(2);
   };
 
@@ -124,25 +126,14 @@ function Home() {
     setMaquinaSelecionada(maquina);
   };
 
-  const selecionarSecadora = (secadora) => {
-    if (!secadora.disponivel || secadora.ocupada) return;
-    setSecadoraSelecionada(secadora);
-  };
-
   const proximoPasso = () => {
     if (passo === 2 && !maquinaSelecionada) {
       alert("Selecione uma máquina!");
       return;
     }
-    if (passo === 3 && tipoLavagem === "completa" && !secadoraSelecionada) {
-      alert("Selecione uma secadora!");
+    if (passo === 3 && (!dataSelecionada || !horarioSelecionado)) {
+      alert("Selecione data e horário!");
       return;
-    }
-    if ((passo === 3 && tipoLavagem === "simples") || (passo === 4 && tipoLavagem === "completa")) {
-      if (!dataSelecionada || !horarioSelecionado) {
-        alert("Selecione data e horário!");
-        return;
-      }
     }
     setPasso(passo + 1);
   };
@@ -152,26 +143,40 @@ function Home() {
   };
 
   const confirmarAgendamento = () => {
-    // Criar objeto do serviço para adicionar ao carrinho
+    let nomeServico = "";
+    let descricaoServico = "";
+    let preco = tipoServico === "lavagem" ? 30 : 20;
+    
+    if (tipoServico === "lavagem") {
+      nomeServico = "Lavagem";
+      descricaoServico = "Lavagem + Atendimento";
+    } else {
+      nomeServico = "Secagem";
+      descricaoServico = "Secagem + Atendimento";
+    }
+    
     const novoServico = {
       id: Date.now(),
-      nome: tipoLavagem === "completa" ? "Lavagem Completa" : "Lavagem Simples",
-      descricao: tipoLavagem === "completa" ? "Lavagem + Secagem + Atendimento" : "Lavagem ou Secagem + Atendimento",
+      nome: nomeServico,
+      descricao: descricaoServico,
       maquina: maquinaSelecionada.nome,
-      secadora: tipoLavagem === "completa" ? secadoraSelecionada.nome : null,
+      tipoServico: tipoServico,
       data: dataSelecionada,
       horario: horarioSelecionado,
-      preco: precoTotal,
-      quantidade: 1
+      preco: preco,
+      quantidade: 1,
+      status: "Agendado",
+      dataCriacao: new Date().toLocaleDateString('pt-BR')
     };
     
-    // Adicionar ao carrinho
-    adicionarAoCarrinho(novoServico);
+    const novosAgendamentos = [...agendamentos, novoServico];
+    setAgendamentos(novosAgendamentos);
+    localStorage.setItem('agendamentos', JSON.stringify(novosAgendamentos));
     
-    // Mostrar mensagem de sucesso
-    alert(`✅ Serviço adicionado ao carrinho!\n\n${novoServico.nome}\nData: ${dataSelecionada}\nHorário: ${horarioSelecionado}\nValor: R$ ${precoTotal.toFixed(2)}`);
+    adicionarAoCarrinho({ ...novoServico });
     
-    // Voltar para a Home
+    alert(`✅ Serviço adicionado ao carrinho!\n\n${nomeServico}\nMáquina: ${maquinaSelecionada.nome}\nData: ${dataSelecionada}\nHorário: ${horarioSelecionado}\nValor: R$ ${preco.toFixed(2)}`);
+    
     voltarParaHome();
   };
 
@@ -188,6 +193,84 @@ function Home() {
   };
 
   const datasDisponiveis = gerarDatas();
+
+  // TELA DE HISTÓRICO
+  if (mostrarHistorico) {
+    return (
+      <section className="home-layout">
+        <Sidebar aberta={sidebarAberta} setAberta={setSidebarAberta} navigate={navigate} handleLogout={handleLogout} />
+        <main className="main-content">
+          <header className="header-home">
+            <section className="header-left">
+              <button className="btn-hamburguer" onClick={() => setSidebarAberta(true)}><FaBars /></button>
+              <button className="btn-voltar-agendamento" onClick={voltarParaHome}>
+                <FaArrowLeft /> Voltar
+              </button>
+              <section className="welcome-text">
+                <span>Bem-vindo de volta,</span>
+                <h2 className="user">{nomeUsuario}</h2>
+              </section>
+            </section>
+            <section className="header-right">
+              <button className="btn-carrinho" onClick={() => setCarrinhoAberto(true)}>
+                <FaShoppingCart />
+                {itensCarrinho.length > 0 && <span className="carrinho-badge">{itensCarrinho.length}</span>}
+              </button>
+              <section className="avatar-circle">
+                {nomeUsuario ? nomeUsuario.charAt(0) : "C"}
+              </section>
+            </section>
+          </header>
+
+          <section className="home-body">
+            <div className="historico-container">
+              <div className="historico-header">
+                <h2><FaHistory /> Meu Histórico</h2>
+                <p>Seus agendamentos realizados</p>
+              </div>
+
+              {agendamentos.length === 0 ? (
+                <div className="historico-vazio">
+                  <FaHistory className="icone-vazio" />
+                  <p>Você ainda não tem agendamentos</p>
+                  <button className="btn-agendar" onClick={() => setMostrarAgendamento(true)}>
+                    <FaCalendarAlt /> Fazer primeiro agendamento
+                  </button>
+                </div>
+              ) : (
+                <div className="historico-lista">
+                  {agendamentos.map((item) => (
+                    <div key={item.id} className="historico-card">
+                      <div className="historico-card-header">
+                        <h3>{item.nome}</h3>
+                        <span className="status-agendado">✅ {item.status || "Agendado"}</span>
+                      </div>
+                      <div className="historico-card-body">
+                        <div className="historico-info">
+                          <p><strong>📅 Data:</strong> {item.data}</p>
+                          <p><strong>⏰ Horário:</strong> {item.horario}</p>
+                          <p><strong>🧺 Máquina:</strong> {item.maquina}</p>
+                          <p><strong>💰 Valor:</strong> R$ {item.preco.toFixed(2)}</p>
+                          <p><strong>📆 Agendado em:</strong> {item.dataCriacao}</p>
+                        </div>
+                        <button className="btn-cancelar-agendamento" onClick={() => {
+                          const novosAgendamentos = agendamentos.filter(a => a.id !== item.id);
+                          setAgendamentos(novosAgendamentos);
+                          localStorage.setItem('agendamentos', JSON.stringify(novosAgendamentos));
+                        }}>
+                          <FaTimes /> Cancelar
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </section>
+        </main>
+      </section>
+    );
+  }
 
   // TELA DE AGENDAMENTO
   if (mostrarAgendamento) {
@@ -225,43 +308,39 @@ function Home() {
                 <div className={`step ${passo >= 2 ? 'active' : ''}`}>2</div>
                 <div className={`step-line ${passo >= 3 ? 'active' : ''}`}></div>
                 <div className={`step ${passo >= 3 ? 'active' : ''}`}>3</div>
-                {tipoLavagem === "completa" && (
-                  <>
-                    <div className={`step-line ${passo >= 4 ? 'active' : ''}`}></div>
-                    <div className={`step ${passo >= 4 ? 'active' : ''}`}>4</div>
-                  </>
-                )}
+                <div className={`step-line ${passo >= 4 ? 'active' : ''}`}></div>
+                <div className={`step ${passo >= 4 ? 'active' : ''}`}>4</div>
               </div>
 
-              {/* PASSO 1 - TIPO LAVAGEM */}
+              {/* PASSO 1 - ESCOLHER TIPO DE SERVIÇO */}
               {passo === 1 && (
                 <div className="passo-content">
-                  <h2>Escolha o tipo de lavagem</h2>
+                  <h2>Escolha o tipo de serviço</h2>
                   <div className="tipos-grid">
-                    <div className="tipo-card" onClick={() => selecionarTipoLavagem("completa")}>
+                    <div className="tipo-card" onClick={() => selecionarTipoServico("lavagem")}>
                       <FaWater className="tipo-icon" />
-                      <h3>Lavagem Completa</h3>
-                      <p>Lavagem + Secagem + Atendimento</p>
+                      <h3>Lavagem</h3>
+                      <p>Lavagem + Atendimento</p>
                       <strong>R$ 30,00</strong>
                     </div>
-                    <div className="tipo-card" onClick={() => selecionarTipoLavagem("simples")}>
-                      <FaSoap className="tipo-icon" />
-                      <h3>Lavagem Simples</h3>
-                      <p>Lavagem ou Secagem + Atendimento</p>
-                      <strong>R$ 10,00</strong>
+                    <div className="tipo-card" onClick={() => selecionarTipoServico("secagem")}>
+                      <FaWind className="tipo-icon" />
+                      <h3>Secagem</h3>
+                      <p>Secagem + Atendimento</p>
+                      <strong>R$ 20,00</strong>
                     </div>
                   </div>
                 </div>
               )}
 
-              {/* PASSO 2 - LAVADORA */}
+              {/* PASSO 2 - ESCOLHER MÁQUINA */}
               {passo === 2 && (
                 <div className="passo-content">
-                  <h2>Escolha a lavadora</h2>
+                  <h2>{tipoServico === "lavagem" ? "Escolha a lavadora" : "Escolha a secadora"}</h2>
                   <div className="maquinas-grid">
-                    {lavadoras.map((maq) => (
+                    {(tipoServico === "lavagem" ? lavadoras : secadoras).map((maq) => (
                       <div key={maq.id} className={`maquina-card ${!maq.disponivel || maq.ocupada ? 'indisponivel' : ''} ${maquinaSelecionada?.id === maq.id ? 'selecionada' : ''}`} onClick={() => selecionarMaquina(maq)}>
-                        <FaTshirt className="maquina-icon" />
+                        {tipoServico === "lavagem" ? <FaTshirt className="maquina-icon" /> : <FaWind className="maquina-icon" />}
                         <span className="maquina-nome">{maq.nome}</span>
                         {!maq.disponivel || maq.ocupada ? <span className="status">Indisponível</span> : maquinaSelecionada?.id === maq.id ? <FaCheckCircle className="status-ok" /> : <FaRegCircle className="status-circle" />}
                       </div>
@@ -270,24 +349,8 @@ function Home() {
                 </div>
               )}
 
-              {/* PASSO 3 - SECADORA */}
-              {passo === 3 && tipoLavagem === "completa" && (
-                <div className="passo-content">
-                  <h2>Escolha a secadora</h2>
-                  <div className="maquinas-grid">
-                    {secadoras.map((sec) => (
-                      <div key={sec.id} className={`maquina-card ${!sec.disponivel || sec.ocupada ? 'indisponivel' : ''} ${secadoraSelecionada?.id === sec.id ? 'selecionada' : ''}`} onClick={() => selecionarSecadora(sec)}>
-                        <FaWind className="maquina-icon" />
-                        <span className="maquina-nome">{sec.nome}</span>
-                        {!sec.disponivel || sec.ocupada ? <span className="status">Indisponível</span> : secadoraSelecionada?.id === sec.id ? <FaCheckCircle className="status-ok" /> : <FaRegCircle className="status-circle" />}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* DATA E HORÁRIO */}
-              {((tipoLavagem === "simples" && passo === 3) || (tipoLavagem === "completa" && passo === 4)) && (
+              {/* PASSO 3 - DATA E HORÁRIO */}
+              {passo === 3 && (
                 <div className="passo-content">
                   <h2>Escolha data e horário</h2>
                   <div className="datas-section">
@@ -313,14 +376,13 @@ function Home() {
                 </div>
               )}
 
-              {/* CONFIRMAÇÃO */}
-              {((tipoLavagem === "simples" && passo === 4) || (tipoLavagem === "completa" && passo === 5)) && (
+              {/* PASSO 4 - CONFIRMAÇÃO */}
+              {passo === 4 && (
                 <div className="passo-content">
                   <h2>Confirme seu agendamento</h2>
                   <div className="confirmacao-card">
-                    <div className="confirmacao-item"><span>Tipo:</span><strong>{tipoLavagem === "simples" ? "Lavagem Simples" : "Lavagem Completa"}</strong></div>
-                    <div className="confirmacao-item"><span>Lavadora:</span><strong>{maquinaSelecionada?.nome}</strong></div>
-                    {tipoLavagem === "completa" && <div className="confirmacao-item"><span>Secadora:</span><strong>{secadoraSelecionada?.nome}</strong></div>}
+                    <div className="confirmacao-item"><span>Tipo:</span><strong>{tipoServico === "lavagem" ? "Lavagem" : "Secagem"}</strong></div>
+                    <div className="confirmacao-item"><span>Máquina:</span><strong>{maquinaSelecionada?.nome}</strong></div>
                     <div className="confirmacao-item"><span>Data:</span><strong>{dataSelecionada}</strong></div>
                     <div className="confirmacao-item"><span>Horário:</span><strong>{horarioSelecionado}</strong></div>
                     <div className="confirmacao-item total"><span>Total:</span><strong>R$ {precoTotal.toFixed(2)}</strong></div>
@@ -331,7 +393,7 @@ function Home() {
               <div className="botoes-agendamento">
                 {passo > 1 && <button className="btn-voltar" onClick={voltarPasso}><FaArrowLeft /> Voltar</button>}
                 <button className="btn-cancelar" onClick={voltarParaHome}>Cancelar</button>
-                {((tipoLavagem === "simples" && passo < 4) || (tipoLavagem === "completa" && passo < 5)) ? (
+                {passo < 4 ? (
                   <button className="btn-proximo" onClick={proximoPasso}>Próximo →</button>
                 ) : (
                   <button className="btn-confirmar" onClick={confirmarAgendamento}><FaShoppingCart /> Adicionar ao Carrinho</button>
@@ -370,7 +432,6 @@ function Home() {
           <section className="section-area">
             <h4>NOSSOS SERVIÇOS</h4>
             <section className="unified-grid">
-              {/* CARD DE AGENDAMENTO */}
               <section className="card-destaque-vertical" onClick={() => setMostrarAgendamento(true)}>
                 <FaCalendarAlt className="icon-main" />
                 <section className="info">
@@ -379,16 +440,8 @@ function Home() {
                 </section>
               </section>
 
-              {/* CARD DE HISTÓRICO (REDIRECIONA PARA VER AGENDAMENTOS) */}
               <section className="sub-grid-services">
-                <section className="card-mini purple" onClick={() => {
-                  const agendamentos = JSON.parse(localStorage.getItem('agendamentos')) || [];
-                  if (agendamentos.length === 0) {
-                    alert("Você ainda não tem agendamentos!");
-                  } else {
-                    alert(`📋 Seus agendamentos:\n${agendamentos.map(a => `${a.nome} - ${a.data} ${a.horario} - R$ ${a.preco}`).join('\n')}`);
-                  }
-                }}>
+                <section className="card-mini purple" onClick={() => setMostrarHistorico(true)}>
                   <FaHistory />
                   <div className="info">
                     <h5>Histórico</h5>
