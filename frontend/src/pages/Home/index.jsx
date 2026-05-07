@@ -102,8 +102,8 @@ function Home() {
                   </section>
                 </section>
 
-                {/* WHATSAPP */}
-                <section className="card-mini purple">
+                {/* WHATSAPP - ATUALIZADO COM LINK */}
+                <section className="card-mini purple" onClick={() => window.open('https://wa.me/5587992433763', '_blank')}>
                   <FaWhatsapp /> 
                   <section className="info">
                     <h5>Suporte</h5>
@@ -111,7 +111,7 @@ function Home() {
                   </section>
                 </section>
 
-                {/* INSTAGRAM - ATUALIZADO COM LINK */}
+                {/* INSTAGRAM */}
                 <section className="card-mini cyan" onClick={() => window.open('https://www.instagram.com/lavamais_sertania/', '_blank')}>
                   <FaInstagram /> 
                   <section className="info">
