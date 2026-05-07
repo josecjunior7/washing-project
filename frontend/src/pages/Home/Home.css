@@ -772,7 +772,7 @@
   box-shadow: 0 4px 12px rgba(0, 196, 196, 0.3);
 }
 
-/* ==================== ESTILOS DO CARRINHO - NOVO LAYOUT ==================== */
+/* ==================== ESTILOS DO CARRINHO ==================== */
 
 .header-right {
   display: flex;
@@ -816,7 +816,6 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-/* Modal do Carrinho - Novo Estilo */
 .carrinho-modal-overlay {
   position: fixed;
   top: 0;
@@ -855,7 +854,6 @@
   }
 }
 
-/* Header do Carrinho */
 .carrinho-header {
   display: flex;
   justify-content: space-between;
@@ -871,11 +869,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-}
-
-.carrinho-header h2::before {
-  content: "🛒";
-  font-size: 1.3rem;
 }
 
 .btn-fechar {
@@ -898,7 +891,6 @@
   transform: rotate(90deg);
 }
 
-/* Lista de Itens */
 .carrinho-itens {
   flex: 1;
   overflow-y: auto;
@@ -1023,7 +1015,6 @@
   color: #ff4444;
 }
 
-/* Footer do Carrinho */
 .carrinho-footer {
   padding: 20px 24px;
   background: white;
@@ -1100,7 +1091,6 @@
   box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
 }
 
-/* Carrinho Vazio */
 .carrinho-vazio {
   text-align: center;
   padding: 60px 40px;
@@ -1282,6 +1272,283 @@
 .btn-agendar:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+}
+
+/* ==================== ESTILOS DO PAGAMENTO - NOVO LAYOUT ==================== */
+
+.pagamento-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.pagamento-card {
+  width: 100%;
+}
+
+/* Header */
+.pagamento-header {
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  color: white;
+  padding: 25px 30px;
+  text-align: center;
+}
+
+.pagamento-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* Resumo do Pedido */
+.resumo-pedido-pagamento {
+  padding: 25px 30px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #eee;
+}
+
+.resumo-pedido-pagamento h3 {
+  color: #6a11cb;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.itens-pagamento {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.item-pagamento {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.item-pagamento-info h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.item-pagamento-info p {
+  margin: 4px 0 0;
+  font-size: 0.7rem;
+  color: #888;
+}
+
+.item-pagamento-preco strong {
+  color: #00c4c4;
+  font-size: 1rem;
+}
+
+.total-pagamento {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #ddd;
+}
+
+.total-pagamento span {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.total-pagamento strong {
+  font-size: 1.3rem;
+  color: #6a11cb;
+}
+
+/* Formas de Pagamento */
+.formas-pagamento {
+  padding: 25px 30px;
+}
+
+.formas-pagamento h3 {
+  color: #6a11cb;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.opcoes-pagamento {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.opcao-pagamento {
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 16px;
+  border: 2px solid #e0e0e0;
+  cursor: pointer;
+  transition: 0.3s;
+  background: white;
+}
+
+.opcao-pagamento:hover {
+  border-color: #6a11cb;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(106, 17, 203, 0.1);
+}
+
+.opcao-pagamento.selecionada {
+  border-color: #6a11cb;
+  background: #f0e6ff;
+}
+
+.opcao-icon {
+  font-size: 2.5rem;
+  color: #6a11cb;
+  margin-bottom: 10px;
+}
+
+.opcao-info h4 {
+  margin: 0 0 5px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.opcao-info p {
+  margin: 0;
+  font-size: 0.7rem;
+  color: #888;
+}
+
+.opcao-check {
+  margin-top: 10px;
+  color: #6a11cb;
+  font-size: 1.2rem;
+}
+
+/* Footer */
+.pagamento-footer {
+  padding: 20px 30px;
+  background: #f8f9fa;
+  border-top: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.total-final {
+  flex: 1;
+}
+
+.total-final span {
+  font-size: 0.85rem;
+  color: #888;
+  display: block;
+}
+
+.total-final strong {
+  font-size: 1.6rem;
+  color: #6a11cb;
+}
+
+.btn-finalizar-pagamento {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  border: none;
+  color: white;
+  padding: 12px 28px;
+  border-radius: 40px;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+.btn-finalizar-pagamento:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+/* Confirmado */
+.confirmado-card {
+  text-align: center;
+  padding: 60px 40px;
+}
+
+.icone-confirmado {
+  font-size: 4rem;
+  color: #25D366;
+  margin-bottom: 20px;
+}
+
+.confirmado-card h2 {
+  color: #6a11cb;
+  margin-bottom: 10px;
+}
+
+.confirmado-card p {
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.btn-voltar-home {
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 40px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-voltar-home:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+}
+
+/* Responsividade do Pagamento */
+@media (max-width: 600px) {
+  .opcoes-pagamento {
+    flex-direction: column;
+  }
+  
+  .opcao-pagamento {
+    min-width: auto;
+  }
+  
+  .pagamento-footer {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .total-final strong {
+    font-size: 1.3rem;
+  }
+  
+  .resumo-pedido-pagamento,
+  .formas-pagamento,
+  .pagamento-footer {
+    padding: 20px;
+  }
 }
 
 /* Responsividade do Carrinho */

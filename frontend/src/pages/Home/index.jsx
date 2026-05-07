@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaCalendarAlt, FaHistory, FaCreditCard, FaClock, FaBars, FaBullhorn, FaWhatsapp, FaInstagram, FaArrowLeft, FaCheckCircle, FaRegCircle, FaTshirt, FaWind, FaWater, FaRegClock, FaCalendarDay, FaShoppingCart, FaTrash, FaTimes } from "react-icons/fa";
+import { 
+  FaCalendarAlt, FaHistory, FaCreditCard, FaClock, FaBars, FaBullhorn, 
+  FaWhatsapp, FaInstagram, FaArrowLeft, FaCheckCircle, FaRegCircle, 
+  FaTshirt, FaWind, FaWater, FaRegClock, FaCalendarDay, FaShoppingCart, 
+  FaTrash, FaTimes, FaQrcode, FaMoneyBill, FaHandHoldingUsd
+} from "react-icons/fa";
 import Sidebar from "../../components/Sidebar";
 import "./Home.css";
 
@@ -10,6 +15,9 @@ function Home() {
   const [nomeUsuario, setNomeUsuario] = useState("Cliente");
   const [mostrarAgendamento, setMostrarAgendamento] = useState(false);
   const [mostrarHistorico, setMostrarHistorico] = useState(false);
+  const [mostrarPagamento, setMostrarPagamento] = useState(false);
+  const [formaPagamento, setFormaPagamento] = useState("");
+  const [pagamentoConfirmado, setPagamentoConfirmado] = useState(false);
   const [passo, setPasso] = useState(1);
   const [tipoServico, setTipoServico] = useState("");
   const [maquinaSelecionada, setMaquinaSelecionada] = useState(null);
@@ -97,17 +105,37 @@ function Home() {
     localStorage.removeItem('carrinho');
   };
 
-  const finalizarPedido = () => {
-    const mensagem = `Olá! Gostaria de finalizar meu pedido:\n\n${itensCarrinho.map(item => 
-      `• ${item.nome} - Data: ${item.data || "A definir"} - Horário: ${item.horario || "A definir"} - Quantidade: ${item.quantidade} - R$ ${(item.preco * item.quantidade).toFixed(2)}`
-    ).join('\n')}\n\nTotal: R$ ${totalCarrinho.toFixed(2)}`;
+  const abrirPagamento = () => {
+    setCarrinhoAberto(false);
+    setMostrarPagamento(true);
+    setFormaPagamento("");
+    setPagamentoConfirmado(false);
+  };
+
+  const handleFinalizarPagamento = () => {
+    if (!formaPagamento) {
+      alert("Selecione uma forma de pagamento!");
+      return;
+    }
+    setPagamentoConfirmado(true);
     
-    window.open(`https://wa.me/5587992433763?text=${encodeURIComponent(mensagem)}`, '_blank');
+    setTimeout(() => {
+      localStorage.removeItem('carrinho');
+      setItensCarrinho([]);
+      setTotalCarrinho(0);
+      setMostrarPagamento(false);
+      setPagamentoConfirmado(false);
+      setFormaPagamento("");
+      alert("Pedido finalizado com sucesso!");
+    }, 2000);
   };
 
   const voltarParaHome = () => {
     setMostrarAgendamento(false);
     setMostrarHistorico(false);
+    setMostrarPagamento(false);
+    setPagamentoConfirmado(false);
+    setFormaPagamento("");
     setPasso(1);
     setTipoServico("");
     setMaquinaSelecionada(null);
@@ -175,7 +203,7 @@ function Home() {
     
     adicionarAoCarrinho({ ...novoServico });
     
-    alert(`✅ Serviço adicionado ao carrinho!\n\n${nomeServico}\nMáquina: ${maquinaSelecionada.nome}\nData: ${dataSelecionada}\nHorário: ${horarioSelecionado}\nValor: R$ ${preco.toFixed(2)}`);
+    alert(`Serviço adicionado ao carrinho!\n\n${nomeServico}\nMáquina: ${maquinaSelecionada.nome}\nData: ${dataSelecionada}\nHorário: ${horarioSelecionado}\nValor: R$ ${preco.toFixed(2)}`);
     
     voltarParaHome();
   };
@@ -193,6 +221,122 @@ function Home() {
   };
 
   const datasDisponiveis = gerarDatas();
+
+  // TELA DE PAGAMENTO
+  if (mostrarPagamento) {
+    return (
+      <section className="home-layout">
+        <Sidebar aberta={sidebarAberta} setAberta={setSidebarAberta} navigate={navigate} handleLogout={handleLogout} />
+        <main className="main-content">
+          <header className="header-home">
+            <section className="header-left">
+              <button className="btn-hamburguer" onClick={() => setSidebarAberta(true)}><FaBars /></button>
+              <button className="btn-voltar-agendamento" onClick={voltarParaHome}>
+                <FaArrowLeft /> Voltar
+              </button>
+              <section className="welcome-text">
+                <span>Bem-vindo de volta,</span>
+                <h2 className="user">{nomeUsuario}</h2>
+              </section>
+            </section>
+            <section className="header-right">
+              <button className="btn-carrinho" onClick={() => setCarrinhoAberto(true)}>
+                <FaShoppingCart />
+                {itensCarrinho.length > 0 && <span className="carrinho-badge">{itensCarrinho.length}</span>}
+              </button>
+              <section className="avatar-circle">
+                {nomeUsuario ? nomeUsuario.charAt(0) : "C"}
+              </section>
+            </section>
+          </header>
+
+          <section className="home-body">
+            <div className="pagamento-container">
+              <div className="pagamento-card">
+                {pagamentoConfirmado ? (
+                  <div className="confirmado-card">
+                    <FaCheckCircle className="icone-confirmado" />
+                    <h2>Pedido Confirmado!</h2>
+                    <p>Seu pedido foi realizado com sucesso.</p>
+                    <button className="btn-voltar-home" onClick={voltarParaHome}>
+                      Voltar para Home
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <div className="pagamento-header">
+                      <h2><FaCreditCard /> Finalizar Pedido</h2>
+                    </div>
+
+                    <div className="resumo-pedido-pagamento">
+                      <h3>Resumo do Pedido</h3>
+                      <div className="itens-pagamento">
+                        {itensCarrinho.map((item, index) => (
+                          <div key={index} className="item-pagamento">
+                            <div className="item-pagamento-info">
+                              <h4>{item.nome}</h4>
+                              <p>{item.descricao}</p>
+                              <div className="item-pagamento-detalhes">
+                                <span><FaCalendarDay /> {item.data}</span>
+                                <span><FaRegClock /> {item.horario}</span>
+                                <span><FaTshirt /> {item.maquina}</span>
+                              </div>
+                            </div>
+                            <div className="item-pagamento-preco">
+                              <strong>R$ {item.preco.toFixed(2)}</strong>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="total-pagamento">
+                        <span>Total do pedido:</span>
+                        <strong>R$ {totalCarrinho.toFixed(2)}</strong>
+                      </div>
+                    </div>
+
+                    <div className="formas-pagamento">
+                      <h3>Escolha a forma de pagamento</h3>
+                      <div className="opcoes-pagamento">
+                        {/* PIX Online */}
+                        <div className={`opcao-pagamento ${formaPagamento === 'pix_online' ? 'selecionada' : ''}`} onClick={() => setFormaPagamento('pix_online')}>
+                          <FaQrcode className="opcao-icon" />
+                          <div className="opcao-info">
+                            <h4>PIX Online</h4>
+                            <p>Pagamento instantâneo via QR Code</p>
+                          </div>
+                          {formaPagamento === 'pix_online' && <FaCheckCircle className="opcao-check" />}
+                        </div>
+
+                        {/* Pagar no Estabelecimento */}
+                        <div className={`opcao-pagamento ${formaPagamento === 'estabelecimento' ? 'selecionada' : ''}`} onClick={() => setFormaPagamento('estabelecimento')}>
+                          <FaHandHoldingUsd className="opcao-icon" />
+                          <div className="opcao-info">
+                            <h4>Pagar no Estabelecimento</h4>
+                            <p>Pagamento na loja com Crédito, Débito ou PIX</p>
+                          </div>
+                          {formaPagamento === 'estabelecimento' && <FaCheckCircle className="opcao-check" />}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="pagamento-footer">
+                      <div className="total-final">
+                        <span>Total a pagar:</span>
+                        <strong>R$ {totalCarrinho.toFixed(2)}</strong>
+                      </div>
+                      <button className="btn-finalizar-pagamento" onClick={handleFinalizarPagamento}>
+                        <FaCheckCircle /> Finalizar Pedido
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            </div>
+          </section>
+        </main>
+      </section>
+    );
+  }
 
   // TELA DE HISTÓRICO
   if (mostrarHistorico) {
@@ -243,15 +387,15 @@ function Home() {
                     <div key={item.id} className="historico-card">
                       <div className="historico-card-header">
                         <h3>{item.nome}</h3>
-                        <span className="status-agendado">✅ {item.status || "Agendado"}</span>
+                        <span className="status-agendado"><FaCheckCircle /> Agendado</span>
                       </div>
                       <div className="historico-card-body">
                         <div className="historico-info">
-                          <p><strong>📅 Data:</strong> {item.data}</p>
-                          <p><strong>⏰ Horário:</strong> {item.horario}</p>
-                          <p><strong>🧺 Máquina:</strong> {item.maquina}</p>
-                          <p><strong>💰 Valor:</strong> R$ {item.preco.toFixed(2)}</p>
-                          <p><strong>📆 Agendado em:</strong> {item.dataCriacao}</p>
+                          <p><FaCalendarDay /> Data: {item.data}</p>
+                          <p><FaRegClock /> Horário: {item.horario}</p>
+                          <p><FaTshirt /> Máquina: {item.maquina}</p>
+                          <p><FaMoneyBill /> Valor: R$ {item.preco.toFixed(2)}</p>
+                          <p><FaCalendarAlt /> Agendado em: {item.dataCriacao}</p>
                         </div>
                         <button className="btn-cancelar-agendamento" onClick={() => {
                           const novosAgendamentos = agendamentos.filter(a => a.id !== item.id);
@@ -312,7 +456,6 @@ function Home() {
                 <div className={`step ${passo >= 4 ? 'active' : ''}`}>4</div>
               </div>
 
-              {/* PASSO 1 - ESCOLHER TIPO DE SERVIÇO */}
               {passo === 1 && (
                 <div className="passo-content">
                   <h2>Escolha o tipo de serviço</h2>
@@ -333,7 +476,6 @@ function Home() {
                 </div>
               )}
 
-              {/* PASSO 2 - ESCOLHER MÁQUINA */}
               {passo === 2 && (
                 <div className="passo-content">
                   <h2>{tipoServico === "lavagem" ? "Escolha a lavadora" : "Escolha a secadora"}</h2>
@@ -349,7 +491,6 @@ function Home() {
                 </div>
               )}
 
-              {/* PASSO 3 - DATA E HORÁRIO */}
               {passo === 3 && (
                 <div className="passo-content">
                   <h2>Escolha data e horário</h2>
@@ -376,7 +517,6 @@ function Home() {
                 </div>
               )}
 
-              {/* PASSO 4 - CONFIRMAÇÃO */}
               {passo === 4 && (
                 <div className="passo-content">
                   <h2>Confirme seu agendamento</h2>
@@ -516,8 +656,8 @@ function Home() {
                       <div className="item-info">
                         <h4>{item.nome}</h4>
                         <p>{item.descricao}</p>
-                        {item.data && <p className="item-data">📅 {item.data} - ⏰ {item.horario}</p>}
-                        {item.maquina && <p className="item-maquina">🧺 {item.maquina}</p>}
+                        {item.data && <p className="item-data"><FaCalendarDay /> {item.data} - <FaRegClock /> {item.horario}</p>}
+                        {item.maquina && <p className="item-maquina"><FaTshirt /> {item.maquina}</p>}
                         <span className="item-preco">R$ {item.preco.toFixed(2)}</span>
                       </div>
                       <div className="item-actions">
@@ -543,8 +683,8 @@ function Home() {
                   </div>
                   <div className="carrinho-botoes">
                     <button className="btn-limpar" onClick={limparCarrinho}>Limpar Carrinho</button>
-                    <button className="btn-finalizar" onClick={finalizarPedido}>
-                      <FaWhatsapp /> Finalizar Pedido
+                    <button className="btn-finalizar" onClick={abrirPagamento}>
+                      <FaCreditCard /> Finalizar Pedido
                     </button>
                   </div>
                 </div>
