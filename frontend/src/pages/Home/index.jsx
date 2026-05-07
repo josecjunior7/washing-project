@@ -111,8 +111,8 @@ function Home() {
                   </section>
                 </section>
 
-                {/* INSTAGRAM */}
-                <section className="card-mini cyan">
+                {/* INSTAGRAM - ATUALIZADO COM LINK */}
+                <section className="card-mini cyan" onClick={() => window.open('https://www.instagram.com/lavamais_sertania/', '_blank')}>
                   <FaInstagram /> 
                   <section className="info">
                     <h5>Siga-nos</h5>
