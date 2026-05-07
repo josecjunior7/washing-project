@@ -100,7 +100,13 @@ const Login = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <label>Email</label>
+          <label>
+            <span style={{ transitionDelay: '0ms' }}>E</span>
+            <span style={{ transitionDelay: '50ms' }}>m</span>
+            <span style={{ transitionDelay: '100ms' }}>a</span>
+            <span style={{ transitionDelay: '150ms' }}>i</span>
+            <span style={{ transitionDelay: '200ms' }}>l</span>
+          </label>
         </section>
 
         {/* INPUT SENHA */}
@@ -111,7 +117,13 @@ const Login = () => {
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
           />
-          <label>Senha</label>
+          <label>
+            <span style={{ transitionDelay: '0ms' }}>S</span>
+            <span style={{ transitionDelay: '50ms' }}>e</span>
+            <span style={{ transitionDelay: '100ms' }}>n</span>
+            <span style={{ transitionDelay: '150ms' }}>h</span>
+            <span style={{ transitionDelay: '200ms' }}>a</span>
+          </label>
         </section>
 
         {/* BOTAO DE LOGIN */}
