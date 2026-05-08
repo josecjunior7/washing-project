@@ -1,0 +1,599 @@
+@import url('../../App.css');
+
+/*------------------------ LAYOUT PRINCIPAL -------------------------*/
+.home-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background-color: white;
+  border-radius: 32px;
+  margin: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(106, 17, 203, 0.2);
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 260px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 0 32px 32px 0;
+  background: #f8fafc;
+}
+
+/*------------------------ CABEÇALHO -------------------------*/
+.header-home {
+  background: var(--text-title);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  border-radius: 0 32px 0 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-hamburguer {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--bg-card);
+}
+
+.btn-voltar-pagamentos {
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 40px;
+  transition: all 0.3s;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(106, 17, 203, 0.2);
+}
+
+.btn-voltar-pagamentos:hover {
+  background: linear-gradient(135deg, #8e2de2, #6a11cb);
+  transform: scale(1.02);
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+}
+
+.welcome-text span {
+  font-size: 0.85rem;
+  color: var(--bg-card);
+}
+
+.user {
+  color: var(--bg-card);
+}
+
+.avatar-circle {
+  width: 42px;
+  height: 42px;
+  background: var(--bg-card);
+  color: var(--text-title);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/*------------------------ CORPO -------------------------*/
+.home-body {
+  padding: 30px 40px;
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+  border-radius: 0 0 32px 0;
+}
+
+/* ==================== ESTILOS DOS PAGAMENTOS ==================== */
+.pagamentos-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.pagamentos-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.pagamentos-header h2 {
+  color: #6a11cb;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.pagamentos-header p {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+/* Cards de Resumo */
+.resumo-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.resumo-card {
+  background: white;
+  border-radius: 24px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid #edf2f7;
+}
+
+.resumo-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.total-pago .resumo-icon {
+  background: linear-gradient(135deg, #10dbdb, #0abebe);
+}
+
+.total-pendente .resumo-icon {
+  background: linear-gradient(135deg, #10dbdb, #0abebe);
+}
+
+.total-servicos .resumo-icon {
+  background: linear-gradient(135deg, #10dbdb, #0abebe);
+}
+
+.resumo-info span {
+  font-size: 0.75rem;
+  color: #888;
+  display: block;
+}
+
+.resumo-info strong {
+  font-size: 1.4rem;
+  color: #333;
+}
+
+/* Filtros */
+.filtros {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+}
+
+.filtro-btn {
+  padding: 8px 24px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 40px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 500;
+  color: #666;
+}
+
+.filtro-btn:hover {
+  border-color: #6a11cb;
+  color: #6a11cb;
+}
+
+.filtro-btn.active {
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  border-color: transparent;
+  color: white;
+}
+
+/* Lista de Pagamentos */
+.pagamentos-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 50vh;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.pagamento-card {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
+  border: 1px solid #edf2f7;
+}
+
+.pagamento-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(106, 17, 203, 0.1);
+}
+
+.pagamento-card.pago {
+  border-left: 4px solid #10dbdb;
+}
+
+.pagamento-card.pendente {
+  border-left: 4px solid #ff6b6b;
+}
+
+.pagamento-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.servico-info h3 {
+  margin: 0;
+  color: #6a11cb;
+  font-size: 1rem;
+}
+
+.servico-info p {
+  margin: 4px 0 0;
+  font-size: 0.75rem;
+  color: #888;
+}
+
+.status-area {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.status-icon {
+  font-size: 1.2rem;
+}
+
+.status-icon.pago {
+  color: #10dbdb;
+}
+
+.status-icon.pendente {
+  color: #ff6b6b;
+}
+
+.status-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.status-badge.pago {
+  background: #e6f7f7;
+  color: #10dbdb;
+}
+
+.status-badge.pendente {
+  background: #ffe6e6;
+  color: #ff6b6b;
+}
+
+/* Detalhes */
+.pagamento-detalhes {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.detalhe {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detalhe span {
+  font-size: 0.7rem;
+  color: #999;
+}
+
+.detalhe strong {
+  font-size: 0.85rem;
+  color: #333;
+}
+
+.detalhe.valor strong {
+  color: #10dbdb;
+  font-size: 1rem;
+}
+
+/* Botões */
+.pagamento-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.btn-recibo, .btn-detalhes, .btn-pagar {
+  padding: 8px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: 0.3s;
+  border: none;
+}
+
+.btn-recibo {
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  color: white;
+}
+
+.btn-recibo:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+}
+
+.btn-detalhes {
+  background: #f0f0f0;
+  color: #666;
+}
+
+.btn-detalhes:hover {
+  background: #e0e0e0;
+  color: #6a11cb;
+}
+
+.btn-pagar {
+  background: linear-gradient(135deg, #10dbdb, #0abebe);
+  color: white;
+}
+
+.btn-pagar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 219, 219, 0.3);
+}
+
+/* Vazio */
+.pagamentos-vazio {
+  text-align: center;
+  padding: 60px;
+  background: white;
+  border-radius: 20px;
+}
+
+.pagamentos-vazio .icone-vazio {
+  font-size: 4rem;
+  color: #c084fc;
+  margin-bottom: 15px;
+}
+
+.pagamentos-vazio p {
+  color: #999;
+}
+
+/* Modal Recibo */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-recibo {
+  background: white;
+  border-radius: 24px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  color: white;
+  border-radius: 24px 24px 0 0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.btn-fechar-modal {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: white;
+  font-size: 1rem;
+}
+
+.modal-body {
+  padding: 20px;
+}
+
+.recibo-logo {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.recibo-logo h3 {
+  color: #6a11cb;
+  margin: 0;
+}
+
+.recibo-dados {
+  background: #f8f9fa;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.recibo-dados p {
+  margin: 5px 0;
+  font-size: 0.8rem;
+}
+
+.recibo-servico {
+  margin-bottom: 20px;
+}
+
+.recibo-servico h4 {
+  color: #6a11cb;
+  margin-bottom: 10px;
+}
+
+.recibo-servico p {
+  margin: 6px 0;
+  font-size: 0.8rem;
+}
+
+.recibo-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  background: #f0e6ff;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.recibo-total strong {
+  color: #6a11cb;
+  font-size: 1.2rem;
+}
+
+.recibo-footer {
+  text-align: center;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.recibo-footer p {
+  font-size: 0.7rem;
+  color: #999;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 10px;
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+}
+
+.btn-download-recibo {
+  flex: 1;
+  padding: 10px;
+  background: linear-gradient(135deg, #10dbdb, #0abebe);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-fechar {
+  flex: 1;
+  padding: 10px;
+  background: #f0f0f0;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .btn-hamburguer {
+    display: block;
+  }
+  
+  .header-home {
+    padding: 15px 25px;
+  }
+  
+  .home-body {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .resumo-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .pagamento-detalhes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .pagamento-actions {
+    flex-wrap: wrap;
+  }
+  
+  .btn-recibo, .btn-detalhes, .btn-pagar {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagamento-detalhes {
+    grid-template-columns: 1fr;
+  }
+  
+  .pagamento-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
