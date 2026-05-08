@@ -1,0 +1,453 @@
+@import url('../../App.css');
+
+/*------------------------ LAYOUT PRINCIPAL -------------------------*/
+.home-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f8fafc;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 260px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/*------------------------ CABEÇALHO -------------------------*/
+.header-home {
+  background: var(--text-title);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.welcome-text span {
+  font-size: 0.85rem;
+  color: var(--bg-card);
+}
+
+.user {
+  color: var(--bg-card);
+}
+
+.avatar-circle {
+  width: 42px;
+  height: 42px;
+  background: var(--bg-card);
+  color: var(--text-title);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/*------------------------ CORPO -------------------------*/
+.home-body {
+  padding: 30px 40px;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==================== ESTILOS DO AGENDAMENTO ==================== */
+
+.btn-voltar-agendamento {
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  transition: 0.3s;
+  font-weight: 500;
+}
+
+.btn-voltar-agendamento:hover {
+  background: linear-gradient(135deg, #8e2de2, #6a11cb);
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+}
+
+.agendamento-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 24px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Steps */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.step {
+  width: 40px;
+  height: 40px;
+  background: #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: #666;
+}
+
+.step.active {
+  background: #6a11cb;
+  color: white;
+}
+
+.step-line {
+  width: 60px;
+  height: 3px;
+  background: #e0e0e0;
+  margin: 0 10px;
+}
+
+.step-line.active {
+  background: #6a11cb;
+}
+
+/* Passo conteúdo */
+.passo-content h2 {
+  text-align: center;
+  color: #6a11cb;
+  margin-bottom: 30px;
+  font-size: 1.4rem;
+}
+
+/* Tipos de lavagem */
+.tipos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.tipo-card {
+  background: linear-gradient(135deg, #f5f0ff, #e9dfff);
+  border-radius: 16px;
+  padding: 25px;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tipo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(106, 17, 203, 0.2);
+}
+
+.tipo-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.tipo-card h3 {
+  color: #6a11cb;
+  margin-bottom: 5px;
+  font-size: 1.2rem;
+}
+
+.tipo-card p {
+  font-size: 0.8rem;
+  color: #666;
+}
+
+.tipo-card strong {
+  display: block;
+  margin-top: 10px;
+  color: #00c4c4;
+  font-size: 1.2rem;
+}
+
+/* Máquinas */
+.maquinas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.maquina-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.maquina-card.selecionada {
+  border-color: #6a11cb;
+  background: #f0e6ff;
+}
+
+.maquina-card.indisponivel {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.maquina-icon {
+  font-size: 1.5rem;
+}
+
+.maquina-nome {
+  font-weight: bold;
+}
+
+.status-ok {
+  color: #6a11cb;
+  font-size: 1.2rem;
+}
+
+.status-circle {
+  color: #bbb;
+  font-size: 1.2rem;
+}
+
+.status {
+  font-size: 0.7rem;
+  color: #ff4444;
+}
+
+/* Datas e Horários */
+.datas-section, .horarios-section {
+  margin-bottom: 25px;
+}
+
+.datas-section h3, .horarios-section h3 {
+  color: #555;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+.datas-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.horarios-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.data-card, .horario-card {
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+.data-card:hover, .horario-card:hover {
+  border-color: #6a11cb;
+  background: #f5f0ff;
+}
+
+.data-card.selecionada, .horario-card.selecionado {
+  background: #6a11cb;
+  color: white;
+  border-color: #6a11cb;
+}
+
+/* Confirmação */
+.confirmacao-card {
+  background: #f8f9fa;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.confirmacao-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.confirmacao-item:last-child {
+  border-bottom: none;
+}
+
+.confirmacao-item.total {
+  margin-top: 10px;
+  padding-top: 15px;
+  border-top: 2px solid #ddd;
+  font-size: 1.1rem;
+}
+
+.confirmacao-item.total strong {
+  color: #6a11cb;
+  font-size: 1.2rem;
+}
+
+/* Botões do Agendamento */
+.botoes-agendamento {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  gap: 15px;
+}
+
+.btn-voltar {
+  background: #f0f0f0;
+  color: #333;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn-voltar:hover {
+  background: #e0e0e0;
+}
+
+.btn-cancelar {
+  background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-cancelar:hover {
+  background: linear-gradient(135deg, #ee5a5a, #ff4444);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3);
+}
+
+.btn-proximo {
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  color: white;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: auto;
+  transition: 0.3s;
+}
+
+.btn-proximo:hover {
+  background: linear-gradient(135deg, #8e2de2, #6a11cb);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+}
+
+.btn-confirmar {
+  background: linear-gradient(135deg, #00c4c4, #00a0a0);
+  color: white;
+  padding: 12px 28px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.3s;
+}
+
+.btn-confirmar:hover {
+  background: linear-gradient(135deg, #00a0a0, #008080);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 196, 196, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .header-home {
+    padding: 15px 20px;
+  }
+  
+  .home-body {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .agendamento-container {
+    padding: 20px;
+  }
+  
+  .tipos-grid, .maquinas-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .step-line {
+    width: 30px;
+  }
+  
+  .step {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+  
+  .passo-content h2 {
+    font-size: 1.1rem;
+  }
+  
+  .tipo-card {
+    padding: 15px;
+  }
+  
+  .tipo-icon {
+    font-size: 2rem;
+  }
+
+  .botoes-agendamento {
+    flex-wrap: wrap;
+  }
+
+  .btn-proximo, .btn-confirmar, .btn-voltar, .btn-cancelar {
+    flex: 1;
+    justify-content: center;
+    margin-left: 0;
+  }
+}
