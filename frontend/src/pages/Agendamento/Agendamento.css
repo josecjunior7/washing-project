@@ -1,99 +1,5 @@
-@import url('../../App.css');
+/* ==================== AGENDAMENTO ==================== */
 
-/*------------------------ LAYOUT PRINCIPAL -------------------------*/
-.home-layout {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-  background-color: #f8fafc;
-}
-
-.main-content {
-  flex: 1;
-  margin-left: 260px;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  height: 100vh;
-  overflow: hidden;
-}
-
-/*------------------------ CABEÇALHO -------------------------*/
-.header-home {
-  background: var(--text-title);
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #f0f0f0;
-  flex-shrink: 0;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
-
-.btn-hamburguer {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--bg-card);
-}
-
-.btn-voltar-agendamento {
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  color: white;
-  font-size: 0.9rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 16px;
-  border-radius: 30px;
-  transition: 0.3s;
-}
-
-.btn-voltar-agendamento:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.welcome-text span {
-  font-size: 0.85rem;
-  color: var(--bg-card);
-}
-
-.user {
-  color: var(--bg-card);
-}
-
-.avatar-circle {
-  width: 42px;
-  height: 42px;
-  background: var(--bg-card);
-  color: var(--text-title);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
-
-/*------------------------ CORPO -------------------------*/
-.home-body {
-  padding: 30px 40px;
-  flex: 1;
-  overflow: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ==================== ESTILOS DO AGENDAMENTO ==================== */
 .agendamento-wrapper {
   max-width: 800px;
   margin: 0 auto;
@@ -333,13 +239,7 @@
   margin-bottom: 12px;
 }
 
-.datas-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.horarios-grid {
+.datas-grid, .horarios-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -463,35 +363,12 @@
 }
 
 /* Responsividade */
-@media (max-width: 900px) {
-  .main-content {
-    margin-left: 0;
-  }
-  
-  .btn-hamburguer {
-    display: block;
-  }
-  
-  .header-home {
-    padding: 15px 25px;
-  }
-}
-
 @media (max-width: 768px) {
-  .home-body {
-    padding: 20px;
-  }
-  
   .agendamento-card {
     padding: 20px;
   }
   
-  .servicos-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  
-  .maquinas-grid {
+  .servicos-grid, .maquinas-grid {
     grid-template-columns: 1fr;
   }
   

@@ -1,66 +1,157 @@
-.carrinho-page {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #6a11cb, #c084fc);
+@import url('../../App.css');
+
+/*------------------------ LAYOUT PRINCIPAL -------------------------*/
+.home-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #f8fafc;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 260px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/*------------------------ CABEÇALHO -------------------------*/
+.header-home {
+  background: var(--text-title);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.header-left {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
-.carrinho-container {
-  max-width: 800px;
-  width: 100%;
-  background: white;
-  border-radius: 24px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.carrinho-header {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 30px;
-  padding-bottom: 15px;
-  border-bottom: 2px solid #f0f0f0;
-}
-
-.carrinho-header h1 {
-  margin: 0;
-  color: #6a11cb;
-  font-size: 1.3rem;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.btn-back {
-  background: transparent;
+.btn-hamburguer {
+  display: none;
+  background: none;
   border: none;
-  color: #6a11cb;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--bg-card);
+}
+
+.btn-voltar-carrinho {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  font-size: 0.9rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: 8px 16px;
+  border-radius: 30px;
+  transition: 0.3s;
 }
 
+.btn-voltar-carrinho:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.welcome-text span {
+  font-size: 0.85rem;
+  color: var(--bg-card);
+}
+
+.user {
+  color: var(--bg-card);
+}
+
+.avatar-circle {
+  width: 42px;
+  height: 42px;
+  background: var(--bg-card);
+  color: var(--text-title);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/*------------------------ CORPO -------------------------*/
+.home-body {
+  padding: 30px 40px;
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==================== ESTILOS DO CARRINHO ==================== */
+.carrinho-container {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.carrinho-card {
+  background: white;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.carrinho-header {
+  text-align: center;
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.carrinho-header h2 {
+  color: #6a11cb;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.carrinho-header p {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+/* Lista de Itens */
 .carrinho-itens {
   max-height: 400px;
   overflow-y: auto;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .carrinho-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background: #f8f9fa;
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 15px;
+  transition: 0.3s;
+  border: 1px solid #eee;
+}
+
+.carrinho-item:hover {
+  transform: translateX(5px);
+  border-color: #e0d4f5;
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.08);
 }
 
 .item-info {
@@ -70,31 +161,37 @@
 .item-info h4 {
   margin: 0 0 5px;
   color: #6a11cb;
+  font-size: 1rem;
 }
 
 .item-info p {
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: #888;
 }
 
 .item-detalhes {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin: 8px 0;
+  gap: 12px;
+  margin: 10px 0 8px;
 }
 
 .item-detalhes span {
   font-size: 0.7rem;
   background: #e9ecef;
-  padding: 2px 8px;
-  border-radius: 12px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #555;
 }
 
 .item-preco {
   font-weight: bold;
   color: #10dbdb;
+  font-size: 1rem;
 }
 
 .item-actions {
@@ -109,7 +206,8 @@
   gap: 10px;
   background: white;
   border-radius: 30px;
-  padding: 5px;
+  padding: 5px 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .quantidade-control button {
@@ -120,11 +218,20 @@
   color: white;
   border-radius: 50%;
   cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+.quantidade-control button:hover {
+  background: #8e2de2;
+  transform: scale(1.05);
 }
 
 .quantidade-control span {
   min-width: 30px;
   text-align: center;
+  font-weight: bold;
+  color: #333;
 }
 
 .btn-remover {
@@ -135,44 +242,66 @@
   display: flex;
   align-items: center;
   gap: 5px;
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  border-radius: 20px;
+  transition: 0.2s;
 }
 
+.btn-remover:hover {
+  background: rgba(255, 107, 107, 0.1);
+  color: #ff4444;
+}
+
+/* Footer */
 .carrinho-footer {
   border-top: 1px solid #eee;
-  padding-top: 20px;
+  padding-top: 24px;
 }
 
 .resumo-pedido {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
+  align-items: baseline;
+  margin-bottom: 20px;
   font-size: 1.1rem;
+}
+
+.resumo-pedido span {
+  color: #666;
+  font-weight: 500;
 }
 
 .total strong {
   color: #6a11cb;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 
 .carrinho-botoes {
   display: flex;
-  gap: 12px;
+  gap: 15px;
 }
 
 .btn-limpar, .btn-finalizar {
   flex: 1;
   padding: 12px;
   border: none;
-  border-radius: 30px;
+  border-radius: 40px;
   cursor: pointer;
   font-weight: bold;
+  transition: 0.3s;
+  font-size: 0.9rem;
 }
 
 .btn-limpar {
   background: transparent;
-  border: 1px solid #ff6b6b;
+  border: 1.5px solid #ff6b6b;
   color: #ff6b6b;
+}
+
+.btn-limpar:hover {
+  background: #ff6b6b;
+  color: white;
 }
 
 .btn-finalizar {
@@ -184,6 +313,12 @@
   gap: 8px;
 }
 
+.btn-finalizar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 219, 219, 0.3);
+}
+
+/* Vazio */
 .carrinho-vazio {
   text-align: center;
   padding: 60px 20px;
@@ -195,25 +330,66 @@
   margin-bottom: 15px;
 }
 
-.btn-continuar {
+.carrinho-vazio p {
+  color: #999;
+  margin-bottom: 20px;
+}
+
+.btn-agendar {
   background: linear-gradient(135deg, #6a11cb, #8e2de2);
   color: white;
   border: none;
   padding: 12px 28px;
-  border-radius: 30px;
+  border-radius: 40px;
   cursor: pointer;
-  margin-top: 15px;
+  font-weight: bold;
+  transition: 0.3s;
 }
 
-@media (max-width: 600px) {
-  .carrinho-container {
+.btn-agendar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .btn-hamburguer {
+    display: block;
+  }
+  
+  .header-home {
+    padding: 15px 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-body {
     padding: 20px;
   }
+  
+  .carrinho-card {
+    padding: 20px;
+  }
+  
   .carrinho-item {
     flex-direction: column;
     align-items: stretch;
+    gap: 12px;
   }
+  
   .item-actions {
     justify-content: space-between;
+  }
+  
+  .carrinho-botoes {
+    flex-direction: column;
+  }
+  
+  .carrinho-header h2 {
+    font-size: 1.2rem;
   }
 }

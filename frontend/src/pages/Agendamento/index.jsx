@@ -7,13 +7,13 @@ import "./Agendamento.css";
 function Agendamento() {
   const navigate = useNavigate();
   const [sidebarAberta, setSidebarAberta] = useState(false);
+  const [nomeUsuario, setNomeUsuario] = useState("Cliente");
   const [passo, setPasso] = useState(1);
   const [tipoServico, setTipoServico] = useState("");
   const [maquinaSelecionada, setMaquinaSelecionada] = useState(null);
   const [dataSelecionada, setDataSelecionada] = useState("");
   const [horarioSelecionado, setHorarioSelecionado] = useState("");
   const [precoTotal, setPrecoTotal] = useState(0);
-  const [nomeUsuario, setNomeUsuario] = useState("Cliente");
 
   const [lavadoras, setLavadoras] = useState([
     { id: "L1", nome: "Lavadora 1", disponivel: true, ocupada: false },
@@ -165,7 +165,6 @@ function Agendamento() {
                 </div>
               </div>
 
-              {/* PASSO 1 */}
               {passo === 1 && (
                 <div className="passo-content">
                   <div className="servicos-grid">
@@ -185,7 +184,6 @@ function Agendamento() {
                 </div>
               )}
 
-              {/* PASSO 2 */}
               {passo === 2 && (
                 <div className="passo-content">
                   <h3 className="passo-subtitle">{tipoServico === "lavagem" ? "Escolha a lavadora" : "Escolha a secadora"}</h3>
@@ -208,12 +206,11 @@ function Agendamento() {
                 </div>
               )}
 
-              {/* PASSO 3 */}
               {passo === 3 && (
                 <div className="passo-content">
                   <h3 className="passo-subtitle">Escolha data e horário</h3>
                   <div className="datas-section">
-                    <label><FaCalendarDay /> Data</label>
+                    <label>Data</label>
                     <div className="datas-grid">
                       {datasDisponiveis.map((data, idx) => (
                         <div key={idx} className={`data-card ${dataSelecionada === data ? 'selecionada' : ''}`} onClick={() => setDataSelecionada(data)}>
@@ -223,7 +220,7 @@ function Agendamento() {
                     </div>
                   </div>
                   <div className="horarios-section">
-                    <label><FaRegClock /> Horário</label>
+                    <label>Horário</label>
                     <div className="horarios-grid">
                       {horarios.map((horario) => (
                         <div key={horario} className={`horario-card ${horarioSelecionado === horario ? 'selecionado' : ''}`} onClick={() => setHorarioSelecionado(horario)}>
@@ -235,7 +232,6 @@ function Agendamento() {
                 </div>
               )}
 
-              {/* PASSO 4 */}
               {passo === 4 && (
                 <div className="passo-content">
                   <h3 className="passo-subtitle">Confirme seus dados</h3>
