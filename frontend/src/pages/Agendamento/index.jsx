@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaCheckCircle, FaRegCircle, FaTshirt, FaWind, FaWater, FaRegClock, FaCalendarDay, FaShoppingCart } from "react-icons/fa";
+import { FaArrowLeft, FaCheckCircle, FaRegCircle, FaTshirt, FaWind, FaWater, FaRegClock, FaCalendarDay, FaShoppingCart, FaBars } from "react-icons/fa";
+import Sidebar from "../../components/Sidebar";
 import "./Agendamento.css";
 
 function Agendamento() {
   const navigate = useNavigate();
+  const [sidebarAberta, setSidebarAberta] = useState(false);
   const [passo, setPasso] = useState(1);
   const [tipoServico, setTipoServico] = useState("");
   const [maquinaSelecionada, setMaquinaSelecionada] = useState(null);
   const [dataSelecionada, setDataSelecionada] = useState("");
   const [horarioSelecionado, setHorarioSelecionado] = useState("");
   const [precoTotal, setPrecoTotal] = useState(0);
+  const [nomeUsuario, setNomeUsuario] = useState("Cliente");
 
   const [lavadoras, setLavadoras] = useState([
     { id: "L1", nome: "Lavadora 1", disponivel: true, ocupada: false },
@@ -25,6 +28,11 @@ function Agendamento() {
     { id: "S3", nome: "Secadora 3", disponivel: false, ocupada: true },
     { id: "S4", nome: "Secadora 4", disponivel: true, ocupada: false }
   ]);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
+  };
 
   const adicionarAoCarrinho = (servico) => {
     const carrinhoSalvo = JSON.parse(localStorage.getItem('carrinho')) || [];
@@ -58,7 +66,9 @@ function Agendamento() {
   };
 
   const voltarPasso = () => {
-    setPasso(passo - 1);
+    if (passo > 1) {
+      setPasso(passo - 1);
+    }
   };
 
   const confirmarAgendamento = () => {
@@ -101,118 +111,178 @@ function Agendamento() {
 
   return (
     <section className="home-layout">
+      <Sidebar 
+        aberta={sidebarAberta} 
+        setAberta={setSidebarAberta} 
+        navigate={navigate} 
+        handleLogout={handleLogout} 
+      />
+
       <main className="main-content">
         <header className="header-home">
           <section className="header-left">
+            <button className="btn-hamburguer" onClick={() => setSidebarAberta(true)}><FaBars /></button>
             <button className="btn-voltar-agendamento" onClick={() => navigate('/home')}>
               <FaArrowLeft /> Voltar
             </button>
             <section className="welcome-text">
               <span>Bem-vindo de volta,</span>
-              <h2 className="user">Cliente</h2>
+              <h2 className="user">{nomeUsuario}</h2>
             </section>
           </section>
-          <section className="avatar-circle">C</section>
+          <section className="avatar-circle">
+            {nomeUsuario ? nomeUsuario.charAt(0) : "C"}
+          </section>
         </header>
 
         <section className="home-body">
-          <div className="agendamento-container">
-            <div className="step-indicator">
-              <div className={`step ${passo >= 1 ? 'active' : ''}`}>1</div>
-              <div className={`step-line ${passo >= 2 ? 'active' : ''}`}></div>
-              <div className={`step ${passo >= 2 ? 'active' : ''}`}>2</div>
-              <div className={`step-line ${passo >= 3 ? 'active' : ''}`}></div>
-              <div className={`step ${passo >= 3 ? 'active' : ''}`}>3</div>
-              <div className={`step-line ${passo >= 4 ? 'active' : ''}`}></div>
-              <div className={`step ${passo >= 4 ? 'active' : ''}`}>4</div>
-            </div>
+          <div className="agendamento-wrapper">
+            <div className="agendamento-card">
+              <div className="agendamento-title">
+                <h2>Novo Agendamento</h2>
+                <p>Preencha os dados abaixo para reservar sua máquina</p>
+              </div>
 
-            {/* PASSO 1 - ESCOLHER TIPO DE SERVIÇO */}
-            {passo === 1 && (
-              <div className="passo-content">
-                <h2>Escolha o tipo de serviço</h2>
-                <div className="tipos-grid">
-                  <div className="tipo-card" onClick={() => selecionarTipoServico("lavagem")}>
-                    <FaWater className="tipo-icon" />
-                    <h3>Lavagem</h3>
-                    <p>Lavagem + Atendimento</p>
-                    <strong>R$ 30,00</strong>
-                  </div>
-                  <div className="tipo-card" onClick={() => selecionarTipoServico("secagem")}>
-                    <FaWind className="tipo-icon" />
-                    <h3>Secagem</h3>
-                    <p>Secagem + Atendimento</p>
-                    <strong>R$ 20,00</strong>
-                  </div>
+              <div className="step-indicator">
+                <div className={`step ${passo >= 1 ? 'active' : ''}`}>
+                  <span className="step-num">1</span>
+                  <span className="step-label">Serviço</span>
+                </div>
+                <div className={`step-line ${passo >= 2 ? 'active' : ''}`}></div>
+                <div className={`step ${passo >= 2 ? 'active' : ''}`}>
+                  <span className="step-num">2</span>
+                  <span className="step-label">Máquina</span>
+                </div>
+                <div className={`step-line ${passo >= 3 ? 'active' : ''}`}></div>
+                <div className={`step ${passo >= 3 ? 'active' : ''}`}>
+                  <span className="step-num">3</span>
+                  <span className="step-label">Data/Hora</span>
+                </div>
+                <div className={`step-line ${passo >= 4 ? 'active' : ''}`}></div>
+                <div className={`step ${passo >= 4 ? 'active' : ''}`}>
+                  <span className="step-num">4</span>
+                  <span className="step-label">Confirmar</span>
                 </div>
               </div>
-            )}
 
-            {/* PASSO 2 - ESCOLHER MÁQUINA */}
-            {passo === 2 && (
-              <div className="passo-content">
-                <h2>{tipoServico === "lavagem" ? "Escolha a lavadora" : "Escolha a secadora"}</h2>
-                <div className="maquinas-grid">
-                  {(tipoServico === "lavagem" ? lavadoras : secadoras).map((maq) => (
-                    <div key={maq.id} className={`maquina-card ${!maq.disponivel || maq.ocupada ? 'indisponivel' : ''} ${maquinaSelecionada?.id === maq.id ? 'selecionada' : ''}`} onClick={() => selecionarMaquina(maq)}>
-                      {tipoServico === "lavagem" ? <FaTshirt className="maquina-icon" /> : <FaWind className="maquina-icon" />}
-                      <span className="maquina-nome">{maq.nome}</span>
-                      {!maq.disponivel || maq.ocupada ? <span className="status">Indisponível</span> : maquinaSelecionada?.id === maq.id ? <FaCheckCircle className="status-ok" /> : <FaRegCircle className="status-circle" />}
+              {/* PASSO 1 */}
+              {passo === 1 && (
+                <div className="passo-content">
+                  <div className="servicos-grid">
+                    <div className={`servico-card ${tipoServico === "lavagem" ? 'selected' : ''}`} onClick={() => selecionarTipoServico("lavagem")}>
+                      <FaWater className="servico-icon" />
+                      <h3>Lavagem</h3>
+                      <p>Lavagem + Atendimento</p>
+                      <div className="servico-preco">R$ 30,00</div>
                     </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-            {/* PASSO 3 - DATA E HORÁRIO */}
-            {passo === 3 && (
-              <div className="passo-content">
-                <h2>Escolha data e horário</h2>
-                <div className="datas-section">
-                  <h3>Data</h3>
-                  <div className="datas-grid">
-                    {datasDisponiveis.map((data, idx) => (
-                      <div key={idx} className={`data-card ${dataSelecionada === data ? 'selecionada' : ''}`} onClick={() => setDataSelecionada(data)}>
-                        {data}
-                      </div>
-                    ))}
+                    <div className={`servico-card ${tipoServico === "secagem" ? 'selected' : ''}`} onClick={() => selecionarTipoServico("secagem")}>
+                      <FaWind className="servico-icon" />
+                      <h3>Secagem</h3>
+                      <p>Secagem + Atendimento</p>
+                      <div className="servico-preco">R$ 20,00</div>
+                    </div>
                   </div>
                 </div>
-                <div className="horarios-section">
-                  <h3>Horário</h3>
-                  <div className="horarios-grid">
-                    {horarios.map((horario) => (
-                      <div key={horario} className={`horario-card ${horarioSelecionado === horario ? 'selecionado' : ''}`} onClick={() => setHorarioSelecionado(horario)}>
-                        {horario}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* PASSO 4 - CONFIRMAÇÃO */}
-            {passo === 4 && (
-              <div className="passo-content">
-                <h2>Confirme seu agendamento</h2>
-                <div className="confirmacao-card">
-                  <div className="confirmacao-item"><span>Tipo:</span><strong>{tipoServico === "lavagem" ? "Lavagem" : "Secagem"}</strong></div>
-                  <div className="confirmacao-item"><span>Máquina:</span><strong>{maquinaSelecionada?.nome}</strong></div>
-                  <div className="confirmacao-item"><span>Data:</span><strong>{dataSelecionada}</strong></div>
-                  <div className="confirmacao-item"><span>Horário:</span><strong>{horarioSelecionado}</strong></div>
-                  <div className="confirmacao-item total"><span>Total:</span><strong>R$ {precoTotal.toFixed(2)}</strong></div>
-                </div>
-              </div>
-            )}
-
-            <div className="botoes-agendamento">
-              {passo > 1 && <button className="btn-voltar" onClick={voltarPasso}><FaArrowLeft /> Voltar</button>}
-              <button className="btn-cancelar" onClick={() => navigate('/home')}>Cancelar</button>
-              {passo < 4 ? (
-                <button className="btn-proximo" onClick={proximoPasso}>Próximo →</button>
-              ) : (
-                <button className="btn-confirmar" onClick={confirmarAgendamento}><FaShoppingCart /> Adicionar ao Carrinho</button>
               )}
+
+              {/* PASSO 2 */}
+              {passo === 2 && (
+                <div className="passo-content">
+                  <h3 className="passo-subtitle">{tipoServico === "lavagem" ? "Escolha a lavadora" : "Escolha a secadora"}</h3>
+                  <div className="maquinas-grid">
+                    {(tipoServico === "lavagem" ? lavadoras : secadoras).map((maq) => (
+                      <div key={maq.id} className={`maquina-card ${!maq.disponivel || maq.ocupada ? 'indisponivel' : ''} ${maquinaSelecionada?.id === maq.id ? 'selecionada' : ''}`} onClick={() => selecionarMaquina(maq)}>
+                        <div className="maquina-icon">
+                          {tipoServico === "lavagem" ? <FaTshirt /> : <FaWind />}
+                        </div>
+                        <div className="maquina-info">
+                          <span className="maquina-nome">{maq.nome}</span>
+                          <span className="maquina-status">
+                            {!maq.disponivel || maq.ocupada ? "Indisponível" : "Disponível"}
+                          </span>
+                        </div>
+                        {maquinaSelecionada?.id === maq.id && <FaCheckCircle className="check-icon" />}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* PASSO 3 */}
+              {passo === 3 && (
+                <div className="passo-content">
+                  <h3 className="passo-subtitle">Escolha data e horário</h3>
+                  <div className="datas-section">
+                    <label><FaCalendarDay /> Data</label>
+                    <div className="datas-grid">
+                      {datasDisponiveis.map((data, idx) => (
+                        <div key={idx} className={`data-card ${dataSelecionada === data ? 'selecionada' : ''}`} onClick={() => setDataSelecionada(data)}>
+                          {data}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="horarios-section">
+                    <label><FaRegClock /> Horário</label>
+                    <div className="horarios-grid">
+                      {horarios.map((horario) => (
+                        <div key={horario} className={`horario-card ${horarioSelecionado === horario ? 'selecionado' : ''}`} onClick={() => setHorarioSelecionado(horario)}>
+                          {horario}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* PASSO 4 */}
+              {passo === 4 && (
+                <div className="passo-content">
+                  <h3 className="passo-subtitle">Confirme seus dados</h3>
+                  <div className="confirmacao-card">
+                    <div className="confirmacao-row">
+                      <span>Serviço:</span>
+                      <strong>{tipoServico === "lavagem" ? "Lavagem" : "Secagem"}</strong>
+                    </div>
+                    <div className="confirmacao-row">
+                      <span>Máquina:</span>
+                      <strong>{maquinaSelecionada?.nome}</strong>
+                    </div>
+                    <div className="confirmacao-row">
+                      <span>Data:</span>
+                      <strong>{dataSelecionada}</strong>
+                    </div>
+                    <div className="confirmacao-row">
+                      <span>Horário:</span>
+                      <strong>{horarioSelecionado}</strong>
+                    </div>
+                    <div className="confirmacao-row total">
+                      <span>Total:</span>
+                      <strong>R$ {precoTotal.toFixed(2)}</strong>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="botoes-agendamento">
+                {passo > 1 && (
+                  <button className="btn-outline" onClick={voltarPasso}>
+                    <FaArrowLeft /> Voltar
+                  </button>
+                )}
+                <button className="btn-outline cancel" onClick={() => navigate('/home')}>
+                  Cancelar
+                </button>
+                {passo < 4 ? (
+                  <button className="btn-primary" onClick={proximoPasso}>
+                    Próximo →
+                  </button>
+                ) : (
+                  <button className="btn-primary confirm" onClick={confirmarAgendamento}>
+                    <FaShoppingCart /> Adicionar ao Carrinho
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </section>
