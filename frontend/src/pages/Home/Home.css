@@ -513,3 +513,204 @@
   text-align: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
+/* ==================== SOMBRA E FORMATO 3D==================== */
+
+/* Ícone do card de agendamento */
+.card-destaque-vertical .icon-main {
+  filter: drop-shadow(4px 6px 8px rgba(0, 0, 0, 0.4));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.card-destaque-vertical:hover .icon-main {
+  transform: translateY(-3px);
+  filter: drop-shadow(6px 8px 12px rgba(0, 0, 0, 0.5));
+}
+
+/* Ícones dos cards laterais */
+.card-mini svg {
+  filter: drop-shadow(3px 4px 6px rgba(0, 0, 0, 0.35));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.card-mini:hover svg {
+  transform: translateY(-2px);
+  filter: drop-shadow(5px 6px 8px rgba(0, 0, 0, 0.45));
+}
+/* ==================== CARDS MAIORES ==================== */
+
+/* Card de Agendamento (destaque) - Aumentado */
+.card-destaque-vertical {
+  padding: 60px 35px;
+  min-height: 380px;
+}
+
+.card-destaque-vertical .icon-main {
+  font-size: 7rem;
+  margin-bottom: 30px;
+}
+
+.card-destaque-vertical h5 {
+  font-size: 2rem;
+  margin-bottom: 18px;
+}
+
+.card-destaque-vertical p {
+  font-size: 1rem;
+}
+
+/* Cards laterais - Aumentados */
+.card-mini {
+  padding: 35px 25px;
+  min-height: 200px;
+}
+
+.card-mini svg {
+  font-size: 3.5rem;
+}
+
+.card-mini h5 {
+  font-size: 1.3rem;
+  margin: 15px 0 10px 0;
+}
+
+.card-mini p {
+  font-size: 0.95rem;
+}
+
+/* Ajuste do grid para manter alinhamento */
+.unified-grid {
+  display: grid;
+  grid-template-columns: 400px 1fr;
+  gap: 30px;
+  align-items: stretch;
+}
+
+.sub-grid-services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  min-height: 0;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 1400px) {
+  .unified-grid {
+    grid-template-columns: 350px 1fr;
+  }
+  
+  .card-destaque-vertical {
+    padding: 50px 30px;
+    min-height: 340px;
+  }
+  
+  .card-destaque-vertical .icon-main {
+    font-size: 6rem;
+  }
+  
+  .card-destaque-vertical h5 {
+    font-size: 1.8rem;
+  }
+  
+  .card-mini {
+    padding: 30px 20px;
+    min-height: 180px;
+  }
+  
+  .card-mini svg {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .unified-grid {
+    grid-template-columns: 320px 1fr;
+    gap: 25px;
+  }
+  
+  .card-destaque-vertical {
+    padding: 40px 25px;
+    min-height: 300px;
+  }
+  
+  .card-destaque-vertical .icon-main {
+    font-size: 5rem;
+  }
+  
+  .card-destaque-vertical h5 {
+    font-size: 1.6rem;
+  }
+  
+  .sub-grid-services {
+    gap: 25px;
+  }
+  
+  .card-mini {
+    padding: 25px 20px;
+    min-height: 160px;
+  }
+  
+  .card-mini svg {
+    font-size: 2.5rem;
+  }
+  
+  .card-mini h5 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .unified-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .card-destaque-vertical {
+    flex-direction: row;
+    text-align: left;
+    padding: 30px;
+    min-height: auto;
+  }
+  
+  .card-destaque-vertical .icon-main {
+    font-size: 4rem;
+    margin-bottom: 0;
+  }
+  
+  .card-destaque-vertical h5 {
+    font-size: 1.4rem;
+  }
+  
+  .sub-grid-services {
+    gap: 20px;
+  }
+  
+  .card-mini {
+    padding: 20px 15px;
+    min-height: auto;
+  }
+  
+  .card-mini svg {
+    font-size: 2rem;
+  }
+  
+  .card-mini h5 {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-mini {
+    padding: 18px 12px;
+  }
+  
+  .card-mini svg {
+    font-size: 1.8rem;
+  }
+  
+  .card-mini h5 {
+    font-size: 0.9rem;
+  }
+  
+  .card-mini p {
+    font-size: 0.75rem;
+  }
+}
