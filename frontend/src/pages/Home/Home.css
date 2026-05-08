@@ -91,16 +91,16 @@
 
 .unified-grid {
   display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: 20px;
+  grid-template-columns: 400px 1fr;
+  gap: 30px;
   align-items: stretch;
 }
 
 /* CARD DE AGENDAMENTO (DESTAQUE) */
 .card-destaque-vertical {
   background: #6a11cb;
-  border-radius: 24px;
-  padding: 40px 25px;
+  border-radius: 32px;
+  padding: 60px 35px;
   color: white;
   display: flex;
   flex-direction: column;
@@ -108,61 +108,89 @@
   justify-content: center;
   text-align: center;
   cursor: pointer;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(0);
+  min-height: 380px;
+  position: relative;
+  overflow: hidden;
 }
 
 .card-destaque-vertical:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 35px rgba(106, 17, 203, 0.25);
 }
 
 .card-destaque-vertical .icon-main {
-  font-size: 5rem;
-  margin-bottom: 20px;
+  font-size: 7rem;
+  margin-bottom: 30px;
+  filter: drop-shadow(4px 6px 8px rgba(0, 0, 0, 0.4));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.card-destaque-vertical:hover .icon-main {
+  transform: translateY(-3px);
+  filter: drop-shadow(6px 8px 12px rgba(0, 0, 0, 0.5));
 }
 
 .card-destaque-vertical h5 {
-  font-size: 1.6rem;
-  margin-bottom: 10px;
+  font-size: 2rem;
+  margin-bottom: 18px;
+}
+
+.card-destaque-vertical p {
+  font-size: 1rem;
 }
 
 /* GRADE LATERAL */
 .sub-grid-services {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 30px;
   min-height: 0;
 }
 
 .card-mini {
-  border-radius: 24px;
-  padding: 25px 20px;
+  border-radius: 28px;
+  padding: 35px 25px;
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform: translateY(0);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  position: relative;
   overflow: hidden;
 }
 
 .card-mini:hover {
-  transform: translateY(-3px);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
 }
 
 .card-mini svg {
-  font-size: 2.5rem;
+  font-size: 3.5rem;
   flex-shrink: 0;
+  filter: drop-shadow(3px 4px 6px rgba(0, 0, 0, 0.35));
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.card-mini:hover svg {
+  transform: translateY(-2px);
+  filter: drop-shadow(5px 6px 8px rgba(0, 0, 0, 0.45));
 }
 
 .card-mini h5 {
-  font-size: 1.1rem;
-  margin: 10px 0 5px 0;
+  font-size: 1.3rem;
+  margin: 15px 0 10px 0;
   font-weight: 600;
 }
 
 .card-mini p {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   opacity: 0.9;
 }
 
@@ -210,18 +238,77 @@
   }
 
   .unified-grid {
-    grid-template-columns: 360px 1fr;
+    grid-template-columns: 420px 1fr;
   }
 }
 
 /* Telas Médias / Laptops pequenos */
-@media (max-width: 1200px) {
-  .sub-grid-services {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 1400px) {
+  .unified-grid {
+    grid-template-columns: 350px 1fr;
   }
+  
+  .card-destaque-vertical {
+    padding: 50px 30px;
+    min-height: 340px;
+  }
+  
+  .card-destaque-vertical .icon-main {
+    font-size: 6rem;
+  }
+  
+  .card-destaque-vertical h5 {
+    font-size: 1.8rem;
+  }
+  
+  .card-mini {
+    padding: 30px 20px;
+    min-height: 180px;
+  }
+  
+  .card-mini svg {
+    font-size: 3rem;
+  }
+  
+  .sub-grid-services {
+    gap: 25px;
+  }
+}
 
+@media (max-width: 1200px) {
+  .unified-grid {
+    grid-template-columns: 320px 1fr;
+    gap: 25px;
+  }
+  
+  .card-destaque-vertical {
+    padding: 40px 25px;
+    min-height: 300px;
+  }
+  
+  .card-destaque-vertical .icon-main {
+    font-size: 5rem;
+  }
+  
+  .card-destaque-vertical h5 {
+    font-size: 1.6rem;
+  }
+  
+  .sub-grid-services {
+    gap: 25px;
+  }
+  
+  .card-mini {
+    padding: 25px 20px;
+    min-height: 160px;
+  }
+  
+  .card-mini svg {
+    font-size: 2.5rem;
+  }
+  
   .card-mini h5 {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 }
 
@@ -238,6 +325,7 @@
 
   .card-destaque-vertical {
     padding: 30px 20px;
+    min-height: auto;
   }
 
   .card-destaque-vertical .icon-main {
@@ -251,6 +339,7 @@
 
   .card-mini {
     padding: 20px 15px;
+    min-height: auto;
   }
 
   .card-mini svg {
@@ -264,6 +353,10 @@
 
   .card-mini p {
     font-size: 0.8rem;
+  }
+  
+  .sub-grid-services {
+    gap: 20px;
   }
 }
 
@@ -298,38 +391,39 @@
     flex-direction: row;
     justify-content: flex-start;
     text-align: left;
-    padding: 20px 25px;
+    padding: 30px;
     gap: 20px;
     flex-shrink: 0;
+    min-height: auto;
   }
 
   .card-destaque-vertical .icon-main {
-    font-size: 3rem;
+    font-size: 4rem;
     margin-bottom: 0;
     flex-shrink: 0;
   }
 
   .card-destaque-vertical h5 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin-bottom: 5px;
   }
 
   .sub-grid-services {
     grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    gap: 20px;
   }
 
   .card-mini {
-    padding: 15px;
-    border-radius: 18px;
+    padding: 20px 15px;
+    min-height: auto;
   }
 
   .card-mini svg {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   .card-mini h5 {
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin: 8px 0 3px 0;
   }
 
@@ -363,20 +457,20 @@
   }
 
   .sub-grid-services {
-    gap: 10px;
+    gap: 15px;
   }
 
   .card-mini {
-    padding: 14px;
+    padding: 18px 12px;
     border-radius: 16px;
   }
 
   .card-mini svg {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
 
   .card-mini h5 {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 
   .card-mini p {
@@ -476,7 +570,7 @@
 }
 
 .btn-carrinho {
-  background: rgba(255, 255, 255, 0.15);
+  background: white;
   border: none;
   font-size: 1.3rem;
   color: #6a11cb;
@@ -484,12 +578,11 @@
   position: relative;
   transition: 0.3s;
   padding: 8px 12px;
-  border-radius: 30px;
+  border-radius: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
-  background: white;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -513,204 +606,65 @@
   text-align: center;
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
-/* ==================== SOMBRA E FORMATO 3D==================== */
 
-/* Ícone do card de agendamento */
-.card-destaque-vertical .icon-main {
-  filter: drop-shadow(4px 6px 8px rgba(0, 0, 0, 0.4));
-  transition: filter 0.3s ease, transform 0.3s ease;
+/* ==================== CONTAINER DOS CARDS COM BORDAS REDONDAS ==================== */
+
+/* Container principal que envolve os cards */
+.section-area {
+  background: transparent;
+  border-radius: 32px;
+  padding: 0;
 }
 
-.card-destaque-vertical:hover .icon-main {
-  transform: translateY(-3px);
-  filter: drop-shadow(6px 8px 12px rgba(0, 0, 0, 0.5));
-}
-
-/* Ícones dos cards laterais */
-.card-mini svg {
-  filter: drop-shadow(3px 4px 6px rgba(0, 0, 0, 0.35));
-  transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-.card-mini:hover svg {
-  transform: translateY(-2px);
-  filter: drop-shadow(5px 6px 8px rgba(0, 0, 0, 0.45));
-}
-/* ==================== CARDS MAIORES ==================== */
-
-/* Card de Agendamento (destaque) - Aumentado */
-.card-destaque-vertical {
-  padding: 60px 35px;
-  min-height: 380px;
-}
-
-.card-destaque-vertical .icon-main {
-  font-size: 7rem;
-  margin-bottom: 30px;
-}
-
-.card-destaque-vertical h5 {
-  font-size: 2rem;
-  margin-bottom: 18px;
-}
-
-.card-destaque-vertical p {
-  font-size: 1rem;
-}
-
-/* Cards laterais - Aumentados */
-.card-mini {
-  padding: 35px 25px;
-  min-height: 200px;
-}
-
-.card-mini svg {
-  font-size: 3.5rem;
-}
-
-.card-mini h5 {
-  font-size: 1.3rem;
-  margin: 15px 0 10px 0;
-}
-
-.card-mini p {
-  font-size: 0.95rem;
-}
-
-/* Ajuste do grid para manter alinhamento */
+/* Grid que contém os cards */
 .unified-grid {
   display: grid;
   grid-template-columns: 400px 1fr;
   gap: 30px;
   align-items: stretch;
+  background: transparent;
+  border-radius: 32px;
 }
 
+/* Card de Agendamento (destaque) - já tem borda redonda */
+.card-destaque-vertical {
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+/* Container dos cards laterais */
 .sub-grid-services {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   min-height: 0;
+  background: transparent;
+  border-radius: 28px;
 }
 
-/* Responsividade para telas menores */
-@media (max-width: 1400px) {
-  .unified-grid {
-    grid-template-columns: 350px 1fr;
-  }
-  
-  .card-destaque-vertical {
-    padding: 50px 30px;
-    min-height: 340px;
-  }
-  
-  .card-destaque-vertical .icon-main {
-    font-size: 6rem;
-  }
-  
-  .card-destaque-vertical h5 {
-    font-size: 1.8rem;
-  }
-  
-  .card-mini {
-    padding: 30px 20px;
-    min-height: 180px;
-  }
-  
-  .card-mini svg {
-    font-size: 3rem;
-  }
+/* Cada card lateral já tem sua borda */
+.card-mini {
+  border-radius: 28px;
+  overflow: hidden;
 }
 
-@media (max-width: 1200px) {
-  .unified-grid {
-    grid-template-columns: 320px 1fr;
-    gap: 25px;
-  }
-  
-  .card-destaque-vertical {
-    padding: 40px 25px;
-    min-height: 300px;
-  }
-  
-  .card-destaque-vertical .icon-main {
-    font-size: 5rem;
-  }
-  
-  .card-destaque-vertical h5 {
-    font-size: 1.6rem;
-  }
-  
-  .sub-grid-services {
-    gap: 25px;
-  }
-  
-  .card-mini {
-    padding: 25px 20px;
-    min-height: 160px;
-  }
-  
-  .card-mini svg {
-    font-size: 2.5rem;
-  }
-  
-  .card-mini h5 {
-    font-size: 1.1rem;
-  }
+/* Se quiser um fundo para o container dos cards */
+.cards-container {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 32px;
+  padding: 20px;
 }
 
-@media (max-width: 900px) {
-  .unified-grid {
-    grid-template-columns: 1fr;
-  }
-  
-  .card-destaque-vertical {
-    flex-direction: row;
-    text-align: left;
-    padding: 30px;
-    min-height: auto;
-  }
-  
-  .card-destaque-vertical .icon-main {
-    font-size: 4rem;
-    margin-bottom: 0;
-  }
-  
-  .card-destaque-vertical h5 {
-    font-size: 1.4rem;
-  }
-  
-  .sub-grid-services {
-    gap: 20px;
-  }
-  
-  .card-mini {
-    padding: 20px 15px;
-    min-height: auto;
-  }
-  
-  .card-mini svg {
-    font-size: 2rem;
-  }
-  
-  .card-mini h5 {
-    font-size: 1rem;
-  }
+/* Para garantir que o conteúdo não ultrapasse as bordas */
+.home-body {
+  padding: 30px 40px;
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 
-@media (max-width: 768px) {
-  .card-mini {
-    padding: 18px 12px;
-  }
-  
-  .card-mini svg {
-    font-size: 1.8rem;
-  }
-  
-  .card-mini h5 {
-    font-size: 0.9rem;
-  }
-  
-  .card-mini p {
-    font-size: 0.75rem;
-  }
+/* Ajuste do scroll */
+.section-area {
+  overflow: visible;
 }
