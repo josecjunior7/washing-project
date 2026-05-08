@@ -19,13 +19,9 @@ function Status() {
       setNomeUsuario(user.nome);
     }
     
-    // Buscar pagamentos confirmados (status "pago")
     const pagamentosSalvos = JSON.parse(localStorage.getItem('pagamentos')) || [];
-    
-    // Filtrar apenas os pagos e criar status
     const pagamentosPagos = pagamentosSalvos.filter(p => p.status === "pago");
     
-    // Adicionar status de progresso (simulado)
     const servicosComStatus = pagamentosPagos.map((pagamento, index) => ({
       id: pagamento.id,
       servico: pagamento.servico,
@@ -61,8 +57,6 @@ function Status() {
         return <FaSpinner className="status-icon secando" />;
       case "pronto":
         return <FaCheckCircle className="status-icon pronto" />;
-      case "finalizado":
-        return <FaCheckCircle className="status-icon finalizado" />;
       default:
         return <FaClock className="status-icon pendente" />;
     }
@@ -76,8 +70,6 @@ function Status() {
         return "Em secagem";
       case "pronto":
         return "Pronto para retirada";
-      case "finalizado":
-        return "Finalizado";
       default:
         return "Aguardando";
     }
@@ -85,16 +77,10 @@ function Status() {
 
   const getStatusColor = (status) => {
     switch(status) {
-      case "lavando":
-        return "lavando";
-      case "secando":
-        return "secando";
-      case "pronto":
-        return "pronto";
-      case "finalizado":
-        return "finalizado";
-      default:
-        return "pendente";
+      case "lavando": return "lavando";
+      case "secando": return "secando";
+      case "pronto": return "pronto";
+      default: return "pendente";
     }
   };
 
@@ -104,7 +90,6 @@ function Status() {
     return "pending";
   };
 
-  // Estatísticas
   const totalServicos = servicosStatus.length;
   const servicosProntos = servicosStatus.filter(s => s.status === "pronto").length;
   const servicosEmAndamento = servicosStatus.filter(s => s.status === "lavando" || s.status === "secando").length;
@@ -116,7 +101,7 @@ function Status() {
         <header className="header-home">
           <section className="header-left">
             <button className="btn-hamburguer" onClick={() => setSidebarAberta(true)}><FaBars /></button>
-            <button className="btn-voltar-agendamento" onClick={voltarParaHome}>
+            <button className="btn-voltar-status" onClick={voltarParaHome}>
               <FaArrowLeft /> Voltar
             </button>
             <section className="welcome-text">
@@ -131,7 +116,6 @@ function Status() {
 
         <section className="home-body">
           <div className="status-container">
-            {/* Cards de Resumo */}
             <div className="status-resumo-cards">
               <div className="status-resumo-card total">
                 <div className="resumo-icon"><FaTshirt /></div>
@@ -156,7 +140,6 @@ function Status() {
               </div>
             </div>
 
-            {/* Lista de Status */}
             <div className="status-lista">
               {servicosStatus.length === 0 ? (
                 <div className="status-vazio">
@@ -182,28 +165,13 @@ function Status() {
                         </span>
                       </div>
                     </div>
-
                     <div className="status-card-body">
                       <div className="servico-detalhes">
-                        <div className="detalhe">
-                          <FaCalendarDay />
-                          <span>{servico.data}</span>
-                        </div>
-                        <div className="detalhe">
-                          <FaRegClock />
-                          <span>{servico.horario}</span>
-                        </div>
-                        <div className="detalhe">
-                          <FaTshirt />
-                          <span>{servico.maquina}</span>
-                        </div>
-                        <div className="detalhe">
-                          <FaMoneyBill />
-                          <span>R$ {servico.valor.toFixed(2)}</span>
-                        </div>
+                        <div className="detalhe"><FaCalendarDay /><span>{servico.data}</span></div>
+                        <div className="detalhe"><FaRegClock /><span>{servico.horario}</span></div>
+                        <div className="detalhe"><FaTshirt /><span>{servico.maquina}</span></div>
+                        <div className="detalhe"><FaMoneyBill /><span>R$ {servico.valor.toFixed(2)}</span></div>
                       </div>
-
-                      {/* Timeline de Progresso */}
                       <div className="timeline">
                         <div className={`timeline-step ${getStepStatus(1, servico.etapaAtual)}`}>
                           <div className="step-dot"></div>
@@ -225,7 +193,6 @@ function Status() {
                           <div className="step-label">Pronto</div>
                         </div>
                       </div>
-
                       {servico.status === "pronto" && (
                         <div className="pronto-mensagem">
                           <FaCheckCircle />

@@ -1,0 +1,305 @@
+@import url('../../App.css');
+
+/*------------------------ LAYOUT PRINCIPAL -------------------------*/
+.home-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background-color: white;
+  border-radius: 32px;
+  margin: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(106, 17, 203, 0.2);
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 260px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 0 32px 32px 0;
+  background: #f8fafc;
+}
+
+/*------------------------ CABEÇALHO -------------------------*/
+.header-home {
+  background: var(--text-title);
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  border-radius: 0 32px 0 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-hamburguer {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--bg-card);
+}
+
+.btn-voltar-historico {
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 40px;
+  transition: all 0.3s;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(106, 17, 203, 0.2);
+}
+
+.btn-voltar-historico:hover {
+  background: linear-gradient(135deg, #8e2de2, #6a11cb);
+  transform: scale(1.02);
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+}
+
+.welcome-text span {
+  font-size: 0.85rem;
+  color: var(--bg-card);
+}
+
+.user {
+  color: var(--bg-card);
+}
+
+.avatar-circle {
+  width: 42px;
+  height: 42px;
+  background: var(--bg-card);
+  color: var(--text-title);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/*------------------------ CORPO -------------------------*/
+.home-body {
+  padding: 30px 40px;
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+  border-radius: 0 0 32px 0;
+}
+
+/* ==================== ESTILOS DO HISTÓRICO ==================== */
+.historico-container {
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.historico-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.historico-header h2 {
+  color: #6a11cb;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.historico-header p {
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.historico-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.historico-card {
+  background: white;
+  border-radius: 24px;
+  padding: 20px;
+  transition: all 0.3s;
+  border: 1px solid #edf2f7;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.historico-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(106, 17, 203, 0.1);
+  border-color: #e0d4f5;
+}
+
+.historico-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.historico-card-header h3 {
+  color: #6a11cb;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.status-agendado {
+  background: #d4edda;
+  color: #155724;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.historico-card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.historico-info {
+  flex: 1;
+}
+
+.historico-info p {
+  margin: 8px 0;
+  font-size: 0.85rem;
+  color: #555;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.historico-info svg {
+  color: #6a11cb;
+  width: 16px;
+}
+
+.btn-cancelar {
+  background: transparent;
+  border: 1px solid #ff6b6b;
+  color: #ff6b6b;
+  padding: 8px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  transition: all 0.3s;
+}
+
+.btn-cancelar:hover {
+  background: #ff6b6b;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.historico-vazio {
+  text-align: center;
+  padding: 60px 40px;
+  background: white;
+  border-radius: 24px;
+}
+
+.historico-vazio .icone-vazio {
+  font-size: 4rem;
+  color: #c084fc;
+  margin-bottom: 15px;
+}
+
+.historico-vazio p {
+  color: #999;
+  margin-bottom: 20px;
+}
+
+.btn-agendar {
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 40px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.btn-agendar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .btn-hamburguer {
+    display: block;
+  }
+  
+  .header-home {
+    padding: 15px 25px;
+  }
+  
+  .home-body {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .historico-card-body {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  
+  .btn-cancelar {
+    align-self: flex-end;
+  }
+  
+  .historico-info p {
+    font-size: 0.75rem;
+  }
+  
+  .historico-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
