@@ -2,14 +2,18 @@
 
 .sidebar {
   width: 260px;
-  height: 100%;
+  height: calc(100vh - 24px);
   background: linear-gradient(135deg, #6a11cb, #8e2de2);
-  border-radius: 32px 0 0 32px;
+  border-radius: 32px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
   transition: all 0.3s ease;
+  margin: 12px 0 12px 12px;
+  position: sticky;
+  top: 12px;
+  align-self: flex-start;
 }
 
 /* Header do Sidebar */

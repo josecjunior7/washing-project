@@ -9,6 +9,12 @@
 
 body {
   overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow: hidden;
 }
 
 /*------------------------ LAYOUT PRINCIPAL COM BORDAS ARREDONDADAS -------------------------*/
@@ -23,60 +29,7 @@ body {
   border: 1px solid rgba(106, 17, 203, 0.2);
 }
 
-.main-content {
-  flex: 1;
-  margin-left: 260px;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 0 32px 32px 0;
-}
-
-/*------------------------ SIDEBAR -------------------------*/
-/* Container principal */
-.home-layout {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-  background-color: white;
-  border-radius: 32px;
-  margin: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(106, 17, 203, 0.2);
-}
-
-/* Sidebar ocupando 100% da altura */
-.sidebar {
-  width: 260px;
-  height: 100%;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #6a11cb, #8e2de2);
-  border-radius: 32px 0 0 32px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-}
-
-/* Garantir que o conteúdo da sidebar preencha */
-.sidebar .sidebar-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: 30px 20px;
-}
-
-/* Empurrar o "Sair da conta" para baixo */
-.sidebar .sidebar-footer {
-  margin-top: auto;
-  padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Main content ocupar o restante */
+/*------------------------ MAIN CONTENT -------------------------*/
 .main-content {
   flex: 1;
   display: flex;
@@ -86,17 +39,6 @@ body {
   overflow: hidden;
   border-radius: 0 32px 32px 0;
   background: #f8fafc;
-}
-
-/* Ajuste do body para não ter scroll */
-body {
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  overflow: hidden;
 }
 
 /*------------------------ CABEÇALHO -------------------------*/
@@ -284,36 +226,20 @@ html {
   color: white;
 }
 
-.purple svg {
-  color: white;
-}
-
-.purple h5 {
-  color: white;
-}
-
-.purple p {
-  color: rgba(255, 255, 255, 0.9);
-}
+.purple svg { color: white; }
+.purple h5  { color: white; }
+.purple p   { color: rgba(255, 255, 255, 0.9); }
 
 .cyan {
   background: linear-gradient(135deg, #10dbdb, #0abebe);
   color: white;
 }
 
-.cyan svg {
-  color: white;
-}
+.cyan svg { color: white; }
+.cyan h5  { color: white; }
+.cyan p   { color: rgba(255, 255, 255, 0.9); }
 
-.cyan h5 {
-  color: white;
-}
-
-.cyan p {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-/* ==================== ICON BOX (NOVO) ==================== */
+/* ==================== ICON BOX ==================== */
 .icon-box {
   width: 80px;
   height: 80px;
@@ -328,6 +254,7 @@ html {
   flex-shrink: 0;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 .card-destaque-vertical .icon-box {
   width: 140px;
   height: 140px;
@@ -341,9 +268,9 @@ html {
     0 8px 24px rgba(0, 0, 0, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
+
 /*------------------------ RESPONSIVIDADE -------------------------*/
 
-/* Telas Grandes / Widescreen */
 @media (min-width: 1600px) {
   .home-body {
     padding: 40px 60px;
@@ -354,34 +281,33 @@ html {
   }
 }
 
-/* Telas Médias / Laptops pequenos */
 @media (max-width: 1400px) {
   .unified-grid {
     grid-template-columns: 350px 1fr;
   }
-  
+
   .card-destaque-vertical {
     padding: 50px 30px;
     min-height: 340px;
   }
-  
+
   .card-destaque-vertical .icon-main {
     font-size: 6rem;
   }
-  
+
   .card-destaque-vertical h5 {
     font-size: 1.8rem;
   }
-  
+
   .card-mini {
     padding: 30px 20px;
     min-height: 180px;
   }
-  
+
   .card-mini svg {
     font-size: 3rem;
   }
-  
+
   .sub-grid-services {
     gap: 25px;
   }
@@ -392,39 +318,38 @@ html {
     grid-template-columns: 320px 1fr;
     gap: 25px;
   }
-  
+
   .card-destaque-vertical {
     padding: 40px 25px;
     min-height: 300px;
   }
-  
+
   .card-destaque-vertical .icon-main {
     font-size: 5rem;
   }
-  
+
   .card-destaque-vertical h5 {
     font-size: 1.6rem;
   }
-  
+
   .sub-grid-services {
     gap: 25px;
   }
-  
+
   .card-mini {
     padding: 25px 20px;
     min-height: 160px;
   }
-  
+
   .card-mini svg {
     font-size: 2.5rem;
   }
-  
+
   .card-mini h5 {
     font-size: 1.1rem;
   }
 }
 
-/* Tablets Landscape */
 @media (max-width: 1024px) {
   .home-body {
     padding: 25px 30px;
@@ -466,13 +391,12 @@ html {
   .card-mini p {
     font-size: 0.8rem;
   }
-  
+
   .sub-grid-services {
     gap: 20px;
   }
 }
 
-/* Tablets Portrait — sidebar some, hambúrguer aparece */
 @media (max-width: 900px) {
   .main-content {
     margin-left: 0;
@@ -542,19 +466,8 @@ html {
   .card-mini p {
     font-size: 0.78rem;
   }
-  
-  /* Sidebar em telas pequenas */
-  .sidebar {
-    width: 100%;
-    border-radius: 32px 32px 0 0;
-  }
-  
-  .main-content {
-    margin-left: 0;
-  }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
   .header-home {
     padding: 12px 20px;
@@ -600,7 +513,6 @@ html {
   }
 }
 
-/* Mobile Pequeno */
 @media (max-width: 480px) {
   .header-home {
     padding: 10px 15px;
@@ -659,7 +571,6 @@ html {
   }
 }
 
-/* Celulares Muito Pequenos */
 @media (max-width: 360px) {
   .home-body {
     padding: 10px;
