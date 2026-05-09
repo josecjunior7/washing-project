@@ -22,8 +22,8 @@ public class AuthController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    // Email que será reconhecido como ADMIN automaticamente
     private static final String EMAIL_ADMIN = "admin@lavamais.com";
+    private static final String SENHA_ADMIN = "123456";
 
     @PostMapping("/cadastro")
     public ResponseEntity<?> cadastrar(@RequestBody Map<String, String> dados) {
@@ -56,8 +56,7 @@ public class AuthController {
         usuario.setTelefone(telefone.trim());
         usuario.setSenha(passwordEncoder.encode(senha));
 
-        // Define role baseado no email
-        if (email.toLowerCase().trim().equals(EMAIL_ADMIN)) {
+        if (email.toLowerCase().trim().equals(EMAIL_ADMIN) && senha.equals(SENHA_ADMIN)) {
             usuario.setRole("ADMIN");
         } else {
             usuario.setRole("CLIENTE");

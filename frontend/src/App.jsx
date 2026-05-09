@@ -10,10 +10,12 @@ import Status from './pages/Status';
 import Carrinho from './pages/Carrinho';
 import FinalizarCompra from './pages/FinalizarCompra';
 import Perfil from './pages/Perfil';
+import Admin from './pages/Admin';
 
 function App() {
-  // Verifica se o usuário está logado
   const isAuthenticated = localStorage.getItem('token') !== null;
+  const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+  const isAdmin = usuario?.role === 'ADMIN';
 
   return (
     <Router>
@@ -52,6 +54,12 @@ function App() {
         <Route 
           path="/home" 
           element={isAuthenticated ? <Home /> : <Navigate to="/login" />} 
+        />
+
+        {/* PAINEL ADMIN - SÓ ACESSA SE FOR ADMIN */}
+        <Route 
+          path="/admin" 
+          element={isAuthenticated && isAdmin ? <Admin /> : <Navigate to="/login" />} 
         />
 
         {/* Redireciona qualquer rota errada para HOME */}
