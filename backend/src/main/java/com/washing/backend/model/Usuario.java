@@ -25,11 +25,23 @@ public class Usuario {
     @Column(nullable = false)
     private String senha;
 
+    @Column(nullable = false)
+    private String role;
+
     @Column(name = "criado_em", nullable = false, updatable = false)
     private LocalDateTime criadoEm;
 
     @PrePersist
     public void prePersist() {
         this.criadoEm = LocalDateTime.now();
+        if (this.role == null) this.role = "CLIENTE";
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

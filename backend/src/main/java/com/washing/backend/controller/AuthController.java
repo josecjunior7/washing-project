@@ -22,6 +22,9 @@ public class AuthController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    // Email que será reconhecido como ADMIN automaticamente
+    private static final String EMAIL_ADMIN = "admin@lavamais.com";
+
     @PostMapping("/cadastro")
     public ResponseEntity<?> cadastrar(@RequestBody Map<String, String> dados) {
 
@@ -53,13 +56,21 @@ public class AuthController {
         usuario.setTelefone(telefone.trim());
         usuario.setSenha(passwordEncoder.encode(senha));
 
+        // Define role baseado no email
+        if (email.toLowerCase().trim().equals(EMAIL_ADMIN)) {
+            usuario.setRole("ADMIN");
+        } else {
+            usuario.setRole("CLIENTE");
+        }
+
         Usuario salvo = usuarioRepository.save(usuario);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(Map.of(
             "message", "Cadastro realizado com sucesso!",
-            "id",    salvo.getId(),
-            "nome",  salvo.getNome(),
-            "email", salvo.getEmail()
+            "id",      salvo.getId(),
+            "nome",    salvo.getNome(),
+            "email",   salvo.getEmail(),
+            "role",    salvo.getRole()
         ));
     }
 
@@ -79,9 +90,10 @@ public class AuthController {
             if (passwordEncoder.matches(senha, usuario.getSenha())) {
                 return ResponseEntity.ok(Map.of(
                     "message", "Login realizado com sucesso!",
-                    "id",    usuario.getId(),
-                    "nome",  usuario.getNome(),
-                    "email", usuario.getEmail()
+                    "id",      usuario.getId(),
+                    "nome",    usuario.getNome(),
+                    "email",   usuario.getEmail(),
+                    "role",    usuario.getRole()
                 ));
             }
         }
