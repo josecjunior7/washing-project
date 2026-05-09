@@ -63,7 +63,9 @@ function Home() {
             <section className="unified-grid">
               {/* AGENDAMENTO */}
               <section className="card-destaque-vertical" onClick={() => navigate('/agendamento')}>
-                <FaCalendarAlt className="icon-main" />
+                <div className="icon-box">
+                  <FaCalendarAlt className="icon-main" />
+                </div>
                 <section className="info">
                   <h5>Agendamento</h5>
                   <p>Reserve sua máquina agora mesmo</p>
@@ -73,7 +75,9 @@ function Home() {
               <section className="sub-grid-services">
                 {/* HISTORICO */}
                 <section className="card-mini purple" onClick={() => navigate('/historico')}>
-                  <FaHistory /> 
+                  <div className="icon-box">
+                    <FaHistory />
+                  </div>
                   <section className="info">
                     <h5>Histórico</h5>
                     <p>Seus agendamentos</p>
@@ -82,7 +86,9 @@ function Home() {
 
                 {/* PAGAMENTOS */}
                 <section className="card-mini cyan" onClick={() => navigate('/pagamentos')}>
-                  <FaCreditCard /> 
+                  <div className="icon-box">
+                    <FaCreditCard />
+                  </div>
                   <section className="info">
                     <h5>Pagamentos</h5>
                     <p>Faturas e recibos</p>
@@ -91,7 +97,9 @@ function Home() {
 
                 {/* STATUS */}
                 <section className="card-mini purple" onClick={() => navigate('/status')}>
-                  <FaClock /> 
+                  <div className="icon-box">
+                    <FaClock />
+                  </div>
                   <section className="info">
                     <h5>Status</h5>
                     <p>Acompanhe sua lavagem</p>
@@ -100,7 +108,9 @@ function Home() {
 
                 {/* NOVIDADES */}
                 <section className="card-mini cyan" onClick={() => navigate('#')}>
-                  <FaBullhorn /> 
+                  <div className="icon-box">
+                    <FaBullhorn />
+                  </div>
                   <section className="info">
                     <h5>Novidades</h5>
                     <p>Confira as ofertas</p>
@@ -109,7 +119,9 @@ function Home() {
 
                 {/* WHATSAPP */}
                 <section className="card-mini purple" onClick={() => window.open('https://wa.me/5587992433763', '_blank')}>
-                  <FaWhatsapp /> 
+                  <div className="icon-box">
+                    <FaWhatsapp />
+                  </div>
                   <section className="info">
                     <h5>Suporte</h5>
                     <p>Fale conosco</p>
@@ -118,7 +130,9 @@ function Home() {
 
                 {/* INSTAGRAM */}
                 <section className="card-mini cyan" onClick={() => window.open('https://www.instagram.com/lavamais_sertania/', '_blank')}>
-                  <FaInstagram /> 
+                  <div className="icon-box">
+                    <FaInstagram />
+                  </div>
                   <section className="info">
                     <h5>Siga-nos</h5>
                     <p>No Instagram</p>
