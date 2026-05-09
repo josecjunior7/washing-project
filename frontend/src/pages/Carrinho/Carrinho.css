@@ -350,6 +350,28 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
 }
+.btn-voltar-carrinho {
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  border: none;
+  color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 40px;
+  transition: all 0.3s;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(106, 17, 203, 0.2);
+}
+
+.btn-voltar-carrinho:hover {
+  background: linear-gradient(135deg, #8e2de2, #6a11cb);
+  transform: scale(1.02);
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+}
 
 /* Responsividade */
 @media (max-width: 900px) {

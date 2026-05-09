@@ -59,7 +59,11 @@ function Carrinho() {
       alert("Seu carrinho está vazio!");
       return;
     }
-    navigate('/finalizar-compra');  // ← CORRIGIDO
+    navigate('/finalizar-compra');
+  };
+
+  const voltarParaHome = () => {
+    navigate('/home');
   };
 
   return (
@@ -75,7 +79,7 @@ function Carrinho() {
         <header className="header-home">
           <section className="header-left">
             <button className="btn-hamburguer" onClick={() => setSidebarAberta(true)}><FaBars /></button>
-            <button className="btn-voltar-carrinho" onClick={() => navigate('/home')}>
+            <button className="btn-voltar-carrinho" onClick={voltarParaHome}>
               <FaArrowLeft /> Voltar
             </button>
             <section className="welcome-text">
