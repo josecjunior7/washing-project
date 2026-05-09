@@ -1,0 +1,143 @@
+/* ==================== ESTILOS DO SIDEBAR ==================== */
+
+.sidebar {
+  width: 260px;
+  height: 100%;
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  border-radius: 32px 0 0 32px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+/* Header do Sidebar */
+.sidebar-header {
+  padding: 30px 20px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-header h2 {
+  color: white;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.sidebar-header p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.75rem;
+  margin-top: 5px;
+}
+
+/* Menu do Sidebar */
+.sidebar-nav {
+  flex: 1;
+  padding: 20px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+}
+
+.sidebar-item:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  transform: translateX(5px);
+}
+
+.sidebar-item.active {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.sidebar-icon {
+  font-size: 1.2rem;
+  width: 24px;
+}
+
+.sidebar-label {
+  font-size: 0.9rem;
+}
+
+/* Footer do Sidebar - Botão Sair com DESTAQUE MAIS CLARO */
+.sidebar-footer {
+  padding: 20px 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: auto;
+}
+
+.sidebar-footer .sidebar-item {
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid #ff6b6b;
+  border-radius: 12px;
+  margin: 0;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.sidebar-footer .sidebar-item:hover {
+  background: #ff6b6b;
+  border-color: #ff6b6b;
+  transform: translateX(0);
+}
+
+.sidebar-footer .sidebar-item .sidebar-icon,
+.sidebar-footer .sidebar-item .sidebar-label {
+  color: #ff6b6b;
+  transition: all 0.3s ease;
+}
+
+.sidebar-footer .sidebar-item:hover .sidebar-icon,
+.sidebar-footer .sidebar-item:hover .sidebar-label {
+  color: white;
+}
+
+/* Overlay para mobile */
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    top: 0;
+    z-index: 999;
+    transition: left 0.3s ease;
+    border-radius: 0 32px 32px 0;
+  }
+  
+  .sidebar.aberta {
+    left: 0;
+  }
+  
+  .sidebar-overlay {
+    display: block;
+  }
+}
+
+@media (min-width: 901px) {
+  .sidebar-overlay {
+    display: none;
+  }
+}
