@@ -59,7 +59,7 @@ function Carrinho() {
       alert("Seu carrinho está vazio!");
       return;
     }
-    navigate('/pagamento');
+    navigate('/finalizar-compra');  // ← CORRIGIDO
   };
 
   return (

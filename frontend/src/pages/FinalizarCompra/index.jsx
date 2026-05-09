@@ -21,13 +21,13 @@ function FinalizarCompra() {
     setTotalCarrinho(soma);
   };
 
-  const handleFinalizarPagamento = () => {
+  const handleConfirmarPagamento = () => {
     if (!formaPagamento) {
       alert("Selecione uma forma de pagamento!");
       return;
     }
     
-    // Salvar os itens como pagamentos realizados
+    // Salvar os pagamentos
     const pagamentosExistentes = JSON.parse(localStorage.getItem('pagamentos')) || [];
     
     const novosPagamentos = itensCarrinho.map((item, index) => ({
@@ -46,21 +46,26 @@ function FinalizarCompra() {
     const todosPagamentos = [...pagamentosExistentes, ...novosPagamentos];
     localStorage.setItem('pagamentos', JSON.stringify(todosPagamentos));
     
-    // Remover itens do carrinho
+    // Limpar carrinho
     localStorage.removeItem('carrinho');
     
     setPagamentoConfirmado(true);
     
+    // Redirecionar após confirmação
     setTimeout(() => {
       navigate('/pagamentos');
     }, 2000);
+  };
+
+  const voltarParaCarrinho = () => {
+    navigate('/carrinho');
   };
 
   return (
     <div className="finalizar-page">
       <div className="finalizar-container">
         <div className="finalizar-header">
-          <button className="btn-back" onClick={() => navigate('/carrinho')}>
+          <button className="btn-back" onClick={voltarParaCarrinho}>
             <FaArrowLeft /> Voltar
           </button>
           <h1><FaCreditCard /> Finalizar Pedido</h1>
@@ -104,16 +109,22 @@ function FinalizarCompra() {
             <div className="formas-pagamento">
               <h3>Escolha a forma de pagamento</h3>
               <div className="opcoes-pagamento">
-                <div className={`opcao-pagamento ${formaPagamento === 'pix_online' ? 'selecionada' : ''}`} onClick={() => setFormaPagamento('pix_online')}>
+                <div 
+                  className={`opcao-pagamento ${formaPagamento === 'pix_online' ? 'selecionada' : ''}`} 
+                  onClick={() => setFormaPagamento('pix_online')}
+                >
                   <FaQrcode className="opcao-icon" />
                   <div className="opcao-info">
-                    <h4>PIX</h4>
+                    <h4>PIX Online</h4>
                     <p>Pagamento instantâneo via QR Code</p>
                   </div>
                   {formaPagamento === 'pix_online' && <FaCheckCircle className="opcao-check" />}
                 </div>
 
-                <div className={`opcao-pagamento ${formaPagamento === 'estabelecimento' ? 'selecionada' : ''}`} onClick={() => setFormaPagamento('estabelecimento')}>
+                <div 
+                  className={`opcao-pagamento ${formaPagamento === 'estabelecimento' ? 'selecionada' : ''}`} 
+                  onClick={() => setFormaPagamento('estabelecimento')}
+                >
                   <FaHandHoldingUsd className="opcao-icon" />
                   <div className="opcao-info">
                     <h4>Pagar no Estabelecimento</h4>
@@ -129,7 +140,7 @@ function FinalizarCompra() {
                 <span>Total a pagar:</span>
                 <strong>R$ {totalCarrinho.toFixed(2)}</strong>
               </div>
-              <button className="btn-finalizar" onClick={handleFinalizarPagamento}>
+              <button className="btn-finalizar" onClick={handleConfirmarPagamento}>
                 <FaCheckCircle /> Confirmar Pagamento
               </button>
             </div>

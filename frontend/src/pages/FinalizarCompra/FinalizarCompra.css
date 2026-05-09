@@ -1,37 +1,37 @@
 /* ==================== LAYOUT PRINCIPAL ==================== */
-.finalizar-layout {
+.finalizar-page {
+  min-height: 100vh;
+  background: #f8fafc;
   display: flex;
-  height: 100vh;
-  overflow: hidden;
-  background: linear-gradient(135deg, #6a11cb, #c084fc);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
-.finalizar-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  height: 100vh;
+.finalizar-container {
+  max-width: 800px;
+  width: 100%;
+  background: white;
+  border-radius: 32px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
 /* ==================== CABEÇALHO ==================== */
 .finalizar-header {
-  background: #2d1b4e;
-  padding: 20px 40px;
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  padding: 20px 30px;
   display: flex;
   align-items: center;
   gap: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  flex-shrink: 0;
 }
 
-.btn-voltar {
+.btn-back {
   background: rgba(255, 255, 255, 0.2);
   border: none;
   color: white;
   padding: 8px 16px;
-  border-radius: 30px;
+  border-radius: 40px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -40,63 +40,28 @@
   transition: 0.3s;
 }
 
-.btn-voltar:hover {
+.btn-back:hover {
   background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.02);
 }
 
-.finalizar-header h2 {
+.finalizar-header h1 {
   margin: 0;
   color: white;
   font-size: 1.3rem;
-}
-
-/* ==================== CORPO ==================== */
-.finalizar-body {
-  padding: 30px 40px;
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-/* ==================== ESTILOS DO PAGAMENTO ==================== */
-.pagamento-container {
-  max-width: 800px;
-  margin: 0 auto;
-  background: white;
-  border-radius: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.pagamento-card {
-  width: 100%;
-}
-
-.pagamento-header {
-  background: linear-gradient(135deg, #6a11cb, #8e2de2);
-  color: white;
-  padding: 25px 30px;
-  text-align: center;
-}
-
-.pagamento-header h2 {
-  margin: 0;
-  font-size: 1.4rem;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 10px;
 }
 
-/* Resumo do Pedido */
-.resumo-pedido-pagamento {
+/* ==================== RESUMO DO PEDIDO ==================== */
+.resumo-pedido {
   padding: 25px 30px;
   background: #f8f9fa;
   border-bottom: 1px solid #eee;
 }
 
-.resumo-pedido-pagamento h3 {
+.resumo-pedido h3 {
   color: #6a11cb;
   font-size: 1rem;
   margin-bottom: 15px;
@@ -104,60 +69,58 @@
   letter-spacing: 1px;
 }
 
-.itens-pagamento {
+.itens-lista {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-height: 300px;
-  overflow-y: auto;
 }
 
-.item-pagamento {
+.item-resumo {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: white;
   padding: 12px 16px;
-  border-radius: 12px;
+  border-radius: 16px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.item-pagamento-info {
+.item-info {
   flex: 1;
 }
 
-.item-pagamento-info h4 {
+.item-info h4 {
   margin: 0;
   font-size: 0.95rem;
   color: #333;
 }
 
-.item-pagamento-info p {
+.item-info p {
   margin: 4px 0 0;
   font-size: 0.7rem;
   color: #888;
 }
 
-.item-pagamento-detalhes {
+.item-detalhes {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 5px;
 }
 
-.item-pagamento-detalhes span {
+.item-detalhes span {
   font-size: 0.65rem;
   background: #f0f0f0;
   padding: 2px 8px;
   border-radius: 12px;
 }
 
-.item-pagamento-preco strong {
+.item-preco strong {
   color: #10dbdb;
   font-size: 1rem;
 }
 
-.total-pagamento {
+.total-resumo {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -166,18 +129,18 @@
   border-top: 2px dashed #ddd;
 }
 
-.total-pagamento span {
+.total-resumo span {
   font-size: 1rem;
   font-weight: 600;
   color: #555;
 }
 
-.total-pagamento strong {
+.total-resumo strong {
   font-size: 1.3rem;
   color: #6a11cb;
 }
 
-/* Formas de Pagamento */
+/* ==================== FORMAS DE PAGAMENTO ==================== */
 .formas-pagamento {
   padding: 25px 30px;
 }
@@ -201,7 +164,7 @@
   min-width: 200px;
   text-align: center;
   padding: 20px;
-  border-radius: 16px;
+  border-radius: 20px;
   border: 2px solid #e0e0e0;
   cursor: pointer;
   transition: 0.3s;
@@ -243,8 +206,8 @@
   font-size: 1.2rem;
 }
 
-/* Footer */
-.pagamento-footer {
+/* ==================== FOOTER ==================== */
+.finalizar-footer {
   padding: 20px 30px;
   background: #f8f9fa;
   border-top: 1px solid #eee;
@@ -270,7 +233,7 @@
   color: #6a11cb;
 }
 
-.btn-finalizar-pagamento {
+.btn-finalizar {
   background: linear-gradient(135deg, #10dbdb, #0abebe);
   border: none;
   color: white;
@@ -285,12 +248,12 @@
   font-size: 0.9rem;
 }
 
-.btn-finalizar-pagamento:hover {
+.btn-finalizar:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(16, 219, 219, 0.3);
 }
 
-/* Confirmado */
+/* ==================== CONFIRMADO ==================== */
 .confirmado-card {
   text-align: center;
   padding: 60px 40px;
@@ -328,21 +291,17 @@
   box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
 }
 
-/* Responsividade */
+/* ==================== RESPONSIVIDADE ==================== */
 @media (max-width: 600px) {
+  .finalizar-container {
+    margin: 10px;
+  }
+  
   .finalizar-header {
     padding: 15px 20px;
   }
   
-  .finalizar-body {
-    padding: 20px;
-  }
-  
-  .pagamento-container {
-    margin: 0;
-  }
-  
-  .resumo-pedido-pagamento {
+  .resumo-pedido {
     padding: 20px;
   }
   
@@ -350,19 +309,19 @@
     padding: 20px;
   }
   
-  .pagamento-footer {
+  .finalizar-footer {
     padding: 20px;
     flex-direction: column;
     text-align: center;
   }
   
-  .item-pagamento {
+  .item-resumo {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
   
-  .item-pagamento-preco {
+  .item-preco {
     text-align: left;
   }
   

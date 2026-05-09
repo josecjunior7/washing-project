@@ -42,7 +42,7 @@ function App() {
         <Route path="/carrinho" element={<Carrinho />} />
 
         {/* TELA DE FinalizarCompra (Finalizar Pedido) */}
-        <Route path="/FinalizarCompra" element={<FinalizarCompra />} />
+        <Route path="/finalizar-compra" element={<FinalizarCompra />} />
 
         {/* DASHBOARD - SÓ ACESSA SE ESTIVER LOGADO */}
         <Route 
