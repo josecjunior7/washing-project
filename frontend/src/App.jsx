@@ -9,6 +9,7 @@ import Pagamentos from './pages/Pagamentos';
 import Status from './pages/Status';
 import Carrinho from './pages/Carrinho';
 import FinalizarCompra from './pages/FinalizarCompra';
+import Perfil from './pages/Perfil';
 
 function App() {
   // Verifica se o usuário está logado
@@ -43,6 +44,9 @@ function App() {
 
         {/* TELA DE FinalizarCompra (Finalizar Pedido) */}
         <Route path="/finalizar-compra" element={<FinalizarCompra />} />
+
+        {/* TELA DE PERFIL */}
+        <Route path="/perfil" element={<Perfil />} />
 
         {/* DASHBOARD - SÓ ACESSA SE ESTIVER LOGADO */}
         <Route 
