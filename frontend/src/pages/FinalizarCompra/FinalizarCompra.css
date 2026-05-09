@@ -1,67 +1,149 @@
-/* ==================== LAYOUT PRINCIPAL ==================== */
-.finalizar-page {
-  min-height: 100vh;
-  background: #f8fafc;
+@import url('../../App.css');
+
+/* ==================== LAYOUT PRINCIPAL - MESMO ESTILO DO HOME ==================== */
+.home-layout {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+  height: 100vh;
+  overflow: hidden;
+  background-color: white;
+  border-radius: 32px;
+  margin: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(106, 17, 203, 0.2);
 }
 
-.finalizar-container {
-  max-width: 800px;
-  width: 100%;
-  background: white;
-  border-radius: 32px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+.main-content {
+  flex: 1;
+  margin-left: 260px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: 100%;
   overflow: hidden;
+  border-radius: 0 32px 32px 0;
+  background: #f8fafc;
 }
 
 /* ==================== CABEÇALHO ==================== */
-.finalizar-header {
-  background: linear-gradient(135deg, #6a11cb, #8e2de2);
-  padding: 20px 30px;
+.header-home {
+  background: var(--text-title);
+  padding: 20px 40px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  border-radius: 0 32px 0 0;
 }
 
-.btn-back {
-  background: rgba(255, 255, 255, 0.2);
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-hamburguer {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--bg-card);
+}
+
+.btn-voltar-finalizar {
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
   border: none;
   color: white;
-  padding: 8px 16px;
-  border-radius: 40px;
+  font-size: 0.9rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 0.9rem;
-  transition: 0.3s;
+  padding: 10px 20px;
+  border-radius: 40px;
+  transition: all 0.3s;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(106, 17, 203, 0.2);
 }
 
-.btn-back:hover {
-  background: rgba(255, 255, 255, 0.3);
+.btn-voltar-finalizar:hover {
+  background: linear-gradient(135deg, #8e2de2, #6a11cb);
   transform: scale(1.02);
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
 }
 
-.finalizar-header h1 {
-  margin: 0;
-  color: white;
-  font-size: 1.3rem;
+.welcome-text span {
+  font-size: 0.85rem;
+  color: var(--bg-card);
+}
+
+.user {
+  color: var(--bg-card);
+}
+
+.avatar-circle {
+  width: 42px;
+  height: 42px;
+  background: var(--bg-card);
+  color: var(--text-title);
+  border-radius: 50%;
   display: flex;
   align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+/* ==================== CORPO ==================== */
+.home-body {
+  padding: 30px 40px;
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  background: #f8fafc;
+  border-radius: 0 0 32px 0;
+}
+
+/* ==================== ESTILOS DO PAGAMENTO ==================== */
+.pagamento-container {
+  max-width: 800px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+}
+
+.pagamento-card {
+  width: 100%;
+}
+
+.pagamento-header {
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  color: white;
+  padding: 25px 30px;
+  text-align: center;
+}
+
+.pagamento-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 10px;
 }
 
-/* ==================== RESUMO DO PEDIDO ==================== */
-.resumo-pedido {
+.resumo-pedido-pagamento {
   padding: 25px 30px;
   background: #f8f9fa;
   border-bottom: 1px solid #eee;
 }
 
-.resumo-pedido h3 {
+.resumo-pedido-pagamento h3 {
   color: #6a11cb;
   font-size: 1rem;
   margin-bottom: 15px;
@@ -69,58 +151,60 @@
   letter-spacing: 1px;
 }
 
-.itens-lista {
+.itens-pagamento {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  max-height: 300px;
+  overflow-y: auto;
 }
 
-.item-resumo {
+.item-pagamento {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: white;
   padding: 12px 16px;
-  border-radius: 16px;
+  border-radius: 12px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.item-info {
+.item-pagamento-info {
   flex: 1;
 }
 
-.item-info h4 {
+.item-pagamento-info h4 {
   margin: 0;
   font-size: 0.95rem;
   color: #333;
 }
 
-.item-info p {
+.item-pagamento-info p {
   margin: 4px 0 0;
   font-size: 0.7rem;
   color: #888;
 }
 
-.item-detalhes {
+.item-pagamento-detalhes {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 5px;
 }
 
-.item-detalhes span {
+.item-pagamento-detalhes span {
   font-size: 0.65rem;
   background: #f0f0f0;
   padding: 2px 8px;
   border-radius: 12px;
 }
 
-.item-preco strong {
+.item-pagamento-preco strong {
   color: #10dbdb;
   font-size: 1rem;
 }
 
-.total-resumo {
+.total-pagamento {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -129,18 +213,17 @@
   border-top: 2px dashed #ddd;
 }
 
-.total-resumo span {
+.total-pagamento span {
   font-size: 1rem;
   font-weight: 600;
   color: #555;
 }
 
-.total-resumo strong {
+.total-pagamento strong {
   font-size: 1.3rem;
   color: #6a11cb;
 }
 
-/* ==================== FORMAS DE PAGAMENTO ==================== */
 .formas-pagamento {
   padding: 25px 30px;
 }
@@ -206,8 +289,7 @@
   font-size: 1.2rem;
 }
 
-/* ==================== FOOTER ==================== */
-.finalizar-footer {
+.pagamento-footer {
   padding: 20px 30px;
   background: #f8f9fa;
   border-top: 1px solid #eee;
@@ -233,7 +315,7 @@
   color: #6a11cb;
 }
 
-.btn-finalizar {
+.btn-finalizar-pagamento {
   background: linear-gradient(135deg, #10dbdb, #0abebe);
   border: none;
   color: white;
@@ -248,12 +330,11 @@
   font-size: 0.9rem;
 }
 
-.btn-finalizar:hover {
+.btn-finalizar-pagamento:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(16, 219, 219, 0.3);
 }
 
-/* ==================== CONFIRMADO ==================== */
 .confirmado-card {
   text-align: center;
   padding: 60px 40px;
@@ -291,17 +372,31 @@
   box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
 }
 
-/* ==================== RESPONSIVIDADE ==================== */
+/* Responsividade */
+@media (max-width: 900px) {
+  .main-content {
+    margin-left: 0;
+  }
+  
+  .btn-hamburguer {
+    display: block;
+  }
+  
+  .header-home {
+    padding: 15px 25px;
+  }
+  
+  .home-body {
+    padding: 20px;
+  }
+}
+
 @media (max-width: 600px) {
-  .finalizar-container {
-    margin: 10px;
+  .pagamento-container {
+    margin: 0;
   }
   
-  .finalizar-header {
-    padding: 15px 20px;
-  }
-  
-  .resumo-pedido {
+  .resumo-pedido-pagamento {
     padding: 20px;
   }
   
@@ -309,19 +404,19 @@
     padding: 20px;
   }
   
-  .finalizar-footer {
+  .pagamento-footer {
     padding: 20px;
     flex-direction: column;
     text-align: center;
   }
   
-  .item-resumo {
+  .item-pagamento {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
   }
   
-  .item-preco {
+  .item-pagamento-preco {
     text-align: left;
   }
   
