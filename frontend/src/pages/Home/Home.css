@@ -21,12 +21,12 @@ html {
 .home-layout {
   display: flex;
   height: 100vh;
-  overflow: hidden;
   background-color: white;
   border-radius: 32px;
   margin: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   border: 1px solid rgba(106, 17, 203, 0.2);
+  /* overflow: hidden  <-- remova esta linha */
 }
 
 /*------------------------ MAIN CONTENT -------------------------*/
