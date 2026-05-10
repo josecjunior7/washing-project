@@ -30,7 +30,11 @@ const Login = () => {
         localStorage.setItem('token', 'usuario-logado');
         localStorage.setItem('usuario', JSON.stringify(response.data));
 
-        navigate('/home');
+        if (response.data.role === 'ADMIN') {
+          navigate('/admin');
+        } else {
+          navigate('/home');
+        }
       }
 
     } catch (error) {
