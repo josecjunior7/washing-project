@@ -31,9 +31,9 @@ const Login = () => {
         localStorage.setItem('usuario', JSON.stringify(response.data));
 
         if (response.data.role === 'ADMIN') {
-          navigate('/admin');
+          window.location.href = '/admin';
         } else {
-          navigate('/home');
+          window.location.href = '/home';
         }
       }
 
