@@ -97,7 +97,7 @@
 
 /* ==================== CORPO ==================== */
 .home-body {
-  padding: 30px 40px;
+  padding: 15px 40px;
   flex: 1;
   overflow: auto;
   display: flex;
@@ -124,7 +124,7 @@
 .pagamento-header {
   background: linear-gradient(135deg, #6a11cb, #8e2de2);
   color: white;
-  padding: 25px 30px;
+  padding: 12px 30px;
   text-align: center;
 }
 
@@ -138,7 +138,7 @@
 }
 
 .resumo-pedido-pagamento {
-  padding: 25px 30px;
+  padding: 12px 30px;
   background: #f8f9fa;
   border-bottom: 1px solid #eee;
 }
@@ -146,7 +146,7 @@
 .resumo-pedido-pagamento h3 {
   color: #6a11cb;
   font-size: 1rem;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -154,8 +154,8 @@
 .itens-pagamento {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  max-height: 300px;
+  gap: 8px;
+  max-height: 100px;
   overflow-y: auto;
 }
 
@@ -225,13 +225,13 @@
 }
 
 .formas-pagamento {
-  padding: 25px 30px;
+  padding: 12px 30px;
 }
 
 .formas-pagamento h3 {
   color: #6a11cb;
   font-size: 1rem;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
@@ -246,7 +246,7 @@
   flex: 1;
   min-width: 200px;
   text-align: center;
-  padding: 20px;
+  padding: 12px;
   border-radius: 20px;
   border: 2px solid #e0e0e0;
   cursor: pointer;
@@ -266,9 +266,9 @@
 }
 
 .opcao-icon {
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   color: #6a11cb;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .opcao-info h4 {
@@ -290,7 +290,7 @@
 }
 
 .pagamento-footer {
-  padding: 20px 30px;
+  padding: 12px 30px;
   background: #f8f9fa;
   border-top: 1px solid #eee;
   display: flex;
@@ -311,7 +311,7 @@
 }
 
 .total-final strong {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   color: #6a11cb;
 }
 

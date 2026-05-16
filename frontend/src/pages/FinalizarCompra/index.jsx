@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { FaArrowLeft, FaCheckCircle, FaHandHoldingUsd, FaCreditCard, FaBars } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaCheckCircle, FaQrcode, FaHandHoldingUsd, FaCreditCard, FaBars } from "react-icons/fa";
 import Sidebar from "../../components/Sidebar";
 import "./FinalizarCompra.css";
 
@@ -137,22 +137,9 @@ function FinalizarCompra() {
                       <strong>R$ {totalCarrinho.toFixed(2)}</strong>
                     </div>
                   </div>
-
-                  <div className="formas-pagamento">
+                 <div className="formas-pagamento">
                     <h3>Escolha a forma de pagamento</h3>
                     <div className="opcoes-pagamento">
-                      <div 
-                        className={`opcao-pagamento ${formaPagamento === 'pix_online' ? 'selecionada' : ''}`} 
-                        onClick={() => setFormaPagamento('pix_online')}
-                      >
-                        <FaQrcode className="opcao-icon" />
-                        <div className="opcao-info">
-                          <h4>PIX Online</h4>
-                          <p>Pagamento instantâneo via QR Code</p>
-                        </div>
-                        {formaPagamento === 'pix_online' && <FaCheckCircle className="opcao-check" />}
-                      </div>
-
                       <div 
                         className={`opcao-pagamento ${formaPagamento === 'estabelecimento' ? 'selecionada' : ''}`} 
                         onClick={() => setFormaPagamento('estabelecimento')}
