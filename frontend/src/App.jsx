@@ -11,12 +11,21 @@ import Carrinho from './pages/Carrinho';
 import FinalizarCompra from './pages/FinalizarCompra';
 import Perfil from './pages/Perfil';
 import Admin from './pages/Admin';
+import AdminMaquinas from './pages/AdminMaquinas';
 
-function App() {
+const PrivateRoute = ({ children }) => {
+  const isAuthenticated = localStorage.getItem('token') !== null;
+  return isAuthenticated ? children : <Navigate to="/login" />;
+};
+
+const AdminRoute = ({ children }) => {
   const isAuthenticated = localStorage.getItem('token') !== null;
   const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
   const isAdmin = usuario?.role === 'ADMIN';
+  return isAuthenticated && isAdmin ? children : <Navigate to="/login" />;
+};
 
+function App() {
   return (
     <Router>
       <Routes>
@@ -53,13 +62,19 @@ function App() {
         {/* DASHBOARD - SÓ ACESSA SE ESTIVER LOGADO */}
         <Route 
           path="/home" 
-          element={isAuthenticated ? <Home /> : <Navigate to="/login" />} 
+          element={<PrivateRoute><Home /></PrivateRoute>} 
         />
 
         {/* PAINEL ADMIN - SÓ ACESSA SE FOR ADMIN */}
         <Route 
           path="/admin" 
-          element={isAuthenticated && isAdmin ? <Admin /> : <Navigate to="/login" />} 
+          element={<AdminRoute><Admin /></AdminRoute>} 
+        />
+
+        {/* TELA DE MÁQUINAS ADMIN */}
+        <Route 
+          path="/admin/maquinas" 
+          element={<AdminRoute><AdminMaquinas /></AdminRoute>} 
         />
 
         {/* Redireciona qualquer rota errada para HOME */}
