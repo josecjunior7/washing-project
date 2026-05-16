@@ -22,18 +22,17 @@ function Admin() {
   };
 
   const menuItems = [
-    { icone: <FaTachometerAlt />, label: "Dashboard",     ativo: true  },
-    { icone: <FaCalendarAlt />,  label: "Agendamentos",   path: "#"    },
-    { icone: <FaUsers />,        label: "Clientes",        path: "#"    },
-    { icone: <FaDollarSign />,   label: "Financeiro",      path: "#"    },
-    { icone: <FaClock />,        label: "Máquinas",        path: "#"    },
-    { icone: <FaCog />,          label: "Configurações",   path: "#"    },
+    { icone: <FaTachometerAlt />, label: "Dashboard",    path: "/admin",          ativo: true },
+    { icone: <FaCalendarAlt />,  label: "Agendamentos",  path: "#"                            },
+    { icone: <FaUsers />,        label: "Clientes",      path: "#"                            },
+    { icone: <FaDollarSign />,   label: "Financeiro",    path: "#"                            },
+    { icone: <FaClock />,        label: "Máquinas",      path: "/admin/maquinas"              },
+    { icone: <FaCog />,          label: "Configurações", path: "#"                            },
   ];
 
   return (
     <section className="admin-layout">
 
-      {/* OVERLAY MOBILE */}
       {sidebarAberta && (
         <div className="admin-overlay" onClick={() => setSidebarAberta(false)} />
       )}
@@ -95,9 +94,7 @@ function Admin() {
             {/* CARDS DE MÉTRICAS */}
             <section className="admin-metrics-grid">
               <section className="admin-metric-card purple">
-                <div className="admin-icon-box">
-                  <FaCalendarAlt />
-                </div>
+                <div className="admin-icon-box"><FaCalendarAlt /></div>
                 <section className="admin-metric-info">
                   <h5>24</h5>
                   <p>Agendamentos hoje</p>
@@ -106,9 +103,7 @@ function Admin() {
               </section>
 
               <section className="admin-metric-card cyan">
-                <div className="admin-icon-box">
-                  <FaDollarSign />
-                </div>
+                <div className="admin-icon-box"><FaDollarSign /></div>
                 <section className="admin-metric-info">
                   <h5>R$ 4.820</h5>
                   <p>Receita do mês</p>
@@ -117,9 +112,7 @@ function Admin() {
               </section>
 
               <section className="admin-metric-card purple">
-                <div className="admin-icon-box">
-                  <FaUsers />
-                </div>
+                <div className="admin-icon-box"><FaUsers /></div>
                 <section className="admin-metric-info">
                   <h5>187</h5>
                   <p>Clientes ativos</p>
@@ -128,9 +121,7 @@ function Admin() {
               </section>
 
               <section className="admin-metric-card cyan">
-                <div className="admin-icon-box">
-                  <FaClock />
-                </div>
+                <div className="admin-icon-box"><FaClock /></div>
                 <section className="admin-metric-info">
                   <h5>6/8</h5>
                   <p>Máquinas em uso</p>
@@ -157,36 +148,11 @@ function Admin() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Filipe M.</td>
-                      <td>Lavagem</td>
-                      <td>08:00</td>
-                      <td><span className="status-pill ok">Concluído</span></td>
-                    </tr>
-                    <tr>
-                      <td>Ana Lima</td>
-                      <td>Secagem</td>
-                      <td>09:30</td>
-                      <td><span className="status-pill ok">Concluído</span></td>
-                    </tr>
-                    <tr>
-                      <td>Carlos R.</td>
-                      <td>Lavagem</td>
-                      <td>11:00</td>
-                      <td><span className="status-pill pending">Em andamento</span></td>
-                    </tr>
-                    <tr>
-                      <td>Juliana S.</td>
-                      <td>Lavagem</td>
-                      <td>13:00</td>
-                      <td><span className="status-pill pending">Aguardando</span></td>
-                    </tr>
-                    <tr>
-                      <td>Pedro A.</td>
-                      <td>Secagem</td>
-                      <td>14:30</td>
-                      <td><span className="status-pill cancel">Cancelado</span></td>
-                    </tr>
+                    <tr><td>Filipe M.</td><td>Lavagem</td><td>08:00</td><td><span className="status-pill ok">Concluído</span></td></tr>
+                    <tr><td>Ana Lima</td><td>Secagem</td><td>09:30</td><td><span className="status-pill ok">Concluído</span></td></tr>
+                    <tr><td>Carlos R.</td><td>Lavagem</td><td>11:00</td><td><span className="status-pill pending">Em andamento</span></td></tr>
+                    <tr><td>Juliana S.</td><td>Lavagem</td><td>13:00</td><td><span className="status-pill pending">Aguardando</span></td></tr>
+                    <tr><td>Pedro A.</td><td>Secagem</td><td>14:30</td><td><span className="status-pill cancel">Cancelado</span></td></tr>
                   </tbody>
                 </table>
               </section>
@@ -198,10 +164,10 @@ function Admin() {
                 </div>
                 <section className="admin-maquinas">
                   {[
-                    { nome: "Máquina 01 — lavagem",   prog: 70,  tempo: "18 min", cor: "purple" },
-                    { nome: "Máquina 02 — secagem",   prog: 45,  tempo: "32 min", cor: "cyan"   },
-                    { nome: "Máquina 03 — lavagem",   prog: 90,  tempo: "5 min",  cor: "purple" },
-                    { nome: "Máquina 04 — disponível", prog: 0,  tempo: "livre",  cor: "free"   },
+                    { nome: "Máquina 01 — lavagem",    prog: 70, tempo: "18 min", cor: "purple" },
+                    { nome: "Máquina 02 — lavagem",    prog: 45, tempo: "32 min", cor: "purple" },
+                    { nome: "Máquina 03 — secagem",    prog: 90, tempo: "5 min",  cor: "cyan"   },
+                    { nome: "Máquina 04 — secagem",    prog: 0,  tempo: "livre",  cor: "free"   },
                   ].map((m, i) => (
                     <section key={i} className="admin-maquina-row">
                       <div className={`admin-maquina-icon ${m.cor}`}>
