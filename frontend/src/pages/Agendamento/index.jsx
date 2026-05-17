@@ -16,18 +16,14 @@ function Agendamento() {
   const [precoTotal, setPrecoTotal] = useState(0);
 
   const [lavadoras, setLavadoras] = useState([
-    { id: "L1", nome: "Lavadora 1", disponivel: true, ocupada: false },
-    { id: "L2", nome: "Lavadora 2", disponivel: true, ocupada: false },
-    { id: "L3", nome: "Lavadora 3", disponivel: false, ocupada: true },
-    { id: "L4", nome: "Lavadora 4", disponivel: true, ocupada: false }
-  ]);
+  { id: "L1", nome: "Lavadora 1", disponivel: true,  ocupada: false },
+  { id: "L2", nome: "Lavadora 2", disponivel: true,  ocupada: false },
+]);
 
   const [secadoras, setSecadoras] = useState([
-    { id: "S1", nome: "Secadora 1", disponivel: true, ocupada: false },
-    { id: "S2", nome: "Secadora 2", disponivel: true, ocupada: false },
-    { id: "S3", nome: "Secadora 3", disponivel: false, ocupada: true },
-    { id: "S4", nome: "Secadora 4", disponivel: true, ocupada: false }
-  ]);
+  { id: "S1", nome: "Secadora 1", disponivel: true,  ocupada: false },
+  { id: "S2", nome: "Secadora 2", disponivel: true,  ocupada: false },
+]);
 
   const handleLogout = () => {
     localStorage.clear();

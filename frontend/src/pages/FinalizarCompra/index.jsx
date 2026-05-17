@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaCheckCircle, FaQrcode, FaHandHoldingUsd, FaCreditCard, FaBars } from "react-icons/fa";
+import { FaArrowLeft, FaCheckCircle, FaHandHoldingUsd, FaCreditCard, FaBars } from "react-icons/fa";
 import Sidebar from "../../components/Sidebar";
 import "./FinalizarCompra.css";
 
@@ -10,7 +10,7 @@ function FinalizarCompra() {
   const [nomeUsuario, setNomeUsuario] = useState("Cliente");
   const [itensCarrinho, setItensCarrinho] = useState([]);
   const [totalCarrinho, setTotalCarrinho] = useState(0);
-  const [formaPagamento, setFormaPagamento] = useState("");
+  const [formaPagamento, setFormaPagamento] = useState("estabelecimento");
   const [pagamentoConfirmado, setPagamentoConfirmado] = useState(false);
 
   useEffect(() => {
@@ -35,11 +35,6 @@ function FinalizarCompra() {
   };
 
   const handleConfirmarPagamento = () => {
-    if (!formaPagamento) {
-      alert("Selecione uma forma de pagamento!");
-      return;
-    }
-    
     const pagamentosExistentes = JSON.parse(localStorage.getItem('pagamentos')) || [];
     
     const novosPagamentos = itensCarrinho.map((item, index) => ({
@@ -52,7 +47,7 @@ function FinalizarCompra() {
       valor: item.preco,
       status: "pago",
       dataPagamento: new Date().toLocaleDateString('pt-BR'),
-      formaPagamento: formaPagamento === "pix_online" ? "PIX" : "Pagamento no Estabelecimento"
+      formaPagamento: "Pagamento no Estabelecimento"
     }));
     
     const todosPagamentos = [...pagamentosExistentes, ...novosPagamentos];
@@ -102,8 +97,8 @@ function FinalizarCompra() {
               {pagamentoConfirmado ? (
                 <div className="confirmado-card">
                   <FaCheckCircle className="icone-confirmado" />
-                  <h2>Pagamento Confirmado!</h2>
-                  <p>Seu pagamento foi realizado com sucesso.</p>
+                  <h2>Agendamento Confirmado!</h2>
+                  <p>Seu agendamento foi realizado com sucesso.</p>
                   <p>Redirecionando para a tela de pagamentos...</p>
                 </div>
               ) : (
@@ -139,31 +134,14 @@ function FinalizarCompra() {
                   </div>
 
                   <div className="formas-pagamento">
-                    <h3>Escolha a forma de pagamento</h3>
-                    <div className="opcoes-pagamento">
-                      <div 
-                        className={`opcao-pagamento ${formaPagamento === 'pix_online' ? 'selecionada' : ''}`} 
-                        onClick={() => setFormaPagamento('pix_online')}
-                      >
-                        <FaQrcode className="opcao-icon" />
-                        <div className="opcao-info">
-                          <h4>PIX Online</h4>
-                          <p>Pagamento instantâneo via QR Code</p>
-                        </div>
-                        {formaPagamento === 'pix_online' && <FaCheckCircle className="opcao-check" />}
+                    <h3>Forma de pagamento</h3>
+                    <div className="opcao-pagamento selecionada">
+                      <FaHandHoldingUsd className="opcao-icon" />
+                      <div className="opcao-info">
+                        <h4>Pagar no Estabelecimento</h4>
+                        <p>Pagamento na loja com Crédito, Débito ou PIX</p>
                       </div>
-
-                      <div 
-                        className={`opcao-pagamento ${formaPagamento === 'estabelecimento' ? 'selecionada' : ''}`} 
-                        onClick={() => setFormaPagamento('estabelecimento')}
-                      >
-                        <FaHandHoldingUsd className="opcao-icon" />
-                        <div className="opcao-info">
-                          <h4>Pagar no Estabelecimento</h4>
-                          <p>Pagamento na loja com Crédito, Débito ou PIX</p>
-                        </div>
-                        {formaPagamento === 'estabelecimento' && <FaCheckCircle className="opcao-check" />}
-                      </div>
+                      <FaCheckCircle className="opcao-check" />
                     </div>
                   </div>
 
@@ -173,7 +151,7 @@ function FinalizarCompra() {
                       <strong>R$ {totalCarrinho.toFixed(2)}</strong>
                     </div>
                     <button className="btn-finalizar-pagamento" onClick={handleConfirmarPagamento}>
-                      <FaCheckCircle /> Confirmar Pagamento
+                      <FaCheckCircle /> Confirmar Agendamento
                     </button>
                   </div>
                 </>
