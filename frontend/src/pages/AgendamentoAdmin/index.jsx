@@ -19,7 +19,8 @@ import {
   FaCheckCircle,
   FaSpinner,
   FaHourglassHalf,
-  FaBan
+  FaBan,
+  FaBullhorn
 } from "react-icons/fa";
 
 import "../Admin/Admin.css";
@@ -62,6 +63,7 @@ function AgendamentoAdmin() {
     { icone: <FaUsers />,         label: "Clientes",      path: "#"                    },
     { icone: <FaDollarSign />,    label: "Financeiro",    path: "#"                    },
     { icone: <FaClock />,         label: "Máquinas",      path: "/admin/maquinas"      },
+    { icone: <FaBullhorn />,      label: "Novidades",     path: "/admin/novidades"     },
     { icone: <FaCog />,           label: "Configurações", path: "/admin/configuracoes" },
   ];
 

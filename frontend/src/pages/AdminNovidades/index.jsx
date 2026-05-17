@@ -39,13 +39,13 @@ function AdminNovidades() {
   };
 
   const menuItems = [
-    { icone: <FaTachometerAlt />, label: "Dashboard",    path: "/admin"                },
-    { icone: <FaCalendarAlt />,  label: "Agendamentos",  path: "#"                     },
-    { icone: <FaUsers />,        label: "Clientes",      path: "#"                     },
-    { icone: <FaDollarSign />,   label: "Financeiro",    path: "#"                     },
-    { icone: <FaClock />,        label: "Máquinas",      path: "/admin/maquinas"       },
-    { icone: <FaBullhorn />,     label: "Novidades",     path: "/admin/novidades", ativo: true },
-    { icone: <FaCog />,          label: "Configurações", path: "/admin/configuracoes"  },
+    { icone: <FaTachometerAlt />, label: "Dashboard",     path: "/admin"                          },
+    { icone: <FaCalendarAlt />,   label: "Agendamentos",  path: "/agendamento-admin"              }, // ✅ corrigido
+    { icone: <FaUsers />,         label: "Clientes",      path: "#"                               },
+    { icone: <FaDollarSign />,    label: "Financeiro",    path: "#"                               },
+    { icone: <FaClock />,         label: "Máquinas",      path: "/admin/maquinas"                 },
+    { icone: <FaBullhorn />,      label: "Novidades",     path: "/admin/novidades", ativo: true   },
+    { icone: <FaCog />,           label: "Configurações", path: "/admin/configuracoes"            },
   ];
 
   const abrirModal = (novidade = null) => {
@@ -110,7 +110,7 @@ function AdminNovidades() {
             <div
               key={index}
               className={`admin-sidebar-item ${item.ativo ? "active" : ""}`}
-              onClick={() => { navigate(item.path); setSidebarAberta(false); }}
+              onClick={() => { if (item.path !== "#") navigate(item.path); setSidebarAberta(false); }}
             >
               <span className="admin-sidebar-icon">{item.icone}</span>
               <span className="admin-sidebar-label">{item.label}</span>
