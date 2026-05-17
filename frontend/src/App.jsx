@@ -14,6 +14,7 @@ import Admin from './pages/Admin';
 import AgendamentoAdmin from './pages/AgendamentoAdmin';
 import AdminMaquinas from './pages/AdminMaquinas';
 import AdminConfiguracoes from './pages/AdminConfiguracoes';
+import Novidades from './pages/Novidades'; 
 
 function App() {
   const isAuthenticated = localStorage.getItem('token') !== null;
@@ -59,6 +60,12 @@ function App() {
 
         {/* PERFIL */}
         <Route path="/perfil" element={<Perfil />} />
+
+        {/* NOVIDADES */}
+        <Route
+          path="/novidades"
+          element={isAuthenticated ? <Novidades /> : <Navigate to="/login" />}
+        />
 
         {/* ADMIN - DASHBOARD */}
         <Route

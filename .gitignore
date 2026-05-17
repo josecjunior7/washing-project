@@ -1,3 +1,4 @@
 #Variaveis de ambiente
 .env
 
+node_modules

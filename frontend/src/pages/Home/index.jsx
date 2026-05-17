@@ -107,7 +107,7 @@ function Home() {
                 </section>
 
                 {/* NOVIDADES */}
-                <section className="card-mini cyan" onClick={() => navigate('#')}>
+                <section className="card-mini cyan" onClick={() => navigate('/novidades')}>
                   <div className="icon-box">
                     <FaBullhorn />
                   </div>
