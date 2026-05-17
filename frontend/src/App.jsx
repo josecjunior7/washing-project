@@ -12,6 +12,7 @@ import FinalizarCompra from './pages/FinalizarCompra';
 import Perfil from './pages/Perfil';
 import Admin from './pages/Admin';
 import AdminMaquinas from './pages/AdminMaquinas';
+import AdminConfiguracoes from './pages/AdminConfiguracoes';
 
 const PrivateRoute = ({ children }) => {
   const isAuthenticated = localStorage.getItem('token') !== null;
@@ -75,6 +76,12 @@ function App() {
         <Route 
           path="/admin/maquinas" 
           element={<AdminRoute><AdminMaquinas /></AdminRoute>} 
+        />
+
+        {/* TELA DE CONFIGURAÇÕES ADMIN */}
+        <Route 
+          path="/admin/configuracoes" 
+          element={<AdminRoute><AdminConfiguracoes /></AdminRoute>} 
         />
 
         {/* Redireciona qualquer rota errada para HOME */}

@@ -22,12 +22,12 @@ function Admin() {
   };
 
   const menuItems = [
-    { icone: <FaTachometerAlt />, label: "Dashboard",    path: "/admin",          ativo: true },
-    { icone: <FaCalendarAlt />,  label: "Agendamentos",  path: "#"                            },
-    { icone: <FaUsers />,        label: "Clientes",      path: "#"                            },
-    { icone: <FaDollarSign />,   label: "Financeiro",    path: "#"                            },
-    { icone: <FaClock />,        label: "Máquinas",      path: "/admin/maquinas"              },
-    { icone: <FaCog />,          label: "Configurações", path: "#"                            },
+    { icone: <FaTachometerAlt />, label: "Dashboard",    path: "/admin",               ativo: true },
+    { icone: <FaCalendarAlt />,  label: "Agendamentos",  path: "#"                                 },
+    { icone: <FaUsers />,        label: "Clientes",      path: "#"                                 },
+    { icone: <FaDollarSign />,   label: "Financeiro",    path: "#"                                 },
+    { icone: <FaClock />,        label: "Máquinas",      path: "/admin/maquinas"                   },
+    { icone: <FaCog />,          label: "Configurações", path: "/admin/configuracoes"              },
   ];
 
   return (
@@ -123,9 +123,9 @@ function Admin() {
               <section className="admin-metric-card cyan">
                 <div className="admin-icon-box"><FaClock /></div>
                 <section className="admin-metric-info">
-                  <h5>6/8</h5>
+                  <h5>4/4</h5>
                   <p>Máquinas em uso</p>
-                  <span className="trend down">2 disponíveis</span>
+                  <span className="trend down">0 disponíveis</span>
                 </section>
               </section>
             </section>
@@ -164,10 +164,10 @@ function Admin() {
                 </div>
                 <section className="admin-maquinas">
                   {[
-                    { nome: "Máquina 01 — lavagem",    prog: 70, tempo: "18 min", cor: "purple" },
-                    { nome: "Máquina 02 — lavagem",    prog: 45, tempo: "32 min", cor: "purple" },
-                    { nome: "Máquina 03 — secagem",    prog: 90, tempo: "5 min",  cor: "cyan"   },
-                    { nome: "Máquina 04 — secagem",    prog: 0,  tempo: "livre",  cor: "free"   },
+                    { nome: "Lavadora 1 — lavagem", prog: 70, tempo: "18 min", cor: "purple" },
+                    { nome: "Lavadora 2 — lavagem", prog: 45, tempo: "32 min", cor: "purple" },
+                    { nome: "Secadora 1 — secagem", prog: 90, tempo: "5 min",  cor: "cyan"   },
+                    { nome: "Secadora 2 — secagem", prog: 0,  tempo: "livre",  cor: "free"   },
                   ].map((m, i) => (
                     <section key={i} className="admin-maquina-row">
                       <div className={`admin-maquina-icon ${m.cor}`}>
