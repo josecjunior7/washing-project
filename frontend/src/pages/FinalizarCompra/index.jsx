@@ -15,10 +15,8 @@ function FinalizarCompra() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('usuario'));
-    if (user && user.nome) {
-      setNomeUsuario(user.nome);
-    }
-    
+    if (user && user.nome) setNomeUsuario(user.nome);
+
     const carrinhoSalvo = JSON.parse(localStorage.getItem('carrinho')) || [];
     setItensCarrinho(carrinhoSalvo);
     calcularTotal(carrinhoSalvo);
@@ -35,8 +33,10 @@ function FinalizarCompra() {
   };
 
   const handleConfirmarPagamento = () => {
+    const dataAtual = new Date().toLocaleDateString('pt-BR');
+
+    // Salva em pagamentos (tela de Pagamentos)
     const pagamentosExistentes = JSON.parse(localStorage.getItem('pagamentos')) || [];
-    
     const novosPagamentos = itensCarrinho.map((item, index) => ({
       id: Date.now() + index,
       servico: item.nome,
@@ -46,39 +46,46 @@ function FinalizarCompra() {
       maquina: item.maquina,
       valor: item.preco,
       status: "pago",
-      dataPagamento: new Date().toLocaleDateString('pt-BR'),
-      formaPagamento: "Pagamento no Estabelecimento"
+      dataPagamento: dataAtual,
+      formaPagamento: "Pagamento no Estabelecimento",
     }));
-    
-    const todosPagamentos = [...pagamentosExistentes, ...novosPagamentos];
-    localStorage.setItem('pagamentos', JSON.stringify(todosPagamentos));
-    localStorage.removeItem('carrinho');
-    
-    setPagamentoConfirmado(true);
-    
-    setTimeout(() => {
-      navigate('/pagamentos');
-    }, 2000);
-  };
+    localStorage.setItem('pagamentos', JSON.stringify([...pagamentosExistentes, ...novosPagamentos]));
 
-  const voltarParaCarrinho = () => {
-    navigate('/carrinho');
+    // Salva em agendamentos (tela de Histórico)
+    const historicoExistente = JSON.parse(localStorage.getItem('agendamentos')) || [];
+    const novosHistorico = itensCarrinho.map((item, index) => ({
+      id: Date.now() + index + 1000,
+      nome: item.nome,
+      descricao: item.descricao,
+      data: item.data,
+      horario: item.horario,
+      maquina: item.maquina,
+      preco: item.preco,
+      dataCriacao: dataAtual,
+    }));
+    localStorage.setItem('agendamentos', JSON.stringify([...historicoExistente, ...novosHistorico]));
+
+    // Limpa carrinho
+    localStorage.removeItem('carrinho');
+
+    setPagamentoConfirmado(true);
+    setTimeout(() => navigate('/pagamentos'), 2000);
   };
 
   return (
     <section className="home-layout">
-      <Sidebar 
-        aberta={sidebarAberta} 
-        setAberta={setSidebarAberta} 
-        navigate={navigate} 
-        handleLogout={handleLogout} 
+      <Sidebar
+        aberta={sidebarAberta}
+        setAberta={setSidebarAberta}
+        navigate={navigate}
+        handleLogout={handleLogout}
       />
 
       <main className="main-content">
         <header className="header-home">
           <section className="header-left">
             <button className="btn-hamburguer" onClick={() => setSidebarAberta(true)}><FaBars /></button>
-            <button className="btn-voltar-finalizar" onClick={voltarParaCarrinho}>
+            <button className="btn-voltar-finalizar" onClick={() => navigate('/carrinho')}>
               <FaArrowLeft /> Voltar
             </button>
             <section className="welcome-text">
