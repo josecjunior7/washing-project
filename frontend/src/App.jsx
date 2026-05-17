@@ -14,13 +14,21 @@ import Admin from './pages/Admin';
 import AgendamentoAdmin from './pages/AgendamentoAdmin';
 import AdminMaquinas from './pages/AdminMaquinas';
 import AdminConfiguracoes from './pages/AdminConfiguracoes';
-import Novidades from './pages/Novidades'; 
+import Novidades from './pages/Novidades';
 
-function App() {
+const PrivateRoute = ({ children }) => {
+  const isAuthenticated = localStorage.getItem('token') !== null;
+  return isAuthenticated ? children : <Navigate to="/login" />;
+};
+
+const AdminRoute = ({ children }) => {
   const isAuthenticated = localStorage.getItem('token') !== null;
   const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
   const isAdmin = usuario?.role === 'ADMIN';
+  return isAuthenticated && isAdmin ? children : <Navigate to="/login" />;
+};
 
+function App() {
   return (
     <Router>
       <Routes>
@@ -35,10 +43,7 @@ function App() {
         <Route path="/cadastro" element={<Cadastro />} />
 
         {/* HOME */}
-        <Route
-          path="/home"
-          element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
-        />
+        <Route path="/home" element={<PrivateRoute><Home /></PrivateRoute>} />
 
         {/* AGENDAMENTO */}
         <Route path="/agendamento" element={<Agendamento />} />
@@ -62,34 +67,19 @@ function App() {
         <Route path="/perfil" element={<Perfil />} />
 
         {/* NOVIDADES */}
-        <Route
-          path="/novidades"
-          element={isAuthenticated ? <Novidades /> : <Navigate to="/login" />}
-        />
+        <Route path="/novidades" element={<PrivateRoute><Novidades /></PrivateRoute>} />
 
         {/* ADMIN - DASHBOARD */}
-        <Route
-          path="/admin"
-          element={isAuthenticated && isAdmin ? <Admin /> : <Navigate to="/login" />}
-        />
+        <Route path="/admin" element={<AdminRoute><Admin /></AdminRoute>} />
 
         {/* ADMIN - AGENDAMENTOS */}
-        <Route
-          path="/agendamento-admin"
-          element={isAuthenticated && isAdmin ? <AgendamentoAdmin /> : <Navigate to="/login" />}
-        />
+        <Route path="/agendamento-admin" element={<AdminRoute><AgendamentoAdmin /></AdminRoute>} />
 
         {/* ADMIN - MÁQUINAS */}
-        <Route
-          path="/admin/maquinas"
-          element={isAuthenticated && isAdmin ? <AdminMaquinas /> : <Navigate to="/login" />}
-        />
+        <Route path="/admin/maquinas" element={<AdminRoute><AdminMaquinas /></AdminRoute>} />
 
         {/* ADMIN - CONFIGURAÇÕES */}
-        <Route
-          path="/admin/configuracoes"
-          element={isAuthenticated && isAdmin ? <AdminConfiguracoes /> : <Navigate to="/login" />}
-        />
+        <Route path="/admin/configuracoes" element={<AdminRoute><AdminConfiguracoes /></AdminRoute>} />
 
         {/* ROTA INVÁLIDA */}
         <Route path="*" element={<Navigate to="/" />} />
