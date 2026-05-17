@@ -14,11 +14,11 @@ function AdminMaquinas() {
   const [modalAberto, setModalAberto] = useState(false);
   const [maquinaEditando, setMaquinaEditando] = useState(null);
   const [maquinas, setMaquinas] = useState([
-  { id: 1, nome: "Lavadora 1", tipo: "Lavagem", status: "Disponível", tempo: "—", capacidade: "10kg" },
-  { id: 2, nome: "Lavadora 2", tipo: "Lavagem", status: "Disponível", tempo: "—", capacidade: "10kg" },
-  { id: 3, nome: "Secadora 1", tipo: "Secagem", status: "Disponível", tempo: "—", capacidade: "8kg"  },
-  { id: 4, nome: "Secadora 2", tipo: "Secagem", status: "Disponível", tempo: "—", capacidade: "8kg"  },
-]);
+    { id: 1, nome: "Lavadora 1", tipo: "Lavagem", status: "Disponível", tempo: "—", capacidade: "10kg" },
+    { id: 2, nome: "Lavadora 2", tipo: "Lavagem", status: "Disponível", tempo: "—", capacidade: "10kg" },
+    { id: 3, nome: "Secadora 1", tipo: "Secagem", status: "Disponível", tempo: "—", capacidade: "8kg"  },
+    { id: 4, nome: "Secadora 2", tipo: "Secagem", status: "Disponível", tempo: "—", capacidade: "8kg"  },
+  ]);
 
   const [form, setForm] = useState({ nome: "", tipo: "Lavagem", capacidade: "", status: "Disponível" });
 
@@ -33,12 +33,12 @@ function AdminMaquinas() {
   };
 
   const menuItems = [
-    { icone: <FaTachometerAlt />, label: "Dashboard",    path: "/admin"           },
-    { icone: <FaCalendarAlt />,  label: "Agendamentos",  path: "#"                },
-    { icone: <FaUsers />,        label: "Clientes",      path: "#"                },
-    { icone: <FaDollarSign />,   label: "Financeiro",    path: "#"                },
-    { icone: <FaClock />,        label: "Máquinas",      path: "/admin/maquinas", ativo: true },
-    { icone: <FaCog />,          label: "Configurações", path: "#"                },
+    { icone: <FaTachometerAlt />, label: "Dashboard",    path: "/admin"                },
+    { icone: <FaCalendarAlt />,  label: "Agendamentos",  path: "#"                     },
+    { icone: <FaUsers />,        label: "Clientes",      path: "#"                     },
+    { icone: <FaDollarSign />,   label: "Financeiro",    path: "#"                     },
+    { icone: <FaClock />,        label: "Máquinas",      path: "/admin/maquinas",      ativo: true },
+    { icone: <FaCog />,          label: "Configurações", path: "/admin/configuracoes"  },
   ];
 
   const abrirModal = (maquina = null) => {
@@ -215,7 +215,7 @@ function AdminMaquinas() {
             <label>Nome</label>
             <input
               type="text"
-              placeholder="Ex: Máquina 07"
+              placeholder="Ex: Máquina 05"
               value={form.nome}
               onChange={(e) => setForm({ ...form, nome: e.target.value })}
             />
