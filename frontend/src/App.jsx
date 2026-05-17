@@ -11,81 +11,68 @@ import Carrinho from './pages/Carrinho';
 import FinalizarCompra from './pages/FinalizarCompra';
 import Perfil from './pages/Perfil';
 import Admin from './pages/Admin';
-import AdminMaquinas from './pages/AdminMaquinas';
-import AdminConfiguracoes from './pages/AdminConfiguracoes';
+import AgendamentoAdmin from './pages/AgendamentoAdmin';
 
-const PrivateRoute = ({ children }) => {
-  const isAuthenticated = localStorage.getItem('token') !== null;
-  return isAuthenticated ? children : <Navigate to="/login" />;
-};
-
-const AdminRoute = ({ children }) => {
+function App() {
   const isAuthenticated = localStorage.getItem('token') !== null;
   const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
   const isAdmin = usuario?.role === 'ADMIN';
-  return isAuthenticated && isAdmin ? children : <Navigate to="/login" />;
-};
 
-function App() {
   return (
     <Router>
       <Routes>
-        {/* PÁGINA PÚBLICA - informações da empresa */}
+
+        {/* PÁGINA PÚBLICA */}
         <Route path="/" element={<LandingPage />} />
-        
-        {/* TELA DE LOGIN */}
+
+        {/* LOGIN */}
         <Route path="/login" element={<Login />} />
 
-        {/* TELA DE CADASTRO */}
+        {/* CADASTRO */}
         <Route path="/cadastro" element={<Cadastro />} />
 
-        {/* TELA DE AGENDAMENTO */}
+        {/* HOME */}
+        <Route
+          path="/home"
+          element={isAuthenticated ? <Home /> : <Navigate to="/login" />}
+        />
+
+        {/* AGENDAMENTO */}
         <Route path="/agendamento" element={<Agendamento />} />
 
-        {/* TELA DE HISTÓRICO */}
+        {/* HISTÓRICO */}
         <Route path="/historico" element={<Historico />} />
 
-        {/* TELA DE PAGAMENTOS (Faturas e Recibos) */}
+        {/* PAGAMENTOS */}
         <Route path="/pagamentos" element={<Pagamentos />} />
 
-        {/* TELA DE STATUS */}
+        {/* STATUS */}
         <Route path="/status" element={<Status />} />
 
-        {/* TELA DO CARRINHO */}
+        {/* CARRINHO */}
         <Route path="/carrinho" element={<Carrinho />} />
 
-        {/* TELA DE FinalizarCompra (Finalizar Pedido) */}
+        {/* FINALIZAR COMPRA */}
         <Route path="/finalizar-compra" element={<FinalizarCompra />} />
 
-        {/* TELA DE PERFIL */}
+        {/* PERFIL */}
         <Route path="/perfil" element={<Perfil />} />
 
-        {/* DASHBOARD - SÓ ACESSA SE ESTIVER LOGADO */}
-        <Route 
-          path="/home" 
-          element={<PrivateRoute><Home /></PrivateRoute>} 
+        {/* ADMIN - DASHBOARD */}
+        <Route
+          path="/admin"
+          element={isAuthenticated && isAdmin ? <Admin /> : <Navigate to="/login" />}
         />
 
-        {/* PAINEL ADMIN - SÓ ACESSA SE FOR ADMIN */}
-        <Route 
-          path="/admin" 
-          element={<AdminRoute><Admin /></AdminRoute>} 
+        {/* ADMIN - AGENDAMENTOS */}
+        <Route
+          path="/agendamento-admin"
+          element={isAuthenticated && isAdmin ? <AgendamentoAdmin /> : <Navigate to="/login" />}
         />
 
-        {/* TELA DE MÁQUINAS ADMIN */}
-        <Route 
-          path="/admin/maquinas" 
-          element={<AdminRoute><AdminMaquinas /></AdminRoute>} 
-        />
-
-        {/* TELA DE CONFIGURAÇÕES ADMIN */}
-        <Route 
-          path="/admin/configuracoes" 
-          element={<AdminRoute><AdminConfiguracoes /></AdminRoute>} 
-        />
-
-        {/* Redireciona qualquer rota errada para HOME */}
+        {/* ROTA INVÁLIDA */}
         <Route path="*" element={<Navigate to="/" />} />
+
       </Routes>
     </Router>
   );

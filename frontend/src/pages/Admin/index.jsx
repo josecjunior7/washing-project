@@ -22,12 +22,12 @@ function Admin() {
   };
 
   const menuItems = [
-    { icone: <FaTachometerAlt />, label: "Dashboard",    path: "/admin",               ativo: true },
-    { icone: <FaCalendarAlt />,  label: "Agendamentos",  path: "#"                                 },
-    { icone: <FaUsers />,        label: "Clientes",      path: "#"                                 },
-    { icone: <FaDollarSign />,   label: "Financeiro",    path: "#"                                 },
-    { icone: <FaClock />,        label: "Máquinas",      path: "/admin/maquinas"                   },
-    { icone: <FaCog />,          label: "Configurações", path: "/admin/configuracoes"              },
+    { icone: <FaTachometerAlt />, label: "Dashboard",    path: "/admin",              ativo: true },
+    { icone: <FaCalendarAlt />,   label: "Agendamentos", path: "/agendamento-admin"               },
+    { icone: <FaUsers />,         label: "Clientes",     path: "#"                                },
+    { icone: <FaDollarSign />,    label: "Financeiro",   path: "#"                                },
+    { icone: <FaClock />,         label: "Máquinas",     path: "/admin/maquinas"                  },
+    { icone: <FaCog />,           label: "Configurações",path: "/admin/configuracoes"             },
   ];
 
   return (
@@ -49,7 +49,7 @@ function Admin() {
             <div
               key={index}
               className={`admin-sidebar-item ${item.ativo ? "active" : ""}`}
-              onClick={() => { if (item.path) navigate(item.path); setSidebarAberta(false); }}
+              onClick={() => { if (item.path !== "#") navigate(item.path); setSidebarAberta(false); }}
             >
               <span className="admin-sidebar-icon">{item.icone}</span>
               <span className="admin-sidebar-label">{item.label}</span>
