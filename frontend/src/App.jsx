@@ -12,6 +12,8 @@ import FinalizarCompra from './pages/FinalizarCompra';
 import Perfil from './pages/Perfil';
 import Admin from './pages/Admin';
 import AgendamentoAdmin from './pages/AgendamentoAdmin';
+import AdminMaquinas from './pages/AdminMaquinas';
+import AdminConfiguracoes from './pages/AdminConfiguracoes';
 
 function App() {
   const isAuthenticated = localStorage.getItem('token') !== null;
@@ -68,6 +70,18 @@ function App() {
         <Route
           path="/agendamento-admin"
           element={isAuthenticated && isAdmin ? <AgendamentoAdmin /> : <Navigate to="/login" />}
+        />
+
+        {/* ADMIN - MÁQUINAS */}
+        <Route
+          path="/admin/maquinas"
+          element={isAuthenticated && isAdmin ? <AdminMaquinas /> : <Navigate to="/login" />}
+        />
+
+        {/* ADMIN - CONFIGURAÇÕES */}
+        <Route
+          path="/admin/configuracoes"
+          element={isAuthenticated && isAdmin ? <AdminConfiguracoes /> : <Navigate to="/login" />}
         />
 
         {/* ROTA INVÁLIDA */}

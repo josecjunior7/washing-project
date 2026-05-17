@@ -49,21 +49,20 @@ function AgendamentoAdmin() {
   const [pagina,        setPagina]        = useState(1);
   const [modalItem,     setModalItem]     = useState(null);
 
-  // STATUS_LABEL definido dentro do componente para evitar erro de parsing com JSX
   const STATUS_LABEL = {
-    ok:      { label: "Concluído",    icone: <FaCheckCircle />    },
-    andando: { label: "Em andamento", icone: <FaSpinner />        },
-    pending: { label: "Aguardando",   icone: <FaHourglassHalf />  },
-    cancel:  { label: "Cancelado",    icone: <FaBan />            },
+    ok:      { label: "Concluído",    icone: <FaCheckCircle />   },
+    andando: { label: "Em andamento", icone: <FaSpinner />       },
+    pending: { label: "Aguardando",   icone: <FaHourglassHalf /> },
+    cancel:  { label: "Cancelado",    icone: <FaBan />           },
   };
 
   const menuItems = [
     { icone: <FaTachometerAlt />, label: "Dashboard",     path: "/admin"               },
-    { icone: <FaCalendarAlt />,   label: "Agendamentos",  path: "/agendamento-admin", ativo: true },
-    { icone: <FaUsers />,         label: "Clientes",      path: "#"                   },
-    { icone: <FaDollarSign />,    label: "Financeiro",    path: "#"                   },
-    { icone: <FaClock />,         label: "Máquinas",      path: "/admin/maquinas"     },
-    { icone: <FaCog />,           label: "Configurações", path: "/admin/configuracoes"},
+    { icone: <FaCalendarAlt />,   label: "Agendamentos",  path: "/agendamento-admin",  ativo: true },
+    { icone: <FaUsers />,         label: "Clientes",      path: "#"                    },
+    { icone: <FaDollarSign />,    label: "Financeiro",    path: "#"                    },
+    { icone: <FaClock />,         label: "Máquinas",      path: "/admin/maquinas"      },
+    { icone: <FaCog />,           label: "Configurações", path: "/admin/configuracoes" },
   ];
 
   useEffect(() => {
@@ -152,9 +151,7 @@ function AgendamentoAdmin() {
             <div className="aad-page-title">
               <div>
                 <h3>Gerenciamento de</h3>
-                <p style={{ fontSize: "1.4rem", fontWeight: 700, color: "#1e1b4b", margin: 0 }}>
-                  Agendamentos
-                </p>
+                <p>Agendamentos</p>
               </div>
             </div>
 
