@@ -14,6 +14,7 @@ import Admin from './pages/Admin';
 import AgendamentoAdmin from './pages/AgendamentoAdmin';
 import AdminMaquinas from './pages/AdminMaquinas';
 import AdminConfiguracoes from './pages/AdminConfiguracoes';
+import AdminNovidades from './pages/AdminNovidades';
 import Novidades from './pages/Novidades';
 
 const PrivateRoute = ({ children }) => {
@@ -66,7 +67,7 @@ function App() {
         {/* PERFIL */}
         <Route path="/perfil" element={<Perfil />} />
 
-        {/* NOVIDADES */}
+        {/* NOVIDADES (cliente) */}
         <Route path="/novidades" element={<PrivateRoute><Novidades /></PrivateRoute>} />
 
         {/* ADMIN - DASHBOARD */}
@@ -80,6 +81,9 @@ function App() {
 
         {/* ADMIN - CONFIGURAÇÕES */}
         <Route path="/admin/configuracoes" element={<AdminRoute><AdminConfiguracoes /></AdminRoute>} />
+
+        {/* ADMIN - NOVIDADES */}
+        <Route path="/admin/novidades" element={<AdminRoute><AdminNovidades /></AdminRoute>} />
 
         {/* ROTA INVÁLIDA */}
         <Route path="*" element={<Navigate to="/" />} />

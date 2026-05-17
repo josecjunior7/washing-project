@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
   FaBars, FaTachometerAlt, FaCalendarAlt, FaUsers,
   FaDollarSign, FaClock, FaCog, FaSignOutAlt, FaPlus,
-  FaEdit, FaTrash, FaCheckCircle, FaTimesCircle
+  FaEdit, FaTrash, FaCheckCircle, FaTimesCircle, FaBullhorn
 } from "react-icons/fa";
 import "./AdminMaquinas.css";
 
@@ -34,11 +34,12 @@ function AdminMaquinas() {
 
   const menuItems = [
     { icone: <FaTachometerAlt />, label: "Dashboard",    path: "/admin"                },
-    { icone: <FaCalendarAlt />,  label: "Agendamentos",  path: "#"                     },
-    { icone: <FaUsers />,        label: "Clientes",      path: "#"                     },
-    { icone: <FaDollarSign />,   label: "Financeiro",    path: "#"                     },
-    { icone: <FaClock />,        label: "Máquinas",      path: "/admin/maquinas",      ativo: true },
-    { icone: <FaCog />,          label: "Configurações", path: "/admin/configuracoes"  },
+    { icone: <FaCalendarAlt />,   label: "Agendamentos", path: "/agendamento-admin"    },
+    { icone: <FaUsers />,         label: "Clientes",     path: "#"                     },
+    { icone: <FaDollarSign />,    label: "Financeiro",   path: "#"                     },
+    { icone: <FaClock />,         label: "Máquinas",     path: "/admin/maquinas",      ativo: true },
+    { icone: <FaBullhorn />,      label: "Novidades",    path: "/admin/novidades"      },
+    { icone: <FaCog />,           label: "Configurações",path: "/admin/configuracoes"  },
   ];
 
   const abrirModal = (maquina = null) => {
@@ -96,7 +97,7 @@ function AdminMaquinas() {
             <div
               key={index}
               className={`admin-sidebar-item ${item.ativo ? "active" : ""}`}
-              onClick={() => { navigate(item.path); setSidebarAberta(false); }}
+              onClick={() => { if (item.path !== "#") navigate(item.path); setSidebarAberta(false); }}
             >
               <span className="admin-sidebar-icon">{item.icone}</span>
               <span className="admin-sidebar-label">{item.label}</span>
@@ -192,7 +193,7 @@ function AdminMaquinas() {
                       <td><span className={getStatusClass(m.status)}>{m.status}</span></td>
                       <td>
                         <section className="acoes">
-                          <button className="btn-acao editar" onClick={() => abrirModal(m)}><FaEdit /></button>
+                          <button className="btn-acao editar"  onClick={() => abrirModal(m)}><FaEdit /></button>
                           <button className="btn-acao excluir" onClick={() => excluirMaquina(m.id)}><FaTrash /></button>
                         </section>
                       </td>
@@ -243,7 +244,7 @@ function AdminMaquinas() {
 
             <div className="modal-acoes">
               <button className="btn-cancelar" onClick={() => setModalAberto(false)}>Cancelar</button>
-              <button className="btn-salvar" onClick={salvarMaquina}>Salvar</button>
+              <button className="btn-salvar"   onClick={salvarMaquina}>Salvar</button>
             </div>
           </div>
         </div>

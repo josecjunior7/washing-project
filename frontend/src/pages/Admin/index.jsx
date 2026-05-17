@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   FaBars, FaTachometerAlt, FaCalendarAlt, FaUsers,
-  FaDollarSign, FaClock, FaCog, FaSignOutAlt
+  FaDollarSign, FaClock, FaCog, FaSignOutAlt, FaBullhorn
 } from "react-icons/fa";
 import "./Admin.css";
 
@@ -27,6 +27,7 @@ function Admin() {
     { icone: <FaUsers />,         label: "Clientes",     path: "#"                                },
     { icone: <FaDollarSign />,    label: "Financeiro",   path: "#"                                },
     { icone: <FaClock />,         label: "Máquinas",     path: "/admin/maquinas"                  },
+    { icone: <FaBullhorn />,      label: "Novidades",    path: "/admin/novidades"                 },
     { icone: <FaCog />,           label: "Configurações",path: "/admin/configuracoes"             },
   ];
 

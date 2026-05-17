@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import {
   FaBars, FaTachometerAlt, FaCalendarAlt, FaUsers,
   FaDollarSign, FaClock, FaCog, FaSignOutAlt,
-  FaStore, FaWhatsapp, FaInstagram, FaSave
+  FaStore, FaWhatsapp, FaInstagram, FaSave, FaBullhorn
 } from "react-icons/fa";
 import "./AdminConfiguracoes.css";
 
@@ -53,11 +53,12 @@ function AdminConfiguracoes() {
 
   const menuItems = [
     { icone: <FaTachometerAlt />, label: "Dashboard",    path: "/admin"                },
-    { icone: <FaCalendarAlt />,  label: "Agendamentos",  path: "#"                     },
-    { icone: <FaUsers />,        label: "Clientes",      path: "#"                     },
-    { icone: <FaDollarSign />,   label: "Financeiro",    path: "#"                     },
-    { icone: <FaClock />,        label: "Máquinas",      path: "/admin/maquinas"       },
-    { icone: <FaCog />,          label: "Configurações", path: "/admin/configuracoes", ativo: true },
+    { icone: <FaCalendarAlt />,   label: "Agendamentos", path: "/agendamento-admin"    },
+    { icone: <FaUsers />,         label: "Clientes",     path: "#"                     },
+    { icone: <FaDollarSign />,    label: "Financeiro",   path: "#"                     },
+    { icone: <FaClock />,         label: "Máquinas",     path: "/admin/maquinas"       },
+    { icone: <FaBullhorn />,      label: "Novidades",    path: "/admin/novidades"      },
+    { icone: <FaCog />,           label: "Configurações",path: "/admin/configuracoes", ativo: true },
   ];
 
   const salvar = () => {
@@ -93,7 +94,7 @@ function AdminConfiguracoes() {
             <div
               key={index}
               className={`admin-sidebar-item ${item.ativo ? "active" : ""}`}
-              onClick={() => { navigate(item.path); setSidebarAberta(false); }}
+              onClick={() => { if (item.path !== "#") navigate(item.path); setSidebarAberta(false); }}
             >
               <span className="admin-sidebar-icon">{item.icone}</span>
               <span className="admin-sidebar-label">{item.label}</span>
@@ -232,17 +233,9 @@ function AdminConfiguracoes() {
                     </div>
                     {h.aberto ? (
                       <div className="horario-inputs">
-                        <input
-                          type="time"
-                          value={h.abre}
-                          onChange={(e) => atualizarHorario(i, "abre", e.target.value)}
-                        />
+                        <input type="time" value={h.abre}  onChange={(e) => atualizarHorario(i, "abre",  e.target.value)} />
                         <span>até</span>
-                        <input
-                          type="time"
-                          value={h.fecha}
-                          onChange={(e) => atualizarHorario(i, "fecha", e.target.value)}
-                        />
+                        <input type="time" value={h.fecha} onChange={(e) => atualizarHorario(i, "fecha", e.target.value)} />
                       </div>
                     ) : (
                       <span className="fechado-label">Fechado</span>

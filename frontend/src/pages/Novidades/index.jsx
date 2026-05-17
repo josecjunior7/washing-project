@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Sidebar";
 import { FaBars, FaTag, FaBullhorn, FaInfoCircle, FaShoppingCart } from "react-icons/fa";
 import "./Novidades.css";
 
-const novidades = [
+const NOVIDADES_PADRAO = [
   {
     tipo: "promocao",
     tag: "Promoção",
@@ -59,7 +59,19 @@ function Novidades() {
   const navigate = useNavigate();
   const [sidebarAberta, setSidebarAberta] = useState(false);
   const [filtro, setFiltro] = useState("todos");
+  const [novidades, setNovidades] = useState([]);
+
   const nomeUsuario = JSON.parse(localStorage.getItem('usuario'))?.nome || "Cliente";
+
+  useEffect(() => {
+    // Lê do localStorage; se não tiver nada usa os dados padrão
+    const salvas = JSON.parse(localStorage.getItem('novidades'));
+    if (salvas && salvas.length > 0) {
+      setNovidades(salvas);
+    } else {
+      setNovidades(NOVIDADES_PADRAO);
+    }
+  }, []);
 
   const handleLogout = () => {
     localStorage.clear();
@@ -109,10 +121,10 @@ function Novidades() {
           {/* FILTROS */}
           <section className="novidades-filtros">
             {[
-              { valor: "todos",    label: "Todos"      },
-              { valor: "promocao", label: "Promoções"  },
-              { valor: "servico",  label: "Serviços"   },
-              { valor: "aviso",    label: "Avisos"     },
+              { valor: "todos",    label: "Todos"     },
+              { valor: "promocao", label: "Promoções" },
+              { valor: "servico",  label: "Serviços"  },
+              { valor: "aviso",    label: "Avisos"    },
             ].map((f) => (
               <button
                 key={f.valor}
@@ -126,7 +138,9 @@ function Novidades() {
 
           {/* CARDS */}
           <section className="novidades-grid">
-            {filtradas.map((n, i) => (
+            {filtradas.length === 0 ? (
+              <p className="novidades-vazio">Nenhuma novidade encontrada.</p>
+            ) : filtradas.map((n, i) => (
               <section key={i} className={`novidade-card ${n.tipo} ${n.destaque ? "destaque" : ""}`}>
                 <div className="novidade-tag">
                   {getIcone(n.tipo)}
