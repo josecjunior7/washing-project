@@ -24,7 +24,7 @@ function Admin() {
   const menuItems = [
     { icone: <FaTachometerAlt />, label: "Dashboard",    path: "/admin",              ativo: true },
     { icone: <FaCalendarAlt />,   label: "Agendamentos", path: "/agendamento-admin"               },
-    { icone: <FaUsers />,         label: "Clientes",     path: "#"                                },
+    { icone: <FaUsers />,         label: "Clientes",     path: "/admin/clientes"                  },
     { icone: <FaDollarSign />,    label: "Financeiro",   path: "#"                                },
     { icone: <FaClock />,         label: "Máquinas",     path: "/admin/maquinas"                  },
     { icone: <FaBullhorn />,      label: "Novidades",    path: "/admin/novidades"                 },

@@ -15,6 +15,7 @@ import AgendamentoAdmin from './pages/AgendamentoAdmin';
 import AdminMaquinas from './pages/AdminMaquinas';
 import AdminConfiguracoes from './pages/AdminConfiguracoes';
 import AdminNovidades from './pages/AdminNovidades';
+import AdminClientes from './pages/AdminClientes';
 import Novidades from './pages/Novidades';
 
 const PrivateRoute = ({ children }) => {
@@ -76,14 +77,17 @@ function App() {
         {/* ADMIN - AGENDAMENTOS */}
         <Route path="/agendamento-admin" element={<AdminRoute><AgendamentoAdmin /></AdminRoute>} />
 
+        {/* ADMIN - CLIENTES */}
+        <Route path="/admin/clientes" element={<AdminRoute><AdminClientes /></AdminRoute>} />
+
         {/* ADMIN - MÁQUINAS */}
         <Route path="/admin/maquinas" element={<AdminRoute><AdminMaquinas /></AdminRoute>} />
 
-        {/* ADMIN - CONFIGURAÇÕES */}
-        <Route path="/admin/configuracoes" element={<AdminRoute><AdminConfiguracoes /></AdminRoute>} />
-
         {/* ADMIN - NOVIDADES */}
         <Route path="/admin/novidades" element={<AdminRoute><AdminNovidades /></AdminRoute>} />
+
+        {/* ADMIN - CONFIGURAÇÕES */}
+        <Route path="/admin/configuracoes" element={<AdminRoute><AdminConfiguracoes /></AdminRoute>} />
 
         {/* ROTA INVÁLIDA */}
         <Route path="*" element={<Navigate to="/" />} />
