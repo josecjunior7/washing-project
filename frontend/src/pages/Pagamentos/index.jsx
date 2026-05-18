@@ -1,25 +1,42 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaCheckCircle, FaClock, FaFileInvoice, FaDownload, FaEye, FaBars, FaCalendarDay, FaRegClock, FaTshirt, FaMoneyBill } from "react-icons/fa";
+import axios from "axios";
+import {
+  FaArrowLeft, FaCheckCircle, FaClock, FaFileInvoice,
+  FaBars, FaCalendarDay, FaRegClock, FaTshirt, FaMoneyBill,
+  FaHourglassHalf, FaTimes, FaSpinner
+} from "react-icons/fa";
 import Sidebar from "../../components/Sidebar";
 import "./Pagamentos.css";
+
+const STATUS_INFO = {
+  CONCLUIDO:    { label: "Concluído",    classe: "pago",      icone: <FaCheckCircle />   },
+  EM_ANDAMENTO: { label: "Em andamento", classe: "pendente",  icone: <FaSpinner />       },
+  AGUARDANDO:   { label: "Aguardando",   classe: "pendente",  icone: <FaHourglassHalf /> },
+  CANCELADO:    { label: "Cancelado",    classe: "cancelado", icone: <FaTimes />         },
+};
 
 function Pagamentos() {
   const navigate = useNavigate();
   const [sidebarAberta, setSidebarAberta] = useState(false);
-  const [nomeUsuario, setNomeUsuario] = useState("Cliente");
-  const [pagamentos, setPagamentos] = useState([]);
-  const [filtro, setFiltro] = useState("todos");
+  const [nomeUsuario,   setNomeUsuario]   = useState("Cliente");
+  const [agendamentos,  setAgendamentos]  = useState([]);
+  const [carregando,    setCarregando]    = useState(true);
+  const [filtro,        setFiltro]        = useState("todos");
   const [reciboSelecionado, setReciboSelecionado] = useState(null);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('usuario'));
-    if (user && user.nome) {
-      setNomeUsuario(user.nome);
+    if (user && user.nome) setNomeUsuario(user.nome);
+
+    if (user && user.id) {
+      axios.get(`http://localhost:8080/api/agendamentos/usuario/${user.id}`)
+        .then(res => setAgendamentos(res.data))
+        .catch(() => alert("Erro ao carregar pagamentos!"))
+        .finally(() => setCarregando(false));
+    } else {
+      setCarregando(false);
     }
-    
-    const pagamentosSalvos = JSON.parse(localStorage.getItem('pagamentos')) || [];
-    setPagamentos(pagamentosSalvos);
   }, []);
 
   const handleLogout = () => {
@@ -27,33 +44,26 @@ function Pagamentos() {
     navigate('/');
   };
 
-  const handleDownloadRecibo = (pagamento) => {
-    if (pagamento.status === "pago") {
-      alert(`Download do recibo:\n\nServiço: ${pagamento.servico}\nValor: R$ ${pagamento.valor.toFixed(2)}\nData: ${pagamento.data}\nForma de Pagamento: ${pagamento.formaPagamento}`);
-    } else {
-      alert("Este pagamento ainda não foi realizado.");
-    }
-  };
+  const totalPago     = agendamentos.filter(a => a.status === "CONCLUIDO").reduce((acc, a) => acc + (a.valor || 0), 0);
+  const totalPendente = agendamentos.filter(a => a.status === "AGUARDANDO" || a.status === "EM_ANDAMENTO").reduce((acc, a) => acc + (a.valor || 0), 0);
 
-  const getStatusIcon = (status) => {
-    return status === "pago" ? <FaCheckCircle className="status-icon pago" /> : <FaClock className="status-icon pendente" />;
-  };
-
-  const getStatusText = (status) => {
-    return status === "pago" ? "Pago" : "Pendente";
-  };
-
-  const pagamentosFiltrados = pagamentos.filter(p => {
-    if (filtro === "todos") return true;
-    return p.status === filtro;
+  const filtrados = agendamentos.filter(a => {
+    if (filtro === "todos")    return true;
+    if (filtro === "pago")     return a.status === "CONCLUIDO";
+    if (filtro === "pendente") return a.status === "AGUARDANDO" || a.status === "EM_ANDAMENTO";
+    if (filtro === "cancelado") return a.status === "CANCELADO";
+    return true;
   });
-
-  const totalPago = pagamentos.filter(p => p.status === "pago").reduce((acc, p) => acc + p.valor, 0);
-  const totalPendente = pagamentos.filter(p => p.status === "pendente").reduce((acc, p) => acc + p.valor, 0);
 
   return (
     <section className="home-layout">
-      <Sidebar aberta={sidebarAberta} setAberta={setSidebarAberta} navigate={navigate} handleLogout={handleLogout} />
+      <Sidebar
+        aberta={sidebarAberta}
+        setAberta={setSidebarAberta}
+        navigate={navigate}
+        handleLogout={handleLogout}
+      />
+
       <main className="main-content">
         <header className="header-home">
           <section className="header-left">
@@ -97,70 +107,66 @@ function Pagamentos() {
                 <div className="resumo-icon"><FaFileInvoice /></div>
                 <div className="resumo-info">
                   <span>Total de Serviços</span>
-                  <strong>{pagamentos.length}</strong>
+                  <strong>{agendamentos.length}</strong>
                 </div>
               </div>
             </div>
 
             <div className="filtros">
-              <button className={`filtro-btn ${filtro === 'todos' ? 'active' : ''}`} onClick={() => setFiltro('todos')}>Todos</button>
-              <button className={`filtro-btn ${filtro === 'pago' ? 'active' : ''}`} onClick={() => setFiltro('pago')}>Pagos</button>
-              <button className={`filtro-btn ${filtro === 'pendente' ? 'active' : ''}`} onClick={() => setFiltro('pendente')}>Pendentes</button>
+              <button className={`filtro-btn ${filtro === 'todos'     ? 'active' : ''}`} onClick={() => setFiltro('todos')}>Todos</button>
+              <button className={`filtro-btn ${filtro === 'pago'      ? 'active' : ''}`} onClick={() => setFiltro('pago')}>Pagos</button>
+              <button className={`filtro-btn ${filtro === 'pendente'  ? 'active' : ''}`} onClick={() => setFiltro('pendente')}>Pendentes</button>
+              <button className={`filtro-btn ${filtro === 'cancelado' ? 'active' : ''}`} onClick={() => setFiltro('cancelado')}>Cancelados</button>
             </div>
 
             <div className="pagamentos-lista">
-              {pagamentosFiltrados.length === 0 ? (
+              {carregando ? (
+                <div className="pagamentos-vazio"><p>Carregando...</p></div>
+              ) : filtrados.length === 0 ? (
                 <div className="pagamentos-vazio">
                   <FaFileInvoice className="icone-vazio" />
                   <p>Nenhum pagamento encontrado</p>
                 </div>
-              ) : (
-                pagamentosFiltrados.map((pagamento) => (
-                  <div key={pagamento.id} className={`pagamento-card ${pagamento.status}`}>
+              ) : filtrados.map((ag) => {
+                const info = STATUS_INFO[ag.status] || STATUS_INFO.AGUARDANDO;
+                return (
+                  <div key={ag.id} className={`pagamento-card ${info.classe}`}>
                     <div className="pagamento-card-header">
                       <div className="servico-info">
-                        <h3>{pagamento.servico}</h3>
-                        <p>{pagamento.descricao}</p>
+                        <h3>{ag.servico}</h3>
+                        <p>{ag.maquina}</p>
                       </div>
                       <div className="status-area">
-                        {getStatusIcon(pagamento.status)}
-                        <span className={`status-badge ${pagamento.status}`}>{getStatusText(pagamento.status)}</span>
+                        <span className={`status-badge ${info.classe}`}>
+                          {info.icone} {info.label}
+                        </span>
                       </div>
                     </div>
                     <div className="pagamento-detalhes">
-                      <div className="detalhe"><FaCalendarDay /><span>Data:</span><strong>{pagamento.data}</strong></div>
-                      <div className="detalhe"><FaRegClock /><span>Horário:</span><strong>{pagamento.horario}</strong></div>
-                      <div className="detalhe"><FaTshirt /><span>Máquina:</span><strong>{pagamento.maquina}</strong></div>
-                      <div className="detalhe valor"><FaMoneyBill /><span>Valor:</span><strong>R$ {pagamento.valor.toFixed(2)}</strong></div>
-                      {pagamento.status === "pago" && (
-                        <>
-                          <div className="detalhe"><span>Data Pagamento:</span><strong>{pagamento.dataPagamento}</strong></div>
-                          <div className="detalhe"><span>Forma:</span><strong>{pagamento.formaPagamento}</strong></div>
-                        </>
-                      )}
+                      <div className="detalhe"><FaCalendarDay /><span>Data:</span><strong>{new Date(ag.data).toLocaleDateString('pt-BR')}</strong></div>
+                      <div className="detalhe"><FaRegClock /><span>Horário:</span><strong>{ag.horario}</strong></div>
+                      <div className="detalhe"><FaTshirt /><span>Máquina:</span><strong>{ag.maquina}</strong></div>
+                      <div className="detalhe valor"><FaMoneyBill /><span>Valor:</span><strong>R$ {ag.valor?.toFixed(2)}</strong></div>
                     </div>
                     <div className="pagamento-actions">
-                      {pagamento.status === "pago" ? (
-                        <>
-                          <button className="btn-recibo" onClick={() => handleDownloadRecibo(pagamento)}><FaDownload /> Baixar Recibo</button>
-                          <button className="btn-detalhes" onClick={() => setReciboSelecionado(pagamento)}><FaEye /> Ver Detalhes</button>
-                        </>
-                      ) : (
-                        <button className="btn-pagar" onClick={() => alert(`Redirecionando para pagamento do serviço: ${pagamento.servico}`)}>Pagar Agora</button>
+                      {ag.status === "CONCLUIDO" && (
+                        <button className="btn-recibo" onClick={() => setReciboSelecionado(ag)}>
+                          <FaFileInvoice /> Ver Recibo
+                        </button>
                       )}
                     </div>
                   </div>
-                ))
-              )}
+                );
+              })}
             </div>
           </div>
         </section>
       </main>
 
-      {/* Modal do Recibo */}
+      {/* MODAL RECIBO */}
       {reciboSelecionado && (
         <div className="modal-overlay" onClick={() => setReciboSelecionado(null)}>
-          <div className="modal-recibo" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-recibo" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
               <h2>Recibo de Pagamento</h2>
               <button className="btn-fechar-modal" onClick={() => setReciboSelecionado(null)}>✕</button>
@@ -170,30 +176,22 @@ function Pagamentos() {
                 <h3>LAVA MAIS</h3>
                 <p>Lavanderia e Secagem</p>
               </div>
-              <div className="recibo-dados">
-                <p><strong>Nº do Documento:</strong> {reciboSelecionado.id}</p>
-                <p><strong>Data do Pagamento:</strong> {reciboSelecionado.dataPagamento}</p>
-                <p><strong>Forma de Pagamento:</strong> {reciboSelecionado.formaPagamento}</p>
-              </div>
               <div className="recibo-servico">
                 <h4>Detalhes do Serviço</h4>
                 <p><strong>Serviço:</strong> {reciboSelecionado.servico}</p>
-                <p><strong>Descrição:</strong> {reciboSelecionado.descricao}</p>
-                <p><strong>Data:</strong> {reciboSelecionado.data}</p>
+                <p><strong>Data:</strong> {new Date(reciboSelecionado.data).toLocaleDateString('pt-BR')}</p>
                 <p><strong>Horário:</strong> {reciboSelecionado.horario}</p>
                 <p><strong>Máquina:</strong> {reciboSelecionado.maquina}</p>
               </div>
               <div className="recibo-total">
-                <span>Valor Pago:</span>
-                <strong>R$ {reciboSelecionado.valor.toFixed(2)}</strong>
+                <span>Valor:</span>
+                <strong>R$ {reciboSelecionado.valor?.toFixed(2)}</strong>
               </div>
               <div className="recibo-footer">
-                <p>Este documento é válido como comprovante de pagamento</p>
                 <p>Código: {Math.random().toString(36).substring(2, 15).toUpperCase()}</p>
               </div>
             </div>
             <div className="modal-footer">
-              <button className="btn-download-recibo" onClick={() => handleDownloadRecibo(reciboSelecionado)}><FaDownload /> Baixar PDF</button>
               <button className="btn-fechar" onClick={() => setReciboSelecionado(null)}>Fechar</button>
             </div>
           </div>

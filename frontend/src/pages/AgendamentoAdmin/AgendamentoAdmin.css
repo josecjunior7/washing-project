@@ -24,6 +24,28 @@
   margin: 0;
 }
 
+/* ── Botão Atualizar ── */
+.aad-btn-refresh {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 20px;
+  background: linear-gradient(135deg, #6a11cb, #8e2de2);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.83rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  box-shadow: 0 4px 12px rgba(106, 17, 203, 0.25);
+}
+
+.aad-btn-refresh:hover {
+  opacity: 0.88;
+  transform: translateY(-1px);
+}
+
 /* ── Painel full-width ── */
 .aad-painel-full {
   width: 100%;
@@ -249,9 +271,9 @@
   transition: background 0.2s, color 0.2s;
 }
 
-.aad-pag-btn:disabled                  { opacity: 0.3; cursor: not-allowed; }
-.aad-pag-btn:hover:not(:disabled)      { background: #ede9fe; color: #7c3aed; }
-.aad-pag-btn.ativo                     { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #fff; border-color: transparent; }
+.aad-pag-btn:disabled             { opacity: 0.3; cursor: not-allowed; }
+.aad-pag-btn:hover:not(:disabled) { background: #ede9fe; color: #7c3aed; }
+.aad-pag-btn.ativo                { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #fff; border-color: transparent; }
 
 .aad-pag-info {
   font-size: 0.78rem;
@@ -380,8 +402,8 @@
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 
-.aad-status-btn:hover       { background: #ede9fe; color: #7c3aed; border-color: #c4b5fd; }
-.aad-status-btn.ativo       { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #fff; border-color: transparent; }
+.aad-status-btn:hover { background: #ede9fe; color: #7c3aed; border-color: #c4b5fd; }
+.aad-status-btn.ativo { background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: #fff; border-color: transparent; }
 
 /* ── Responsivo mobile ── */
 @media (max-width: 640px) {

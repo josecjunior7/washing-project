@@ -49,7 +49,7 @@
   flex-direction: column;
 }
 
-.nav-item {
+.sidebar-item {
   padding: 12px 15px;
   display: flex;
   align-items: center;
@@ -58,26 +58,47 @@
   cursor: pointer;
   color: rgba(255, 255, 255, 0.85);
   margin-bottom: 10px;
-  transition: 0.2s;
+  transition: all 0.2s ease;
   font-weight: 500;
+  text-decoration: none;
 }
 
-.nav-item:hover {
+.sidebar-item:hover {
   background: rgba(255, 255, 255, 0.15);
   color: white;
   transform: translateX(5px);
 }
 
-.nav-item.active {
-  background: rgba(255, 255, 255, 0.2);
+/* Item ativo — rota atual */
+.sidebar-item.ativo {
+  background: rgba(255, 255, 255, 0.22);
   color: white;
+  border-left: 3px solid #00ffff;
+  padding-left: 12px;
 }
 
-.nav-item.nav-perfil {
-  color: rgba(255, 255, 255, 0.85);
+.sidebar-item.ativo .sidebar-icon,
+.sidebar-item.ativo .sidebar-label {
+  color: #00ffff;
 }
 
-.sidebar-logout {
+.sidebar-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar-label {
+  font-size: 0.92rem;
+}
+
+/*------------------------ FOOTER / LOGOUT -------------------------*/
+.sidebar-footer {
+  padding: 0 15px 20px;
+}
+
+.sidebar-footer .sidebar-item {
   background: rgba(255, 255, 255, 0.1);
   border: 2px solid #ff6b6b;
   border-radius: 8px;
@@ -87,15 +108,28 @@
   justify-content: center;
   gap: 10px;
   padding: 10px;
-  cursor: pointer;
+  margin-bottom: 0;
   font-weight: bold;
-  margin: auto 15px 20px 15px;
   transition: all 0.3s ease;
 }
 
-.sidebar-logout:hover {
+.sidebar-footer .sidebar-item:hover {
   background: #ff6b6b;
   color: white;
+  transform: none;
+}
+
+.sidebar-footer .sidebar-item .sidebar-icon,
+.sidebar-footer .sidebar-item .sidebar-label {
+  color: inherit;
+}
+
+/*------------------------ OVERLAY -------------------------*/
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1999;
 }
 
 /*------------------------ RESPONSIVIDADE -------------------------*/

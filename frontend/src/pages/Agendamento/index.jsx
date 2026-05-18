@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaCheckCircle, FaRegCircle, FaTshirt, FaWind, FaWater, FaRegClock, FaCalendarDay, FaShoppingCart, FaBars } from "react-icons/fa";
+import axios from "axios";
+import { FaArrowLeft, FaCheckCircle, FaTshirt, FaWind, FaWater, FaShoppingCart, FaBars } from "react-icons/fa";
 import Sidebar from "../../components/Sidebar";
 import "./Agendamento.css";
 
@@ -14,28 +15,26 @@ function Agendamento() {
   const [dataSelecionada, setDataSelecionada] = useState("");
   const [horarioSelecionado, setHorarioSelecionado] = useState("");
   const [precoTotal, setPrecoTotal] = useState(0);
+  const [carregando, setCarregando] = useState(false);
 
-  const [lavadoras, setLavadoras] = useState([
-  { id: "L1", nome: "Lavadora 1", disponivel: true,  ocupada: false },
-  { id: "L2", nome: "Lavadora 2", disponivel: true,  ocupada: false },
-]);
+  const [lavadoras] = useState([
+    { id: "L1", nome: "Lavadora 1", disponivel: true, ocupada: false },
+    { id: "L2", nome: "Lavadora 2", disponivel: true, ocupada: false },
+  ]);
 
-  const [secadoras, setSecadoras] = useState([
-  { id: "S1", nome: "Secadora 1", disponivel: true,  ocupada: false },
-  { id: "S2", nome: "Secadora 2", disponivel: true,  ocupada: false },
-]);
+  const [secadoras] = useState([
+    { id: "S1", nome: "Secadora 1", disponivel: true, ocupada: false },
+    { id: "S2", nome: "Secadora 2", disponivel: true, ocupada: false },
+  ]);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('usuario'));
+    if (user && user.nome) setNomeUsuario(user.nome);
+  }, []);
 
   const handleLogout = () => {
     localStorage.clear();
     navigate('/');
-  };
-
-  const adicionarAoCarrinho = (servico) => {
-    const carrinhoSalvo = JSON.parse(localStorage.getItem('carrinho')) || [];
-    carrinhoSalvo.push({ ...servico, quantidade: 1, id: Date.now() });
-    localStorage.setItem('carrinho', JSON.stringify(carrinhoSalvo));
-    alert(`Serviço adicionado ao carrinho!`);
-    navigate('/carrinho');
   };
 
   const selecionarTipoServico = (tipo) => {
@@ -50,45 +49,43 @@ function Agendamento() {
   };
 
   const proximoPasso = () => {
-    if (passo === 2 && !maquinaSelecionada) {
-      alert("Selecione uma máquina!");
-      return;
-    }
-    if (passo === 3 && (!dataSelecionada || !horarioSelecionado)) {
-      alert("Selecione data e horário!");
-      return;
-    }
+    if (passo === 2 && !maquinaSelecionada) { alert("Selecione uma máquina!"); return; }
+    if (passo === 3 && (!dataSelecionada || !horarioSelecionado)) { alert("Selecione data e horário!"); return; }
     setPasso(passo + 1);
   };
 
-  const voltarPasso = () => {
-    if (passo > 1) {
-      setPasso(passo - 1);
-    }
-  };
+  const voltarPasso = () => { if (passo > 1) setPasso(passo - 1); };
 
-  const confirmarAgendamento = () => {
-    let nomeServico = "";
-    let descricaoServico = "";
-    let preco = tipoServico === "lavagem" ? 30 : 20;
-    
-    if (tipoServico === "lavagem") {
-      nomeServico = "Lavagem";
-      descricaoServico = "Lavagem + Atendimento";
-    } else {
-      nomeServico = "Secagem";
-      descricaoServico = "Secagem + Atendimento";
+  const confirmarAgendamento = async () => {
+    const user = JSON.parse(localStorage.getItem('usuario'));
+
+    if (!user || !user.id) {
+      alert("Usuário não encontrado. Faça login novamente.");
+      navigate('/login');
+      return;
     }
-    
-    const novoServico = {
-      nome: nomeServico,
-      descricao: descricaoServico,
+
+    setCarregando(true);
+
+    const novoAgendamento = {
+      nomeCliente: user.nome,
+      servico: tipoServico === "lavagem" ? "Lavagem" : "Secagem",
       maquina: maquinaSelecionada.nome,
       data: dataSelecionada,
       horario: horarioSelecionado,
-      preco: preco
+      valor: precoTotal,
+      usuarioId: user.id,
     };
-    adicionarAoCarrinho(novoServico);
+
+    try {
+      await axios.post('http://localhost:8080/api/agendamentos', novoAgendamento);
+      alert("Agendamento realizado com sucesso!");
+      navigate('/home');
+    } catch (error) {
+      alert("Erro ao realizar agendamento. Tente novamente!");
+    } finally {
+      setCarregando(false);
+    }
   };
 
   const horarios = ["08:00", "09:00", "10:00", "11:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
@@ -107,11 +104,11 @@ function Agendamento() {
 
   return (
     <section className="home-layout">
-      <Sidebar 
-        aberta={sidebarAberta} 
-        setAberta={setSidebarAberta} 
-        navigate={navigate} 
-        handleLogout={handleLogout} 
+      <Sidebar
+        aberta={sidebarAberta}
+        setAberta={setSidebarAberta}
+        navigate={navigate}
+        handleLogout={handleLogout}
       />
 
       <main className="main-content">
@@ -140,27 +137,18 @@ function Agendamento() {
               </div>
 
               <div className="step-indicator">
-                <div className={`step ${passo >= 1 ? 'active' : ''}`}>
-                  <span className="step-num">1</span>
-                  <span className="step-label">Serviço</span>
-                </div>
-                <div className={`step-line ${passo >= 2 ? 'active' : ''}`}></div>
-                <div className={`step ${passo >= 2 ? 'active' : ''}`}>
-                  <span className="step-num">2</span>
-                  <span className="step-label">Máquina</span>
-                </div>
-                <div className={`step-line ${passo >= 3 ? 'active' : ''}`}></div>
-                <div className={`step ${passo >= 3 ? 'active' : ''}`}>
-                  <span className="step-num">3</span>
-                  <span className="step-label">Data/Hora</span>
-                </div>
-                <div className={`step-line ${passo >= 4 ? 'active' : ''}`}></div>
-                <div className={`step ${passo >= 4 ? 'active' : ''}`}>
-                  <span className="step-num">4</span>
-                  <span className="step-label">Confirmar</span>
-                </div>
+                {[1,2,3,4].map((n, i) => (
+                  <React.Fragment key={n}>
+                    <div className={`step ${passo >= n ? 'active' : ''}`}>
+                      <span className="step-num">{n}</span>
+                      <span className="step-label">{["Serviço","Máquina","Data/Hora","Confirmar"][i]}</span>
+                    </div>
+                    {i < 3 && <div className={`step-line ${passo >= n+1 ? 'active' : ''}`}></div>}
+                  </React.Fragment>
+                ))}
               </div>
 
+              {/* PASSO 1 — Serviço */}
               {passo === 1 && (
                 <div className="passo-content">
                   <div className="servicos-grid">
@@ -180,12 +168,17 @@ function Agendamento() {
                 </div>
               )}
 
+              {/* PASSO 2 — Máquina */}
               {passo === 2 && (
                 <div className="passo-content">
                   <h3 className="passo-subtitle">{tipoServico === "lavagem" ? "Escolha a lavadora" : "Escolha a secadora"}</h3>
                   <div className="maquinas-grid">
                     {(tipoServico === "lavagem" ? lavadoras : secadoras).map((maq) => (
-                      <div key={maq.id} className={`maquina-card ${!maq.disponivel || maq.ocupada ? 'indisponivel' : ''} ${maquinaSelecionada?.id === maq.id ? 'selecionada' : ''}`} onClick={() => selecionarMaquina(maq)}>
+                      <div
+                        key={maq.id}
+                        className={`maquina-card ${!maq.disponivel || maq.ocupada ? 'indisponivel' : ''} ${maquinaSelecionada?.id === maq.id ? 'selecionada' : ''}`}
+                        onClick={() => selecionarMaquina(maq)}
+                      >
                         <div className="maquina-icon">
                           {tipoServico === "lavagem" ? <FaTshirt /> : <FaWind />}
                         </div>
@@ -202,6 +195,7 @@ function Agendamento() {
                 </div>
               )}
 
+              {/* PASSO 3 — Data/Hora */}
               {passo === 3 && (
                 <div className="passo-content">
                   <h3 className="passo-subtitle">Escolha data e horário</h3>
@@ -228,6 +222,7 @@ function Agendamento() {
                 </div>
               )}
 
+              {/* PASSO 4 — Confirmar */}
               {passo === 4 && (
                 <div className="passo-content">
                   <h3 className="passo-subtitle">Confirme seus dados</h3>
@@ -270,11 +265,12 @@ function Agendamento() {
                     Próximo →
                   </button>
                 ) : (
-                  <button className="btn-primary confirm" onClick={confirmarAgendamento}>
-                    <FaShoppingCart /> Adicionar ao Carrinho
+                  <button className="btn-primary confirm" onClick={confirmarAgendamento} disabled={carregando}>
+                    {carregando ? "Agendando..." : <><FaShoppingCart /> Confirmar Agendamento</>}
                   </button>
                 )}
               </div>
+
             </div>
           </div>
         </section>

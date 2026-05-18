@@ -1,18 +1,21 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import { FaHome, FaCalendarAlt, FaHistory, FaCreditCard, FaClock, FaBullhorn, FaWhatsapp, FaInstagram, FaSignOutAlt, FaUser } from "react-icons/fa";
 import "./Sidebar.css";
 
 function Sidebar({ aberta, setAberta, navigate, handleLogout }) {
+  const location = useLocation();
+
   const menuItems = [
-    { icone: <FaHome />, label: "Início", path: "/home" },
-    { icone: <FaUser />, label: "Meu Perfil", path: "/perfil" },
+    { icone: <FaHome />,        label: "Início",      path: "/home"        },
+    { icone: <FaUser />,        label: "Meu Perfil",  path: "/perfil"      },
     { icone: <FaCalendarAlt />, label: "Agendamento", path: "/agendamento" },
-    { icone: <FaHistory />, label: "Histórico", path: "/historico" },
-    { icone: <FaCreditCard />, label: "Pagamentos", path: "/pagamentos" },
-    { icone: <FaClock />, label: "Status", path: "/status" },
-    { icone: <FaBullhorn />, label: "Novidades", path: "/novidades" },
-    { icone: <FaWhatsapp />, label: "Suporte", path: "https://wa.me/5587992433763", external: true },
-    { icone: <FaInstagram />, label: "Instagram", path: "https://www.instagram.com/lavamais_sertania/", external: true },
+    { icone: <FaHistory />,     label: "Histórico",   path: "/historico"   },
+    { icone: <FaCreditCard />,  label: "Pagamentos",  path: "/pagamentos"  },
+    { icone: <FaClock />,       label: "Status",      path: "/status"      },
+    { icone: <FaBullhorn />,    label: "Novidades",   path: "/novidades"   },
+    { icone: <FaWhatsapp />,    label: "Suporte",     path: "https://wa.me/5587992433763",                    external: true },
+    { icone: <FaInstagram />,   label: "Instagram",   path: "https://www.instagram.com/lavamais_sertania/",   external: true },
   ];
 
   const handleClick = (item) => {
@@ -27,7 +30,7 @@ function Sidebar({ aberta, setAberta, navigate, handleLogout }) {
   return (
     <>
       {aberta && <div className="sidebar-overlay" onClick={() => setAberta(false)}></div>}
-      
+
       <aside className={`sidebar ${aberta ? 'aberta' : ''}`}>
         <div className="sidebar-header">
           <h2>Lava Mais</h2>
@@ -36,9 +39,9 @@ function Sidebar({ aberta, setAberta, navigate, handleLogout }) {
 
         <nav className="sidebar-nav">
           {menuItems.map((item, index) => (
-            <div 
+            <div
               key={index}
-              className="sidebar-item"
+              className={`sidebar-item ${!item.external && location.pathname === item.path ? 'ativo' : ''}`}
               onClick={() => handleClick(item)}
             >
               <span className="sidebar-icon">{item.icone}</span>

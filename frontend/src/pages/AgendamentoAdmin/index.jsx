@@ -1,61 +1,57 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
-  FaBars,
-  FaTachometerAlt,
-  FaCalendarAlt,
-  FaUsers,
-  FaDollarSign,
-  FaClock,
-  FaCog,
-  FaSignOutAlt,
-  FaSearch,
-  FaFilter,
-  FaEye,
-  FaEdit,
-  FaTimes,
-  FaChevronLeft,
-  FaChevronRight,
-  FaCheckCircle,
-  FaSpinner,
-  FaHourglassHalf,
-  FaBan,
-  FaBullhorn
+  FaBars, FaTachometerAlt, FaCalendarAlt, FaUsers, FaDollarSign,
+  FaClock, FaCog, FaSignOutAlt, FaSearch, FaFilter, FaEye, FaEdit,
+  FaTimes, FaChevronLeft, FaChevronRight, FaCheckCircle, FaSpinner,
+  FaHourglassHalf, FaBan, FaBullhorn, FaSync
 } from "react-icons/fa";
 
 import "../Admin/Admin.css";
 import "./AgendamentoAdmin.css";
 
-const DADOS_MOCK = [
-  { id: "#001", cliente: "Filipe Monteiro", servico: "Lavagem",     data: "16/05/2026", horario: "08:00", valor: "R$ 25,00", status: "ok"      },
-  { id: "#002", cliente: "Ana Lima",        servico: "Secagem",     data: "16/05/2026", horario: "09:30", valor: "R$ 20,00", status: "ok"      },
-  { id: "#003", cliente: "Carlos Rocha",    servico: "Lavagem",     data: "16/05/2026", horario: "11:00", valor: "R$ 25,00", status: "andando" },
-  { id: "#004", cliente: "Juliana Santos",  servico: "Lav. + Sec.", data: "16/05/2026", horario: "13:00", valor: "R$ 40,00", status: "pending" },
-  { id: "#005", cliente: "Pedro Alves",     servico: "Secagem",     data: "16/05/2026", horario: "14:30", valor: "R$ 20,00", status: "cancel"  },
-  { id: "#006", cliente: "Maria Oliveira",  servico: "Lavagem",     data: "15/05/2026", horario: "08:00", valor: "R$ 25,00", status: "ok"      },
-  { id: "#007", cliente: "Lucas Ferreira",  servico: "Lav. + Sec.", data: "15/05/2026", horario: "10:00", valor: "R$ 40,00", status: "ok"      },
-  { id: "#008", cliente: "Beatriz Costa",   servico: "Lavagem",     data: "15/05/2026", horario: "12:00", valor: "R$ 25,00", status: "cancel"  },
-];
-
 const POR_PAGINA = 5;
+
+const STATUS_LABEL = {
+  ok:      { label: "Concluído",    icone: <FaCheckCircle />   },
+  andando: { label: "Em andamento", icone: <FaSpinner />       },
+  pending: { label: "Aguardando",   icone: <FaHourglassHalf /> },
+  cancel:  { label: "Cancelado",    icone: <FaBan />           },
+};
+
+const mapStatus = (status) => {
+  switch (status) {
+    case "CONCLUIDO":    return "ok";
+    case "EM_ANDAMENTO": return "andando";
+    case "AGUARDANDO":   return "pending";
+    case "CANCELADO":    return "cancel";
+    default:             return "pending";
+  }
+};
+
+const mapStatusBack = (status) => {
+  switch (status) {
+    case "ok":      return "CONCLUIDO";
+    case "andando": return "EM_ANDAMENTO";
+    case "pending": return "AGUARDANDO";
+    case "cancel":  return "CANCELADO";
+    default:        return "AGUARDANDO";
+  }
+};
 
 function AgendamentoAdmin() {
   const navigate = useNavigate();
 
   const [sidebarAberta, setSidebarAberta] = useState(false);
   const [nomeAdmin,     setNomeAdmin]     = useState("Admin");
+  const [agendamentos,  setAgendamentos]  = useState([]);
+  const [carregando,    setCarregando]    = useState(true);
   const [busca,         setBusca]         = useState("");
   const [filtroStatus,  setFiltroStatus]  = useState("todos");
   const [filtroServico, setFiltroServico] = useState("todos");
   const [pagina,        setPagina]        = useState(1);
   const [modalItem,     setModalItem]     = useState(null);
-
-  const STATUS_LABEL = {
-    ok:      { label: "Concluído",    icone: <FaCheckCircle />   },
-    andando: { label: "Em andamento", icone: <FaSpinner />       },
-    pending: { label: "Aguardando",   icone: <FaHourglassHalf /> },
-    cancel:  { label: "Cancelado",    icone: <FaBan />           },
-  };
 
   const menuItems = [
     { icone: <FaTachometerAlt />, label: "Dashboard",     path: "/admin"               },
@@ -67,9 +63,32 @@ function AgendamentoAdmin() {
     { icone: <FaCog />,           label: "Configurações", path: "/admin/configuracoes" },
   ];
 
+  const carregarAgendamentos = async () => {
+    setCarregando(true);
+    try {
+      const res = await axios.get('http://localhost:8080/api/agendamentos');
+      const formatados = res.data.map((ag) => ({
+        id:      `#${String(ag.id).padStart(3, '0')}`,
+        idReal:  ag.id,
+        cliente: ag.nomeCliente,
+        servico: ag.servico,
+        data:    new Date(ag.data).toLocaleDateString('pt-BR'),
+        horario: ag.horario,
+        valor:   `R$ ${ag.valor.toFixed(2).replace('.', ',')}`,
+        status:  mapStatus(ag.status),
+      }));
+      setAgendamentos(formatados);
+    } catch {
+      alert("Erro ao carregar agendamentos!");
+    } finally {
+      setCarregando(false);
+    }
+  };
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("usuario"));
     if (user && user.nome) setNomeAdmin(user.nome);
+    carregarAgendamentos();
   }, []);
 
   const handleLogout = () => {
@@ -77,7 +96,33 @@ function AgendamentoAdmin() {
     navigate("/");
   };
 
-  const dadosFiltrados = DADOS_MOCK.filter(item => {
+  const mudarStatus = async (novoStatus) => {
+    try {
+      await axios.put(
+        `http://localhost:8080/api/agendamentos/${modalItem.idReal}/status`,
+        { status: mapStatusBack(novoStatus) }
+      );
+      setAgendamentos(prev =>
+        prev.map(ag => ag.idReal === modalItem.idReal ? { ...ag, status: novoStatus } : ag)
+      );
+      setModalItem(prev => ({ ...prev, status: novoStatus }));
+    } catch {
+      alert("Erro ao atualizar status!");
+    }
+  };
+
+  const deletarAgendamento = async (idReal) => {
+    if (!window.confirm("Deseja cancelar este agendamento?")) return;
+    try {
+      await axios.delete(`http://localhost:8080/api/agendamentos/${idReal}`);
+      setAgendamentos(prev => prev.filter(ag => ag.idReal !== idReal));
+      if (modalItem?.idReal === idReal) setModalItem(null);
+    } catch {
+      alert("Erro ao cancelar agendamento!");
+    }
+  };
+
+  const dadosFiltrados = agendamentos.filter(item => {
     const buscaOk   = item.cliente.toLowerCase().includes(busca.toLowerCase()) ||
                       item.id.toLowerCase().includes(busca.toLowerCase());
     const statusOk  = filtroStatus  === "todos" || item.status  === filtroStatus;
@@ -87,10 +132,6 @@ function AgendamentoAdmin() {
 
   const totalPaginas = Math.ceil(dadosFiltrados.length / POR_PAGINA);
   const dadosPagina  = dadosFiltrados.slice((pagina - 1) * POR_PAGINA, pagina * POR_PAGINA);
-
-  const mudarStatus = (novoStatus) => {
-    setModalItem(prev => ({ ...prev, status: novoStatus }));
-  };
 
   return (
     <section className="admin-layout">
@@ -105,7 +146,6 @@ function AgendamentoAdmin() {
           <h2>Lava Mais</h2>
           <p>Painel Admin</p>
         </div>
-
         <nav className="admin-sidebar-nav">
           {menuItems.map((item, index) => (
             <div
@@ -118,7 +158,6 @@ function AgendamentoAdmin() {
             </div>
           ))}
         </nav>
-
         <div className="admin-sidebar-footer">
           <div className="admin-sidebar-item" onClick={handleLogout}>
             <span className="admin-sidebar-icon"><FaSignOutAlt /></span>
@@ -130,7 +169,6 @@ function AgendamentoAdmin() {
       {/* MAIN */}
       <main className="admin-main">
 
-        {/* HEADER */}
         <header className="admin-header">
           <section className="admin-header-left">
             <button className="admin-btn-hamburguer" onClick={() => setSidebarAberta(true)}>
@@ -146,7 +184,6 @@ function AgendamentoAdmin() {
           </section>
         </header>
 
-        {/* BODY */}
         <section className="admin-body">
           <section className="admin-section">
 
@@ -155,11 +192,13 @@ function AgendamentoAdmin() {
                 <h3>Gerenciamento de</h3>
                 <p>Agendamentos</p>
               </div>
+              <button className="aad-btn-refresh" onClick={carregarAgendamentos} title="Atualizar">
+                <FaSync /> Atualizar
+              </button>
             </div>
 
             <div className="admin-panel aad-painel-full">
 
-              {/* Filtros */}
               <div className="aad-filtros">
                 <div className="aad-busca">
                   <FaSearch className="aad-busca-icone" />
@@ -170,15 +209,10 @@ function AgendamentoAdmin() {
                     onChange={e => { setBusca(e.target.value); setPagina(1); }}
                   />
                 </div>
-
                 <div className="aad-selects">
                   <div className="aad-select-wrapper">
                     <FaFilter className="aad-select-icone" />
-                    <select
-                      className="aad-select"
-                      value={filtroStatus}
-                      onChange={e => { setFiltroStatus(e.target.value); setPagina(1); }}
-                    >
+                    <select className="aad-select" value={filtroStatus} onChange={e => { setFiltroStatus(e.target.value); setPagina(1); }}>
                       <option value="todos">Todos os status</option>
                       <option value="ok">Concluído</option>
                       <option value="andando">Em andamento</option>
@@ -186,14 +220,9 @@ function AgendamentoAdmin() {
                       <option value="cancel">Cancelado</option>
                     </select>
                   </div>
-
                   <div className="aad-select-wrapper">
                     <FaFilter className="aad-select-icone" />
-                    <select
-                      className="aad-select"
-                      value={filtroServico}
-                      onChange={e => { setFiltroServico(e.target.value); setPagina(1); }}
-                    >
+                    <select className="aad-select" value={filtroServico} onChange={e => { setFiltroServico(e.target.value); setPagina(1); }}>
                       <option value="todos">Todos os serviços</option>
                       <option value="Lavagem">Lavagem</option>
                       <option value="Secagem">Secagem</option>
@@ -204,29 +233,22 @@ function AgendamentoAdmin() {
               </div>
 
               <p className="aad-resumo-filtro">
-                {dadosFiltrados.length} agendamento{dadosFiltrados.length !== 1 ? "s" : ""} encontrado{dadosFiltrados.length !== 1 ? "s" : ""}
+                {carregando ? "Carregando..." : `${dadosFiltrados.length} agendamento${dadosFiltrados.length !== 1 ? "s" : ""} encontrado${dadosFiltrados.length !== 1 ? "s" : ""}`}
               </p>
 
-              {/* Tabela */}
               <div className="aad-tabela-wrapper">
                 <table className="admin-table aad-tabela">
                   <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>Cliente</th>
-                      <th>Serviço</th>
-                      <th>Data</th>
-                      <th>Horário</th>
-                      <th>Valor</th>
-                      <th>Status</th>
-                      <th>Ações</th>
+                      <th>ID</th><th>Cliente</th><th>Serviço</th><th>Data</th>
+                      <th>Horário</th><th>Valor</th><th>Status</th><th>Ações</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {dadosPagina.length === 0 ? (
-                      <tr>
-                        <td colSpan={8} className="aad-vazio">Nenhum agendamento encontrado.</td>
-                      </tr>
+                    {carregando ? (
+                      <tr><td colSpan={8} className="aad-vazio">Carregando agendamentos...</td></tr>
+                    ) : dadosPagina.length === 0 ? (
+                      <tr><td colSpan={8} className="aad-vazio">Nenhum agendamento encontrado.</td></tr>
                     ) : dadosPagina.map((item, i) => (
                       <tr key={i} className="aad-linha">
                         <td className="aad-id">{item.id}</td>
@@ -235,8 +257,7 @@ function AgendamentoAdmin() {
                         <td>{item.data}</td>
                         <td>
                           <span className="aad-horario">
-                            <FaClock style={{ fontSize: "0.7rem" }} />
-                            {item.horario}
+                            <FaClock style={{ fontSize: "0.7rem" }} /> {item.horario}
                           </span>
                         </td>
                         <td className="aad-valor">{item.valor}</td>
@@ -248,15 +269,9 @@ function AgendamentoAdmin() {
                         </td>
                         <td>
                           <div className="aad-acoes">
-                            <button className="aad-btn-acao ver"      title="Ver detalhes" onClick={() => setModalItem(item)}>
-                              <FaEye />
-                            </button>
-                            <button className="aad-btn-acao editar"   title="Editar"       onClick={() => setModalItem(item)}>
-                              <FaEdit />
-                            </button>
-                            <button className="aad-btn-acao cancelar" title="Cancelar"     onClick={() => setModalItem({ ...item, status: "cancel" })}>
-                              <FaTimes />
-                            </button>
+                            <button className="aad-btn-acao ver"      title="Ver detalhes" onClick={() => setModalItem(item)}><FaEye /></button>
+                            <button className="aad-btn-acao editar"   title="Editar"       onClick={() => setModalItem(item)}><FaEdit /></button>
+                            <button className="aad-btn-acao cancelar" title="Deletar"      onClick={() => deletarAgendamento(item.idReal)}><FaTimes /></button>
                           </div>
                         </td>
                       </tr>
@@ -265,20 +280,13 @@ function AgendamentoAdmin() {
                 </table>
               </div>
 
-              {/* Paginação */}
               {totalPaginas > 1 && (
                 <div className="aad-paginacao">
-                  <button className="aad-pag-btn" disabled={pagina === 1} onClick={() => setPagina(p => p - 1)}>
-                    <FaChevronLeft />
-                  </button>
+                  <button className="aad-pag-btn" disabled={pagina === 1} onClick={() => setPagina(p => p - 1)}><FaChevronLeft /></button>
                   {Array.from({ length: totalPaginas }, (_, i) => i + 1).map(p => (
-                    <button key={p} className={`aad-pag-btn ${pagina === p ? "ativo" : ""}`} onClick={() => setPagina(p)}>
-                      {p}
-                    </button>
+                    <button key={p} className={`aad-pag-btn ${pagina === p ? "ativo" : ""}`} onClick={() => setPagina(p)}>{p}</button>
                   ))}
-                  <button className="aad-pag-btn" disabled={pagina === totalPaginas} onClick={() => setPagina(p => p + 1)}>
-                    <FaChevronRight />
-                  </button>
+                  <button className="aad-pag-btn" disabled={pagina === totalPaginas} onClick={() => setPagina(p => p + 1)}><FaChevronRight /></button>
                   <span className="aad-pag-info">Página {pagina} de {totalPaginas}</span>
                 </div>
               )}
@@ -293,9 +301,7 @@ function AgendamentoAdmin() {
           <div className="aad-modal" onClick={e => e.stopPropagation()}>
             <div className="aad-modal-header">
               <h3>Detalhes do Agendamento {modalItem.id}</h3>
-              <button className="aad-modal-close" onClick={() => setModalItem(null)}>
-                <FaTimes />
-              </button>
+              <button className="aad-modal-close" onClick={() => setModalItem(null)}><FaTimes /></button>
             </div>
             <div className="aad-modal-body">
               {[

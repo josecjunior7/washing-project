@@ -1,19 +1,72 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   FaBars, FaTachometerAlt, FaCalendarAlt, FaUsers,
   FaDollarSign, FaClock, FaCog, FaSignOutAlt, FaBullhorn
 } from "react-icons/fa";
 import "./Admin.css";
 
+const mapStatus = (status) => {
+  switch (status) {
+    case "CONCLUIDO":    return "ok";
+    case "EM_ANDAMENTO": return "andando";
+    case "AGUARDANDO":   return "pending";
+    case "CANCELADO":    return "cancel";
+    default:             return "pending";
+  }
+};
+
+const STATUS_LABEL = {
+  ok:      "Concluído",
+  andando: "Em andamento",
+  pending: "Aguardando",
+  cancel:  "Cancelado",
+};
+
 function Admin() {
   const navigate = useNavigate();
   const [sidebarAberta, setSidebarAberta] = useState(false);
-  const [nomeAdmin, setNomeAdmin] = useState("Admin");
+  const [nomeAdmin,     setNomeAdmin]     = useState("Admin");
+  const [ultimos,       setUltimos]       = useState([]);
+  const [totalHoje,     setTotalHoje]     = useState(0);
+  const [receitaMes,    setReceitaMes]    = useState(0);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('usuario'));
     if (user && user.nome) setNomeAdmin(user.nome);
+
+    axios.get('http://localhost:8080/api/agendamentos')
+      .then(res => {
+        const todos = res.data;
+
+        // últimos 5
+        const formatados = todos.slice(-5).reverse().map(ag => ({
+          cliente: ag.nomeCliente,
+          servico: ag.servico,
+          horario: ag.horario,
+          status:  mapStatus(ag.status),
+        }));
+        setUltimos(formatados);
+
+        // total hoje
+        const hoje = new Date().toISOString().split('T')[0];
+        const agHoje = todos.filter(ag => ag.data === hoje || ag.data?.startsWith(hoje));
+        setTotalHoje(agHoje.length);
+
+        // receita do mês
+        const mesAtual = new Date().getMonth();
+        const anoAtual = new Date().getFullYear();
+        const receita = todos
+          .filter(ag => {
+            const d = new Date(ag.data);
+            return d.getMonth() === mesAtual && d.getFullYear() === anoAtual
+                   && ag.status === "CONCLUIDO";
+          })
+          .reduce((acc, ag) => acc + (ag.valor || 0), 0);
+        setReceitaMes(receita);
+      })
+      .catch(() => {});
   }, []);
 
   const handleLogout = () => {
@@ -22,13 +75,13 @@ function Admin() {
   };
 
   const menuItems = [
-    { icone: <FaTachometerAlt />, label: "Dashboard",    path: "/admin",              ativo: true },
-    { icone: <FaCalendarAlt />,   label: "Agendamentos", path: "/agendamento-admin"               },
-    { icone: <FaUsers />,         label: "Clientes",     path: "/admin/clientes"                  },
-    { icone: <FaDollarSign />,    label: "Financeiro",   path: "#"                                },
-    { icone: <FaClock />,         label: "Máquinas",     path: "/admin/maquinas"                  },
-    { icone: <FaBullhorn />,      label: "Novidades",    path: "/admin/novidades"                 },
-    { icone: <FaCog />,           label: "Configurações",path: "/admin/configuracoes"             },
+    { icone: <FaTachometerAlt />, label: "Dashboard",     path: "/admin",              ativo: true },
+    { icone: <FaCalendarAlt />,   label: "Agendamentos",  path: "/agendamento-admin"               },
+    { icone: <FaUsers />,         label: "Clientes",      path: "/admin/clientes"                  },
+    { icone: <FaDollarSign />,    label: "Financeiro",    path: "#"                                },
+    { icone: <FaClock />,         label: "Máquinas",      path: "/admin/maquinas"                  },
+    { icone: <FaBullhorn />,      label: "Novidades",     path: "/admin/novidades"                 },
+    { icone: <FaCog />,           label: "Configurações", path: "/admin/configuracoes"             },
   ];
 
   return (
@@ -44,7 +97,6 @@ function Admin() {
           <h2>Lava Mais</h2>
           <p>Painel Admin</p>
         </div>
-
         <nav className="admin-sidebar-nav">
           {menuItems.map((item, index) => (
             <div
@@ -57,7 +109,6 @@ function Admin() {
             </div>
           ))}
         </nav>
-
         <div className="admin-sidebar-footer">
           <div className="admin-sidebar-item" onClick={handleLogout}>
             <span className="admin-sidebar-icon"><FaSignOutAlt /></span>
@@ -66,10 +117,9 @@ function Admin() {
         </div>
       </aside>
 
-      {/* CONTEÚDO PRINCIPAL */}
+      {/* MAIN */}
       <main className="admin-main">
 
-        {/* HEADER */}
         <header className="admin-header">
           <section className="admin-header-left">
             <button className="admin-btn-hamburguer" onClick={() => setSidebarAberta(true)}>
@@ -81,43 +131,37 @@ function Admin() {
             </section>
           </section>
           <section className="admin-header-right">
-            <section className="admin-avatar">
-              {nomeAdmin.charAt(0)}
-            </section>
+            <section className="admin-avatar">{nomeAdmin.charAt(0)}</section>
           </section>
         </header>
 
-        {/* BODY */}
         <section className="admin-body">
           <section className="admin-section">
             <h4>VISÃO GERAL</h4>
 
-            {/* CARDS DE MÉTRICAS */}
+            {/* MÉTRICAS */}
             <section className="admin-metrics-grid">
               <section className="admin-metric-card purple">
                 <div className="admin-icon-box"><FaCalendarAlt /></div>
                 <section className="admin-metric-info">
-                  <h5>24</h5>
+                  <h5>{totalHoje}</h5>
                   <p>Agendamentos hoje</p>
-                  <span className="trend up">↑ 12% vs ontem</span>
                 </section>
               </section>
 
               <section className="admin-metric-card cyan">
                 <div className="admin-icon-box"><FaDollarSign /></div>
                 <section className="admin-metric-info">
-                  <h5>R$ 4.820</h5>
+                  <h5>R$ {receitaMes.toFixed(2).replace('.', ',')}</h5>
                   <p>Receita do mês</p>
-                  <span className="trend up">↑ 8% vs mês ant.</span>
                 </section>
               </section>
 
               <section className="admin-metric-card purple">
                 <div className="admin-icon-box"><FaUsers /></div>
                 <section className="admin-metric-info">
-                  <h5>187</h5>
+                  <h5>—</h5>
                   <p>Clientes ativos</p>
-                  <span className="trend up">↑ 5 novos hoje</span>
                 </section>
               </section>
 
@@ -126,7 +170,6 @@ function Admin() {
                 <section className="admin-metric-info">
                   <h5>4/4</h5>
                   <p>Máquinas em uso</p>
-                  <span className="trend down">0 disponíveis</span>
                 </section>
               </section>
             </section>
@@ -134,10 +177,16 @@ function Admin() {
             {/* GRID INFERIOR */}
             <section className="admin-bottom-grid">
 
-              {/* TABELA DE AGENDAMENTOS */}
+              {/* ÚLTIMOS AGENDAMENTOS */}
               <section className="admin-panel">
                 <div className="admin-panel-header">
                   <h4>ÚLTIMOS AGENDAMENTOS</h4>
+                  <button
+                    className="admin-panel-link"
+                    onClick={() => navigate('/agendamento-admin')}
+                  >
+                    Ver todos →
+                  </button>
                 </div>
                 <table className="admin-table">
                   <thead>
@@ -149,11 +198,24 @@ function Admin() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr><td>Filipe M.</td><td>Lavagem</td><td>08:00</td><td><span className="status-pill ok">Concluído</span></td></tr>
-                    <tr><td>Ana Lima</td><td>Secagem</td><td>09:30</td><td><span className="status-pill ok">Concluído</span></td></tr>
-                    <tr><td>Carlos R.</td><td>Lavagem</td><td>11:00</td><td><span className="status-pill pending">Em andamento</span></td></tr>
-                    <tr><td>Juliana S.</td><td>Lavagem</td><td>13:00</td><td><span className="status-pill pending">Aguardando</span></td></tr>
-                    <tr><td>Pedro A.</td><td>Secagem</td><td>14:30</td><td><span className="status-pill cancel">Cancelado</span></td></tr>
+                    {ultimos.length === 0 ? (
+                      <tr>
+                        <td colSpan={4} style={{ textAlign: 'center', color: '#bbb', padding: '20px' }}>
+                          Nenhum agendamento ainda.
+                        </td>
+                      </tr>
+                    ) : ultimos.map((ag, i) => (
+                      <tr key={i}>
+                        <td>{ag.cliente}</td>
+                        <td>{ag.servico}</td>
+                        <td>{ag.horario}</td>
+                        <td>
+                          <span className={`status-pill ${ag.status}`}>
+                            {STATUS_LABEL[ag.status]}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
               </section>
