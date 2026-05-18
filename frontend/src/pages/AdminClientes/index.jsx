@@ -9,12 +9,12 @@ import {
 } from "react-icons/fa";
 import "../Admin/Admin.css";
 import "./AdminClientes.css";
-
+ 
 const POR_PAGINA = 8;
-
+ 
 function AdminClientes() {
   const navigate = useNavigate();
-
+ 
   const [sidebarAberta, setSidebarAberta] = useState(false);
   const [nomeAdmin,     setNomeAdmin]     = useState("Admin");
   const [busca,         setBusca]         = useState("");
@@ -23,22 +23,22 @@ function AdminClientes() {
   const [modalCliente,  setModalCliente]  = useState(null);
   const [clientes,      setClientes]      = useState([]);
   const [carregando,    setCarregando]    = useState(true);
-
+ 
   const menuItems = [
-    { icone: <FaTachometerAlt />, label: "Dashboard",    path: "/admin"               },
-    { icone: <FaCalendarAlt />,   label: "Agendamentos", path: "/agendamento-admin"   },
-    { icone: <FaUsers />,         label: "Clientes",     path: "/admin/clientes",     ativo: true },
-    { icone: <FaDollarSign />,    label: "Financeiro",   path: "#"                    },
-    { icone: <FaClock />,         label: "Máquinas",     path: "/admin/maquinas"      },
-    { icone: <FaBullhorn />,      label: "Novidades",    path: "/admin/novidades"     },
-    { icone: <FaCog />,           label: "Configurações",path: "/admin/configuracoes" },
-  ];
-
+  { icone: <FaTachometerAlt />, label: "Dashboard",     path: "/admin"                        },
+  { icone: <FaCalendarAlt />,   label: "Agendamentos",  path: "/admin/agendamentos"            },
+  { icone: <FaUsers />,         label: "Clientes",      path: "/admin/clientes", ativo: true   },
+  { icone: <FaDollarSign />, label: "Financeiro", path: "#" },
+  { icone: <FaClock />,         label: "Máquinas",      path: "/admin/maquinas"                },
+  { icone: <FaBullhorn />,      label: "Novidades",     path: "/admin/novidades"               },
+  { icone: <FaCog />,           label: "Configurações", path: "/admin/configuracoes"           },
+];
+ 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("usuario"));
     if (user && user.nome) setNomeAdmin(user.nome);
   }, []);
-
+ 
   useEffect(() => {
     fetch('http://localhost:8080/api/usuarios')
       .then(res => res.json())
@@ -57,12 +57,12 @@ function AdminClientes() {
       })
       .catch(() => setCarregando(false));
   }, []);
-
+ 
   const handleLogout = () => {
     localStorage.clear();
     navigate("/");
   };
-
+ 
   const toggleBloquear = (id) => {
     setClientes(prev => prev.map(c =>
       c.id === id
@@ -76,7 +76,7 @@ function AdminClientes() {
       }));
     }
   };
-
+ 
   const clientesFiltrados = clientes.filter(c => {
     const buscaOk  = c.nome.toLowerCase().includes(busca.toLowerCase()) ||
                      c.telefone.includes(busca) ||
@@ -84,19 +84,19 @@ function AdminClientes() {
     const statusOk = filtroStatus === "todos" || c.status === filtroStatus;
     return buscaOk && statusOk;
   });
-
+ 
   const totalPaginas   = Math.ceil(clientesFiltrados.length / POR_PAGINA);
   const clientesPagina = clientesFiltrados.slice((pagina - 1) * POR_PAGINA, pagina * POR_PAGINA);
   const totalAtivos     = clientes.filter(c => c.status === "ativo").length;
   const totalBloqueados = clientes.filter(c => c.status === "bloqueado").length;
-
+ 
   return (
     <section className="admin-layout">
-
+ 
       {sidebarAberta && (
         <div className="admin-overlay" onClick={() => setSidebarAberta(false)} />
       )}
-
+ 
       {/* SIDEBAR */}
       <aside className={`admin-sidebar ${sidebarAberta ? "aberta" : ""}`}>
         <div className="admin-sidebar-header">
@@ -122,7 +122,7 @@ function AdminClientes() {
           </div>
         </div>
       </aside>
-
+ 
       {/* MAIN */}
       <main className="admin-main">
         <header className="admin-header">
@@ -139,10 +139,10 @@ function AdminClientes() {
             <section className="admin-avatar">{nomeAdmin.charAt(0)}</section>
           </section>
         </header>
-
+ 
         <section className="admin-body">
           <section className="admin-section">
-
+ 
             {/* MÉTRICAS */}
             <section className="admin-metrics-grid">
               <section className="admin-metric-card purple">
@@ -174,10 +174,10 @@ function AdminClientes() {
                 </section>
               </section>
             </section>
-
+ 
             {/* PAINEL */}
             <div className="admin-panel">
-
+ 
               {/* FILTROS */}
               <div className="ac-filtros">
                 <div className="ac-busca">
@@ -205,11 +205,11 @@ function AdminClientes() {
                   ))}
                 </div>
               </div>
-
+ 
               <p className="ac-resumo">
                 {carregando ? "Carregando clientes..." : `${clientesFiltrados.length} cliente${clientesFiltrados.length !== 1 ? "s" : ""} encontrado${clientesFiltrados.length !== 1 ? "s" : ""}`}
               </p>
-
+ 
               {/* TABELA */}
               <div className="ac-tabela-wrapper">
                 <table className="admin-table ac-tabela">
@@ -272,7 +272,7 @@ function AdminClientes() {
                   </tbody>
                 </table>
               </div>
-
+ 
               {/* PAGINAÇÃO */}
               {totalPaginas > 1 && (
                 <div className="ac-paginacao">
@@ -291,11 +291,11 @@ function AdminClientes() {
                 </div>
               )}
             </div>
-
+ 
           </section>
         </section>
       </main>
-
+ 
       {/* MODAL */}
       {modalCliente && (
         <div className="ac-modal-overlay" onClick={() => setModalCliente(null)}>
@@ -341,9 +341,9 @@ function AdminClientes() {
           </div>
         </div>
       )}
-
+ 
     </section>
   );
 }
-
+ 
 export default AdminClientes;

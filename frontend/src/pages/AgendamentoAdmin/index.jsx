@@ -7,19 +7,19 @@ import {
   FaTimes, FaChevronLeft, FaChevronRight, FaCheckCircle, FaSpinner,
   FaHourglassHalf, FaBan, FaBullhorn, FaSync
 } from "react-icons/fa";
-
+ 
 import "../Admin/Admin.css";
 import "./AgendamentoAdmin.css";
-
+ 
 const POR_PAGINA = 5;
-
+ 
 const STATUS_LABEL = {
   ok:      { label: "Concluído",    icone: <FaCheckCircle />   },
   andando: { label: "Em andamento", icone: <FaSpinner />       },
   pending: { label: "Aguardando",   icone: <FaHourglassHalf /> },
   cancel:  { label: "Cancelado",    icone: <FaBan />           },
 };
-
+ 
 const mapStatus = (status) => {
   switch (status) {
     case "CONCLUIDO":    return "ok";
@@ -29,7 +29,7 @@ const mapStatus = (status) => {
     default:             return "pending";
   }
 };
-
+ 
 const mapStatusBack = (status) => {
   switch (status) {
     case "ok":      return "CONCLUIDO";
@@ -39,10 +39,10 @@ const mapStatusBack = (status) => {
     default:        return "AGUARDANDO";
   }
 };
-
+ 
 function AgendamentoAdmin() {
   const navigate = useNavigate();
-
+ 
   const [sidebarAberta, setSidebarAberta] = useState(false);
   const [nomeAdmin,     setNomeAdmin]     = useState("Admin");
   const [agendamentos,  setAgendamentos]  = useState([]);
@@ -52,17 +52,17 @@ function AgendamentoAdmin() {
   const [filtroServico, setFiltroServico] = useState("todos");
   const [pagina,        setPagina]        = useState(1);
   const [modalItem,     setModalItem]     = useState(null);
-
+ 
   const menuItems = [
-    { icone: <FaTachometerAlt />, label: "Dashboard",     path: "/admin"               },
-    { icone: <FaCalendarAlt />,   label: "Agendamentos",  path: "/agendamento-admin",  ativo: true },
-    { icone: <FaUsers />,         label: "Clientes",      path: "#"                    },
-    { icone: <FaDollarSign />,    label: "Financeiro",    path: "#"                    },
-    { icone: <FaClock />,         label: "Máquinas",      path: "/admin/maquinas"      },
-    { icone: <FaBullhorn />,      label: "Novidades",     path: "/admin/novidades"     },
-    { icone: <FaCog />,           label: "Configurações", path: "/admin/configuracoes" },
-  ];
-
+  { icone: <FaTachometerAlt />, label: "Dashboard",     path: "/admin"                              },
+  { icone: <FaCalendarAlt />,   label: "Agendamentos",  path: "/admin/agendamentos", ativo: true    },
+  { icone: <FaUsers />,         label: "Clientes",      path: "/admin/clientes"                     },
+  { icone: <FaDollarSign />, label: "Financeiro", path: "#" },
+  { icone: <FaClock />,         label: "Máquinas",      path: "/admin/maquinas"                     },
+  { icone: <FaBullhorn />,      label: "Novidades",     path: "/admin/novidades"                    },
+  { icone: <FaCog />,           label: "Configurações", path: "/admin/configuracoes"                },
+];
+ 
   const carregarAgendamentos = async () => {
     setCarregando(true);
     try {
@@ -84,18 +84,18 @@ function AgendamentoAdmin() {
       setCarregando(false);
     }
   };
-
+ 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("usuario"));
     if (user && user.nome) setNomeAdmin(user.nome);
     carregarAgendamentos();
   }, []);
-
+ 
   const handleLogout = () => {
     localStorage.clear();
     navigate("/");
   };
-
+ 
   const mudarStatus = async (novoStatus) => {
     try {
       await axios.put(
@@ -110,7 +110,7 @@ function AgendamentoAdmin() {
       alert("Erro ao atualizar status!");
     }
   };
-
+ 
   const deletarAgendamento = async (idReal) => {
     if (!window.confirm("Deseja cancelar este agendamento?")) return;
     try {
@@ -121,7 +121,7 @@ function AgendamentoAdmin() {
       alert("Erro ao cancelar agendamento!");
     }
   };
-
+ 
   const dadosFiltrados = agendamentos.filter(item => {
     const buscaOk   = item.cliente.toLowerCase().includes(busca.toLowerCase()) ||
                       item.id.toLowerCase().includes(busca.toLowerCase());
@@ -129,17 +129,17 @@ function AgendamentoAdmin() {
     const servicoOk = filtroServico === "todos" || item.servico === filtroServico;
     return buscaOk && statusOk && servicoOk;
   });
-
+ 
   const totalPaginas = Math.ceil(dadosFiltrados.length / POR_PAGINA);
   const dadosPagina  = dadosFiltrados.slice((pagina - 1) * POR_PAGINA, pagina * POR_PAGINA);
-
+ 
   return (
     <section className="admin-layout">
-
+ 
       {sidebarAberta && (
         <div className="admin-overlay" onClick={() => setSidebarAberta(false)} />
       )}
-
+ 
       {/* SIDEBAR */}
       <aside className={`admin-sidebar ${sidebarAberta ? "aberta" : ""}`}>
         <div className="admin-sidebar-header">
@@ -165,10 +165,10 @@ function AgendamentoAdmin() {
           </div>
         </div>
       </aside>
-
+ 
       {/* MAIN */}
       <main className="admin-main">
-
+ 
         <header className="admin-header">
           <section className="admin-header-left">
             <button className="admin-btn-hamburguer" onClick={() => setSidebarAberta(true)}>
@@ -183,10 +183,10 @@ function AgendamentoAdmin() {
             <section className="admin-avatar">{nomeAdmin.charAt(0)}</section>
           </section>
         </header>
-
+ 
         <section className="admin-body">
           <section className="admin-section">
-
+ 
             <div className="aad-page-title">
               <div>
                 <h3>Gerenciamento de</h3>
@@ -196,9 +196,9 @@ function AgendamentoAdmin() {
                 <FaSync /> Atualizar
               </button>
             </div>
-
+ 
             <div className="admin-panel aad-painel-full">
-
+ 
               <div className="aad-filtros">
                 <div className="aad-busca">
                   <FaSearch className="aad-busca-icone" />
@@ -231,11 +231,11 @@ function AgendamentoAdmin() {
                   </div>
                 </div>
               </div>
-
+ 
               <p className="aad-resumo-filtro">
                 {carregando ? "Carregando..." : `${dadosFiltrados.length} agendamento${dadosFiltrados.length !== 1 ? "s" : ""} encontrado${dadosFiltrados.length !== 1 ? "s" : ""}`}
               </p>
-
+ 
               <div className="aad-tabela-wrapper">
                 <table className="admin-table aad-tabela">
                   <thead>
@@ -279,7 +279,7 @@ function AgendamentoAdmin() {
                   </tbody>
                 </table>
               </div>
-
+ 
               {totalPaginas > 1 && (
                 <div className="aad-paginacao">
                   <button className="aad-pag-btn" disabled={pagina === 1} onClick={() => setPagina(p => p - 1)}><FaChevronLeft /></button>
@@ -294,7 +294,7 @@ function AgendamentoAdmin() {
           </section>
         </section>
       </main>
-
+ 
       {/* MODAL */}
       {modalItem && (
         <div className="aad-modal-overlay" onClick={() => setModalItem(null)}>
@@ -334,9 +334,9 @@ function AgendamentoAdmin() {
           </div>
         </div>
       )}
-
+ 
     </section>
   );
 }
-
+ 
 export default AgendamentoAdmin;

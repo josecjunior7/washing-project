@@ -6,7 +6,7 @@ import {
   FaDollarSign, FaClock, FaCog, FaSignOutAlt, FaBullhorn
 } from "react-icons/fa";
 import "./Admin.css";
-
+ 
 const mapStatus = (status) => {
   switch (status) {
     case "CONCLUIDO":    return "ok";
@@ -16,14 +16,14 @@ const mapStatus = (status) => {
     default:             return "pending";
   }
 };
-
+ 
 const STATUS_LABEL = {
   ok:      "Concluído",
   andando: "Em andamento",
   pending: "Aguardando",
   cancel:  "Cancelado",
 };
-
+ 
 function Admin() {
   const navigate = useNavigate();
   const [sidebarAberta, setSidebarAberta] = useState(false);
@@ -31,15 +31,15 @@ function Admin() {
   const [ultimos,       setUltimos]       = useState([]);
   const [totalHoje,     setTotalHoje]     = useState(0);
   const [receitaMes,    setReceitaMes]    = useState(0);
-
+ 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('usuario'));
     if (user && user.nome) setNomeAdmin(user.nome);
-
+ 
     axios.get('http://localhost:8080/api/agendamentos')
       .then(res => {
         const todos = res.data;
-
+ 
         // últimos 5
         const formatados = todos.slice(-5).reverse().map(ag => ({
           cliente: ag.nomeCliente,
@@ -48,12 +48,12 @@ function Admin() {
           status:  mapStatus(ag.status),
         }));
         setUltimos(formatados);
-
+ 
         // total hoje
         const hoje = new Date().toISOString().split('T')[0];
         const agHoje = todos.filter(ag => ag.data === hoje || ag.data?.startsWith(hoje));
         setTotalHoje(agHoje.length);
-
+ 
         // receita do mês
         const mesAtual = new Date().getMonth();
         const anoAtual = new Date().getFullYear();
@@ -68,29 +68,29 @@ function Admin() {
       })
       .catch(() => {});
   }, []);
-
+ 
   const handleLogout = () => {
     localStorage.clear();
     navigate('/');
   };
-
+ 
   const menuItems = [
-    { icone: <FaTachometerAlt />, label: "Dashboard",     path: "/admin",              ativo: true },
-    { icone: <FaCalendarAlt />,   label: "Agendamentos",  path: "/agendamento-admin"               },
-    { icone: <FaUsers />,         label: "Clientes",      path: "/admin/clientes"                  },
-    { icone: <FaDollarSign />,    label: "Financeiro",    path: "#"                                },
-    { icone: <FaClock />,         label: "Máquinas",      path: "/admin/maquinas"                  },
-    { icone: <FaBullhorn />,      label: "Novidades",     path: "/admin/novidades"                 },
-    { icone: <FaCog />,           label: "Configurações", path: "/admin/configuracoes"             },
+    { icone: <FaTachometerAlt />, label: "Dashboard",     path: "/admin",                ativo: true },
+    { icone: <FaCalendarAlt />,   label: "Agendamentos",  path: "/admin/agendamentos"                },
+    { icone: <FaUsers />,         label: "Clientes",      path: "/admin/clientes"                    },
+    { icone: <FaDollarSign />,    label: "Financeiro",    path: "#"                                  },
+    { icone: <FaClock />,         label: "Máquinas",      path: "/admin/maquinas"                    },
+    { icone: <FaBullhorn />,      label: "Novidades",     path: "/admin/novidades"                   },
+    { icone: <FaCog />,           label: "Configurações", path: "/admin/configuracoes"               },
   ];
-
+ 
   return (
     <section className="admin-layout">
-
+ 
       {sidebarAberta && (
         <div className="admin-overlay" onClick={() => setSidebarAberta(false)} />
       )}
-
+ 
       {/* SIDEBAR */}
       <aside className={`admin-sidebar ${sidebarAberta ? "aberta" : ""}`}>
         <div className="admin-sidebar-header">
@@ -116,10 +116,10 @@ function Admin() {
           </div>
         </div>
       </aside>
-
+ 
       {/* MAIN */}
       <main className="admin-main">
-
+ 
         <header className="admin-header">
           <section className="admin-header-left">
             <button className="admin-btn-hamburguer" onClick={() => setSidebarAberta(true)}>
@@ -134,11 +134,11 @@ function Admin() {
             <section className="admin-avatar">{nomeAdmin.charAt(0)}</section>
           </section>
         </header>
-
+ 
         <section className="admin-body">
           <section className="admin-section">
             <h4>VISÃO GERAL</h4>
-
+ 
             {/* MÉTRICAS */}
             <section className="admin-metrics-grid">
               <section className="admin-metric-card purple">
@@ -148,7 +148,7 @@ function Admin() {
                   <p>Agendamentos hoje</p>
                 </section>
               </section>
-
+ 
               <section className="admin-metric-card cyan">
                 <div className="admin-icon-box"><FaDollarSign /></div>
                 <section className="admin-metric-info">
@@ -156,7 +156,7 @@ function Admin() {
                   <p>Receita do mês</p>
                 </section>
               </section>
-
+ 
               <section className="admin-metric-card purple">
                 <div className="admin-icon-box"><FaUsers /></div>
                 <section className="admin-metric-info">
@@ -164,7 +164,7 @@ function Admin() {
                   <p>Clientes ativos</p>
                 </section>
               </section>
-
+ 
               <section className="admin-metric-card cyan">
                 <div className="admin-icon-box"><FaClock /></div>
                 <section className="admin-metric-info">
@@ -173,17 +173,17 @@ function Admin() {
                 </section>
               </section>
             </section>
-
+ 
             {/* GRID INFERIOR */}
             <section className="admin-bottom-grid">
-
+ 
               {/* ÚLTIMOS AGENDAMENTOS */}
               <section className="admin-panel">
                 <div className="admin-panel-header">
                   <h4>ÚLTIMOS AGENDAMENTOS</h4>
                   <button
                     className="admin-panel-link"
-                    onClick={() => navigate('/agendamento-admin')}
+                    onClick={() => navigate('/admin/agendamentos')}
                   >
                     Ver todos →
                   </button>
@@ -219,7 +219,7 @@ function Admin() {
                   </tbody>
                 </table>
               </section>
-
+ 
               {/* STATUS DAS MÁQUINAS */}
               <section className="admin-panel">
                 <div className="admin-panel-header">
@@ -247,7 +247,7 @@ function Admin() {
                   ))}
                 </section>
               </section>
-
+ 
             </section>
           </section>
         </section>
@@ -255,5 +255,5 @@ function Admin() {
     </section>
   );
 }
-
+ 
 export default Admin;
