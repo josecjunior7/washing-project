@@ -11,7 +11,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -22,12 +21,9 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                // Libera cadastro e login sem autenticacao
-                .requestMatchers("/api/cadastro", "/api/login").permitAll()
-                // Qualquer outra rota exige autenticacao
+                .requestMatchers("/api/cadastro", "/api/login", "/api/usuarios").permitAll()
                 .anyRequest().authenticated()
             );
-
         return http.build();
     }
 }

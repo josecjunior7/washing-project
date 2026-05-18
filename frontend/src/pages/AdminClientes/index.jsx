@@ -4,26 +4,11 @@ import {
   FaBars, FaTachometerAlt, FaCalendarAlt, FaUsers,
   FaDollarSign, FaClock, FaCog, FaSignOutAlt, FaBullhorn,
   FaSearch, FaEye, FaBan, FaCheckCircle, FaTimes,
-  FaChevronLeft, FaChevronRight, FaPhone, FaMapMarkerAlt,
+  FaChevronLeft, FaChevronRight, FaPhone,
   FaUserCircle
 } from "react-icons/fa";
 import "../Admin/Admin.css";
 import "./AdminClientes.css";
-
-const CLIENTES_MOCK = [
-  { id: "#C001", nome: "Filipe Monteiro",  telefone: "(87) 99243-3763", endereco: "Rua das Flores, 12 - Sertânia, PE",    agendamentos: 8,  status: "ativo",     cadastro: "10/01/2026" },
-  { id: "#C002", nome: "Ana Lima",         telefone: "(87) 98765-4321", endereco: "Av. Central, 45 - Sertânia, PE",       agendamentos: 5,  status: "ativo",     cadastro: "15/01/2026" },
-  { id: "#C003", nome: "Carlos Rocha",     telefone: "(87) 91234-5678", endereco: "Rua do Sol, 78 - Sertânia, PE",        agendamentos: 3,  status: "ativo",     cadastro: "20/01/2026" },
-  { id: "#C004", nome: "Juliana Santos",   telefone: "(87) 99876-5432", endereco: "Rua Nova, 90 - Sertânia, PE",          agendamentos: 12, status: "ativo",     cadastro: "05/02/2026" },
-  { id: "#C005", nome: "Pedro Alves",      telefone: "(87) 98888-7777", endereco: "Travessa das Palmeiras, 3 - Sertânia, PE", agendamentos: 1, status: "bloqueado", cadastro: "12/02/2026" },
-  { id: "#C006", nome: "Maria Oliveira",   telefone: "(87) 97777-6666", endereco: "Rua da Paz, 55 - Sertânia, PE",        agendamentos: 7,  status: "ativo",     cadastro: "18/02/2026" },
-  { id: "#C007", nome: "Lucas Ferreira",   telefone: "(87) 96666-5555", endereco: "Rua do Campo, 21 - Sertânia, PE",      agendamentos: 4,  status: "ativo",     cadastro: "01/03/2026" },
-  { id: "#C008", nome: "Beatriz Costa",    telefone: "(87) 95555-4444", endereco: "Av. Brasil, 100 - Sertânia, PE",       agendamentos: 2,  status: "bloqueado", cadastro: "10/03/2026" },
-  { id: "#C009", nome: "Rafael Souza",     telefone: "(87) 94444-3333", endereco: "Rua dos Ipês, 67 - Sertânia, PE",      agendamentos: 9,  status: "ativo",     cadastro: "15/03/2026" },
-  { id: "#C010", nome: "Camila Pereira",   telefone: "(87) 93333-2222", endereco: "Rua Esperança, 14 - Sertânia, PE",     agendamentos: 6,  status: "ativo",     cadastro: "20/03/2026" },
-  { id: "#C011", nome: "Diego Martins",    telefone: "(87) 92222-1111", endereco: "Rua das Acácias, 33 - Sertânia, PE",   agendamentos: 0,  status: "ativo",     cadastro: "01/04/2026" },
-  { id: "#C012", nome: "Larissa Nunes",    telefone: "(87) 91111-0000", endereco: "Av. das Palmeiras, 88 - Sertânia, PE", agendamentos: 15, status: "ativo",     cadastro: "10/04/2026" },
-];
 
 const POR_PAGINA = 8;
 
@@ -36,7 +21,8 @@ function AdminClientes() {
   const [filtroStatus,  setFiltroStatus]  = useState("todos");
   const [pagina,        setPagina]        = useState(1);
   const [modalCliente,  setModalCliente]  = useState(null);
-  const [clientes,      setClientes]      = useState(CLIENTES_MOCK);
+  const [clientes,      setClientes]      = useState([]);
+  const [carregando,    setCarregando]    = useState(true);
 
   const menuItems = [
     { icone: <FaTachometerAlt />, label: "Dashboard",    path: "/admin"               },
@@ -51,6 +37,25 @@ function AdminClientes() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("usuario"));
     if (user && user.nome) setNomeAdmin(user.nome);
+  }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/api/usuarios')
+      .then(res => res.json())
+      .then(data => {
+        const formatados = data.map((u, i) => ({
+          id:           `#C${String(i + 1).padStart(3, '0')}`,
+          nome:         u.nome,
+          email:        u.email,
+          telefone:     u.telefone,
+          agendamentos: 0,
+          status:       "ativo",
+          cadastro:     new Date(u.criadoEm).toLocaleDateString('pt-BR'),
+        }));
+        setClientes(formatados);
+        setCarregando(false);
+      })
+      .catch(() => setCarregando(false));
   }, []);
 
   const handleLogout = () => {
@@ -80,10 +85,9 @@ function AdminClientes() {
     return buscaOk && statusOk;
   });
 
-  const totalPaginas = Math.ceil(clientesFiltrados.length / POR_PAGINA);
+  const totalPaginas   = Math.ceil(clientesFiltrados.length / POR_PAGINA);
   const clientesPagina = clientesFiltrados.slice((pagina - 1) * POR_PAGINA, pagina * POR_PAGINA);
-
-  const totalAtivos    = clientes.filter(c => c.status === "ativo").length;
+  const totalAtivos     = clientes.filter(c => c.status === "ativo").length;
   const totalBloqueados = clientes.filter(c => c.status === "bloqueado").length;
 
   return (
@@ -121,8 +125,6 @@ function AdminClientes() {
 
       {/* MAIN */}
       <main className="admin-main">
-
-        {/* HEADER */}
         <header className="admin-header">
           <section className="admin-header-left">
             <button className="admin-btn-hamburguer" onClick={() => setSidebarAberta(true)}>
@@ -138,7 +140,6 @@ function AdminClientes() {
           </section>
         </header>
 
-        {/* BODY */}
         <section className="admin-body">
           <section className="admin-section">
 
@@ -206,7 +207,7 @@ function AdminClientes() {
               </div>
 
               <p className="ac-resumo">
-                {clientesFiltrados.length} cliente{clientesFiltrados.length !== 1 ? "s" : ""} encontrado{clientesFiltrados.length !== 1 ? "s" : ""}
+                {carregando ? "Carregando clientes..." : `${clientesFiltrados.length} cliente${clientesFiltrados.length !== 1 ? "s" : ""} encontrado${clientesFiltrados.length !== 1 ? "s" : ""}`}
               </p>
 
               {/* TABELA */}
@@ -216,18 +217,21 @@ function AdminClientes() {
                     <tr>
                       <th>ID</th>
                       <th>Nome</th>
+                      <th>Email</th>
                       <th>Telefone</th>
-                      <th>Endereço</th>
-                      <th>Agendamentos</th>
                       <th>Cadastro</th>
                       <th>Status</th>
                       <th>Ações</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {clientesPagina.length === 0 ? (
+                    {carregando ? (
                       <tr>
-                        <td colSpan={8} className="ac-vazio">Nenhum cliente encontrado.</td>
+                        <td colSpan={7} className="ac-vazio">Carregando...</td>
+                      </tr>
+                    ) : clientesPagina.length === 0 ? (
+                      <tr>
+                        <td colSpan={7} className="ac-vazio">Nenhum cliente encontrado.</td>
                       </tr>
                     ) : clientesPagina.map((c, i) => (
                       <tr key={i} className="ac-linha">
@@ -236,17 +240,13 @@ function AdminClientes() {
                           <div className="ac-avatar">{c.nome.charAt(0)}</div>
                           {c.nome}
                         </td>
+                        <td>{c.email}</td>
                         <td>
                           <span className="ac-telefone">
                             <FaPhone style={{ fontSize: "0.7rem" }} />
                             {c.telefone}
                           </span>
                         </td>
-                        <td className="ac-endereco">
-                          <FaMapMarkerAlt style={{ fontSize: "0.7rem", color: "#8b5cf6", marginRight: 4 }} />
-                          {c.endereco}
-                        </td>
-                        <td className="ac-agendamentos">{c.agendamentos}</td>
                         <td>{c.cadastro}</td>
                         <td>
                           <span className={`status-pill ${c.status === "ativo" ? "ok" : "cancel"}`}>
@@ -255,7 +255,7 @@ function AdminClientes() {
                         </td>
                         <td>
                           <div className="ac-acoes">
-                            <button className="ac-btn-acao ver"     title="Ver detalhes" onClick={() => setModalCliente(c)}>
+                            <button className="ac-btn-acao ver" title="Ver detalhes" onClick={() => setModalCliente(c)}>
                               <FaEye />
                             </button>
                             <button
@@ -317,11 +317,10 @@ function AdminClientes() {
                 </div>
               </div>
               {[
-                ["ID",             modalCliente.id],
-                ["Telefone",       modalCliente.telefone],
-                ["Endereço",       modalCliente.endereco],
-                ["Agendamentos",   modalCliente.agendamentos],
-                ["Cadastro em",    modalCliente.cadastro],
+                ["ID",          modalCliente.id],
+                ["Email",       modalCliente.email],
+                ["Telefone",    modalCliente.telefone],
+                ["Cadastro em", modalCliente.cadastro],
               ].map(([label, value]) => (
                 <div className="ac-modal-row" key={label}>
                   <span className="ac-modal-label">{label}</span>
@@ -334,7 +333,9 @@ function AdminClientes() {
                 className={`ac-modal-btn ${modalCliente.status === "ativo" ? "bloquear" : "desbloquear"}`}
                 onClick={() => toggleBloquear(modalCliente.id)}
               >
-                {modalCliente.status === "ativo" ? <><FaBan /> Bloquear cliente</> : <><FaCheckCircle /> Desbloquear cliente</>}
+                {modalCliente.status === "ativo"
+                  ? <><FaBan /> Bloquear cliente</>
+                  : <><FaCheckCircle /> Desbloquear cliente</>}
               </button>
             </div>
           </div>

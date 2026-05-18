@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -99,5 +100,22 @@ public class AuthController {
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(Map.of("message", "E-mail ou senha invalidos"));
+    }
+
+    @GetMapping("/usuarios")
+    public ResponseEntity<?> listarClientes() {
+        List<Map<String, Object>> clientes = usuarioRepository.findAll()
+            .stream()
+            .filter(u -> u.getRole().equals("CLIENTE"))
+            .map(u -> Map.<String, Object>of(
+                "id",       u.getId(),
+                "nome",     u.getNome(),
+                "email",    u.getEmail(),
+                "telefone", u.getTelefone(),
+                "criadoEm", u.getCriadoEm().toString()
+            ))
+            .toList();
+
+        return ResponseEntity.ok(clientes);
     }
 }
