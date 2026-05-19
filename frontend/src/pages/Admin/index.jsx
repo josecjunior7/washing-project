@@ -40,7 +40,6 @@ function Admin() {
       .then(res => {
         const todos = res.data;
  
-        // últimos 5
         const formatados = todos.slice(-5).reverse().map(ag => ({
           cliente: ag.nomeCliente,
           servico: ag.servico,
@@ -49,12 +48,10 @@ function Admin() {
         }));
         setUltimos(formatados);
  
-        // total hoje
         const hoje = new Date().toISOString().split('T')[0];
         const agHoje = todos.filter(ag => ag.data === hoje || ag.data?.startsWith(hoje));
         setTotalHoje(agHoje.length);
  
-        // receita do mês
         const mesAtual = new Date().getMonth();
         const anoAtual = new Date().getFullYear();
         const receita = todos
@@ -78,7 +75,7 @@ function Admin() {
     { icone: <FaTachometerAlt />, label: "Dashboard",     path: "/admin",                ativo: true },
     { icone: <FaCalendarAlt />,   label: "Agendamentos",  path: "/admin/agendamentos"                },
     { icone: <FaUsers />,         label: "Clientes",      path: "/admin/clientes"                    },
-    { icone: <FaDollarSign />,    label: "Financeiro",    path: "#"                                  },
+    { icone: <FaDollarSign />,    label: "Financeiro",    path: "/admin/financeiro"                  },
     { icone: <FaClock />,         label: "Máquinas",      path: "/admin/maquinas"                    },
     { icone: <FaBullhorn />,      label: "Novidades",     path: "/admin/novidades"                   },
     { icone: <FaCog />,           label: "Configurações", path: "/admin/configuracoes"               },

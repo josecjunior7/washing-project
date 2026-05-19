@@ -1,23 +1,21 @@
 :root {
-  --bg-primary: #fcfbfe; /* Tom sutil de fundo puxando pro roxo */
+  --bg-primary: #fcfbfe;
   --bg-card: #ffffff;
-  --text-main: #1e1b4b; /* O mesmo azul-escuro profundo do seu modal */
-  --text-muted: #aaa;    /* O cinza suave que você usa para descrições */
+  --text-main: #1e1b4b;
+  --text-muted: #aaa;
   --border-color: #e5e7eb;
-  
-  /* Cores de Destaque da Identidade Visual */
+
   --purple-main: #8b5cf6;
   --purple-dark: #6d28d9;
   --purple-hover: #ede9fe;
   --purple-border: #c4b5fd;
   --gradient-purple: linear-gradient(135deg, #8b5cf6, #6d28d9);
 
-  /* Cores Financeiras em sintonia com os alertas do projeto */
-  --color-receita: #059669;       /* Verde igual ao seu 'desbloquear' */
+  --color-receita: #059669;
   --color-receita-light: rgba(52, 211, 153, 0.15);
-  --color-despesa: #ef4444;       /* Vermelho igual ao seu 'bloquear' */
+  --color-despesa: #ef4444;
   --color-despesa-light: rgba(248, 113, 113, 0.15);
-  --color-saldo: #3b82f6;         /* Azul igual ao seu botão 'ver' */
+  --color-saldo: #3b82f6;
   --color-saldo-light: rgba(96, 165, 250, 0.15);
 
   --radius-lg: 20px;
@@ -31,10 +29,11 @@
   background-color: var(--bg-primary);
   color: var(--text-main);
   min-height: 100vh;
-  padding: 2.5rem 4rem; /* Otimizado para computadores */
+  padding: 2.5rem 4rem;
   box-sizing: border-box;
+}
 
-
+.top-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -77,17 +76,17 @@
 
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 colunas perfeitas no PC */
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
 
 .finance-card {
   background-color: var(--bg-card);
-  border-radius: var(--radius-lg); /* Bordas do seu padrão de modal */
+  border-radius: var(--radius-lg);
   padding: 1.75rem;
   border: 1px solid #ede9fe;
-  box-shadow: 0 10px 30px rgba(106, 17, 203, 0.04); /* Sombra suave */
+  box-shadow: 0 10px 30px rgba(106, 17, 203, 0.04);
   position: relative;
   overflow: hidden;
   transition: transform 0.2s;
@@ -110,10 +109,9 @@
   margin: 0.4rem 0;
 }
 
-/* Cores específicas de acordo com os cards do seu sistema */
 .finance-card.receita h2 { color: var(--color-receita); }
 .finance-card.despesa h2 { color: var(--color-despesa); }
-.finance-card.saldo h2 { color: var(--color-saldo); }
+.finance-card.saldo h2   { color: var(--color-saldo);   }
 
 .finance-card p {
   font-size: 0.8rem;
@@ -147,7 +145,6 @@
   color: var(--text-muted);
 }
 
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -171,7 +168,6 @@ td {
   font-size: 0.88rem;
   color: #495057;
 }
-
 
 table tbody tr {
   transition: background 0.15s;
@@ -224,12 +220,11 @@ td.empty {
   transform: scale(1.05);
 }
 
-
 .form-grid {
   background-color: #f9fafb;
   padding: 1.5rem 2rem;
   display: grid;
-  grid-template-columns: 2.2fr 1.3fr 1.1fr 1.2fr 1.1fr 1.1fr; /* Larguras para o PC */
+  grid-template-columns: 2.2fr 1.3fr 1.1fr 1.2fr 1.1fr 1.1fr;
   gap: 12px;
   align-items: flex-end;
   border-top: 1px solid var(--border-color);
@@ -247,7 +242,6 @@ td.empty {
   color: #555;
   letter-spacing: 0.02em;
 }
-
 
 .input-group input,
 .input-group select {

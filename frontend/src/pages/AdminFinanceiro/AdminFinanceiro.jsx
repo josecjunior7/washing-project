@@ -2,16 +2,16 @@ import React, { useState } from "react";
 import "./AdminFinanceiro.css";
 
 export default function AdminFinanceiro() {
-const [despesas, setDespesas] = useState([]);
+  const [despesas, setDespesas] = useState([]);
 
   const [form, setForm] = useState({
     descricao: "",
     categoria: "Água/Luz",
     valor: "",
     vencimento: "",
-    status: "Pago" 
+    status: "Pago"
   });
-  
+
   const handleChange = (e) => {
     setForm({
       ...form,
@@ -20,11 +20,7 @@ const [despesas, setDespesas] = useState([]);
   };
 
   const adicionarDespesa = () => {
-    if (
-      !form.descricao ||
-      !form.valor ||
-      !form.vencimento
-    ) {
+    if (!form.descricao || !form.valor || !form.vencimento) {
       alert("Preencha todos os campos");
       return;
     }
@@ -37,7 +33,6 @@ const [despesas, setDespesas] = useState([]);
 
     setDespesas([...despesas, novaDespesa]);
 
-   
     setForm({
       descricao: "",
       categoria: "Água/Luz",
@@ -48,13 +43,9 @@ const [despesas, setDespesas] = useState([]);
   };
 
   const removerDespesa = (id) => {
-    setDespesas(
-      despesas.filter((item) => item.id !== id)
-    );
+    setDespesas(despesas.filter((item) => item.id !== id));
   };
 
-
-  const { totalReceita } = { totalReceita: 0 }; 
   const receitaTotal = 0;
 
   const totalDespesas = despesas.reduce(
@@ -72,10 +63,7 @@ const [despesas, setDespesas] = useState([]);
           <h1>financeiro</h1>
           <span>lavanderia</span>
         </div>
-
-        <button className="mes-btn">
-          maio 2026
-        </button>
+        <button className="mes-btn">maio 2026</button>
       </div>
 
       {/* CARDS */}
@@ -85,13 +73,11 @@ const [despesas, setDespesas] = useState([]);
           <h2>R$ {receitaTotal.toFixed(2)}</h2>
           <p>entradas do mês</p>
         </div>
-
         <div className="finance-card despesa">
           <span>TOTAL DESPESAS</span>
           <h2>R$ {totalDespesas.toFixed(2)}</h2>
           <p>saídas do mês</p>
         </div>
-
         <div className="finance-card saldo">
           <span>SALDO</span>
           <h2>R$ {saldo.toFixed(2)}</h2>
@@ -117,14 +103,10 @@ const [despesas, setDespesas] = useState([]);
               <th></th>
             </tr>
           </thead>
-
           <tbody>
             {despesas.length === 0 ? (
               <tr>
-                <td
-                  colSpan="6"
-                  className="empty"
-                >
+                <td colSpan="6" className="empty">
                   nenhuma despesa cadastrada
                 </td>
               </tr>
@@ -132,34 +114,16 @@ const [despesas, setDespesas] = useState([]);
               despesas.map((item) => (
                 <tr key={item.id}>
                   <td>{item.descricao}</td>
-
                   <td>{item.categoria}</td>
-
                   <td>{item.vencimento}</td>
-
+                  <td>R$ {item.valor.toFixed(2)}</td>
                   <td>
-                    R$ {item.valor.toFixed(2)}
-                  </td>
-
-                  <td>
-                    <span
-                      className={`status ${
-                        item.status === "Pago"
-                          ? "pago"
-                          : "pendente"
-                      }`}
-                    >
+                    <span className={`status ${item.status === "Pago" ? "pago" : "pendente"}`}>
                       {item.status}
                     </span>
                   </td>
-
                   <td>
-                    <button
-                      className="delete-btn"
-                      onClick={() =>
-                        removerDespesa(item.id)
-                      }
-                    >
+                    <button className="delete-btn" onClick={() => removerDespesa(item.id)}>
                       excluir
                     </button>
                   </td>
@@ -173,7 +137,6 @@ const [despesas, setDespesas] = useState([]);
         <div className="form-grid">
           <div className="input-group">
             <label>DESCRIÇÃO</label>
-
             <input
               type="text"
               name="descricao"
@@ -182,25 +145,17 @@ const [despesas, setDespesas] = useState([]);
               onChange={handleChange}
             />
           </div>
-
           <div className="input-group">
             <label>CATEGORIA</label>
-
-            <select
-              name="categoria"
-              value={form.categoria}
-              onChange={handleChange}
-            >
+            <select name="categoria" value={form.categoria} onChange={handleChange}>
               <option value="Água/Luz">Água/Luz</option>
               <option value="Produtos">Produtos</option>
               <option value="Funcionários">Funcionários</option>
               <option value="Aluguel">Aluguel</option>
             </select>
           </div>
-
           <div className="input-group">
             <label>VALOR (R$)</label>
-
             <input
               type="number"
               name="valor"
@@ -209,10 +164,8 @@ const [despesas, setDespesas] = useState([]);
               onChange={handleChange}
             />
           </div>
-
           <div className="input-group">
             <label>VENCIMENTO</label>
-
             <input
               type="date"
               name="vencimento"
@@ -220,24 +173,14 @@ const [despesas, setDespesas] = useState([]);
               onChange={handleChange}
             />
           </div>
-
           <div className="input-group">
             <label>STATUS</label>
-
-            <select
-              name="status"
-              value={form.status}
-              onChange={handleChange}
-            >
+            <select name="status" value={form.status} onChange={handleChange}>
               <option value="Pago">Pago</option>
               <option value="Pendente">Pendente</option>
             </select>
           </div>
-
-          <button
-            className="add-btn"
-            onClick={adicionarDespesa}
-          >
+          <button className="add-btn" onClick={adicionarDespesa}>
             + adicionar
           </button>
         </div>

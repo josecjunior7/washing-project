@@ -16,6 +16,7 @@ import AdminMaquinas from './pages/AdminMaquinas';
 import AdminConfiguracoes from './pages/AdminConfiguracoes';
 import AdminNovidades from './pages/AdminNovidades';
 import AdminClientes from './pages/AdminClientes';
+import AdminFinanceiro from './pages/AdminFinanceiro';
 import Novidades from './pages/Novidades';
 
 const PrivateRoute = ({ children }) => {
@@ -73,6 +74,8 @@ function App() {
         <Route path="/admin/maquinas" element={<AdminRoute><AdminMaquinas /></AdminRoute>} />
 
         <Route path="/admin/novidades" element={<AdminRoute><AdminNovidades /></AdminRoute>} />
+
+        <Route path="/admin/financeiro" element={<AdminRoute><AdminFinanceiro /></AdminRoute>} />
 
         <Route path="/admin/configuracoes" element={<AdminRoute><AdminConfiguracoes /></AdminRoute>} />
 
