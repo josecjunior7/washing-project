@@ -35,7 +35,6 @@ function FinalizarCompra() {
   const handleConfirmarPagamento = () => {
     const dataAtual = new Date().toLocaleDateString('pt-BR');
 
-    // Salva em pagamentos (tela de Pagamentos)
     const pagamentosExistentes = JSON.parse(localStorage.getItem('pagamentos')) || [];
     const novosPagamentos = itensCarrinho.map((item, index) => ({
       id: Date.now() + index,
@@ -51,7 +50,6 @@ function FinalizarCompra() {
     }));
     localStorage.setItem('pagamentos', JSON.stringify([...pagamentosExistentes, ...novosPagamentos]));
 
-    // Salva em agendamentos (tela de Histórico)
     const historicoExistente = JSON.parse(localStorage.getItem('agendamentos')) || [];
     const novosHistorico = itensCarrinho.map((item, index) => ({
       id: Date.now() + index + 1000,
@@ -65,9 +63,7 @@ function FinalizarCompra() {
     }));
     localStorage.setItem('agendamentos', JSON.stringify([...historicoExistente, ...novosHistorico]));
 
-    // Limpa carrinho
     localStorage.removeItem('carrinho');
-
     setPagamentoConfirmado(true);
     setTimeout(() => navigate('/pagamentos'), 2000);
   };

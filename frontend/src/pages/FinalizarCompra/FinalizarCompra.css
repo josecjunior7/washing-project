@@ -249,13 +249,7 @@ body, html {
   letter-spacing: 1px;
 }
 
-.opcoes-pagamento {
-  display: flex;
-  gap: 14px;
-}
-
 .opcao-pagamento {
-  flex: 1;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -265,7 +259,6 @@ body, html {
   cursor: pointer;
   transition: 0.3s;
   background: white;
-  text-align: left;
 }
 
 .opcao-pagamento:hover {
@@ -316,6 +309,7 @@ body, html {
   flex-shrink: 0;
 }
 
+.total-final { flex: 1; }
 .total-final span   { font-size: 0.78rem; color: #888; display: block; }
 .total-final strong { font-size: 1.4rem; color: #6a11cb; }
 
@@ -368,7 +362,6 @@ body, html {
 }
 
 @media (max-width: 600px) {
-  .opcoes-pagamento { flex-direction: column; }
   .pagamento-footer { flex-direction: column; text-align: center; }
   .item-pagamento { flex-direction: column; align-items: flex-start; gap: 8px; }
   .total-final strong { font-size: 1.2rem; }
