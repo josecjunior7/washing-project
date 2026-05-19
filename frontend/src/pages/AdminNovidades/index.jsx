@@ -39,13 +39,13 @@ function AdminNovidades() {
   };
 
   const menuItems = [
-    { icone: <FaTachometerAlt />, label: "Dashboard",     path: "/admin"                          },
-    { icone: <FaCalendarAlt />,   label: "Agendamentos",  path: "/agendamento-admin"              }, // ✅ corrigido
-    { icone: <FaUsers />,         label: "Clientes",      path: "#"                               },
-    { icone: <FaDollarSign />,    label: "Financeiro",    path: "#"                               },
-    { icone: <FaClock />,         label: "Máquinas",      path: "/admin/maquinas"                 },
-    { icone: <FaBullhorn />,      label: "Novidades",     path: "/admin/novidades", ativo: true   },
-    { icone: <FaCog />,           label: "Configurações", path: "/admin/configuracoes"            },
+    { icone: <FaTachometerAlt />, label: "Dashboard",     path: "/admin"                        },
+    { icone: <FaCalendarAlt />,   label: "Agendamentos",  path: "/admin/agendamentos"            },
+    { icone: <FaUsers />,         label: "Clientes",      path: "#"                             },
+    { icone: <FaDollarSign />,    label: "Financeiro",    path: "#"                             },
+    { icone: <FaClock />,         label: "Máquinas",      path: "/admin/maquinas"               },
+    { icone: <FaBullhorn />,      label: "Novidades",     path: "/admin/novidades", ativo: true },
+    { icone: <FaCog />,           label: "Configurações", path: "/admin/configuracoes"          },
   ];
 
   const abrirModal = (novidade = null) => {
