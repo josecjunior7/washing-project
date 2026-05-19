@@ -1,0 +1,298 @@
+:root {
+  --bg-primary: #fcfbfe; /* Tom sutil de fundo puxando pro roxo */
+  --bg-card: #ffffff;
+  --text-main: #1e1b4b; /* O mesmo azul-escuro profundo do seu modal */
+  --text-muted: #aaa;    /* O cinza suave que você usa para descrições */
+  --border-color: #e5e7eb;
+  
+  /* Cores de Destaque da Identidade Visual */
+  --purple-main: #8b5cf6;
+  --purple-dark: #6d28d9;
+  --purple-hover: #ede9fe;
+  --purple-border: #c4b5fd;
+  --gradient-purple: linear-gradient(135deg, #8b5cf6, #6d28d9);
+
+  /* Cores Financeiras em sintonia com os alertas do projeto */
+  --color-receita: #059669;       /* Verde igual ao seu 'desbloquear' */
+  --color-receita-light: rgba(52, 211, 153, 0.15);
+  --color-despesa: #ef4444;       /* Vermelho igual ao seu 'bloquear' */
+  --color-despesa-light: rgba(248, 113, 113, 0.15);
+  --color-saldo: #3b82f6;         /* Azul igual ao seu botão 'ver' */
+  --color-saldo-light: rgba(96, 165, 250, 0.15);
+
+  --radius-lg: 20px;
+  --radius-md: 10px;
+  --radius-sm: 8px;
+  --transition: all 0.2s ease-in-out;
+}
+
+.financeiro-page {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-main);
+  min-height: 100vh;
+  padding: 2.5rem 4rem; /* Otimizado para computadores */
+  box-sizing: border-box;
+
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.top-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: -0.5px;
+  color: var(--text-main);
+}
+
+.top-header span {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.mes-btn {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  color: #555;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  text-transform: lowercase;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.mes-btn:hover {
+  background: var(--purple-hover);
+  color: var(--purple-main);
+  border-color: var(--purple-border);
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 colunas perfeitas no PC */
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.finance-card {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg); /* Bordas do seu padrão de modal */
+  padding: 1.75rem;
+  border: 1px solid #ede9fe;
+  box-shadow: 0 10px 30px rgba(106, 17, 203, 0.04); /* Sombra suave */
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.finance-card:hover {
+  transform: translateY(-2px);
+}
+
+.finance-card span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+.finance-card h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.4rem 0;
+}
+
+/* Cores específicas de acordo com os cards do seu sistema */
+.finance-card.receita h2 { color: var(--color-receita); }
+.finance-card.despesa h2 { color: var(--color-despesa); }
+.finance-card.saldo h2 { color: var(--color-saldo); }
+
+.finance-card p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.table-container {
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid #ede9fe;
+  box-shadow: 0 15px 45px rgba(106, 17, 203, 0.06);
+  overflow: hidden;
+}
+
+.table-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.table-header h3 {
+  margin: 0 0 4px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  color: var(--text-main);
+}
+
+.table-header span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+th {
+  background-color: #f9fafb;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--border-color);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+td {
+  padding: 1.1rem 2rem;
+  border-bottom: 1px solid #f9fafb;
+  font-size: 0.88rem;
+  color: #495057;
+}
+
+
+table tbody tr {
+  transition: background 0.15s;
+}
+
+table tbody tr:hover td {
+  background: #f5f3ff;
+}
+
+td.empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 4rem;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.status {
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.status.pago {
+  background-color: var(--color-receita-light);
+  color: var(--color-receita);
+}
+
+.status.pendente {
+  background-color: var(--color-despesa-light);
+  color: var(--color-despesa);
+}
+
+.delete-btn {
+  background: var(--color-despesa-light);
+  border: none;
+  color: var(--color-despesa);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.delete-btn:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+
+.form-grid {
+  background-color: #f9fafb;
+  padding: 1.5rem 2rem;
+  display: grid;
+  grid-template-columns: 2.2fr 1.3fr 1.1fr 1.2fr 1.1fr 1.1fr; /* Larguras para o PC */
+  gap: 12px;
+  align-items: flex-end;
+  border-top: 1px solid var(--border-color);
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.input-group label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #555;
+  letter-spacing: 0.02em;
+}
+
+
+.input-group input,
+.input-group select {
+  height: 38px;
+  width: 100%;
+  padding: 0 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #333;
+  font-size: 0.85rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.input-group input::placeholder {
+  color: #bbb;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  border-color: var(--purple-main);
+}
+
+.add-btn {
+  height: 38px;
+  background: var(--gradient-purple);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.add-btn:active {
+  transform: scale(0.98);
+}
