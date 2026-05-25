@@ -22,7 +22,7 @@ const [mostrarSenha, setMostrarSenha] = useState(false); // 👈 ADD AQUI
     setCarregando(true);
 
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/api/login`, {
         email: email,
         senha: senha
       });
