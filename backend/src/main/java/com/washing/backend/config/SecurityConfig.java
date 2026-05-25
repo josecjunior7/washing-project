@@ -24,18 +24,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(csrf -> csrf.disable())
-            .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                    "/api/cadastro",
-                    "/api/login",
-                    "/api/usuarios",
-                    "/api/agendamentos",
-                    "/api/agendamentos/**"
-                ).permitAll()
-                .anyRequest().authenticated()
-            );
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/api/cadastro",
+                                "/api/login",
+                                "/api/usuarios",
+                                "/api/agendamentos",
+                                "/api/agendamentos/**")
+                        .permitAll()
+                        .anyRequest().authenticated());
         return http.build();
     }
 
@@ -44,8 +43,9 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
             "http://localhost:3000",
-            "http://localhost:5173"
-        ));
+            "http://localhost:5173",
+            "http://13.217.182.248",
+            "http://ec2-13-217-182-248.compute-1.amazonaws.com"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
