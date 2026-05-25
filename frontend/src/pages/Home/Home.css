@@ -37,7 +37,7 @@ body, html {
 
 /*------------------------ CABEÇALHO -------------------------*/
 .header-home {
-  background: var(--text-title);
+  background: var(--bg-main);
   padding: 14px 32px;
   display: flex;
   justify-content: space-between;
