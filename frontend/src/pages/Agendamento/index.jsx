@@ -4,6 +4,7 @@ import axios from "axios";
 import { FaArrowLeft, FaCheckCircle, FaTshirt, FaWind, FaWater, FaShoppingCart, FaBars } from "react-icons/fa";
 import Sidebar from "../../components/Sidebar";
 import "./Agendamento.css";
+import { toast } from "react-toastify";
 
 function Agendamento() {
   const navigate = useNavigate();
@@ -49,8 +50,8 @@ function Agendamento() {
   };
 
   const proximoPasso = () => {
-    if (passo === 2 && !maquinaSelecionada) { alert("Selecione uma máquina!"); return; }
-    if (passo === 3 && (!dataSelecionada || !horarioSelecionado)) { alert("Selecione data e horário!"); return; }
+    if (passo === 2 && !maquinaSelecionada) { toast("Selecione uma máquina!"); return; }
+    if (passo === 3 && (!dataSelecionada || !horarioSelecionado)) { toast("Selecione data e horário!"); return; }
     setPasso(passo + 1);
   };
 
@@ -60,7 +61,7 @@ function Agendamento() {
     const user = JSON.parse(localStorage.getItem('usuario'));
 
     if (!user || !user.id) {
-      alert("Usuário não encontrado. Faça login novamente.");
+      toast("Usuário não encontrado. Faça login novamente.");
       navigate('/login');
       return;
     }
@@ -79,10 +80,10 @@ function Agendamento() {
 
     try {
       await axios.post('http://localhost:8080/api/agendamentos', novoAgendamento);
-      alert("Agendamento realizado com sucesso!");
+      toast("Agendamento realizado com sucesso!");
       navigate('/home');
     } catch (error) {
-      alert("Erro ao realizar agendamento. Tente novamente!");
+      toast("Erro ao realizar agendamento. Tente novamente!");
     } finally {
       setCarregando(false);
     }

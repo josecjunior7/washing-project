@@ -18,7 +18,7 @@ const Sidebar = ({ aberta, setAberta, navigate, handleLogout }) => {
         </div>
         
         <nav className="sidebar-nav">
-          <div className="nav-item active" onClick={() => navigate('/dashboard')}>
+          <div className="nav-item active" onClick={() => navigate('/home')}>
             <FaHome /> <span>Início</span>
           </div>
           
