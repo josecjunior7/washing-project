@@ -68,15 +68,15 @@ body, html {
 }
 
 .user {
-  color: #FFFFFF;
+  color: var(--text-secondary);
   font-size: 1.1rem;
 }
 
 .avatar-circle {
   width: 38px;
   height: 38px;
-  background: #FFFFFF;
-  color: var(--bg-main);
+  background: #FFFFFF !important;
+  color: #6a11cb !important;
   border-radius: 50%;
   display: flex;
   align-items: center;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import {
   FaBars, FaTachometerAlt, FaCalendarAlt, FaUsers,
   FaDollarSign, FaClock, FaCog, FaSignOutAlt, FaBullhorn
@@ -9,7 +10,6 @@ import "./AdminFinanceiro.css";
 
 export default function AdminFinanceiro() {
   const navigate = useNavigate();
-  const location = useLocation();
 
   const [sidebarAberta, setSidebarAberta] = useState(false);
   const [nomeAdmin,     setNomeAdmin]     = useState("Admin");
@@ -49,16 +49,18 @@ export default function AdminFinanceiro() {
 
   const adicionarDespesa = () => {
     if (!form.descricao || !form.valor || !form.vencimento) {
-      alert("Preencha todos os campos");
+      toast.warn("Preencha todos os campos");
       return;
     }
     const novaDespesa = { id: Date.now(), ...form, valor: Number(form.valor) };
     setDespesas([...despesas, novaDespesa]);
+    toast.success("Despesa adicionada com sucesso!");
     setForm({ descricao: "", categoria: "Água/Luz", valor: "", vencimento: "", status: "Pago" });
   };
 
   const removerDespesa = (id) => {
     setDespesas(despesas.filter((item) => item.id !== id));
+    toast.success("Despesa removida!");
   };
 
   const receitaTotal  = 0;
@@ -72,7 +74,6 @@ export default function AdminFinanceiro() {
         <div className="admin-overlay" onClick={() => setSidebarAberta(false)} />
       )}
 
-      {/* SIDEBAR */}
       <aside className={`admin-sidebar ${sidebarAberta ? "aberta" : ""}`}>
         <div className="admin-sidebar-header">
           <h2>Lava Mais</h2>
@@ -98,7 +99,6 @@ export default function AdminFinanceiro() {
         </div>
       </aside>
 
-      {/* MAIN */}
       <main className="admin-main">
         <header className="admin-header">
           <section className="admin-header-left">
@@ -118,7 +118,6 @@ export default function AdminFinanceiro() {
         <section className="admin-body">
           <section className="admin-section">
 
-            {/* MÉTRICAS */}
             <section className="admin-metrics-grid">
               <section className="admin-metric-card cyan">
                 <div className="admin-icon-box"><FaDollarSign /></div>
@@ -150,7 +149,6 @@ export default function AdminFinanceiro() {
               </section>
             </section>
 
-            {/* TABELA */}
             <section className="admin-panel">
               <div className="admin-panel-header maquinas-header">
                 <h4>LISTA DE DESPESAS</h4>
@@ -197,17 +195,10 @@ export default function AdminFinanceiro() {
                 </tbody>
               </table>
 
-              {/* FORM */}
               <div className="form-grid">
                 <div className="input-group">
                   <label>DESCRIÇÃO</label>
-                  <input
-                    type="text"
-                    name="descricao"
-                    placeholder="ex: conta de água"
-                    value={form.descricao}
-                    onChange={handleChange}
-                  />
+                  <input type="text" name="descricao" placeholder="ex: conta de água" value={form.descricao} onChange={handleChange} />
                 </div>
                 <div className="input-group">
                   <label>CATEGORIA</label>
@@ -220,22 +211,11 @@ export default function AdminFinanceiro() {
                 </div>
                 <div className="input-group">
                   <label>VALOR (R$)</label>
-                  <input
-                    type="number"
-                    name="valor"
-                    placeholder="0,00"
-                    value={form.valor}
-                    onChange={handleChange}
-                  />
+                  <input type="number" name="valor" placeholder="0,00" value={form.valor} onChange={handleChange} />
                 </div>
                 <div className="input-group">
                   <label>VENCIMENTO</label>
-                  <input
-                    type="date"
-                    name="vencimento"
-                    value={form.vencimento}
-                    onChange={handleChange}
-                  />
+                  <input type="date" name="vencimento" value={form.vencimento} onChange={handleChange} />
                 </div>
                 <div className="input-group">
                   <label>STATUS</label>

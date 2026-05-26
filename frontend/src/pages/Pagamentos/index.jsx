@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from 'react-toastify';
 import {
   FaArrowLeft, FaCheckCircle, FaClock, FaFileInvoice,
   FaBars, FaCalendarDay, FaRegClock, FaTshirt, FaMoneyBill,
@@ -32,7 +33,7 @@ function Pagamentos() {
     if (user && user.id) {
       axios.get(`http://localhost:8080/api/agendamentos/usuario/${user.id}`)
         .then(res => setAgendamentos(res.data))
-        .catch(() => alert("Erro ao carregar pagamentos!"))
+        .catch(() => toast.error("Erro ao carregar pagamentos!"))
         .finally(() => setCarregando(false));
     } else {
       setCarregando(false);
@@ -48,9 +49,9 @@ function Pagamentos() {
   const totalPendente = agendamentos.filter(a => a.status === "AGUARDANDO" || a.status === "EM_ANDAMENTO").reduce((acc, a) => acc + (a.valor || 0), 0);
 
   const filtrados = agendamentos.filter(a => {
-    if (filtro === "todos")    return true;
-    if (filtro === "pago")     return a.status === "CONCLUIDO";
-    if (filtro === "pendente") return a.status === "AGUARDANDO" || a.status === "EM_ANDAMENTO";
+    if (filtro === "todos")     return true;
+    if (filtro === "pago")      return a.status === "CONCLUIDO";
+    if (filtro === "pendente")  return a.status === "AGUARDANDO" || a.status === "EM_ANDAMENTO";
     if (filtro === "cancelado") return a.status === "CANCELADO";
     return true;
   });
@@ -163,7 +164,6 @@ function Pagamentos() {
         </section>
       </main>
 
-      {/* MODAL RECIBO */}
       {reciboSelecionado && (
         <div className="modal-overlay" onClick={() => setReciboSelecionado(null)}>
           <div className="modal-recibo" onClick={e => e.stopPropagation()}>

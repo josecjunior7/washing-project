@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import logo from "./../../assets/images/dashboard-logo.png";
 import "./Cadastro.css";
 
@@ -18,14 +19,14 @@ const Cadastro = () => {
   const handleCadastro = async (e) => {
     e.preventDefault();
 
-    if (!nome.trim()) { alert("Por favor, digite seu nome!"); return; }
-    if (!sobrenome.trim()) { alert("Por favor, digite seu sobrenome!"); return; }
-    if (!email.trim()) { alert("Por favor, digite seu e-mail!"); return; }
-    if (!telefone.trim()) { alert("Por favor, digite seu telefone!"); return; }
-    if (!senha) { alert("Por favor, digite uma senha!"); return; }
-    if (senha.length < 6) { alert("A senha deve ter pelo menos 6 caracteres!"); return; }
-    if (senha !== confirmarSenha) { alert("As senhas não coincidem!"); return; }
-    if (!aceitouTermos) { alert("Você precisa aceitar os termos de uso para se cadastrar!"); return; }
+    if (!nome.trim()) { toast.warn("Por favor, digite seu nome!"); return; }
+    if (!sobrenome.trim()) { toast.warn("Por favor, digite seu sobrenome!"); return; }
+    if (!email.trim()) { toast.warn("Por favor, digite seu e-mail!"); return; }
+    if (!telefone.trim()) { toast.warn("Por favor, digite seu telefone!"); return; }
+    if (!senha) { toast.warn("Por favor, digite uma senha!"); return; }
+    if (senha.length < 6) { toast.warn("A senha deve ter pelo menos 6 caracteres!"); return; }
+    if (senha !== confirmarSenha) { toast.warn("As senhas não coincidem!"); return; }
+    if (!aceitouTermos) { toast.warn("Você precisa aceitar os termos de uso para se cadastrar!"); return; }
 
     setCarregando(true);
 
@@ -38,18 +39,18 @@ const Cadastro = () => {
       });
 
       if (response.status === 200 || response.status === 201) {
-        alert("Cadastro realizado com sucesso! Faça login para continuar.");
-        navigate('/login');
+        toast.success("Cadastro realizado com sucesso! Faça login para continuar.");
+        setTimeout(() => navigate('/login'), 2000);
       }
     } catch (error) {
       if (error.response) {
         if (error.response.status === 409) {
-          alert("Este e-mail já está cadastrado! Use outro e-mail ou faça login.");
+          toast.error("Este e-mail já está cadastrado! Use outro e-mail ou faça login.");
         } else {
-          alert("Erro ao cadastrar. Tente novamente!");
+          toast.error("Erro ao cadastrar. Tente novamente!");
         }
       } else {
-        alert("Erro de conexão. Verifique se o backend está rodando!");
+        toast.error("Erro de conexão. Verifique se o backend está rodando!");
       }
     } finally {
       setCarregando(false);
@@ -72,7 +73,6 @@ const Cadastro = () => {
 
         <h2 className="rg-titulo">CRIAR CONTA</h2>
 
-        {/* Nome e Sobrenome lado a lado */}
         <section className="rg-nome-row">
           <section className="rg-i-email">
             <input type="text" required value={nome} onChange={(e) => setNome(e.target.value)} />
@@ -124,7 +124,6 @@ const Cadastro = () => {
           </label>
         </section>
 
-        {/* Senha e Confirmar lado a lado */}
         <section className="rg-senhas-row">
           <section className="rg-i-senha">
             <input type="password" required value={senha} onChange={(e) => setSenha(e.target.value)} />

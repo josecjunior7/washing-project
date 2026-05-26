@@ -1,16 +1,6 @@
 @import url('../../App.css');
 
 /*------------------------ LAYOUT PRINCIPAL -------------------------*/
-.home-layout {
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-  background-color: white;
-  border-radius: 32px;
-  margin: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  border: 1px solid rgba(106, 17, 203, 0.2);
-}
 
 .main-content {
   flex: 1;
@@ -26,7 +16,7 @@
 
 /*------------------------ CABEÇALHO -------------------------*/
 .header-home {
-  background: var(--text-title);
+  background: var(--bg-main);
   padding: 20px 40px;
   display: flex;
   justify-content: space-between;

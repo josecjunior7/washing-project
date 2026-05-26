@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import { FaArrowLeft, FaUser, FaEnvelope, FaPhone, FaMapMarkerAlt, FaCalendarAlt, FaEdit, FaBars, FaSave, FaUserCircle } from "react-icons/fa";
 import Sidebar from "../../components/Sidebar";
 import "./Perfil.css";
@@ -8,7 +9,6 @@ function Perfil() {
   const navigate = useNavigate();
   const [sidebarAberta, setSidebarAberta] = useState(false);
   const [editando, setEditando] = useState(false);
-  
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [telefone, setTelefone] = useState("");
@@ -22,7 +22,6 @@ function Perfil() {
       setEmail(user.email || "cliente@email.com");
       setTelefone(user.telefone || "(87) 99999-9999");
     }
-    
     setEndereco("Av. Joaquim Nabuco, 209 - Sertânia, PE");
     setDataCadastro("15/03/2024");
   }, []);
@@ -39,7 +38,7 @@ function Perfil() {
     user.telefone = telefone;
     localStorage.setItem('usuario', JSON.stringify(user));
     setEditando(false);
-    alert("Dados atualizados com sucesso!");
+    toast.success("Dados atualizados com sucesso!");
   };
 
   const handleCancelar = () => {
@@ -54,11 +53,11 @@ function Perfil() {
 
   return (
     <section className="home-layout">
-      <Sidebar 
-        aberta={sidebarAberta} 
-        setAberta={setSidebarAberta} 
-        navigate={navigate} 
-        handleLogout={handleLogout} 
+      <Sidebar
+        aberta={sidebarAberta}
+        setAberta={setSidebarAberta}
+        navigate={navigate}
+        handleLogout={handleLogout}
       />
 
       <main className="main-content">
@@ -93,12 +92,7 @@ function Perfil() {
                 <div className="info-group">
                   <label><FaUser /> Nome Completo</label>
                   {editando ? (
-                    <input 
-                      type="text" 
-                      value={nome} 
-                      onChange={(e) => setNome(e.target.value)}
-                      className="perfil-input"
-                    />
+                    <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} className="perfil-input" />
                   ) : (
                     <p>{nome}</p>
                   )}
@@ -107,12 +101,7 @@ function Perfil() {
                 <div className="info-group">
                   <label><FaEnvelope /> E-mail</label>
                   {editando ? (
-                    <input 
-                      type="email" 
-                      value={email} 
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="perfil-input"
-                    />
+                    <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="perfil-input" />
                   ) : (
                     <p>{email}</p>
                   )}
@@ -121,12 +110,7 @@ function Perfil() {
                 <div className="info-group">
                   <label><FaPhone /> Telefone</label>
                   {editando ? (
-                    <input 
-                      type="tel" 
-                      value={telefone} 
-                      onChange={(e) => setTelefone(e.target.value)}
-                      className="perfil-input"
-                    />
+                    <input type="tel" value={telefone} onChange={(e) => setTelefone(e.target.value)} className="perfil-input" />
                   ) : (
                     <p>{telefone}</p>
                   )}

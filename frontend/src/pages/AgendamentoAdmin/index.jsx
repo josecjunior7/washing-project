@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { toast } from 'react-toastify';
 import {
   FaBars, FaTachometerAlt, FaCalendarAlt, FaUsers, FaDollarSign,
   FaClock, FaCog, FaSignOutAlt, FaSearch, FaFilter, FaEye, FaEdit,
@@ -73,7 +74,7 @@ function AgendamentoAdmin() {
         idReal:  ag.id,
         cliente: ag.nomeCliente || "—",
         servico: ag.servico     || "—",
-        data:    ag.data        || "—",   // já vem dd/MM/yyyy do backend
+        data:    ag.data        || "—",
         horario: ag.horario     || "—",
         valor:   ag.valor != null
                    ? `R$ ${Number(ag.valor).toFixed(2).replace('.', ',')}`
@@ -82,7 +83,7 @@ function AgendamentoAdmin() {
       }));
       setAgendamentos(formatados);
     } catch {
-      alert("Erro ao carregar agendamentos!");
+      toast.error("Erro ao carregar agendamentos!");
     } finally {
       setCarregando(false);
     }
@@ -109,8 +110,9 @@ function AgendamentoAdmin() {
         prev.map(ag => ag.idReal === modalItem.idReal ? { ...ag, status: novoStatus } : ag)
       );
       setModalItem(prev => ({ ...prev, status: novoStatus }));
+      toast.success("Status atualizado com sucesso!");
     } catch {
-      alert("Erro ao atualizar status!");
+      toast.error("Erro ao atualizar status!");
     }
   };
 
@@ -120,8 +122,9 @@ function AgendamentoAdmin() {
       await axios.delete(`http://localhost:8080/api/agendamentos/${idReal}`);
       setAgendamentos(prev => prev.filter(ag => ag.idReal !== idReal));
       if (modalItem?.idReal === idReal) setModalItem(null);
+      toast.success("Agendamento cancelado!");
     } catch {
-      alert("Erro ao cancelar agendamento!");
+      toast.error("Erro ao cancelar agendamento!");
     }
   };
 
@@ -143,7 +146,6 @@ function AgendamentoAdmin() {
         <div className="admin-overlay" onClick={() => setSidebarAberta(false)} />
       )}
 
-      {/* SIDEBAR */}
       <aside className={`admin-sidebar ${sidebarAberta ? "aberta" : ""}`}>
         <div className="admin-sidebar-header">
           <h2>Lava Mais</h2>
@@ -169,9 +171,7 @@ function AgendamentoAdmin() {
         </div>
       </aside>
 
-      {/* MAIN */}
       <main className="admin-main">
-
         <header className="admin-header">
           <section className="admin-header-left">
             <button className="admin-btn-hamburguer" onClick={() => setSidebarAberta(true)}>
@@ -201,7 +201,6 @@ function AgendamentoAdmin() {
             </div>
 
             <div className="admin-panel aad-painel-full">
-
               <div className="aad-filtros">
                 <div className="aad-busca">
                   <FaSearch className="aad-busca-icone" />
@@ -301,7 +300,6 @@ function AgendamentoAdmin() {
         </section>
       </main>
 
-      {/* MODAL */}
       {modalItem && (
         <div className="aad-modal-overlay" onClick={() => setModalItem(null)}>
           <div className="aad-modal" onClick={e => e.stopPropagation()}>

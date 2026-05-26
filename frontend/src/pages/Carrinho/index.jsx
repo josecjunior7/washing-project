@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import { FaArrowLeft, FaTrash, FaShoppingCart, FaCreditCard, FaBars, FaCalendarDay, FaRegClock, FaTshirt } from "react-icons/fa";
 import Sidebar from "../../components/Sidebar";
 import "./Carrinho.css";
@@ -13,10 +14,7 @@ function Carrinho() {
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem('usuario'));
-    if (user && user.nome) {
-      setNomeUsuario(user.nome);
-    }
-    
+    if (user && user.nome) setNomeUsuario(user.nome);
     const carrinhoSalvo = JSON.parse(localStorage.getItem('carrinho')) || [];
     setItensCarrinho(carrinhoSalvo);
     calcularTotal(carrinhoSalvo);
@@ -46,33 +44,33 @@ function Carrinho() {
     setItensCarrinho(novosItens);
     calcularTotal(novosItens);
     localStorage.setItem('carrinho', JSON.stringify(novosItens));
+    toast.success("Item removido do carrinho!");
   };
 
   const limparCarrinho = () => {
     setItensCarrinho([]);
     setTotalCarrinho(0);
     localStorage.removeItem('carrinho');
+    toast.success("Carrinho limpo!");
   };
 
   const finalizarPedido = () => {
     if (itensCarrinho.length === 0) {
-      alert("Seu carrinho está vazio!");
+      toast.warn("Seu carrinho está vazio!");
       return;
     }
     navigate('/finalizar-compra');
   };
 
-  const voltarParaHome = () => {
-    navigate('/home');
-  };
+  const voltarParaHome = () => navigate('/home');
 
   return (
     <section className="home-layout">
-      <Sidebar 
-        aberta={sidebarAberta} 
-        setAberta={setSidebarAberta} 
-        navigate={navigate} 
-        handleLogout={handleLogout} 
+      <Sidebar
+        aberta={sidebarAberta}
+        setAberta={setSidebarAberta}
+        navigate={navigate}
+        handleLogout={handleLogout}
       />
 
       <main className="main-content">

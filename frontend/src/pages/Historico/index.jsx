@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from 'react-toastify';
 import {
   FaArrowLeft, FaHistory, FaCalendarDay, FaRegClock,
   FaTshirt, FaMoneyBill, FaBars, FaCheckCircle,
@@ -30,7 +31,7 @@ function Historico() {
     if (user && user.id) {
       axios.get(`http://localhost:8080/api/agendamentos/usuario/${user.id}`)
         .then(res => setAgendamentos(res.data))
-        .catch(() => alert("Erro ao carregar histórico!"))
+        .catch(() => toast.error("Erro ao carregar histórico!"))
         .finally(() => setCarregando(false));
     } else {
       setCarregando(false);
@@ -49,9 +50,9 @@ function Historico() {
       setAgendamentos(prev =>
         prev.map(ag => ag.id === id ? { ...ag, status: "CANCELADO" } : ag)
       );
-      alert("Agendamento cancelado!");
+      toast.success("Agendamento cancelado!");
     } catch {
-      alert("Erro ao cancelar agendamento!");
+      toast.error("Erro ao cancelar agendamento!");
     }
   };
 

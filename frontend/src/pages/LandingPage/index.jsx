@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from 'react-toastify';
 import "./LandingPage.css";
 import home from "../../assets/images/HOME.png";
 import HeaderPublic from "../../components/HeaderPublic";
@@ -8,38 +9,26 @@ const LandingPage = () => {
   const copiarEndereco = () => {
     const endereco = "Av. Joaquim Nabuco, 209 - Sertânia, PE, 56600-000";
     navigator.clipboard.writeText(endereco);
-    alert("Endereço copiado com sucesso!");
+    toast.success("Endereço copiado com sucesso!");
   };
 
   return (
     <section className="home-container">
       
-      {/* IMAGEM DE FUNDO */}
-      <img
-        src={home}
-        alt="Home Layout"
-        className="home-bg-image"
-      />
+      <img src={home} alt="Home Layout" className="home-bg-image" />
 
-      {/* HEADER COMPONENTE */}
       <HeaderPublic />
 
-      {/* PAINEL PRINCIPAL */}
       <main className="info-panel">
 
-        {/* CARD 1: LOCALIZAÇÃO */}
         <section className="info-card">
           <h3>Localização</h3>
           <p>Av. Joaquim Nabuco, 209 - Sertânia, PE, 56600-000</p>
-          <button
-            className="btn-copiar"
-            onClick={copiarEndereco}
-          >
-          Copiar endereço
+          <button className="btn-copiar" onClick={copiarEndereco}>
+            Copiar endereço
           </button>
         </section>
 
-        {/* CARD 2: MAPA */}
         <section className="info-card">
           <h3>Mapa do local</h3>
           <iframe
@@ -51,7 +40,6 @@ const LandingPage = () => {
           ></iframe>
         </section>
 
-        {/* CARD 3: HORÁRIO */}
         <section className="info-card">
           <section className="card-hours">
             <h3>Horário de funcionamento</h3>
