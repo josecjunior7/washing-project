@@ -6,11 +6,16 @@ import HeaderPublic from "../../components/HeaderPublic";
 
 const LandingPage = () => {
 
-  const copiarEndereco = () => {
-    const endereco = "Av. Joaquim Nabuco, 209 - Sertânia, PE, 56600-000";
-    navigator.clipboard.writeText(endereco);
-    toast.success("Endereço copiado com sucesso!");
-  };
+const copiarEndereco = () => {
+  const endereco = "Av. Joaquim Nabuco, 209 - Sertânia, PE, 56600-000";
+  const el = document.createElement('textarea');
+  el.value = endereco;
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+  toast.success("Endereço copiado com sucesso!");
+};
 
   return (
     <section className="home-container">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import axios from "axios";
+import api from "../../api";
 import { toast } from 'react-toastify';
 import {
   FaBars, FaTachometerAlt, FaCalendarAlt, FaUsers, FaDollarSign,
@@ -68,7 +68,7 @@ function AgendamentoAdmin() {
   const carregarAgendamentos = async () => {
     setCarregando(true);
     try {
-      const res = await axios.get('http://localhost:8080/api/agendamentos');
+      const res = await api.get('/api/agendamentos');
       const formatados = res.data.map((ag) => ({
         id:      `#${String(ag.id).padStart(3, '0')}`,
         idReal:  ag.id,
@@ -102,10 +102,7 @@ function AgendamentoAdmin() {
 
   const mudarStatus = async (novoStatus) => {
     try {
-      await axios.put(
-        `http://localhost:8080/api/agendamentos/${modalItem.idReal}/status`,
-        { status: mapStatusBack(novoStatus) }
-      );
+      await api.put(`/api/agendamentos/${modalItem.idReal}/status`, { status: mapStatusBack(novoStatus) });
       setAgendamentos(prev =>
         prev.map(ag => ag.idReal === modalItem.idReal ? { ...ag, status: novoStatus } : ag)
       );
@@ -119,7 +116,7 @@ function AgendamentoAdmin() {
   const deletarAgendamento = async (idReal) => {
     if (!window.confirm("Deseja cancelar este agendamento?")) return;
     try {
-      await axios.delete(`http://localhost:8080/api/agendamentos/${idReal}`);
+      await api.delete(`/api/agendamentos/${idReal}`);
       setAgendamentos(prev => prev.filter(ag => ag.idReal !== idReal));
       if (modalItem?.idReal === idReal) setModalItem(null);
       toast.success("Agendamento cancelado!");
@@ -174,9 +171,7 @@ function AgendamentoAdmin() {
       <main className="admin-main">
         <header className="admin-header">
           <section className="admin-header-left">
-            <button className="admin-btn-hamburguer" onClick={() => setSidebarAberta(true)}>
-              <FaBars />
-            </button>
+            <button className="admin-btn-hamburguer" onClick={() => setSidebarAberta(true)}><FaBars /></button>
             <section className="admin-welcome">
               <span>Bem-vindo,</span>
               <h2>{nomeAdmin}</h2>

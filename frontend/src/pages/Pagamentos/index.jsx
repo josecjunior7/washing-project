@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../api";
 import { toast } from 'react-toastify';
 import {
   FaArrowLeft, FaCheckCircle, FaClock, FaFileInvoice,
@@ -31,7 +31,7 @@ function Pagamentos() {
     if (user && user.nome) setNomeUsuario(user.nome);
 
     if (user && user.id) {
-      axios.get(`http://localhost:8080/api/agendamentos/usuario/${user.id}`)
+      api.get(`/api/agendamentos/usuario/${user.id}`)
         .then(res => setAgendamentos(res.data))
         .catch(() => toast.error("Erro ao carregar pagamentos!"))
         .finally(() => setCarregando(false));
@@ -58,12 +58,7 @@ function Pagamentos() {
 
   return (
     <section className="home-layout">
-      <Sidebar
-        aberta={sidebarAberta}
-        setAberta={setSidebarAberta}
-        navigate={navigate}
-        handleLogout={handleLogout}
-      />
+      <Sidebar aberta={sidebarAberta} setAberta={setSidebarAberta} navigate={navigate} handleLogout={handleLogout} />
 
       <main className="main-content">
         <header className="header-home">

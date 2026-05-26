@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../api";
 import { toast } from 'react-toastify';
 import {
   FaArrowLeft, FaHistory, FaCalendarDay, FaRegClock,
@@ -29,7 +29,7 @@ function Historico() {
     if (user && user.nome) setNomeUsuario(user.nome);
 
     if (user && user.id) {
-      axios.get(`http://localhost:8080/api/agendamentos/usuario/${user.id}`)
+      api.get(`/api/agendamentos/usuario/${user.id}`)
         .then(res => setAgendamentos(res.data))
         .catch(() => toast.error("Erro ao carregar histórico!"))
         .finally(() => setCarregando(false));
@@ -46,7 +46,7 @@ function Historico() {
   const cancelarAgendamento = async (id) => {
     if (!window.confirm("Deseja cancelar este agendamento?")) return;
     try {
-      await axios.put(`http://localhost:8080/api/agendamentos/${id}/status`, { status: "CANCELADO" });
+      await api.put(`/api/agendamentos/${id}/status`, { status: "CANCELADO" });
       setAgendamentos(prev =>
         prev.map(ag => ag.id === id ? { ...ag, status: "CANCELADO" } : ag)
       );
@@ -58,12 +58,7 @@ function Historico() {
 
   return (
     <section className="home-layout">
-      <Sidebar
-        aberta={sidebarAberta}
-        setAberta={setSidebarAberta}
-        navigate={navigate}
-        handleLogout={handleLogout}
-      />
+      <Sidebar aberta={sidebarAberta} setAberta={setSidebarAberta} navigate={navigate} handleLogout={handleLogout} />
 
       <main className="main-content">
         <header className="header-home">
@@ -90,9 +85,7 @@ function Historico() {
             </div>
 
             {carregando ? (
-              <div className="historico-vazio">
-                <p>Carregando...</p>
-              </div>
+              <div className="historico-vazio"><p>Carregando...</p></div>
             ) : agendamentos.length === 0 ? (
               <div className="historico-vazio">
                 <FaHistory className="icone-vazio" />
