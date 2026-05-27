@@ -96,7 +96,19 @@
 
 /*-------------------- BOTÕES (CORES LAVA MAIS) --------------------*/
 
-.btn-primary {
+.btn-log {
+  width: 100%;
+  padding: 12px;
+  background: #6a11cb;
+  border: 2px solid #6a11cb;
+  color: var(--text-title);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.3s;
+/*
   width: 100%;
   padding: 12px;
   border: none;
@@ -106,12 +118,13 @@
   cursor: pointer;
   text-transform: uppercase;
   margin: 10px 0;
-  background: #00ffff; /* Ciano */
-  color: #6a11cb;      /* Roxo */
-  transition: 0.3s;
+  background: #00ffff;
+  color: #6a11cb;
+  transition: 0.3s;*/
 }
 
-.btn-primary:hover { 
+.btn-log:hover { 
+  color: var(--bg-main);
   background: #00e6e6; 
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
@@ -121,7 +134,7 @@
   width: 100%;
   padding: 12px;
   background: transparent;
-  border: 2px solid #6a11cb; /* Roxo */
+  border: 2px solid #6a11cb;
   color: #6a11cb;
   border-radius: 8px;
   font-size: 16px;

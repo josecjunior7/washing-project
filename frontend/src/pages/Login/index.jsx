@@ -108,7 +108,7 @@ const Login = () => {
             </span>
           </section>
           <section className="btn-login">
-            <button type="submit" className="btn-primary" onClick={handleLogin} disabled={carregando}>
+            <button type="submit" className="btn-log" onClick={handleLogin} disabled={carregando}>
               {carregando ? "ENTRANDO..." : "LOGIN"}
             </button>
           </section>
